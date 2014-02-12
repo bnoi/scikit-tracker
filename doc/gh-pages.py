@@ -87,8 +87,7 @@ if __name__ == '__main__':
 
             if "dev" in tag:
                 tag = "dev"
-            else:
-                # Rename e.g. 0.9.0 to 0.9.x
+            elif len(tag.split('.')) >= 3:
                 tag = '.'.join(tag.split('.')[:-1] + ['x'])
 
             break

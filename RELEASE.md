@@ -10,12 +10,8 @@
 - Update the docs:
 
   - Edit `doc/source/_static/docversions.js` and commit
-  - Build a clean version of the docs.  Run `make` in the root dir, then
-    `rm -rf build; make html` in the docs.
-  - Run `make html` again to copy the newly generated `random.js` into
-    place.  Double check `random.js`, otherwise the skimage.org front
-    page gets broken!
-  - Build using `make gh-pages`.
+  - `rm -rf build; make html` in the doc/.
+  - Build gh-pages using `python gh-pages`.
   - Push upstream: `git push origin gh-pages` in `doc/gh-pages`.
 
 - Add the version number as a tag in git::
