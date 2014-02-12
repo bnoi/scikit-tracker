@@ -37,3 +37,4 @@ nosetests.xml
 
 sktracker/version.py
 doc/build
+doc/gh-pages

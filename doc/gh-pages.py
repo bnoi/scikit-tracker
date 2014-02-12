@@ -116,8 +116,8 @@ if __name__ == '__main__':
 
     try:
         cd(pages_dir)
-        status = sh2('git status | head -1')
-        branch = re.match('\# On branch (.*)$', status).group(1)
+        status = str(sh2('git status | head -1'))
+        branch = re.match(r'\# On branch (.*)$', status).group(1)
         if branch != 'gh-pages':
             e = 'On %r, git branch is %r, MUST be "gh-pages"' % (pages_dir,
                                                                  branch)
