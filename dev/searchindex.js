@@ -1,0 +1,1 @@
+Search.setIndex({envversion:43,terms:{todo:0,modul:0,search:0,index:0,page:0,content:0},titleterms:{welcom:0,tracker:0,document:0,scikit:0,indic:0,tabl:0},filenames:["index"],objects:{},titles:["Welcome to scikit-tracker&#8217;s documentation!"],objnames:{},objtypes:{}})
