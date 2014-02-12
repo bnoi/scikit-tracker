@@ -1,1 +1,1 @@
-Search.setIndex({filenames:["index"],titles:["Welcome to scikit-tracker&#8217;s documentation!"],terms:{test2:[],todo:0,index:0,search:0,content:0,page:0,modul:0},objnames:{},envversion:43,titleterms:{tracker:0,tabl:0,indic:0,document:0,welcom:0,scikit:0},objtypes:{},objects:{}})
+Search.setIndex({objects:{},terms:{page:0,todo:0,content:0,index:0,search:0,modul:0},filenames:["index"],titleterms:{scikit:0,indic:0,tabl:0,welcom:0,document:0,tracker:0},objnames:{},titles:["Welcome to scikit-tracker&#8217;s documentation!"],envversion:43,objtypes:{}})
