@@ -1,0 +1,31 @@
+# After changing this file, check it on:
+# http://lint.travis-ci.org/
+
+language: python
+
+python:
+    - 3.3
+
+virtualenv:
+    system_site_packages: false
+
+before_install:
+    - wget http://repo.continuum.io/miniconda/Miniconda3-3.0.0-Linux-x86_64.sh -O miniconda.sh
+    - chmod +x miniconda.sh
+    - ./miniconda.sh -b
+    - export PATH=/home/travis/miniconda3/bin:$PATH
+    - conda update --yes conda
+    - conda install --yes numpy scipy pandas
+    - conda install --yes scikit-learn scikit-image
+    - conda install --yes nose
+    - conda install --yes sphinx
+    - conda install --yes pip
+    - pip install coverage
+
+install:
+    - python setup.py install
+
+script:
+    # Run all tests
+    - nosetests sktracker
+    - nosetests sktracker --with-coverage --cover-package=sktracker

@@ -2,6 +2,8 @@
 
 `scikit-tracker` is a bla bla bla bla.
 
+[![Build Status](https://travis-ci.org/bnoi/scikit-tracker.png?branch=master)](https://travis-ci.org/bnoi/scikit-tracker)
+
 ## Documentation
 
 Documentation is available at http://bnoi.github.io/scikit-tracker.
