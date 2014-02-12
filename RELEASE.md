@@ -12,24 +12,19 @@
   - Edit `doc/source/_static/docversions.js` and commit
   - `rm -rf build; make html` in the doc/.
   - Build gh-pages using `python gh-pages`.
-  - Push upstream:
-    - `cd gh-pages/ && git push origin gh-pages`.
+  - Push upstream : `cd gh-pages/ && git push origin gh-pages`.
 
-- Add the version number as a tag in git::
+- Add the version number as a tag in git : `git tag v0.X.0`
 
-   git tag v0.X.0
+- Push the new meta-data to github : `git push --tags origin master`
 
-- Push the new meta-data to github::
+- Publish on PyPi :
 
-   git push --tags origin master
-
-- Publish on PyPi::
-
+```sh
    python setup.py register
    python setup.py sdist upload
+```
 
-- Increase the version number
-
-  - In `setup.py`, set to `dev`.
+- Increase the version number in `setup.py`, set to `dev`.
 
 - Update the development docs for the new version `0.X-dev` just like above
