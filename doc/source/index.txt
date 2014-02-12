@@ -3,6 +3,8 @@ Welcome to scikit-tracker's documentation!
 
 Contents: TODO
 
+test1
+
 .. toctree::
    :maxdepth: 2
 
