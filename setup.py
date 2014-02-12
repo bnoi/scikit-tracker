@@ -21,8 +21,8 @@ DEPENDENCIES        =  {
                         'numpy': (1, 8),
                         'scipy': (0, 12),
                         'pandas': (0, 13),
-                        'scikit-image': (0, 9),
-                        'scikit-learn': (0, 13),
+                        'skimage': (0, 9),
+                        'sklearn': (0, 13),
                       }
 
 # Only require Cython if we have a developer checkout
@@ -30,7 +30,7 @@ if VERSION.endswith('dev'):
     DEPENDENCIES['nose'] = (1, 3)
     DEPENDENCIES['sphinx'] = (1, 2)
 
-def write_version_py(filename='skimage/version.py'):
+def write_version_py(filename='sktracker/version.py'):
     template = """# This file is generated from the sktracker setup.py
 __version__ = '%s'
 """
@@ -108,8 +108,6 @@ if __name__ == "__main__":
             'Operating System :: Unix',
             'Operating System :: MacOS',
         ],
-
-        configuration=configuration,
 
         packages=setuptools.find_packages(exclude=['doc']),
         include_package_data=True,
