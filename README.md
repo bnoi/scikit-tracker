@@ -1,6 +1,6 @@
-# `scikit-tracker` - Objects detection and robust tracking for cell biology
+# Objects detection and robust tracking for cell biology
 
-bla bla bla bla blab
+`scikit-tracker` is a bla bla bla bla.
 
 ## Documentation
 
@@ -22,6 +22,7 @@ Documentation is available at http://bnoi.github.io/scikit-tracker.
 ### For developers
 
 - nose >= 1.3
+- sphinx >= 1.2
 
 ## Installation
 
@@ -33,6 +34,11 @@ Or by cloning this repo and using setup.py:
 
     $ git clone git@github.com:bnoi/scikit-tracker.git
     $ python setup.py install
+
+## Authors
+
+- Guillaume Gay : gllm.gay@gmail.com
+- Hadrien Mary : hadrien.mary@gmail.com
 
 ## Licence
 

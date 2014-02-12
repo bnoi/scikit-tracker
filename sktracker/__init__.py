@@ -1,6 +1,6 @@
 """Object detection and tracking for cell biology
 
-``sklearn`` is bla bla bla.
+`scikit-learn` is bla bla bla.
 
 Subpackages
 -----------
@@ -15,4 +15,7 @@ img_as_float
 
 """
 
-from .version import __version__
+try:
+    from .version import __version__
+except ImportError:
+    __version__ = "dev"
