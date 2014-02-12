@@ -1,12 +1,5 @@
 """Script to commit the doc build outputs into the github-pages repo.
 
-Use:
-
-  gh-pages.py [tag]
-
-If no tag is given, the current output of 'git describe' is used.  If given,
-that is how the resulting directory will be named.
-
 In practice, you should use either actual clean tags from a current build or
 something like 'current' as a stable URL for the mest current version of the """
 
@@ -91,7 +84,6 @@ if __name__ == '__main__':
                 tag = '.'.join(tag.split('.')[:-1] + ['x'])
 
             break
-
 
     startdir = os.getcwd()
     if not os.path.exists(pages_dir):
