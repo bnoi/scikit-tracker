@@ -15,7 +15,7 @@ MAINTAINER_EMAIL    = 'gllm.gay@gmail.com'
 URL                 = 'http://bnoi.github.io/scikit-tracker'
 LICENSE             = 'BSD 3-Clause'
 DOWNLOAD_URL        = 'https://github.com/bnoi/scikit-tracker'
-VERSION             = '0.1-dev'
+VERSION             = '0.1'
 PYTHON_VERSION      = (3, 3)
 DEPENDENCIES        =  {
                         'numpy': (1, 8),
