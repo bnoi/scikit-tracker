@@ -118,7 +118,6 @@ if __name__ == '__main__':
     try:
         cd(pages_dir)
         status = sh2('git status | head -1').decode("utf-8")
-        print(status)
         branch = re.match('\# On branch (.*)$', status).group(1)
         if branch != 'gh-pages':
             e = 'On %r, git branch is %r, MUST be "gh-pages"' % (pages_dir,
@@ -126,7 +125,7 @@ if __name__ == '__main__':
             raise RuntimeError(e)
         sh("touch .nojekyll")
         sh('git add .')
-        sh2('git commit -m"Updated doc release: %s"' % tag)
+        sh2('git commit -am "Updated doc release: %s"' % tag)
 
         print('Most recent commit:')
         sys.stdout.flush()
