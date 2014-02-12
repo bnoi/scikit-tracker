@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Script to commit the doc build outputs into the github-pages repo.
 
 Use:
@@ -107,25 +106,26 @@ if __name__ == '__main__':
         cd(startdir)
 
     dest = os.path.join(pages_dir, tag)
+
     # This is pretty unforgiving: we unconditionally nuke the destination
     # directory, and then copy the html tree in there
     shutil.rmtree(dest, ignore_errors=True)
     shutil.copytree(html_dir, dest)
+
     # copy pdf file into tree
     #shutil.copy(pjoin(pdf_dir, 'scikits.image.pdf'), pjoin(dest, 'scikits.image.pdf'))
 
     try:
         cd(pages_dir)
-        status = str(sh2('git status | head -1'))
-        branch = re.match(r'\# On branch (.*)$', status).group(1)
+        status = sh2('git status | head -1').decode("utf-8")
+        print(status)
+        branch = re.match('\# On branch (.*)$', status).group(1)
         if branch != 'gh-pages':
             e = 'On %r, git branch is %r, MUST be "gh-pages"' % (pages_dir,
                                                                  branch)
             raise RuntimeError(e)
         sh("touch .nojekyll")
-        sh('git add .nojekyll')
-        sh('git add index.html')
-        sh('git add %s' % tag)
+        sh('git add .')
         sh2('git commit -m"Updated doc release: %s"' % tag)
 
         print('Most recent commit:')
