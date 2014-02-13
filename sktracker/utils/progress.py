@@ -2,9 +2,12 @@ __all__ = ['print_progress']
 
 import sys
 
+
 def print_progress(progress):
     """Display a progress bar filled with a variable value. print_progress
     also works under IPython notebook.
+
+    Se `progress` to -1 to remove the progress bar.
 
     Parameters
     ----------
