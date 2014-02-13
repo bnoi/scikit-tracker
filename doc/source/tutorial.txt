@@ -1,0 +1,10 @@
+Tutorials
+=========
+
+Here you can find some quickstart guides to quickly learn how to use basic
+``sktracker`` features.
+
+.. toctree::
+   :maxdepth: 2
+
+   tutorial/discover

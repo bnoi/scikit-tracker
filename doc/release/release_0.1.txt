@@ -1,18 +1,23 @@
-# Announcement : scikit-tracker 0.1
+scikit-tracker 0.1
+------------------
 
-## New Features
-
-None
-
-## API changes
+New Features
+^^^^^^^^^^^^
 
 None
 
-## Pull request merged
+API changes
+^^^^^^^^^^^^
+
+None
+
+Pull request merged
+^^^^^^^^^^^^^^^^^^^
 
 It contained the following 0 merges:
 
-## Contributors to this release
+Contributors to this release
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This release was made possible by the collaborative efforts of many
 contributors, both new and old.  They are listed in alphabetical order by

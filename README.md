@@ -6,7 +6,8 @@
 
 ## Documentation
 
-Documentation is available at http://bnoi.github.io/scikit-tracker.
+Documentation for stable version : http://bnoi.github.io/scikit-tracker/stable.
+Documentation for dev version : http://bnoi.github.io/scikit-tracker/dev.
 
 ## Dependencies
 

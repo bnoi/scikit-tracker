@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+"""Script to auto-generate our API docs.
+"""
+# stdlib imports
+import os, sys
+
+# local imports
+from apigen import ApiDocWriter
+
+# version comparison
+from distutils.version import LooseVersion as V
+
+#*****************************************************************************
+
+def abort(error):
+    print('*WARNING* API documentation not generated: %s' % error)
+    exit()
+
+if __name__ == '__main__':
+    package = 'sktracker'
+
+    # Check that the 'sktracker' package is available. If not, the API
+    # documentation is not (re)generated and existing API documentation
+    # sources will be used.
+
+    try:
+        __import__(package)
+    except ImportError:
+        abort("Can not import sktracker")
+
+    module = sys.modules[package]
+
+    # Check that the source version is equal to the installed
+    # version. If the versions mismatch the API documentation sources
+    # are not (re)generated. This avoids automatic generation of documentation
+    # for older or newer versions if such versions are installed on the system.
+
+    outdir = 'source/api'
+    docwriter = ApiDocWriter(package)
+    docwriter.package_skip_patterns += [r'\.fixes$',
+                                        r'\.externals$',
+                                        ]
+    docwriter.write_api_docs(outdir)
+    docwriter.write_index(outdir, 'api', relative_to='source/api')
+    print('%d files written' % len(docwriter.written_modules))
