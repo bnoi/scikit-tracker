@@ -14,4 +14,4 @@ try:
 except ImportError:
     __version__ = "dev"
 
-import .utils
+from . import utils
