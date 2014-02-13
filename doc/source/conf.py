@@ -17,7 +17,6 @@ import sys
 import os
 
 import sphinx_bootstrap_theme
-import numpydoc
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -306,7 +305,7 @@ html_theme_options = {
     'navbar_title': "Scikit-tracker",
 
     # Tab name for entire site. (Default: "Site")
-    'navbar_site_name': "test",
+    'navbar_site_name': "Content",
 
     # A list of tuples containing pages or urls to link to.
     # Valid tuples should be in the following forms:

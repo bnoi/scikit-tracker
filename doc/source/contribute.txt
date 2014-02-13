@@ -1,5 +1,5 @@
-What's new in ``sktracker``
-===========================
+Contribute to ``sktracker`` development
+=======================================
 
 Development process
 -------------------

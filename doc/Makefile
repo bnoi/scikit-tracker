@@ -6,7 +6,6 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = build
-PYTHON        ?= python
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
@@ -179,5 +178,5 @@ pseudoxml:
 
 api:
 	@mkdir -p source/api
-	$(PYTHON) tools/api_builder.py
+	sphinx-apidoc -o source/api ../sktracker/ -s txt -flT
 	@echo "Build API docs...done."
