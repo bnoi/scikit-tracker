@@ -30,8 +30,6 @@ if VERSION.endswith('dev'):
     DEPENDENCIES['nose'] = (1, 3)
     DEPENDENCIES['sphinx'] = (1, 2)
     DEPENDENCIES['coverage'] = (3, 7)
-    DEPENDENCIES['sphinx-bootstrap-theme'] = (0, 3, 8)
-    DEPENDENCIES['numpydoc'] = (0, 5)
 
 def write_version_py(filename='sktracker/version.py'):
     template = """# This file is generated from the sktracker setup.py
