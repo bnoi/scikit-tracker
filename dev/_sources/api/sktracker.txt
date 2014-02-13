@@ -8,6 +8,18 @@ Subpackages
 
     sktracker.utils
 
+Submodules
+----------
+
+sktracker.version module
+------------------------
+
+.. automodule:: sktracker.version
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 Module contents
 ---------------
 
