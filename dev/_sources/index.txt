@@ -1,15 +1,49 @@
-Welcome to scikit-tracker's documentation!
+Welcome to Scikit-tracker's documentation!
 ==========================================
 
-Contents: TODO .
+Scikit-tracker is aim to detect and track objects from cell biological data.
+It's a toolbox for SciPy_.
+
+.. _SciPy: http://www.scipy.org
+
+
+Table of content
+----------------
 
 .. toctree::
-   :maxdepth: 2
+   :hidden:
 
-Indices and tables
-==================
+   tutorial
+   install
+   api/sktracker
+   new
+   contribute
+   license
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
+.. list-table::
+   :class: contentstable
+
+   * - `Tutorial <tutorial.html>`_
+
+       User quick start guide.
+
+     - `Installation <install.html>`_
+
+       How to install sktracker.
+
+     - `API Reference <api/sktracker.html>`_
+
+       Functions and classes reference.
+
+   * - `What's new <new.html>`_
+
+       What's new in sktracker ?
+
+     - `Contribute <contribute.html>`_
+
+       Become an sktracker's hacker !
+
+     - `License <license.html>`_
+
+       Conditions on the use and redistribution of this package.

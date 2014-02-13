@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Search &mdash; sktracker vdev docs</title>
+    <title>Skicit-tracker installation &mdash; sktracker vdev docs</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,23 +26,17 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="_static/searchtools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="sktracker vdev docs" href="index.html" />
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
-  
+    <link rel="next" title="sktracker package" href="api/sktracker.html" />
+    <link rel="prev" title="Discover Scikit-tracker" href="tutorial/discover.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-
 
   </head>
   <body>
@@ -74,15 +68,15 @@
      href="index.html">Content <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorial/discover.html">Discover Scikit-tracker</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Skicit-tracker installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#from-pypi">From PyPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#installation-github-repo">Installation Github repo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Skicit-tracker installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-github-repo">Installation Github repo</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/sktracker.html">sktracker package</a><ul>
@@ -110,16 +104,35 @@
             
             
               
+  <li>
+    <a href="tutorial/discover.html" title="Previous Chapter: Discover Scikit-tracker"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Discover Scikit-...</span>
+    </a>
+  </li>
+  <li>
+    <a href="api/sktracker.html" title="Next Chapter: sktracker package"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">sktracker packag... &raquo;</span>
+    </a>
+  </li>
             
             
             
             
-              <li class="hidden-sm"></li>
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/install.txt"
+     rel="nofollow">Source</a>
+</div></li>
             
           </ul>
 
           
             
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
           
         </div>
     </div>
@@ -129,35 +142,55 @@
   <div class="row">
     <div class="col-md-12">
       
-  <h1 id="search-documentation">Search</h1>
-  <div id="fallback" class="admonition warning">
-  <script type="text/javascript">$('#fallback').hide();</script>
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  <p>
-    From here you can search these documents. Enter your search
-    words into the box below and click "search". Note that the search
-    function will automatically search for all of the words. Pages
-    containing fewer words won't appear in the result list.
-  </p>
+  <div class="section" id="skicit-tracker-installation">
+<h1>Skicit-tracker installation<a class="headerlink" href="#skicit-tracker-installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">sktracker</span></tt> depends on the following packages :</p>
+<ul class="simple">
+<li>python &gt;= 3.3 (ask if you need support for python 2.7)</li>
+<li>numpy &gt;= 1.8</li>
+<li>scipy &gt;= 0.12</li>
+<li>pandas &gt;= 0.13</li>
+<li>scikit-image &gt;= 0.9</li>
+<li>scikit-learn &gt;= 0.13</li>
+</ul>
+<p><strong>Optional</strong></p>
+<ul class="simple">
+<li>matplotlib &gt;= 1.3</li>
+</ul>
+<p><strong>For developers</strong></p>
+<ul class="simple">
+<li>nose &gt;= 1.3</li>
+<li>sphinx &gt;= 1.2</li>
+<li>sphinx-bootstrap-theme == 0.3.8</li>
+<li>numpydoc &gt;= 0.5</li>
+<li>coverage &gt;= 3.7</li>
+</ul>
+</div>
+<div class="section" id="from-pypi">
+<h2>From PyPI<a class="headerlink" href="#from-pypi" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>easy_install -U scikit-tracker
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install -U scikit-tracker
+</pre></div>
+</div>
+</div>
+<div class="section" id="installation-github-repo">
+<h2>Installation Github repo<a class="headerlink" href="#installation-github-repo" title="Permalink to this headline">¶</a></h2>
+<p>Obtain the source from the git repository at <a class="reference external" href="https://github.com/bnoi/scikit-tracker">https://github.com/bnoi/scikit-tracker</a> by running:</p>
+<div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/bnoi/scikit-tracker.git
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">sktracker</span></tt> can be installed globally using:</p>
+<div class="highlight-python"><div class="highlight"><pre>python setup.py install
+</pre></div>
+</div>
+</div>
+</div>
 
-  
-  <form class="form-inline" action="" method="get">
-    <div class="form-group">
-      <input type="text" class="form-control" name="q" value="" />
-    </div>
-    <input type="submit" class="btn btn-default" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>  
-  
-  
-  
-  <div id="search-results">
-  
-  </div>
 
     </div>
       

@@ -1,0 +1,17 @@
+sktracker package
+=================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    sktracker.utils
+
+Module contents
+---------------
+
+.. automodule:: sktracker
+    :members:
+    :undoc-members:
+    :show-inheritance:

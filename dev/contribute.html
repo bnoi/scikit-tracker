@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Search &mdash; sktracker vdev docs</title>
+    <title>Contribute to sktracker development &mdash; sktracker vdev docs</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,23 +26,17 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="_static/searchtools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="sktracker vdev docs" href="index.html" />
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
-  
+    <link rel="next" title="License" href="license.html" />
+    <link rel="prev" title="What’s new in sktracker" href="new.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-
 
   </head>
   <body>
@@ -74,7 +68,7 @@
      href="index.html">Content <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorial/discover.html">Discover Scikit-tracker</a></li>
 </ul>
@@ -94,12 +88,12 @@
 <li class="toctree-l2"><a class="reference internal" href="new.html#scikit-tracker-0-1">scikit-tracker 0.1</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute to <tt class="docutils literal"><span class="pre">sktracker</span></tt> development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contribute.html#development-process">Development process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contribute.html#guidelines">Guidelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contribute.html#test-coverage">Test coverage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Contribute to <tt class="docutils literal"><span class="pre">sktracker</span></tt> development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -110,16 +104,35 @@
             
             
               
+  <li>
+    <a href="new.html" title="Previous Chapter: What’s new in sktracker"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; What’s new in sk...</span>
+    </a>
+  </li>
+  <li>
+    <a href="license.html" title="Next Chapter: License"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">License &raquo;</span>
+    </a>
+  </li>
             
             
             
             
-              <li class="hidden-sm"></li>
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/contribute.txt"
+     rel="nofollow">Source</a>
+</div></li>
             
           </ul>
 
           
             
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
           
         </div>
     </div>
@@ -129,35 +142,25 @@
   <div class="row">
     <div class="col-md-12">
       
-  <h1 id="search-documentation">Search</h1>
-  <div id="fallback" class="admonition warning">
-  <script type="text/javascript">$('#fallback').hide();</script>
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  <p>
-    From here you can search these documents. Enter your search
-    words into the box below and click "search". Note that the search
-    function will automatically search for all of the words. Pages
-    containing fewer words won't appear in the result list.
-  </p>
+  <div class="section" id="contribute-to-sktracker-development">
+<h1>Contribute to <tt class="docutils literal"><span class="pre">sktracker</span></tt> development<a class="headerlink" href="#contribute-to-sktracker-development" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="development-process">
+<h2>Development process<a class="headerlink" href="#development-process" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="guidelines">
+<h2>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="stylistic-guidelines">
+<h2>Stylistic Guidelines<a class="headerlink" href="#stylistic-guidelines" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="test-coverage">
+<h2>Test coverage<a class="headerlink" href="#test-coverage" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="continous-integration-with-travis-ci">
+<h2>Continous integration with Travis CI<a class="headerlink" href="#continous-integration-with-travis-ci" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
 
-  
-  <form class="form-inline" action="" method="get">
-    <div class="form-group">
-      <input type="text" class="form-control" name="q" value="" />
-    </div>
-    <input type="submit" class="btn btn-default" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>  
-  
-  
-  
-  <div id="search-results">
-  
-  </div>
 
     </div>
       
