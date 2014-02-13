@@ -5,10 +5,10 @@ clean:
 	find . -name "*.so" -o -name "*.pyc" -o -name "*.pyx.md5" | xargs rm -f
 
 test:
-	nosetests sktracker
+	nosetests sktracker -v
 
 coverage:
-	nosetests sktracker --with-coverage --cover-package=sktracker
+	nosetests sktracker --with-coverage --cover-package=sktracker -v
 
 push_dev_doc:
 	cd doc/ && make api && make html && python gh-pages.py

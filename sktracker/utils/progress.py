@@ -3,7 +3,7 @@ __all__ = ['print_progress']
 import sys
 
 
-def print_progress(progress):
+def print_progress(progress, out=sys.stdout):
     """Display a progress bar filled with a variable value. print_progress
     also works under IPython notebook.
 
@@ -36,8 +36,8 @@ def print_progress(progress):
 
     # If process is finished
     if progress == -1:
-        sys.stdout.write("\r" + " " * 80 + "\r\r")
-        sys.stdout.flush()
+        out.write("\r" + " " * 80 + "\r\r")
+        out.flush()
         return
 
     # Size of the progress bar
@@ -56,5 +56,8 @@ def print_progress(progress):
     bar += "]"
 
     # Write progress bar
-    sys.stdout.write("\r%d%% " % (progress) + bar)
-    sys.stdout.flush()
+    bar_str = "\r%d%% " % (progress) + bar
+    out.write(bar_str)
+    out.flush()
+
+
