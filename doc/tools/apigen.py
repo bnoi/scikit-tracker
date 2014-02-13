@@ -200,6 +200,8 @@ class ApiDocWriter(object):
         classes : list of str
             A list of (public) class names in the module.
         """
+        print('lllllllllllll')
+        print(uri)
         mod = __import__(uri, fromlist=[uri])
         # find all public objects in the module.
         obj_strs = [obj for obj in dir(mod) if not obj.startswith('_')]

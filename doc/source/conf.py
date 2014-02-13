@@ -17,6 +17,7 @@ import sys
 import os
 
 import sphinx_bootstrap_theme
+import numpydoc
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -24,7 +25,6 @@ import sphinx_bootstrap_theme
 #sys.path.insert(0, os.path.abspath('.'))
 
 curpath = os.path.dirname(__file__)
-sys.path.append(os.path.join(curpath, '..', 'ext'))
 
 # -- General configuration ------------------------------------------------
 
@@ -38,7 +38,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
-    'sphinx.ext.autosummary'
+    'sphinx.ext.autosummary',
+    'numpydoc'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
