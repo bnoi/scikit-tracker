@@ -25,6 +25,8 @@ Documentation is available at http://bnoi.github.io/scikit-tracker.
 
 - nose >= 1.3
 - sphinx >= 1.2
+- sphinx-bootstrap-theme == 0.3.8
+- coverage >= 3.7
 
 ## Installation
 
