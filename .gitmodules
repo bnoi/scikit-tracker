@@ -1,0 +1,3 @@
+[submodule "doc/extensions/numpydoc"]
+	path = doc/extensions/numpydoc
+	url = https://github.com/numpy/numpydoc.git

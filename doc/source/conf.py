@@ -25,6 +25,12 @@ import sphinx_bootstrap_theme
 
 curpath = os.path.dirname(__file__)
 
+# Import numpydoc
+sys.path.append(os.path.join(curpath, '..', 'extensions', 'numpydoc'))
+
+# Import sktracker
+sys.path.append(os.path.join(curpath, '..', '..'))
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
