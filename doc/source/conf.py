@@ -16,8 +16,6 @@
 import sys
 import os
 
-import sphinx_bootstrap_theme
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -27,6 +25,10 @@ curpath = os.path.dirname(__file__)
 
 # Import numpydoc
 sys.path.append(os.path.join(curpath, '..', 'extensions', 'numpydoc'))
+
+# Import sphinx_bootstrap_theme
+sys.path.append(os.path.join(curpath, '..', 'extensions', 'sphinx-bootstrap-theme'))
+import sphinx_bootstrap_theme
 
 # Import sktracker
 sys.path.append(os.path.join(curpath, '..', '..'))
