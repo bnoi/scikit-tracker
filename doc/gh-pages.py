@@ -120,7 +120,7 @@ if __name__ == '__main__':
             sh('rm -f stable')
             sh('ln -s %s stable' % tag)
 
-        sh('git add .')
+        sh('git add . --all')
         sh2('git commit -am "Updated doc release: %s"' % tag)
 
         print('Most recent commit:')
