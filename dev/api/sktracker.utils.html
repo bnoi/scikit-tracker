@@ -1,4 +1,12 @@
 
+
+  
+  
+ 
+  
+ 
+
+
 <!DOCTYPE html>
 
 
@@ -10,7 +18,7 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootswatch-3.1.0/lumen/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/lumen/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,9 +34,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="sktracker vdev docs" href="../index.html" />
     <link rel="up" title="sktracker package" href="sktracker.html" />
@@ -51,8 +59,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html">
-          Scikit-tracker</a>
+        <a class="navbar-brand" href="../index.html">Scikit-tracker</a>
         <span class="navbar-text navbar-version pull-left"><b>dev</b></span>
       </div>
 
@@ -62,14 +69,11 @@
             
             
               <li class="dropdown globaltoc-container">
-  <a role="button"
-     id="dLabelGlobalToc"
-     data-toggle="dropdown"
-     data-target="#"
-     href="../index.html">Content <b class="caret"></b></a>
+  <a href="../index.html"
+     class="dropdown-toggle"
+     data-toggle="dropdown">Content <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
-      role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+    ><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorial/discover.html">Discover Scikit-tracker</a></li>
 </ul>
@@ -107,19 +111,17 @@
             
             
               
-  <li>
-    <a href="sktracker.html" title="Previous Chapter: sktracker package"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; sktracker packag...</span>
-    </a>
-  </li>
-  <li>
-    <a href="../new.html" title="Next Chapter: What’s new in sktracker"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">What’s new in sk... &raquo;</span>
-    </a>
-  </li>
+                
+  <li><a href="sktracker.html"
+         title="Previous Chapter: sktracker package">&laquo; sktracker packag...</a></li>
+  <li><a href="../new.html"
+         title="Next Chapter: What’s new in sktracker">What’s new in sk... &raquo;</a></li>
+              
             
             
             
             
-              <li class="hidden-sm">
+              <li>
 <div id="sourcelink">
   <a href="../_sources/api/sktracker.utils.txt"
      rel="nofollow">Source</a>
@@ -154,7 +156,7 @@
 <span id="sktracker-utils-progress-module"></span><h2>sktracker.utils.progress module<a class="headerlink" href="#module-sktracker.utils.progress" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="sktracker.utils.progress.print_progress">
-<tt class="descclassname">sktracker.utils.progress.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em><big>)</big><a class="headerlink" href="#sktracker.utils.progress.print_progress" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">sktracker.utils.progress.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em>, <em>out=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='UTF-8'&gt;</em><big>)</big><a class="headerlink" href="#sktracker.utils.progress.print_progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display a progress bar filled with a variable value. print_progress
 also works under IPython notebook.</p>
 <p>Se <cite>progress</cite> to -1 to remove the progress bar.</p>
@@ -196,7 +198,7 @@ and 100.</p>
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.utils" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="sktracker.utils.print_progress">
-<tt class="descclassname">sktracker.utils.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em><big>)</big><a class="headerlink" href="#sktracker.utils.print_progress" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">sktracker.utils.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em>, <em>out=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='UTF-8'&gt;</em><big>)</big><a class="headerlink" href="#sktracker.utils.print_progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display a progress bar filled with a variable value. print_progress
 also works under IPython notebook.</p>
 <p>Se <cite>progress</cite> to -1 to remove the progress bar.</p>

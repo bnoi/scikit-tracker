@@ -138,12 +138,8 @@
       $localLi.first().after('<li class="divider"></li>');
     }
 
-    // Manually add dropdown.
-    // Appears unnecessary as of:
-    //   https://github.com/ryan-roemer/sphinx-bootstrap-theme/pull/90
-    // Remove next time around...
-    // a.dropdown-toggle class needed in globaltoc.html
-    //$('.dropdown-toggle').dropdown();
+    // Enable dropdown.
+    $('.dropdown-toggle').dropdown();
 
     // Patch tables.
     patchTables();
@@ -157,12 +153,8 @@
       // ignore references
       if (!$(e).parent().hasClass("reference")) {
         $(e).replaceWith(function () {
-          return $("<code />").html($(this).html());
+          return $("<code />").text($(this).text());
         });
       }});
-
-    // Update sourcelink to remove outerdiv (fixes appearance in navbar).
-    var $srcLink = $(".nav #sourcelink");
-    $srcLink.parent().html($srcLink.html());
   });
-}(window.$jqTheme || window.jQuery));
+}($jqTheme || window.jQuery));
