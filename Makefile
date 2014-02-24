@@ -1,4 +1,4 @@
-.PHONY: help build clean test coverage push_dev_doc
+.PHONY: help build clean test coverage doc push_doc
 
 help:
 	@echo "Please use make <target> where <target> is one of"
@@ -20,6 +20,9 @@ test:
 coverage:
 	nosetests sktracker --with-coverage --cover-package=sktracker -v
 
-push_dev_doc:
-	cd doc/ && make api && make html && python gh-pages.py
+doc:
+	cd doc/ && make api && make html
+
+push_doc:
+	cd doc/ && python gh-pages.py
 	cd doc/gh-pages/ && git push origin gh-pages && cd ../../
