@@ -11,7 +11,7 @@ color
 
 try:
     from .version import __version__
-except ImportError:
-    __version__ = "dev"
+except ImportError: # pragma: no cover
+    __version__ = "dev" # pragma: no cover
 
 from . import utils
