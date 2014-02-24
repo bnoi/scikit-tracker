@@ -2,7 +2,7 @@ from sktracker.utils import color
 from sktracker.utils.color_system import CODE
 
 def test_colors():
-    for test_string in ["test", "test_string", "i am a test", ""]:
+    for test_string in ["i am a test", ""]:
         for color_string, color_code in CODE.items():
             yield check_color, test_string, color_string, color_code
 
