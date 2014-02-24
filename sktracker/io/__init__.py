@@ -14,4 +14,8 @@ from .tifffile import TiffSequence
 
 from .ome import OMEModel
 
-__all__ = ['OMEModel', 'imsave', 'imread', 'imshow', 'TiffFile', 'TiffSequence']
+from .tiff_metadata import get_metadata_from_tiff
+
+
+__all__ = ['get_metadata_from_tiff', 'OMEModel', 'imsave', 'imread', 'imshow',
+           'TiffFile', 'TiffSequence']

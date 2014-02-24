@@ -21,7 +21,7 @@ class OMEModel():
     Parameters
     ----------
     xml_str: str
-        OME XML string.
+        OME XML string
 
     """
 
@@ -56,12 +56,13 @@ class OMEModel():
         Parameters
         ----------
         sup_cols: list
-            Supplementaries columns to retrieve.
+            Supplementaries columns to retrieve
 
         Returns
         -------
         df_planes: `pd.DataFrame`
-            Contains OME XML Plane informations.
+            Contains OME XML Plane informations
+
         """
         if self.planes:
             cols = ["TheC", "TheT", "TheZ"]
@@ -94,7 +95,8 @@ class OMEModel():
         Returns
         -------
         metadata: dict
-            Metadata from OME XML.
+            Metadata from OME XML
+
         """
 
         if not self.img or not self.pixels:
@@ -170,7 +172,8 @@ class OMEModel():
         Returns
         -------
         output: str
-            OME XML as string.
+            OME XML as string
+
         """
         f = io.StringIO()
         et = ElementTree.ElementTree(self.root)
@@ -189,9 +192,10 @@ class OMEModel():
         Parameters
         ----------
         size_x: int
-            X size.
+            X size
         size_y: int
-            Y size.
+            Y size
+
         """
 
         self.pixels.attrib['SizeX'] = str(size_x)
@@ -203,7 +207,8 @@ class OMEModel():
         Parameters
         ----------
         size_z: int
-            Z size.
+            Z size
+
         """
 
         self.pixels.attrib['SizeZ'] = str(size_z)
@@ -219,6 +224,7 @@ class OMEModel():
             Physicial size for x pixels in um
         size_x: float
             Physicial size for x pixels in um
+
         """
 
         if size_x:
@@ -234,7 +240,8 @@ class OMEModel():
         Returns
         -------
         physical_size: dict
-            Contains physical size for available dimensions.
+            Contains physical size for available dimensions
+
         """
 
         res = {}
@@ -253,7 +260,8 @@ class OMEModel():
         Parameters
         ----------
         new_name: str
-            New name to set.
+            New name to set
+
         """
 
         self.img.attrib['Name'] = new_name
@@ -269,7 +277,8 @@ class OMEModel():
         Parameters
         -----------
         new_file_name: str
-            New filename to set.
+            New filename to set
+
         """
 
         uuid_value = uuid.uuid1()
@@ -289,6 +298,7 @@ class OMEModel():
     def uniform_ifd(self): # pragma: no cover
         """OME with more than one Tiff file has to be converted before save them
         in a single Tiff file to make correct IFD in TiffData tags.
+
         """
 
         fnames = []
