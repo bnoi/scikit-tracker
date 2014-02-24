@@ -50,7 +50,7 @@ class OMEModel():
             log.error('OME model does not contain Plane tag')
             self.planes = None
 
-    def df_planes(self, sup_cols):
+    def df_planes(self, sup_cols=[]):
         """Get OME Plane tags as `pd.DataFrame`.
 
         Parameters
@@ -112,20 +112,30 @@ class OMEModel():
         if "PhysicalSizeX" in self.pixels.attrib.keys():
             x_size = float(self.pixels.attrib["PhysicalSizeX"])
             if x_size != 1:
-                md['x-size'] = x_size
+                md['PhysicalSizeX'] = x_size
         if "PhysicalSizeY" in self.pixels.attrib.keys():
             y_size = float(self.pixels.attrib["PhysicalSizeY"])
             if y_size != 1:
-                md['y-size'] = y_size
+                md['PhysicalSizeY'] = y_size
         if "PhysicalSizeZ" in self.pixels.attrib.keys():
             z_size = float(self.pixels.attrib["PhysicalSizeZ"])
             if z_size != 1:
-                md['z-size'] = z_size
+                md['PhysicalSizeZ'] = z_size
 
         # Find dimension order
         if "DimensionOrder" in self.pixels.attrib.keys():
             md['axes'] = self.pixels.attrib["DimensionOrder"]
             md['axes'] = list(reversed(md['axes']))
+
+        if 'axes' in md.keys():
+            shape = []
+            for d in md['axes']:
+                try:
+                    s = self.pixels.attrib['Size' + d]
+                    shape.append(int(s))
+                except:
+                    shape.append(1)
+            md['shape'] = tuple(shape)
 
         # Find channels ID and names
         channels = self.pixels.findall("{%s}Channel" % self.ns)
@@ -237,7 +247,7 @@ class OMEModel():
 
         return res
 
-    def set_name(self, new_name):
+    def set_name(self, new_name): # pragma: no cover
         """Set first Image tag name.
 
         Parameters
@@ -248,7 +258,7 @@ class OMEModel():
 
         self.img.attrib['Name'] = new_name
 
-    def set_filename(self, new_file_name):
+    def set_filename(self, new_file_name): # pragma: no cover
         """Set new filename for each TiffData
 
         Notes
@@ -268,7 +278,7 @@ class OMEModel():
             uuid_tag.attrib['FileName'] = new_file_name
             uuid_tag.text = "urn:uuid:" + str(uuid_value)
 
-    def set_size_t(self):
+    def set_size_t(self): # pragma: no cover
         """Set correct size for T dimensions in Plane according to Plane tag.
         """
 
@@ -276,7 +286,7 @@ class OMEModel():
 
         self.pixels.attrib["SizeT"] = str(size_t)
 
-    def uniform_ifd(self):
+    def uniform_ifd(self): # pragma: no cover
         """OME with more than one Tiff file has to be converted before save them
         in a single Tiff file to make correct IFD in TiffData tags.
         """
