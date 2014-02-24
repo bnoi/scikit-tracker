@@ -4,8 +4,8 @@ __all__ = ['in_ipython']
 def in_ipython():
     """Test if current python process is an IPython process or not.
 
-    Return
-    ------
+    Returns
+    -------
     True wether current process is IPython, False in the other case.
     """
     try:

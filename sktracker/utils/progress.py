@@ -3,7 +3,7 @@ __all__ = ['print_progress']
 import sys
 
 
-def print_progress(progress, out=sys.stdout):
+def print_progress(progress, out=None):
     """Display a progress bar filled with a variable value. print_progress
     also works under IPython notebook.
 
@@ -14,6 +14,8 @@ def print_progress(progress, out=sys.stdout):
     progress: int
         Variable value use to fill the progress bar. Should be between 0
         and 100.
+    out: OutStream
+        Where to stream progress bar. None will redirect output to `sys.stdout`.
 
     Returns
     -------
@@ -33,6 +35,9 @@ def print_progress(progress, out=sys.stdout):
     >>> print_progress(-1)
 
     """
+
+    if out is None:
+        out = sys.stdout
 
     # If process is finished
     if progress == -1:
