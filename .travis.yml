@@ -27,5 +27,5 @@ install:
 
 script:
     # Run all tests
-    - nosetests sktracker -v
+    # - nosetests sktracker -v
     - nosetests sktracker --with-coverage --cover-package=sktracker -v
