@@ -6,7 +6,8 @@ help:
 	@echo "    clean          : clean current repository"
 	@echo "    test           : run tests"
 	@echo "    coverage       : run tests and check code coverage"
-	@echo "    push_dev_doc   : push dev documentation on internet"
+	@echo "    doc            : build dev documentation"
+	@echo "    push_doc       : push dev documentation to http://bnoi.github.io/scikit-tracker/dev/"
 
 build:
 	python setup.py build_ext --inplace
