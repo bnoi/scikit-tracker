@@ -17,6 +17,7 @@ except ImportError: # pragma: no cover
     __version__ = "dev" # pragma: no cover
 
 from . import utils
+from . import io
 
 def setup_log(): # pragma: no cover
 
