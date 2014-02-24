@@ -1,0 +1,38 @@
+sktracker.io package
+====================
+
+Submodules
+----------
+
+sktracker.io.ome module
+-----------------------
+
+.. automodule:: sktracker.io.ome
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.io.tiff_metadata module
+---------------------------------
+
+.. automodule:: sktracker.io.tiff_metadata
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.io.tifffile module
+----------------------------
+
+.. automodule:: sktracker.io.tifffile
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.io
+    :members:
+    :undoc-members:
+    :show-inheritance:
