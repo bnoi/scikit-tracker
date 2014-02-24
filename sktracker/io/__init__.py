@@ -12,4 +12,6 @@ from .tifffile import imshow
 from .tifffile import TiffFile
 from .tifffile import TiffSequence
 
-__all__ = ['imsave', 'imread', 'imshow', 'TiffFile', 'TiffSequence']
+from .ome import OMEModel
+
+__all__ = ['OMEModel', 'imsave', 'imread', 'imshow', 'TiffFile', 'TiffSequence']
