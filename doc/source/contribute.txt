@@ -1,5 +1,5 @@
-Contribute to ``sktracker`` development
-=======================================
+Contribute to development
+=========================
 
 Development process
 -------------------

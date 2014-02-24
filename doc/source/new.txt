@@ -1,4 +1,4 @@
-What's new in ``sktracker``
-===========================
+What's new
+==========
 
 .. include:: ../release/release_0.1.txt
