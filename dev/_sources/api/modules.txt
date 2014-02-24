@@ -1,0 +1,7 @@
+sktracker
+=========
+
+.. toctree::
+   :maxdepth: 1
+
+   sktracker

@@ -1,5 +1,5 @@
-Skicit-tracker installation
-===========================
+Ìnstallation
+=============
 
 Dependencies
 ------------

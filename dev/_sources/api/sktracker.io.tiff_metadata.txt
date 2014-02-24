@@ -1,0 +1,7 @@
+sktracker.io.tiff_metadata module
+=================================
+
+.. automodule:: sktracker.io.tiff_metadata
+    :members:
+    :undoc-members:
+    :show-inheritance:

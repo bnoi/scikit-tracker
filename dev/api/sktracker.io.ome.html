@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sktracker.io.ome module &mdash; sktracker vdev docs</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.1.0/lumen/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="sktracker vdev docs" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Scikit-tracker</a>
+        <span class="navbar-text navbar-version pull-left"><b>dev</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Content <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/discover.html">Discover Scikit-tracker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html"><cite>sktracker</cite> installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation-github-repo">Installation Github repo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.html">sktracker package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker.version">sktracker.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../new.html">What&#8217;s new in <tt class="docutils literal"><span class="pre">sktracker</span></tt></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../new.html#scikit-tracker-0-1">scikit-tracker 0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contribute to <tt class="docutils literal"><span class="pre">sktracker</span></tt> development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/api/sktracker.io.ome.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="module-sktracker.io.ome">
+<span id="sktracker-io-ome-module"></span><h1>sktracker.io.ome module<a class="headerlink" href="#module-sktracker.io.ome" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sktracker.io.ome.OMEModel">
+<em class="property">class </em><tt class="descclassname">sktracker.io.ome.</tt><tt class="descname">OMEModel</tt><big>(</big><em>xml_str</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>OMEModel allows OME xml manipulation in order to read and write OME
+metadata.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xml_str: str</strong></p>
+<blockquote class="last">
+<div><p>OME XML string</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.df_planes">
+<tt class="descname">df_planes</tt><big>(</big><em>sup_cols=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.df_planes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get OME Plane tags as <cite>pd.DataFrame</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sup_cols: list</strong></p>
+<blockquote>
+<div><p>Supplementaries columns to retrieve</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">df_planes: <cite>pd.DataFrame</cite></p>
+<blockquote class="last">
+<div><p>Contains OME XML Plane informations</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.get_metadata">
+<tt class="descname">get_metadata</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.get_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve global metadata from OME.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">metadata: dict</p>
+<blockquote class="last">
+<div><p>Metadata from OME XML</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>If some metadata are missing (such as <cite>z-size</cite>), they are inferred from
+Plane tags.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.get_physical_size">
+<tt class="descname">get_physical_size</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.get_physical_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get physical size for each dimensions (X, Y and Z) if possible.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">physical_size: dict</p>
+<blockquote class="last">
+<div><p>Contains physical size for available dimensions</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.set_filename">
+<tt class="descname">set_filename</tt><big>(</big><em>new_file_name</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set new filename for each TiffData</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_file_name: str</strong></p>
+<blockquote class="last">
+<div><p>New filename to set</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Filename will be the same for each TiffData. Do not use if you&#8217;re dataset
+use several Tiff files.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.set_name">
+<tt class="descname">set_name</tt><big>(</big><em>new_name</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set first Image tag name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_name: str</strong></p>
+<blockquote class="last">
+<div><p>New name to set</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.set_physical_size">
+<tt class="descname">set_physical_size</tt><big>(</big><em>size_x=None</em>, <em>size_y=None</em>, <em>size_z=None</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_physical_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set physical X, Y and Z size (in um).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size_x: float</strong></p>
+<blockquote>
+<div><p>Physicial size for x pixels in um</p>
+</div></blockquote>
+<p><strong>size_x: float</strong></p>
+<blockquote>
+<div><p>Physicial size for x pixels in um</p>
+</div></blockquote>
+<p><strong>size_x: float</strong></p>
+<blockquote class="last">
+<div><p>Physicial size for x pixels in um</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.set_size_t">
+<tt class="descname">set_size_t</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_size_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set correct size for T dimensions in Plane according to Plane tag.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.set_xy_size">
+<tt class="descname">set_xy_size</tt><big>(</big><em>size_x</em>, <em>size_y</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_xy_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set X and Y size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size_x: int</strong></p>
+<blockquote>
+<div><p>X size</p>
+</div></blockquote>
+<p><strong>size_y: int</strong></p>
+<blockquote class="last">
+<div><p>Y size</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.set_z_size">
+<tt class="descname">set_z_size</tt><big>(</big><em>size_z</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_z_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set Z size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size_z: int</strong></p>
+<blockquote class="last">
+<div><p>Z size</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.tostring">
+<tt class="descname">tostring</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.tostring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write in memory OME XML to string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">output: str</p>
+<blockquote class="last">
+<div><p>OME XML as string</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ome.OMEModel.uniform_ifd">
+<tt class="descname">uniform_ifd</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.uniform_ifd" title="Permalink to this definition">¶</a></dt>
+<dd><p>OME with more than one Tiff file has to be converted before save them
+in a single Tiff file to make correct IFD in TiffData tags.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
