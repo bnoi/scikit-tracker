@@ -38,8 +38,8 @@ or
 
   pip install -U scikit-tracker
 
-Installation Github repo
--------------------------
+Installation from source (Github repo)
+--------------------------------------
 
 Obtain the source from the git repository at `https://github.com/bnoi/scikit-tracker
 <https://github.com/bnoi/scikit-tracker>`_ by running::
