@@ -814,7 +814,9 @@ class TiffFile(object):
 
     def _omeseries(self):
         """Return image series in OME-TIFF file(s)."""
-        root = ElementTree.XML(self.pages[0].tags['image_description'].value)
+        xmlstring = self.pages[0].tags['image_description'].value
+        xmlstring = xmlstring.decode('utf-8',errors='replace')
+        root = ElementTree.XML(xmlstring)
         uuid = root.attrib.get('UUID', None)
         self._tiffs = {uuid: self}
         modulo = {}
@@ -1893,7 +1895,11 @@ def read_numpy(fh, byteorder, dtype, count):
 
 def read_json(fh, byteorder, dtype, count):
     """Read tag data from file and return as object."""
-    return json.loads(unicode(stripnull(fh.read(count)), 'utf-8'))
+    json_string = unicode(stripnull(fh.read(count)), 'utf-8')
+    try:
+        return json.loads(json_string)
+    except:
+        return None
 
 
 def read_mm_header(fh, byteorder, dtype, count):
