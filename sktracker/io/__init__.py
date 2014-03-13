@@ -6,6 +6,10 @@ https://www.openmicroscopy.org/site/support/ome-model/ for details.
 
 """
 
+# Remove warnings for tifffile.py
+import warnings
+warnings.filterwarnings("ignore")
+
 from .tifffile import imsave
 from .tifffile import imread
 from .tifffile import imshow
