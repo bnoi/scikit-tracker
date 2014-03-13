@@ -1,6 +1,6 @@
 [submodule "doc/extensions/numpydoc"]
 	path = doc/extensions/numpydoc
 	url = https://github.com/numpy/numpydoc.git
-[submodule "doc/extensions/sphinx-bootstrap-theme"]
-	path = doc/extensions/sphinx-bootstrap-theme
-	url = https://github.com/ryan-roemer/sphinx-bootstrap-theme.git
+[submodule "doc/extensions/sphinx_rtd_theme"]
+	path = doc/extensions/sphinx_rtd_theme
+	url = https://github.com/snide/sphinx_rtd_theme.git

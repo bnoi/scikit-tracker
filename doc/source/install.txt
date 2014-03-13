@@ -1,4 +1,4 @@
-Ìnstallation
+Installation
 =============
 
 Dependencies
@@ -28,24 +28,40 @@ Dependencies
 From PyPI
 ---------
 
-::
+.. code-block:: sh
 
-  easy_install -U scikit-tracker
+  $ easy_install -U scikit-tracker
 
 or
 
-::
+.. code-block:: sh
 
-  pip install -U scikit-tracker
+  $ pip install -U scikit-tracker
 
 Installation from source (Github repo)
 --------------------------------------
 
+Here you will see how to install the last ``sktracker`` version.
+
+One command line
+~~~~~~~~~~~~~~~~
+
+.. code-block:: sh
+
+    $ pip install -e git+https://github.com/bnoi/scikit-tracker.git#egg=master
+
+Clone and install
+~~~~~~~~~~~~~~~~~
+
 Obtain the source from the git repository at `https://github.com/bnoi/scikit-tracker
-<https://github.com/bnoi/scikit-tracker>`_ by running::
+<https://github.com/bnoi/scikit-tracker>`_ by running :
 
-  git clone https://github.com/bnoi/scikit-tracker.git
+.. code-block:: sh
 
-``sktracker`` can be installed globally using::
+  $ git clone https://github.com/bnoi/scikit-tracker.git
 
-  python setup.py install
+``sktracker`` can be installed globally using :
+
+.. code-block:: sh
+
+  $ python setup.py install
