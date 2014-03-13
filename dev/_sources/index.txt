@@ -6,44 +6,20 @@ It's a toolbox for SciPy_.
 
 .. _SciPy: http://www.scipy.org
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis tellus at neque consequat commodo eu vel felis. Nulla elementum aliquet tristique. Mauris eu bibendum orci. Praesent id ante tempor, pretium ipsum sit amet, malesuada elit. Praesent rutrum massa et convallis placerat. Sed sollicitudin, massa adipiscing dignissim rutrum, odio odio dignissim nunc, ut aliquam orci ipsum quis elit. Mauris laoreet lectus vel purus volutpat iaculis.
+
+Aenean orci urna, varius sed venenatis vel, volutpat ut elit. Proin in porttitor turpis, at iaculis ipsum. Etiam lectus leo, porttitor nec condimentum sit amet, accumsan vitae quam. Curabitur ac quam vel sem lobortis sodales a id urna. Sed placerat eleifend erat, et mollis sapien sollicitudin et. Phasellus sagittis ipsum quis lectus lacinia iaculis. In euismod nisi ac nunc molestie, at bibendum nulla volutpat.
+
+Fusce posuere felis eget placerat aliquet. Sed nec dignissim enim, sit amet accumsan mi. Donec at libero rhoncus, consequat nisi vel, tincidunt neque. Fusce gravida neque molestie urna semper, ac commodo enim luctus. Nulla facilisi. Sed feugiat nisi vitae felis dignissim interdum. Maecenas sit amet sapien egestas, mollis tortor in, egestas mi. Mauris vitae lacus pharetra, luctus ligula id, pretium elit. Etiam bibendum elementum nibh vitae porttitor. Interdum et malesuada fames ac ante ipsum primis in faucibus.
 
 Table of content
 ----------------
 
 .. toctree::
-   :hidden:
 
-   tutorial
-   install
-   api/sktracker
-   new
-   contribute
-   license
-
-
-.. list-table::
-   :class: contentstable
-
-   * - `Tutorial <tutorial.html>`_
-
-       User quick start guide.
-
-     - `Installation <install.html>`_
-
-       How to install sktracker.
-
-     - `API Reference <api/sktracker.html>`_
-
-       Functions and classes reference.
-
-   * - `What's new <new.html>`_
-
-       What's new in sktracker ?
-
-     - `Contribute <contribute.html>`_
-
-       Become an sktracker's hacker !
-
-     - `License <license.html>`_
-
-       Conditions on the use and redistribution of this package.
+    new
+    install
+    tutorial
+    api/sktracker
+    contribute
+    license
