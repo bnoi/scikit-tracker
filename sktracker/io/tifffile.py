@@ -200,6 +200,7 @@ def imsave(filename, data, photometric=None, planarconfig=None,
         If 0, data are written uncompressed (default).
     extratags: sequence of tuples
         Additional tags as [(code, dtype, count, value, writeonce)].
+
         code : int
             The TIFF tag Id.
         dtype : str
