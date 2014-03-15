@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to Scikit-tracker’s documentation! &mdash; sktracker vdev docs</title>
+  <title>Scikit-tracker’s documentation &mdash; sktracker vdev docs</title>
   
 
   
@@ -111,7 +111,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="#">Docs</a> &raquo;</li>
       
-    <li>Welcome to Scikit-tracker&#8217;s documentation!</li>
+    <li>Scikit-tracker&#8217;s documentation</li>
       <li class="wy-breadcrumbs-aside">
         
           <a href="_sources/index.txt" rel="nofollow"> View page source</a>
@@ -122,13 +122,31 @@
 </div>
           <div role="main">
             
-  <div class="section" id="welcome-to-scikit-tracker-s-documentation">
-<h1>Welcome to Scikit-tracker&#8217;s documentation!<a class="headerlink" href="#welcome-to-scikit-tracker-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Scikit-tracker is aim to detect and track objects from cell biological data.
-It&#8217;s a toolbox for <a class="reference external" href="http://www.scipy.org">SciPy</a>.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis tellus at neque consequat commodo eu vel felis. Nulla elementum aliquet tristique. Mauris eu bibendum orci. Praesent id ante tempor, pretium ipsum sit amet, malesuada elit. Praesent rutrum massa et convallis placerat. Sed sollicitudin, massa adipiscing dignissim rutrum, odio odio dignissim nunc, ut aliquam orci ipsum quis elit. Mauris laoreet lectus vel purus volutpat iaculis.</p>
-<p>Aenean orci urna, varius sed venenatis vel, volutpat ut elit. Proin in porttitor turpis, at iaculis ipsum. Etiam lectus leo, porttitor nec condimentum sit amet, accumsan vitae quam. Curabitur ac quam vel sem lobortis sodales a id urna. Sed placerat eleifend erat, et mollis sapien sollicitudin et. Phasellus sagittis ipsum quis lectus lacinia iaculis. In euismod nisi ac nunc molestie, at bibendum nulla volutpat.</p>
-<p>Fusce posuere felis eget placerat aliquet. Sed nec dignissim enim, sit amet accumsan mi. Donec at libero rhoncus, consequat nisi vel, tincidunt neque. Fusce gravida neque molestie urna semper, ac commodo enim luctus. Nulla facilisi. Sed feugiat nisi vitae felis dignissim interdum. Maecenas sit amet sapien egestas, mollis tortor in, egestas mi. Mauris vitae lacus pharetra, luctus ligula id, pretium elit. Etiam bibendum elementum nibh vitae porttitor. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+  <div class="section" id="scikit-tracker-s-documentation">
+<h1>Scikit-tracker&#8217;s documentation<a class="headerlink" href="#scikit-tracker-s-documentation" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><strong>Version</strong> : dev (april 2014)</li>
+<li><strong>Source code</strong> : <a class="reference external" href="https://github.com/bnoi/scikit-tracker">https://github.com/bnoi/scikit-tracker</a></li>
+<li><strong>Issues, ideas and discussions</strong> : <a class="reference external" href="https://github.com/bnoi/scikit-tracker/issues">https://github.com/bnoi/scikit-tracker/issues</a></li>
+</ul>
+<p><strong>scikit-tracker</strong> aims to be a robust Python library to work with cell
+biology microscopy images. <a class="reference external" href="https://www.openmicroscopy.org/site/support/ome-model/ome-tiff/">OME XML and OME Tiff</a> are supported to
+handle input/output to the lib. The two main goals of the library is to
+implement <strong>detection</strong> and <strong>tracking</strong> algorithms relevant to analyse
+biological microscopy dataset.</p>
+<p>Several algorithms are featured and it is planned to add others:</p>
+<ul class="simple">
+<li><strong>Gaussian peak detection</strong> by deflation loop : <a class="reference external" href="http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1233.html">Segré et al. Nature
+Methods (2008)</a></li>
+<li><strong>Cell boundary detection</strong> with bright field depth fitting : (demander à
+JO pour la citation)</li>
+<li><strong>Cell boundary segmentation</strong> (demander à guillaume pr son algo)</li>
+<li><strong>Lap Tracker</strong>, a robust single-particle tracking : <a class="reference external" href="http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html">K. Jaqaman and G.
+Danuser, Nature Methods, 2008</a>. The version implemented in
+<strong>scikit-tracker</strong> is a slightly modified version from the original
+to allow easy, flexible and yet powerfull parameters adjustements
+with custom cost function.</li>
+</ul>
 <div class="section" id="table-of-content">
 <h2>Table of content<a class="headerlink" href="#table-of-content" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
