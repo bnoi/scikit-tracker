@@ -1,8 +1,18 @@
 # Objects detection and robust tracking for cell biology
 
-`scikit-tracker` is a bla bla bla bla.
-
 [![Build Status](https://travis-ci.org/bnoi/scikit-tracker.png?branch=master)](https://travis-ci.org/bnoi/scikit-tracker)
+
+`scikit-tracker` aims to bring a robust python library to work with cell biology microscopy images. OME XML and OME Tiff are supported to handle input/output to `scikit-tracker`. The two main goal o the library is to implement **detection** and **tracking** algorithm which fit with biological dataset.
+
+Several algorithms are featured and it is planned to add others:
+
+- Gaussian peak detection by deflation loop : [Segré et al. Nature Methods (2008)](http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1233.html)
+
+- Cell boundary detection with bright field depth fitting : (demander à JO pour la citation)
+
+- Cell boundary segmentation (demander à guillaume pr son algo)
+
+- Lap Tracker, a robust single-particle tracking : [K. Jaqaman and G. Danuser, Nature Methods, 2008](http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html). The version implemented in `scikit-tracker` is a slightly modified version from the original to allow easy, flexible and yet powerfull parameters adjustements with custom cost function.
 
 ## Documentation
 
