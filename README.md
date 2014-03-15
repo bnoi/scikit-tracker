@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bnoi/scikit-tracker.png?branch=master)](https://travis-ci.org/bnoi/scikit-tracker)
 
-`scikit-tracker` aims to bring a robust python library to work with cell biology microscopy images. OME XML and OME Tiff are supported to handle input/output to `scikit-tracker`. The two main goal o the library is to implement **detection** and **tracking** algorithm which fit with biological dataset.
+`scikit-tracker` aims to be a robust python library to work with cell biology microscopy images. [OME XML and OME Tiff](https://www.openmicroscopy.org/site/support/ome-model/ome-tiff/) are supported to handle input/output to the lib. The two main goals of the library is to implement **detection** and **tracking** algorithms relevant to analyse biological microscopy dataset.
 
 Several algorithms are featured and it is planned to add others:
 
