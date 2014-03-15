@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bnoi/scikit-tracker.png?branch=master)](https://travis-ci.org/bnoi/scikit-tracker)
 
-`scikit-tracker` aims to be a robust python library to work with cell biology microscopy images. [OME XML and OME Tiff](https://www.openmicroscopy.org/site/support/ome-model/ome-tiff/) are supported to handle input/output to the lib. The two main goals of the library is to implement **detection** and **tracking** algorithms relevant to analyse biological microscopy dataset.
+**scikit-tracker** aims to be a robust Python library to work with cell biology microscopy images. [OME XML and OME Tiff](https://www.openmicroscopy.org/site/support/ome-model/ome-tiff/) are supported to handle input/output to the lib. The two main goals of the library is to implement **detection** and **tracking** algorithms relevant to analyse biological microscopy dataset.
 
 Several algorithms are featured and it is planned to add others:
 
@@ -12,7 +12,7 @@ Several algorithms are featured and it is planned to add others:
 
 - Cell boundary segmentation (demander à guillaume pr son algo)
 
-- Lap Tracker, a robust single-particle tracking : [K. Jaqaman and G. Danuser, Nature Methods, 2008](http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html). The version implemented in `scikit-tracker` is a slightly modified version from the original to allow easy, flexible and yet powerfull parameters adjustements with custom cost function.
+- Lap Tracker, a robust single-particle tracking : [K. Jaqaman and G. Danuser, Nature Methods, 2008](http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html). The version implemented in **scikit-tracker** is a slightly modified version from the original to allow easy, flexible and yet powerfull parameters adjustements with custom cost function.
 
 ## Documentation
 
@@ -21,7 +21,7 @@ Several algorithms are featured and it is planned to add others:
 
 ## Dependencies
 
-- python >= 3.3 (ask if you need support for python 2.7)
+- Python >= 3.3
 - numpy >= 1.8
 - scipy >= 0.12
 - pandas >= 0.13
@@ -36,8 +36,6 @@ Several algorithms are featured and it is planned to add others:
 
 - nose >= 1.3
 - sphinx >= 1.2
-- sphinx-bootstrap-theme == 0.3.8
-- numpydoc >= 0.5
 - coverage >= 3.7
 
 ## Installation
