@@ -27,6 +27,9 @@ Several algorithms are featured and it is planned to add others:
    to allow easy, flexible and yet powerfull parameters adjustements
    with custom cost function.
 
+.. note::
+    **scikit-tracker** and ``sktracker`` refer to the same thing. However **scikit-tracker** may be used more as a project name while ``sktracker`` as a Python module.
+
 .. _OME XML and OME Tiff: https://www.openmicroscopy.org/site/support/ome-model/ome-tiff/
 .. _Segré et al. Nature Methods (2008): http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1233.html
 .. _K. Jaqaman and G. Danuser, Nature Methods, 2008: http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html
