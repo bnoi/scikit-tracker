@@ -43,6 +43,7 @@ Table of content
     new
     install
     tutorial
+    theory
     api/sktracker
     contribute
     license

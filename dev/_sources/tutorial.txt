@@ -1,5 +1,5 @@
-Tutorials
-=========
+Tutorial : getting started
+==========================
 
 Here you can find some quickstart guides to quickly learn how to use basic
 ``sktracker`` features.
