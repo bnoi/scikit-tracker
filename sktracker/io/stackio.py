@@ -75,7 +75,19 @@ class StackIO:
         return tf
 
     def image_iterator(self, channel_index=0, memmap=True):
-        """
+        """Iterate over image T and Z dimensions. A channel has to be choosen and
+        will be excluded from the iterator.
+
+        Parameters
+        ----------
+        channel_index : int
+            Channel position to remove
+        memmap : bool
+            If True, use `numpy.memmap` to read arrays from file if possible.
+
+        Returns
+        -------
+        A Python iterator over the image array.
         """
 
         tf = self.get_tif()
