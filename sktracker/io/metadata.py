@@ -58,6 +58,8 @@ def get_metadata(filename):
     json_metadata = _get_from_metadata_json(filename)
     md.update(json_metadata)
 
+    md["FileName"] = filename
+
     return md
 
 def _get_from_metadata_json(filename):
