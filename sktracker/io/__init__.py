@@ -18,7 +18,7 @@ from .tifffile import TiffSequence
 
 from .ome import OMEModel
 from .stackio import StackIO
-from .metadata import get_metadata
+from .metadataio import get_metadata
 
 
 __all__ = ['get_metadata', 'OMEModel', 'imsave', 'imread', 'imshow',
