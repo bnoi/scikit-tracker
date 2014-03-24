@@ -1,4 +1,7 @@
+from nose.tools import assert_raises
+
 from sktracker import data
+from sktracker.io import StackIO
 
 # from nose import with_setup
 
@@ -19,6 +22,8 @@ from sktracker import data
 #     m = OMEModel(xml_str)
 #     del m
 
-def test_stackio():
+def test_stackio_from_tif_file():
 
-    st = StackIO
+    st = StackIO.from_tif_file(data.CZT_peaks())
+
+    # Test metadata

@@ -10,7 +10,7 @@ from . import OMEModel
 __all__ = ['get_metadata']
 
 
-def get_metadata(filename):
+def get_metadata(filename, json_discovery=False):
     """Get image file metadata
     Metadata will be retrieved from TIFF IFD comments. OME is automatically
     detected. Additionnaly a file called metadata.json can be in the same
@@ -55,8 +55,9 @@ def get_metadata(filename):
         # pass
         # Informations can be found here: tf.micromanager_metadata
 
-    json_metadata = _get_from_metadata_json(filename)
-    md.update(json_metadata)
+    if json_discovery:
+        json_metadata = _get_from_metadata_json(filename)
+        md.update(json_metadata)
 
     md["FileName"] = filename
 
@@ -78,7 +79,6 @@ def _get_from_metadata_json(filename):
         A dict with all metadata retrieved from the metadata.json
 
     """
-
     metadata = {}
 
     file_dir = os.path.dirname(filename)

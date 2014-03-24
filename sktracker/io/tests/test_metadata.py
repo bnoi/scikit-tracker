@@ -18,4 +18,7 @@ def test_get_metadata():
                      'AcquisitionDate': '2014-02-24T15:29:53',
                      'Shape': (20, 8, 2, 20, 50)}
 
-    assert real_metadata == get_metadata(fname)
+    guessed_metadata = get_metadata(fname, json_discovery=True)
+    guessed_metadata.pop("FileName", None)
+
+    assert real_metadata == guessed_metadata
