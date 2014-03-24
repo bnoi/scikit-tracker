@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 log = logging.getLogger(__name__)
-from .io import validate_metadata
+from . import validate_metadata
 
 class ObjectsIO():
     """
