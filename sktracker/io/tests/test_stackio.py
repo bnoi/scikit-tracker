@@ -32,5 +32,5 @@ def test_stackio_from_objectsio():
 
 def test_stackio_get_data():
     st = StackIO.from_tif_file(data.CZT_peaks())
-    arr = st.get_data()
+    arr = st.get_data(memmap=True)
     assert arr.shape == (1, 4, 4, 48, 56)
