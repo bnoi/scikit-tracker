@@ -1,4 +1,4 @@
-import io
+import io #That's python core io module
 import logging
 import uuid
 from xml.etree import cElementTree as ElementTree
