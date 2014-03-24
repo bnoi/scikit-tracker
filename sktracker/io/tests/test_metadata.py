@@ -1,11 +1,12 @@
 import os
 
+import sktracker
 from sktracker.io import get_metadata
 
-current_dir = os.path.dirname(os.path.realpath(__file__))
+data_dir = sktracker.data.path
 
 def test_get_metadata():
-    fname = os.path.join(current_dir, "sample.ome.tif")
+    fname = os.path.join(data_dir, "sample.ome.tif")
     real_metadata = {'PhysicalSizeY': 0.065,
                      'SizeC': 2,
                      'SizeZ': 8,

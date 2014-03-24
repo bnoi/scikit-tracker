@@ -2,15 +2,16 @@ import os
 
 from nose import with_setup
 
+import sktracker
 from sktracker.io import OMEModel
 
-current_dir = os.path.dirname(os.path.realpath(__file__))
+data_dir = sktracker.data.path
 
 xml_str = None
 
 def open_tubhiswt_4D_ome_xml():
     fname = "tubhiswt-4D.ome.xml"
-    f = open(os.path.join(current_dir, fname))
+    f = open(os.path.join(data_dir, fname))
     global xml_str
     xml_str = f.read()
     f.close()
