@@ -18,8 +18,8 @@ from .tifffile import TiffSequence
 
 from .ome import OMEModel
 
-from .tiff_metadata import get_metadata_from_tiff
+from .metadata import get_metadata
 
 
-__all__ = ['get_metadata_from_tiff', 'OMEModel', 'imsave', 'imread', 'imshow',
+__all__ = ['get_metadata', 'OMEModel', 'imsave', 'imread', 'imshow',
            'TiffFile', 'TiffSequence']

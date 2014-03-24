@@ -34,9 +34,9 @@ def test_ome_df_planes():
 def test_ome_get_metadata():
     m = OMEModel(xml_str)
     metadata = m.get_metadata()
-    real_metadata = {'shape': (2, 43, 10, 512, 512),
-                     'axes': ['C', 'T', 'Z', 'Y', 'X'],
-                     'acquisition_date': '2013-01-15T17:02:48'}
+    real_metadata = {'Shape': (2, 43, 10, 512, 512),
+                     'DimensionOrder': ['C', 'T', 'Z', 'Y', 'X'],
+                     'AcquisitionDate': '2013-01-15T17:02:48'}
     assert metadata == real_metadata
 
 @with_setup(setup=open_tubhiswt_4D_ome_xml, teardown=xml_str_clean)
@@ -55,7 +55,7 @@ def test_ome_set_xy_size():
     size_y = 45
     m.set_xy_size(size_x, size_y)
     md = m.get_metadata()
-    assert md['shape'][-1] == size_x and md['shape'][-2] == size_y
+    assert md['Shape'][-1] == size_x and md['Shape'][-2] == size_y
 
 @with_setup(setup=open_tubhiswt_4D_ome_xml, teardown=xml_str_clean)
 def test_ome_set_z_size():
@@ -63,7 +63,7 @@ def test_ome_set_z_size():
     size_z = 50
     m.set_z_size(size_z)
     md = m.get_metadata()
-    assert md['shape'][2] == size_z
+    assert md['Shape'][2] == size_z
 
 @with_setup(setup=open_tubhiswt_4D_ome_xml, teardown=xml_str_clean)
 def test_ome_set_physical_size():

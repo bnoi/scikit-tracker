@@ -108,61 +108,58 @@ class OMEModel():
 
         acq_date = img.find("{%s}AcquisitionDate" % self.ns)
         if acq_date is not None:
-            md['acquisition_date'] = acq_date.text
+            md['AcquisitionDate'] = acq_date.text
 
         # Find x and y real dimensions
         if "PhysicalSizeX" in self.pixels.attrib.keys():
             x_size = float(self.pixels.attrib["PhysicalSizeX"])
-            if x_size != 1:
-                md['PhysicalSizeX'] = x_size
+            md['PhysicalSizeX'] = x_size
         if "PhysicalSizeY" in self.pixels.attrib.keys():
             y_size = float(self.pixels.attrib["PhysicalSizeY"])
-            if y_size != 1:
-                md['PhysicalSizeY'] = y_size
+            md['PhysicalSizeY'] = y_size
         if "PhysicalSizeZ" in self.pixels.attrib.keys():
             z_size = float(self.pixels.attrib["PhysicalSizeZ"])
-            if z_size != 1:
-                md['PhysicalSizeZ'] = z_size
+            md['PhysicalSizeZ'] = z_size
 
         # Find dimension order
         if "DimensionOrder" in self.pixels.attrib.keys():
-            md['axes'] = self.pixels.attrib["DimensionOrder"]
-            md['axes'] = list(reversed(md['axes']))
+            md['DimensionOrder'] = self.pixels.attrib["DimensionOrder"]
+            md['DimensionOrder'] = list(reversed(md['DimensionOrder']))
 
-        if 'axes' in md.keys():
+        if 'DimensionOrder' in md.keys():
             shape = []
-            for d in md['axes']:
+            for d in md['DimensionOrder']:
                 try:
                     s = self.pixels.attrib['Size' + d]
                     shape.append(int(s))
                 except:
                     shape.append(1)
-            md['shape'] = tuple(shape)
+            md['Shape'] = tuple(shape)
 
         # Find channels ID and names
         channels = self.pixels.findall("{%s}Channel" % self.ns)
         if 'Name' in channels[0].attrib.keys():
-            md['channels'] = list(map(lambda x: x.attrib['Name'], channels))
+            md['Channels'] = list(map(lambda x: x.attrib['Name'], channels))
 
         # Find dt
         if "TimeIncrement" in self.pixels.attrib.keys():
             dt = float(self.pixels.attrib["TimeIncrement"])
             if dt != 0:
-                md['dt'] = dt
+                md['TimeIncrement'] = dt
 
-        if 'dt' not in md.keys() or (md['dt'] == 0):
+        if 'TimeIncrement' not in md.keys() or (md['TimeIncrement'] == 0):
             if self.planes and 'DeltaT' in self.planes[0].attrib.keys():
                 pl = self.df_planes(['DeltaT'])
                 t = pl.xs(0, level='TheC').xs(0, level='TheZ')['DeltaT']
-                md['dt'] = float(np.diff(t.values).mean())
+                md['TimeIncrement'] = float(np.diff(t.values).mean())
 
         # Find distance between slices
-        if 'z-size' not in md.keys() and self.planes and 'PositionZ' in self.planes[0].attrib.keys():
+        if 'PhysicalSizeZ' not in md.keys() and self.planes and 'PositionZ' in self.planes[0].attrib.keys():
             pl = self.df_planes(['PositionZ'])
             z = pl.xs(0, level="TheC")['PositionZ'].groupby(level='TheT')
             z = z.apply(lambda x: np.diff(x.values).mean())
             z = np.abs(z.mean())
-            md['z-size'] = float(z)
+            md['PhysicalSizeZ'] = float(z)
 
         return md
 

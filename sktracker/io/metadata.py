@@ -5,10 +5,10 @@ log = logging.getLogger(__name__)
 from . import TiffFile
 from . import OMEModel
 
-__all__ = ['get_metadata_from_tiff']
+__all__ = ['get_metadata']
 
 
-def get_metadata_from_tiff(tf):
+def get_metadata(tf):
     """Get Tiff file metadata.
 
     Parameters
@@ -29,17 +29,17 @@ def get_metadata_from_tiff(tf):
     axes = tf.series[0]['axes']
     shape = tf.series[0]['shape']
 
-    md['shape'] = shape
-    md['axes'] = axes
+    md['Shape'] = shape
+    md['DimensionOrder'] = axes
 
     if tf.is_imagej or tf.is_ome:
 
         for dim_label in ['T', 'C', 'Z', 'Y', 'X']:
             try:
                 dim_id = axes.index(dim_label)
-                md[dim_label.lower()] = shape[dim_id]
+                md["Size" + dim_label] = shape[dim_id]
             except:
-                md[dim_label.lower()] = 1
+                md["Size" + dim_label] = 1
 
     if tf.is_ome:
         xml_metadata = tf[0].tags['image_description'].value.decode()
