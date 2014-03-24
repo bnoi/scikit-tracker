@@ -2,13 +2,13 @@ from nose.tools import assert_raises
 
 from sktracker import data
 from sktracker.io import StackIO
+from sktracker.io import ObjectsIO
 
 
 def test_stackio_from_tif_file():
 
-    st = StackIO.from_tif_file(data.CZT_peaks())
+    st = StackIO(data.CZT_peaks(), json_discovery=False)
 
-    # Test metadata
     true_metadata = {'SizeC': 1,
                      'TimeIncrement': 10.0,
                      'DimensionOrder': ['C', 'T', 'Z', 'Y', 'X'],
@@ -28,9 +28,29 @@ def test_stackio_from_tif_file():
     assert guessed_metadata == true_metadata
 
 def test_stackio_from_objectsio():
-    pass
+    oio = ObjectsIO.from_h5(data.sample_h5())
+    st = StackIO.from_objectsio(oio)
+
+    true_metadata = {'PysicalSizeY': 0.43,
+                     'PysicalSizeX': 0.43,
+                     'PysicalSizeZ': 1.5,
+                     'TimeIncrement': 3.0,
+                     'Shape': (512, 512, 23, 5),
+                     'SizeT': 5,
+                     'Type': 'unint16',
+                     'FileName': 'sample.ome.tif',
+                     'DimensionOrder': 'TZYX',
+                     'SizeZ': 23,
+                     'SizeY': 512,
+                     'SizeX': 512}
+
+    guessed_metadata = st.metadata
+
+    assert guessed_metadata == true_metadata
+
 
 def test_stackio_get_data():
-    st = StackIO.from_tif_file(data.CZT_peaks())
-    arr = st.get_data(memmap=True)
+    st = StackIO(data.CZT_peaks())
+    tf = st.get_tif()
+    arr = tf.asarray(memmap=True)
     assert arr.shape == (1, 4, 4, 48, 56)

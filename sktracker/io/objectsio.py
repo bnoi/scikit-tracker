@@ -17,7 +17,7 @@ class ObjectsIO():
         self.metadata = metadata
         validate_metadata(metadata)
         self.base_dir = base_dir
-        
+
         if store_path is None:
             store_name = metadata['FileName'].split(os.path.sep)[-1]
             store_name = store_name.split('.')[0]+'.h5'
@@ -32,21 +32,21 @@ class ObjectsIO():
 
     @classmethod
     def from_h5(cls, store_path, base_dir=''):
-        
+
         store_path = os.path.join(base_dir, store_path)
         with pd.get_store(store_path) as store:
             metadata_serie = store['metadata']
         metadata = metadata_serie.to_dict()
         validate_metadata(metadata)
-        return cls.__init__(metadata=metadata,
-                            store_path=store_path,
-                            base_dir=base_dir)
+        return cls(metadata=metadata,
+                   store_path=store_path,
+                   base_dir=base_dir)
 
     def save_metadata(self):
         with pd.get_store(self.store_path) as store:
             store['metadata'] = _serialize(self.metadata)
-            
-            
+
+
 def _serialize(attr):
     ''' Creates a pandas series from a dictionnary'''
     return pd.Series(list(attr.values()), index=attr.keys())

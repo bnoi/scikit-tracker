@@ -94,12 +94,10 @@ def _get_from_metadata_json(filename):
     return metadata
 
 def validate_metadata(metadata,
-                      keys=['DimensionOrder',
-                            'Shape',
-                            'FileName']):
+                      keys=['DimensionOrder', 'Shape', 'FileName']):
     err = []
     for key in keys:
-        if not key in metadata:
+        if not key in metadata.keys():
             err.append(key)
     if len(err):
         raise ValueError('metadata missing the following key(s):\n'
