@@ -1,12 +1,11 @@
 import os
 
-import sktracker
+from sktracker import data
 from sktracker.io import get_metadata
 
-data_dir = sktracker.data.path
 
 def test_get_metadata():
-    fname = os.path.join(data_dir, "sample.ome.tif")
+    fname = data.sample()
     real_metadata = {'PhysicalSizeY': 0.065,
                      'SizeC': 2,
                      'SizeZ': 8,
