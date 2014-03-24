@@ -103,3 +103,26 @@ class StackIO:
                 yield arr[idx]
 
         return it
+
+    def list_iterator(self, start=None, stop=None, memmap=True):
+        """Returns an iterator over each image from
+        `self.image_path_list` as an array
+
+        Parameters
+        ==========
+
+        start: int or None, the first image to return from the list
+        stop: int or None: the last image to return from the list
+
+        """
+        image_list = self.image_path_list
+        if stop:
+            image_list = image_list[:stop]
+        if start:
+            image_list = image_list[start:]
+
+        def stack_iter():
+            for filename in image_list:
+                stack = TiffFile(filename).asarray(memmap=memmap)
+            yield stack
+        return stack_iter
