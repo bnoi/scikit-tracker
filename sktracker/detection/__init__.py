@@ -2,6 +2,6 @@
 
 """
 
-from peak_detector import peak_detector
+from .peak_detector import peak_detector
 
 __all__ = ['peak_detector']
