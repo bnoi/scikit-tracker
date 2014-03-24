@@ -1,11 +1,12 @@
 import os
+from nose.tools import assert_raises
 
 from sktracker import data
 from sktracker.io import get_metadata
-
+from sktracker.io import metadata
 
 def test_get_metadata():
-    fname = data.sample()
+    fname = data.sample_ome()
     real_metadata = {'PhysicalSizeY': 0.065,
                      'SizeC': 2,
                      'SizeZ': 8,
@@ -22,3 +23,34 @@ def test_get_metadata():
     guessed_metadata.pop("FileName", None)
 
     assert real_metadata == guessed_metadata
+
+
+def test_invalidate_metadata():
+
+    bad_metadata = {'SizeC': 2,
+                    'SizeZ': 8}
+    assert_raises(ValueError,
+                  metadata.validate_metadata, bad_metadata)
+
+def test_validate_metadata():
+
+    good_metadata = {'PhysicalSizeY': 0.065,
+                     'SizeC': 2,
+                     'SizeZ': 8,
+                     'SizeT': 20,
+                     'PhysicalSizeX': 0.065,
+                     'SizeY': 20,
+                     'SizeX': 50,
+                     'PhysicalSizeZ': 0.8,
+                     'DimensionOrder': ['T', 'Z', 'C', 'Y', 'X'],
+                     'AcquisitionDate': '2014-02-24T15:29:53',
+                     'Shape': (20, 8, 2, 20, 50),
+                     'FileName' : '../../data/sample.ome.tif'}
+
+    default_good = metadata.validate_metadata(good_metadata)
+    extra_good =  metadata.validate_metadata(good_metadata,
+                                             keys=['PhysicalSizeZ',
+                                                   'DimensionOrder',
+                                                   'AcquisitionDate'])
+    assert default_good and extra_good
+
