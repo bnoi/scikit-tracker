@@ -15,7 +15,7 @@ before_install:
     - ./miniconda.sh -b
     - export PATH=/home/travis/miniconda3/bin:$PATH
     - conda update --yes conda
-    - conda install --yes numpy scipy pandas
+    - conda install --yes numpy scipy pandas tables
     - conda install --yes scikit-learn scikit-image
     - conda install --yes nose
     - conda install --yes sphinx
