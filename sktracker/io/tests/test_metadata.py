@@ -3,7 +3,8 @@ from nose.tools import assert_raises
 
 from sktracker import data
 from sktracker.io import get_metadata
-from sktracker.io import metadata
+from sktracker.io import validate_metadata
+
 
 def test_get_metadata():
     fname = data.sample_ome()
@@ -30,7 +31,7 @@ def test_invalidate_metadata():
     bad_metadata = {'SizeC': 2,
                     'SizeZ': 8}
     assert_raises(ValueError,
-                  metadata.validate_metadata, bad_metadata)
+                  validate_metadata, bad_metadata)
 
 def test_validate_metadata():
 
@@ -47,8 +48,8 @@ def test_validate_metadata():
                      'Shape': (20, 8, 2, 20, 50),
                      'FileName' : '../../data/sample.ome.tif'}
 
-    default_good = metadata.validate_metadata(good_metadata)
-    extra_good =  metadata.validate_metadata(good_metadata,
+    default_good = validate_metadata(good_metadata)
+    extra_good =  validate_metadata(good_metadata,
                                              keys=['PhysicalSizeZ',
                                                    'DimensionOrder',
                                                    'AcquisitionDate'])

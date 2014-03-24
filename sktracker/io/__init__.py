@@ -19,7 +19,8 @@ from .tifffile import TiffSequence
 from .ome import OMEModel
 from .stackio import StackIO
 from .metadataio import get_metadata
+from .metadataio import validate_metadata
 
 
 __all__ = ['get_metadata', 'OMEModel', 'imsave', 'imread', 'imshow',
-           'TiffFile', 'TiffSequence', 'StackIO']
+           'TiffFile', 'TiffSequence', 'StackIO', 'validate_metadata']
