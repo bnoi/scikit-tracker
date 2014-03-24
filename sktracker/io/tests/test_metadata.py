@@ -13,7 +13,7 @@ def test_get_metadata():
                      'PhysicalSizeX': 0.065,
                      'SizeY': 20,
                      'SizeX': 50,
-                     'PhysicalSizeZ': 0.3,
+                     'PhysicalSizeZ': 0.8,
                      'DimensionOrder': ['T', 'Z', 'C', 'Y', 'X'],
                      'AcquisitionDate': '2014-02-24T15:29:53',
                      'Shape': (20, 8, 2, 20, 50)}
