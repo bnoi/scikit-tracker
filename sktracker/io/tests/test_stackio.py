@@ -48,9 +48,11 @@ def test_stackio_from_objectsio():
 
     assert guessed_metadata == true_metadata
 
+def test_stackio_image_iterator():
+    fname = data.CZT_peaks()
+    st = StackIO(fname, json_discovery=False)
 
-def test_stackio_get_data():
-    st = StackIO(data.CZT_peaks())
-    tf = st.get_tif()
-    arr = tf.asarray(memmap=True)
-    assert arr.shape == (1, 4, 4, 48, 56)
+    arr = st.get_tif().asarray(memmap=True).shape
+
+    for a in st.image_iterator(channel_index=0, memmap=True):
+        assert a.shape == arr[-2:]

@@ -1,6 +1,8 @@
 import os
 import logging
 
+import numpy as np
+
 from .metadataio import get_metadata
 from . import TiffFile
 
@@ -71,3 +73,18 @@ class StackIO:
 
         tf = TiffFile(self.image_path)
         return tf
+
+    def image_iterator(self, channel_index=0, memmap=True):
+        """
+        """
+
+        tf = self.get_tif()
+        arr = tf.asarray(memmap=memmap)
+
+        # Get only one single channel
+        channel_position = self.metadata['DimensionOrder'].index('C')
+        arr = np.take(arr, channel_index, axis=channel_position)
+
+        # Define data iterator
+        for idx in np.ndindex(arr.shape[:-2]):
+            yield arr[idx]
