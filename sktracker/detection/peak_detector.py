@@ -2,6 +2,14 @@ import os
 import logging
 import subprocess
 import multiprocessing
+import itertools
+
+from scipy.optimize import leastsq
+from skimage import feature
+
+import numpy as np
+
+from ..utils import print_progress
 
 log = logging.getLogger(__name__)
 
@@ -66,7 +74,14 @@ def peak_detector(data_iterator,
 
     # Scale parameters in pixels
     parameters['w_s'] /= metadata['PhysicalSizeX']
+    parameters['w_s'] = np.round(parameters['w_s'])
     parameters['peak_radius'] /= metadata['PhysicalSizeX']
+
+    # Find number of stacks to process
+    # Only iteration over T and Z are assumed
+    t_position = metadata['DimensionOrder'].index('T')
+    z_position = metadata['DimensionOrder'].index('Z')
+    n_stack = metadata['Shape'][t_position] * metadata['Shape'][z_position]
 
     if parallel:
 
@@ -82,15 +97,13 @@ def peak_detector(data_iterator,
 
         ncore = multiprocessing.cpu_count() + 1
         log.info('Parallel mode enabled: %i cores will be used to process %i stacks' %
-                 (ncore, nb_stacks))
+                 (ncore, n_stack))
         pool = multiprocessing.Pool(processes=ncore, initializer=init_worker)
 
-    all_peaks = []
-    i = 0
-
     # Build arguments list
-    arguments = zip(
-        stacks, itertools.repeat(detection_parameters), list(range(nb_stacks)))
+    arguments = zip(data_iterator,
+                    itertools.repeat(parameters),
+                    range(n_stack))
 
     try:
         # Launch peak_detection
@@ -99,17 +112,24 @@ def peak_detector(data_iterator,
         else:
             results = map(find_gaussian_peaks, arguments)
 
+        all_peaks = []
+
         # Get unordered results and log progress
-        for i in range(nb_stacks):
-            result = next(results)
+        for i, (pos, peaks) in enumerate(results):
+
+            n_peaks = len(peaks)
+            percent_progression = (i + 1) / n_stack * 100
+
             if show_progress:
-                pprogress((i + 1) / nb_stacks * 100,
-                          ("%i/%i - %i peaks detected on stack n°%i" %
-                           ((i + 1), nb_stacks, len(result[1]), result[0])))
+                message = ("%i/%i - %i peaks detected on stack n°%i" %
+                           ((i + 1), n_stack, n_peaks, pos))
+                pprogress(percent_progression, message)
+
             elif verbose:
                 log.info('Detection done for stack number %i: %i peaks detected (%i/%i - %i%%)' %
-                     (result[0], len(result[1]), i + 1, nb_stacks, ((i + 1) * 100 / nb_stacks)))
-            all_peaks.append(result)
+                     (pos, n_peaks, i + 1, n_stack, percent_progression))
+
+            all_peaks.append((pos, peaks))
 
         if show_progress:
             pprogress(-1)
@@ -118,15 +138,13 @@ def peak_detector(data_iterator,
         if parallel:
             pool.terminate()
             pool.join()
-        raise CanceledByUserException(
-            'Peak detection has been canceled by user')
+        raise Exception('Detection has been canceled by user')
 
     if parallel:
         pool.close()
         pool.terminate()
 
     # Sort peaks and remove index used to sort
-    log.info('Reordering stacks')
     all_peaks.sort(key=lambda x: x[0])
     all_peaks = [x[1] for x in all_peaks]
 

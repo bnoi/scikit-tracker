@@ -86,5 +86,8 @@ class StackIO:
         arr = np.take(arr, channel_index, axis=channel_position)
 
         # Define data iterator
-        for idx in np.ndindex(arr.shape[:-2]):
-            yield arr[idx]
+        def it():
+            for idx in np.ndindex(arr.shape[:-2]):
+                yield arr[idx]
+
+        return it

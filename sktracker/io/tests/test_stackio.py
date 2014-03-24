@@ -54,5 +54,6 @@ def test_stackio_image_iterator():
 
     arr = st.get_tif().asarray(memmap=True).shape
 
-    for a in st.image_iterator(channel_index=0, memmap=True):
+    iterator = st.image_iterator(channel_index=0, memmap=True)
+    for a in iterator():
         assert a.shape == arr[-2:]
