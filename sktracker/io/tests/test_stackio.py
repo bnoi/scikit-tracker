@@ -66,7 +66,7 @@ def test_load_img_list():
     assert len(file_list) == len(file_names)
     for path, name in zip(file_list, file_names):
         assert path.endswith(name)
-    
+
 def test_stackio_list_iterator():
 
     metadata = {'SizeC': 1,
@@ -85,7 +85,12 @@ def test_stackio_list_iterator():
     file_list = data.stack_list()
     stackio = StackIO(image_path_list=file_list, metadata=metadata)
     stack_iter = stackio.list_iterator()
-    
+
     for n, stack in enumerate(stack_iter()):
         assert stack.shape == (5, 172, 165)
     assert n == 3
+
+def test_stackio_get_tif_from_list():
+    images_list = data.stack_list()
+    st = StackIO(image_path_list=images_list)
+    assert st.get_tif_from_list(3).asarray().shape == (5, 172, 165)

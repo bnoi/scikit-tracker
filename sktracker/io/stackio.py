@@ -41,7 +41,7 @@ class StackIO:
         else:
             self.metadata = get_metadata(image_path, json_discovery)
         self._image_path_list = image_path_list
-        
+
     @property
     def image_path_list(self):
         if not self._image_path_list:
@@ -82,6 +82,19 @@ class StackIO:
         """
 
         tf = TiffFile(self.image_path)
+        return tf
+
+    def get_tif_from_list(self, index=0):
+        """Get TiffFile instance from images list.
+
+        Returns
+        -------
+        tf : object
+            An `sktracker.io.TiffFile` instance.
+
+        """
+
+        tf = TiffFile(self.image_path_list[index])
         return tf
 
     def image_iterator(self, channel_index=0, memmap=True):

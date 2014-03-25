@@ -69,7 +69,7 @@ def peak_detector(data_iterator,
     if not verbose:
         log.disabled = True
 
-    _parameters = DEFAULT_PARAMETERS
+    _parameters = DEFAULT_PARAMETERS.copy()
     _parameters.update(parameters)
     parameters = _parameters
 
