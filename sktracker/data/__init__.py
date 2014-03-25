@@ -1,4 +1,4 @@
-"""Test images and example data.
+"""Test dataset and fake auto generated trajectories.
 
 When data function end with _temp. The file is being copied to a temporary
 directory before its path is returned.
@@ -7,6 +7,8 @@ directory before its path is returned.
 import os
 import tempfile
 import shutil
+
+from .trajectories_generator import trajectories_generator
 
 from ..io.utils import load_img_list
 
