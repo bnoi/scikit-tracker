@@ -137,11 +137,98 @@
             
   <div class="section" id="sktracker-data-package">
 <h1>sktracker.data package<a class="headerlink" href="#sktracker-data-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.data.trajectories_generator">
+<span id="sktracker-data-trajectories-generator-module"></span><h2>sktracker.data.trajectories_generator module<a class="headerlink" href="#module-sktracker.data.trajectories_generator" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="sktracker.data.trajectories_generator.trajectories_generator">
+<tt class="descclassname">sktracker.data.trajectories_generator.</tt><tt class="descname">trajectories_generator</tt><big>(</big><em>n_part=5</em>, <em>n_times=100</em>, <em>noise=1e-10</em>, <em>p_disapear=1e-10</em>, <em>sampling=10</em>, <em>seed=0</em><big>)</big><a class="headerlink" href="#sktracker.data.trajectories_generator.trajectories_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build and return fake trajectories with x, y, z and t features.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_part</strong> : int</p>
+<blockquote>
+<div><p>Number of trajectories</p>
+</div></blockquote>
+<p><strong>n_times</strong> : int</p>
+<blockquote>
+<div><p>Number of time points</p>
+</div></blockquote>
+<p><strong>noise: float</strong></p>
+<blockquote>
+<div><p>Typical position noise</p>
+</div></blockquote>
+<p><strong>p_disapear</strong> : float</p>
+<blockquote>
+<div><p>Probability that a particle disapears in one frame</p>
+</div></blockquote>
+<p><strong>sampling</strong> : int</p>
+<blockquote>
+<div><p>Typical density of points w/r to trajectories
+variations. This corresponds typicaly to the number of points
+for one period of an oscillating function.</p>
+</div></blockquote>
+<p><strong>seed</strong> : float</p>
+<blockquote>
+<div><p>See value for random function.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <cite>pandas.DataFrame</cite></p>
+<blockquote class="last">
+<div><p>Simulated trajectories. Column named <cite>true_label</cite> contains correct
+object labels.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">trajectories_generator</span><span class="p">(</span><span class="n">n_part</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="go">                                        noise=1e-10, p_disapear=1e-10,</span>
+<span class="go">                                        sampling=10, seed=0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
+<span class="go">                          x         y         z  true_label   t</span>
+<span class="go">    t_stamp label</span>
+<span class="go">    0       0      0.616882  0.902349  0.521563           4   0</span>
+<span class="go">            1      0.153268  0.963879  0.641001           0   0</span>
+<span class="go">            2      0.697661  0.765814  0.952269           2   0</span>
+<span class="go">            3      0.133093  0.616393  0.119415           3   0</span>
+<span class="go">            4      0.580687  0.054081  0.465635           1   0</span>
+<span class="go">    1       0      0.120437  0.639993  0.129516           3   1</span>
+<span class="go">            1      0.712195  0.785034  0.962370           2   1</span>
+<span class="go">            2      0.625566  0.870682  0.531664           4   1</span>
+<span class="go">            3      0.577739  0.043900  0.475736           1   1</span>
+<span class="go">            4      0.135332  0.976875  0.651102           0   1</span>
+<span class="go">    2       0      0.633960  0.839042  0.541765           4   2</span>
+<span class="go">            1      0.107496  0.663800  0.139617           3   2</span>
+<span class="go">            2      0.726992  0.804561  0.972471           2   2</span>
+<span class="go">            3      0.117182  0.990282  0.661203           0   2</span>
+<span class="go">            4      0.575109  0.033273  0.485837           1   2</span>
+<span class="go">    ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="module-sktracker.data">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.data" title="Permalink to this headline">¶</a></h2>
+<p>Test dataset and fake auto generated trajectories.</p>
+<p>When data function end with _temp. The file is being copied to a temporary
+directory before its path is returned.</p>
 <dl class="function">
 <dt id="sktracker.data.CZT_peaks">
 <tt class="descclassname">sktracker.data.</tt><tt class="descname">CZT_peaks</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.CZT_peaks" title="Permalink to this definition">¶</a></dt>
+<dd><p>OME Tiff with fluo spots and CTZ dimensions.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.data.TC_BF_cells">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">TC_BF_cells</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.TC_BF_cells" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -160,9 +247,15 @@
 <dd></dd></dl>
 
 <dl class="function">
+<dt id="sktracker.data.sample_h5_temp">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">sample_h5_temp</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.sample_h5_temp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="sktracker.data.sample_ome">
 <tt class="descclassname">sktracker.data.</tt><tt class="descname">sample_ome</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.sample_ome" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>OME Tiff with fluo spots and cells in BF and CTZ dimensions.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="sktracker.data.stack_list">
@@ -177,7 +270,8 @@
 <dl class="function">
 <dt id="sktracker.data.tubhiswt_4D">
 <tt class="descclassname">sktracker.data.</tt><tt class="descname">tubhiswt_4D</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.tubhiswt_4D" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>OME XML file from OME sample dataset.</p>
+</dd></dl>
 
 </div>
 </div>

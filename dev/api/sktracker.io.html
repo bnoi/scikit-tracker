@@ -539,14 +539,19 @@ to get image data (in memory or via an iterator).</p>
 
 <dl class="method">
 <dt id="sktracker.io.stackio.StackIO.image_iterator">
-<tt class="descname">image_iterator</tt><big>(</big><em>channel_index=0</em>, <em>memmap=True</em><big>)</big><a class="headerlink" href="#sktracker.io.stackio.StackIO.image_iterator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">image_iterator</tt><big>(</big><em>position=-2</em>, <em>channel_index=0</em>, <em>memmap=True</em><big>)</big><a class="headerlink" href="#sktracker.io.stackio.StackIO.image_iterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iterate over image T and Z dimensions. A channel has to be
 choosen and will be excluded from the iterator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>channel_index</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
+<blockquote>
+<div><p>Dimensions on which you want to iterate. For example, -2 will only
+keep the two last dimensions, usually X and Y.</p>
+</div></blockquote>
+<p><strong>channel_index</strong> : int</p>
 <blockquote>
 <div><p>Channel position to remove</p>
 </div></blockquote>
@@ -1807,14 +1812,19 @@ to get image data (in memory or via an iterator).</p>
 
 <dl class="method">
 <dt id="sktracker.io.StackIO.image_iterator">
-<tt class="descname">image_iterator</tt><big>(</big><em>channel_index=0</em>, <em>memmap=True</em><big>)</big><a class="headerlink" href="#sktracker.io.StackIO.image_iterator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">image_iterator</tt><big>(</big><em>position=-2</em>, <em>channel_index=0</em>, <em>memmap=True</em><big>)</big><a class="headerlink" href="#sktracker.io.StackIO.image_iterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iterate over image T and Z dimensions. A channel has to be
 choosen and will be excluded from the iterator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>channel_index</strong> : int</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
+<blockquote>
+<div><p>Dimensions on which you want to iterate. For example, -2 will only
+keep the two last dimensions, usually X and Y.</p>
+</div></blockquote>
+<p><strong>channel_index</strong> : int</p>
 <blockquote>
 <div><p>Channel position to remove</p>
 </div></blockquote>
