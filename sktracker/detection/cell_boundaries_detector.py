@@ -17,8 +17,8 @@ from ..utils.progress import print_progress
 
 __all__ = ['peak_detector']
 
-DEFAULT_PARAMETERS = {'sigma': 3,
-                      'minimal_area': 5,
+DEFAULT_PARAMETERS = {'object_height': 3,
+                      'minimal_area': 160,
                       }
 
 def cell_boundaries_detector(data_iterator,
@@ -40,12 +40,10 @@ def cell_boundaries_detector(data_iterator,
     verbose : bool (default: True)
         Display informations during detection.
     parameters : dict
-            - sigma: float
-                Width (in um) of the sliding window over which the hypothesis ratio
-                is computed :math:`w_s` in the article. It should be wide enough
-                to contain some background to allow a proper noise evaluation.
-            - minimal_area: int
-                Minimal area to find (in um)
+        object_height : float
+            Typical size of the object in um.
+        minimal_area : float
+            Typical area of the object in um^2.
 
     Return
     ------
@@ -62,19 +60,30 @@ def cell_boundaries_detector(data_iterator,
     # Scale parameters in pixels
     parameters['minimal_area'] /= metadata['PhysicalSizeX']
 
+    # Load parameters
+    sigma = parameters['object_height'] // metadata['SizeZ']
+    minimal_area = parameters['minimal_area'] / metadata['SizeX']
+
     # Find number of stacks to process
     # Only iteration over T and Z are assumed
     n_stack = metadata['SizeT'] * metadata['SizeZ']
 
-    for t, imt in enumerate(data_iterator()):
+    sizeX =  metadata['SizeX']
+    sizeY =  metadata['SizeY']
+
+    # calculate the correlation image from the z-stack
+    cellprop = []
+    t_tot = metadata['SizeT']
+    for t, imt in enumerate(data_iterator):
 
         if show_progress:
             p = int(float(t + 1) / t_tot * 100.)
             print_progress(p)
 
         if (np.any(imt) != 0 or (t != 0 and not np.array_equal(imt, im[t - 1]))):
-            corr = np.zeros((im.shape[-2], im.shape[-1]))
-            for x, y in np.ndindex(imt.shape[-2], imt.shape[-1]):
+            corr = np.zeros((sizeX, sizeY))
+
+            for x, y in np.ndindex(sizeX, sizeY):
                 Iz = imt[:, x, y]
                 z = np.array(range(len(Iz)))
                 zf = len(Iz) / 2
@@ -105,6 +114,7 @@ def cell_boundaries_detector(data_iterator,
                 if np.any(labelized):
                     prevcellprop = regionprops(
                         labelized, intensity_image=corr)[0]
+                    print(prevcellprop)
 
                 prevarea = area
                 if prevcellprop:

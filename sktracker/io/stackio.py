@@ -97,12 +97,15 @@ class StackIO:
         tf = TiffFile(self.image_path_list[index])
         return tf
 
-    def image_iterator(self, channel_index=0, memmap=True):
+    def image_iterator(self, position=-2, channel_index=0, memmap=True):
         """Iterate over image T and Z dimensions. A channel has to be
         choosen and will be excluded from the iterator.
 
         Parameters
         ----------
+        position : int
+            Dimensions on which you want to iterate. For example, -2 will only
+            keep the two last dimensions, usually X and Y.
         channel_index : int
             Channel position to remove
         memmap : bool
@@ -123,7 +126,7 @@ class StackIO:
 
         # Define data iterator
         def it():
-            for idx in np.ndindex(arr.shape[:-2]):
+            for idx in np.ndindex(arr.shape[:position]):
                 yield arr[idx]
 
         return it
