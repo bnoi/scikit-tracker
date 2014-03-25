@@ -3,6 +3,7 @@ from nose.tools import assert_raises
 from sktracker import data
 from sktracker.io import StackIO
 from sktracker.io import ObjectsIO
+from sktracker.io.utils import load_img_list
 
 
 def test_stackio_from_tif_file():
@@ -57,3 +58,34 @@ def test_stackio_image_iterator():
     iterator = st.image_iterator(channel_index=0, memmap=True)
     for a in iterator():
         assert a.shape == arr[-2:]
+
+def test_load_img_list():
+    stack_list_dir = data.stack_list_dir()
+    file_list = load_img_list(stack_list_dir)
+    file_names = ['Stack-1.tif', 'Stack-2.tif', 'Stack-3.tif', 'Stack-4.tif']
+    assert len(file_list) == len(file_names)
+    for path, name in zip(file_list, file_names):
+        assert path.endswith(name)
+    
+def test_stackio_list_iterator():
+
+    metadata = {'SizeC': 1,
+                'TimeIncrement': 10.0,
+                'DimensionOrder': ['C', 'T', 'Z', 'Y', 'X'],
+                'SizeT': 4,
+                'AcquisitionDate': '2014-03-24T11:25:14',
+                'SizeX': 56,
+                'SizeY': 48,
+                'SizeZ': 4,
+                'PhysicalSizeY': 0.065,
+                'PhysicalSizeX': 0.065,
+                'Shape': (1, 4, 4, 48, 56),
+                'PhysicalSizeZ': 1.0}
+
+    file_list = data.stack_list()
+    stackio = StackIO(image_path_list=file_list, metadata=metadata)
+    stack_iter = stackio.list_iterator()
+    
+    for n, stack in enumerate(stack_iter()):
+        assert stack.shape == (5, 165, 172)
+    assert n == 4
