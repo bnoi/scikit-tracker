@@ -36,6 +36,6 @@ def test_objectsio():
 
 def test_from_h5():
 
-    store_path = data.sample_h5()
+    store_path = data.sample_h5_temp()
     oio = ObjectsIO.from_h5(store_path, base_dir=tempfile.gettempdir())
     assert validate_metadata(oio.metadata)
