@@ -40,10 +40,12 @@ class StackIO:
             self.metadata = metadata
         else:
             self.metadata = get_metadata(image_path, json_discovery)
-        self._image_path_list
+        self._image_path_list = image_path_list
         
-    
+    @property
     def image_path_list(self):
+        if not self._image_path_list:
+            return 
         if self.base_dir:
              return [os.path.join(self.base_dir, image)
                      for image in self._image_path_list]

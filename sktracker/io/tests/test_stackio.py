@@ -87,5 +87,5 @@ def test_stackio_list_iterator():
     stack_iter = stackio.list_iterator()
     
     for n, stack in enumerate(stack_iter()):
-        assert stack.shape == (5, 165, 172)
-    assert n == 4
+        assert stack.shape == (5, 172, 165)
+    assert n == 3
