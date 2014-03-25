@@ -28,3 +28,6 @@ def stack_list():
 
 def TZ_nucleus():
     return os.path.join(data_path, "TZ_nucleus.ome.tif")
+
+def TC_BF_cells():
+    return os.path.join(data_path, "TC_BF_cells.ome.tif")
