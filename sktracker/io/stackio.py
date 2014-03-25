@@ -45,7 +45,7 @@ class StackIO:
     @property
     def image_path_list(self):
         if not self._image_path_list:
-            return 
+            return
         if self.base_dir:
              return [os.path.join(self.base_dir, image)
                      for image in self._image_path_list]
