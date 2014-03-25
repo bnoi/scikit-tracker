@@ -34,10 +34,16 @@ def test_objectsio():
     oio = ObjectsIO(st.metadata, store_path="test.h5", base_dir=tempfile.gettempdir())
     oio["detected"] = peaks
 
-    assert oio.keys() == ['/detected', '/metadata']
+    assert (oio.keys() == ['/detected', '/metadata']) and (oio["detected"].shape == (28, 6))
+
+def test_from_h5_without_base_dir():
+
+    store_path = data.sample_h5()
+    oio = ObjectsIO.from_h5(store_path)
+    assert validate_metadata(oio.metadata)
 
 def test_from_h5():
 
     store_path = data.sample_h5()
-    oio = ObjectsIO.from_h5(store_path)
+    oio = ObjectsIO.from_h5(store_path, base_dir=tempfile.gettempdir())
     assert validate_metadata(oio.metadata)
