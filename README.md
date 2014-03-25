@@ -8,7 +8,7 @@ Several algorithms are featured and it is planned to add others:
 
 - Gaussian peak detection by deflation loop : [Segré et al. Nature Methods (2008)](http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1233.html)
 
-- Cell boundary detection with bright field depth fitting : (demander à JO pour la citation)
+- Cell boundary detection with bright field depth fitting : [Julou, T., PNAS, (2013)](http://www.pnas.org/content/early/2013/07/10/1301428110)
 
 - Cell nucleus segmentation : by Guillaume Gay
 
