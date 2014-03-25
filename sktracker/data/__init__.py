@@ -16,7 +16,7 @@ def metadata_json():
     return os.path.join(data_path, "metadata.json")
 
 def sample_h5():
-    return os.path.join(data_path, "sample.h5")
+    return os.path.join(data_path, "sample_original.h5")
 
 def stack_list_dir():
     return os.path.join(data_path, "stack_list")
