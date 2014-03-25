@@ -29,7 +29,7 @@ def test_stackio_from_tif_file():
     assert guessed_metadata == true_metadata
 
 def test_stackio_from_objectsio():
-    oio = ObjectsIO.from_h5(data.sample_h5())
+    oio = ObjectsIO.from_h5(data.sample_h5_temp())
     st = StackIO.from_objectsio(oio)
 
     true_metadata = {'PysicalSizeY': 0.43,

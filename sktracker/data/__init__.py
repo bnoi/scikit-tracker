@@ -1,4 +1,7 @@
 import os
+import tempfile
+import shutil
+
 from ..io.utils import load_img_list
 
 data_path = os.path.dirname(os.path.realpath(__file__))
@@ -16,7 +19,14 @@ def metadata_json():
     return os.path.join(data_path, "metadata.json")
 
 def sample_h5():
-    return os.path.join(data_path, "sample_original.h5")
+    return os.path.join(data_path, "sample.h5")
+
+def sample_h5_temp():
+    d = tempfile.gettempdir()
+    f_ori = os.path.join(data_path, "sample.h5")
+    f_dest = os.path.join(d, "sample.h5")
+    shutil.copy(f_ori, f_dest)
+    return f_dest
 
 def stack_list_dir():
     return os.path.join(data_path, "stack_list")
