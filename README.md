@@ -10,7 +10,7 @@ Several algorithms are featured and it is planned to add others:
 
 - Cell boundary detection with bright field depth fitting : (demander à JO pour la citation)
 
-- Cell boundary segmentation (demander à guillaume pr son algo)
+- Cell nucleus segmentation : by Guillaume Gay
 
 - Lap Tracker, a robust single-particle tracking : [K. Jaqaman and G. Danuser, Nature Methods, 2008](http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html). The version implemented in **scikit-tracker** is a slightly modified version from the original to allow easy, flexible and yet powerfull parameters adjustements with custom cost function.
 
