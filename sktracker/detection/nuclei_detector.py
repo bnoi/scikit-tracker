@@ -62,6 +62,9 @@ def nuclei_detector(data_iterator,
         raw_cell_positions,
         keys=raw_cell_positions.keys(),
         names=('t_stamp', 'label'))
+    real_times = nuclei_positions.index.get_level_values('t_stamp').astype(np.float)
+    real_times *= metadata['TimeIncrement']
+    nuclei_positions['t'] = real_times
     return nuclei_positions
 
 def detect_one_stack(args,
