@@ -17,14 +17,6 @@ log = logging.getLogger(__name__)
 
 __all__ = ['nuclei_detector']
 
-DEFAULT_METADATA =  {"PhysicalSizeX": 0.42,
-                     "PhysicalSizeY": 0.42,
-                     "PhysicalSizeZ": 1.5,
-                     "TimeIncrement": 3,
-                     "FileName": '',
-                     "Shape":[1, 1, 512, 512],
-                     "DimensionOrder":"TZYX" }
-
 DEFAULT_PARAMETERS = {'segment_method':'otsu',
                       'correction':1.,
                       'smooth':10,
@@ -46,10 +38,6 @@ def nuclei_detector(data_iterator,
     _parameters = DEFAULT_PARAMETERS.copy()
     _parameters.update(parameters)
     parameters = _parameters
-    _metadata = DEFAULT_METADATA.copy()
-    _metadata.update(metadata)
-    metadata = _metadata
-    print(parameters)
     
     parameters['min_z_size'] = parameters['min_z_size'] / metadata['PhysicalSizeZ']
     parameters['min_radius'] /= metadata['PhysicalSizeX']
