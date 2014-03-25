@@ -3,7 +3,7 @@ __all__ = ['print_progress']
 import sys
 
 
-def print_progress(progress, out=None):
+def print_progress(progress, message=None, out=None):
     """Display a progress bar filled with a variable value. print_progress
     also works under IPython notebook.
 
@@ -59,6 +59,9 @@ def print_progress(progress, out=None):
     for i in range(int(size - progress_bar)):
         bar += " "
     bar += "]"
+
+    if message:
+        bar += " " + str(message)
 
     # Write progress bar
     bar_str = "\r%d%% " % (progress) + bar

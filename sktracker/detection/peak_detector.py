@@ -8,6 +8,7 @@ from scipy.optimize import leastsq
 from skimage import feature
 
 import numpy as np
+import pandas as pd
 
 from ..utils import print_progress
 
@@ -79,9 +80,7 @@ def peak_detector(data_iterator,
 
     # Find number of stacks to process
     # Only iteration over T and Z are assumed
-    t_position = metadata['DimensionOrder'].index('T')
-    z_position = metadata['DimensionOrder'].index('Z')
-    n_stack = metadata['Shape'][t_position] * metadata['Shape'][z_position]
+    n_stack = metadata['SizeT'] * metadata['SizeZ']
 
     if parallel:
 
@@ -123,7 +122,7 @@ def peak_detector(data_iterator,
             if show_progress:
                 message = ("%i/%i - %i peaks detected on stack n°%i" %
                            ((i + 1), n_stack, n_peaks, pos))
-                pprogress(percent_progression, message)
+                print_progress(percent_progression, message)
 
             elif verbose:
                 log.info('Detection done for stack number %i: %i peaks detected (%i/%i - %i%%)' %
@@ -132,7 +131,7 @@ def peak_detector(data_iterator,
             all_peaks.append((pos, peaks))
 
         if show_progress:
-            pprogress(-1)
+            print_progress(-1)
 
     except KeyboardInterrupt:
         if parallel:
@@ -148,24 +147,39 @@ def peak_detector(data_iterator,
     all_peaks.sort(key=lambda x: x[0])
     all_peaks = [x[1] for x in all_peaks]
 
-    # # Pre-processing peaks
-    # index = []
-    # peaks = []
+    # Store peaks in pd.DataFrame
+    index = []
+    peaks_df = []
 
-    # for t, peak in enumerate(all_peaks):
-    #     if peak.any():
-    #         for i, p in enumerate(peak):
-    #             index.append((t, i))
-    #             peaks.append(p)
+    for n, peaks in enumerate(all_peaks):
+        if peaks.any():
+            for peak in peaks:
+                peaks_df.append(peak)
+                index.append((n,))
 
-    # if not peaks:
-    #     return pd.DataFrame([])
+    if not peaks_df:
+        return pd.DataFrame([])
 
-    return all_peaks
-    # peaks = pd.DataFrame(peaks, columns=['x', 'y', 'w', 'I'], dtype='float')
-    # peaks.index = pd.MultiIndex.from_tuples(index, names=['t_stamp', 'label'])
+    peaks_df = pd.DataFrame(peaks_df, columns=['x', 'y', 'w', 'I'], dtype='float')
+    peaks_df.index = pd.MultiIndex.from_tuples(index, names=['t_stamp'])
 
-    # return peaks
+    t_stamp = peaks_df.index.get_level_values('t_stamp').values
+    peaks_df['t'] = t_stamp // metadata['SizeZ']
+    peaks_df['z'] = t_stamp % metadata['SizeZ']
+
+    peaks_df['label'] = np.arange(len(peaks_df))
+
+    peaks_df = peaks_df.reset_index(level=['t_stamp', 'label'])
+    peaks_df['t_stamp'] = peaks_df['t'].copy()
+    peaks_df.set_index(['t_stamp', 'label'], inplace=True)
+
+    peaks_df['x'] *= metadata["PhysicalSizeX"]
+    peaks_df['y'] *= metadata["PhysicalSizeY"]
+    peaks_df['z'] *= metadata["PhysicalSizeZ"]
+    peaks_df['w'] *= metadata["PhysicalSizeX"]
+    peaks_df['t'] *= metadata["TimeIncrement"]
+
+    return peaks_df
 
 
 def find_gaussian_peaks(args):

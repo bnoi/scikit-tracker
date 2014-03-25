@@ -7,4 +7,4 @@ Here you can find some quickstart guides to quickly learn how to use basic
 .. toctree::
    :maxdepth: 2
 
-   tutorial/discover
+   tutorial/ch_trajectories
