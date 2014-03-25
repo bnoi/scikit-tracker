@@ -1,0 +1,10 @@
+sktracker.data package
+======================
+
+Module contents
+---------------
+
+.. automodule:: sktracker.data
+    :members:
+    :undoc-members:
+    :show-inheritance:

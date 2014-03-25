@@ -73,10 +73,16 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial : getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial/discover.html">Discover Scikit-tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">sktracker package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
@@ -197,7 +203,7 @@
 <span id="sktracker-utils-progress-module"></span><h2>sktracker.utils.progress module<a class="headerlink" href="#module-sktracker.utils.progress" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="sktracker.utils.progress.print_progress">
-<tt class="descclassname">sktracker.utils.progress.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em>, <em>out=None</em><big>)</big><a class="headerlink" href="#sktracker.utils.progress.print_progress" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">sktracker.utils.progress.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em>, <em>message=None</em>, <em>out=None</em><big>)</big><a class="headerlink" href="#sktracker.utils.progress.print_progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display a progress bar filled with a variable value. print_progress
 also works under IPython notebook.</p>
 <p>Se <cite>progress</cite> to -1 to remove the progress bar.</p>
@@ -244,7 +250,7 @@ and 100.</p>
 <p>Various utilities functions</p>
 <dl class="function">
 <dt id="sktracker.utils.print_progress">
-<tt class="descclassname">sktracker.utils.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em>, <em>out=None</em><big>)</big><a class="headerlink" href="#sktracker.utils.print_progress" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">sktracker.utils.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em>, <em>message=None</em>, <em>out=None</em><big>)</big><a class="headerlink" href="#sktracker.utils.print_progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display a progress bar filled with a variable value. print_progress
 also works under IPython notebook.</p>
 <p>Se <cite>progress</cite> to -1 to remove the progress bar.</p>

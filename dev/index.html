@@ -71,10 +71,16 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial : getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/discover.html">Discover Scikit-tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory about some featured algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api/sktracker.html">sktracker package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#subpackages">Subpackages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#submodules">Submodules</a></li>
@@ -143,7 +149,7 @@ biological microscopy dataset.</p>
 Methods (2008)</a></li>
 <li><strong>Cell boundary detection</strong> with bright field depth fitting : (demander à
 JO pour la citation)</li>
-<li><strong>Cell boundary segmentation</strong> (demander à guillaume pr son algo)</li>
+<li><strong>Cell nucleus segmentation</strong> : by Guillaume Gay</li>
 <li><strong>Lap Tracker</strong>, a robust single-particle tracking : <a class="reference external" href="http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html">K. Jaqaman and G.
 Danuser, Nature Methods, 2008</a>. The version implemented in
 <strong>scikit-tracker</strong> is a slightly modified version from the original
@@ -179,20 +185,50 @@ with custom cost function.</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial : getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/discover.html">Discover Scikit-tracker</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tutorial/discover.html#sub-title-1">sub title 1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial/discover.html#sub-title-2">sub title 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#gaussian-peak-detection">Gaussian peak detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#purpose">Purpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#principle">Principle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-boundary-detection">Cell boundary detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id1">Purpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id2">Principle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id3">Purpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id4">Principle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#lap-tracker">Lap Tracker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id5">Purpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id6">Principle</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory about some featured algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/sktracker.html">sktracker package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/sktracker.data.html">sktracker.data package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.data.html#module-sktracker.data">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/sktracker.detection.html">sktracker.detection package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.detection.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.detection.html#module-sktracker.detection.peak_detector">sktracker.detection.peak_detector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.detection.html#module-sktracker.detection">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="api/sktracker.io.html">sktracker.io package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.metadataio">sktracker.io.metadataio module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.objectsio">sktracker.io.objectsio module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.ome">sktracker.io.ome module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.tiff_metadata">sktracker.io.tiff_metadata module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.stackio">sktracker.io.stackio module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.tifffile">sktracker.io.tifffile module</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="api/sktracker.io.html#requirements">Requirements</a></li>
 <li class="toctree-l5"><a class="reference internal" href="api/sktracker.io.html#notes">Notes</a></li>
@@ -201,6 +237,7 @@ with custom cost function.</li>
 <li class="toctree-l5"><a class="reference internal" href="api/sktracker.io.html#examples">Examples</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.utils">sktracker.io.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io">Module contents</a></li>
 </ul>
 </li>

@@ -1,0 +1,22 @@
+sktracker.detection package
+===========================
+
+Submodules
+----------
+
+sktracker.detection.peak_detector module
+----------------------------------------
+
+.. automodule:: sktracker.detection.peak_detector
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.detection
+    :members:
+    :undoc-members:
+    :show-inheritance:

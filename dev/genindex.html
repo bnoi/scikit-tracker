@@ -71,10 +71,16 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial : getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/discover.html">Discover Scikit-tracker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory about some featured algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api/sktracker.html">sktracker package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#subpackages">Subpackages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#submodules">Submodules</a></li>
@@ -133,11 +139,15 @@
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
  
 </div>
 <h2 id="A">A</h2>
@@ -185,8 +195,6 @@
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/sktracker.utils.html#sktracker.utils.color">color() (in module sktracker.utils)</a>
   </dt>
@@ -197,6 +205,12 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.CZT_peaks">CZT_peaks() (in module sktracker.data)</a>
+  </dt>
+
   </dl></td>
 </tr></table>
 
@@ -220,6 +234,28 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="api/sktracker.io.html#sktracker.io.ObjectsIO.from_h5">from_h5() (sktracker.io.ObjectsIO class method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.objectsio.ObjectsIO.from_h5">(sktracker.io.objectsio.ObjectsIO class method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.from_objectsio">from_objectsio() (sktracker.io.StackIO class method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.stackio.StackIO.from_objectsio">(sktracker.io.stackio.StackIO class method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
   <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.fstat">fstat (sktracker.io.TiffFile attribute)</a>
   </dt>
 
@@ -236,27 +272,23 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="api/sktracker.io.html#sktracker.io.ome.OMEModel.get_metadata">get_metadata() (sktracker.io.ome.OMEModel method)</a>
+  <dt><a href="api/sktracker.io.html#sktracker.io.get_metadata">get_metadata() (in module sktracker.io)</a>
   </dt>
 
       <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.metadataio.get_metadata">(in module sktracker.io.metadataio)</a>
+  </dt>
+
         
   <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.get_metadata">(sktracker.io.OMEModel method)</a>
   </dt>
 
-      </dl></dd>
-      
-  <dt><a href="api/sktracker.io.html#sktracker.io.get_metadata_from_tiff">get_metadata_from_tiff() (in module sktracker.io)</a>
-  </dt>
-
-      <dd><dl>
         
-  <dt><a href="api/sktracker.io.html#sktracker.io.tiff_metadata.get_metadata_from_tiff">(in module sktracker.io.tiff_metadata)</a>
+  <dt><a href="api/sktracker.io.html#sktracker.io.ome.OMEModel.get_metadata">(sktracker.io.ome.OMEModel method)</a>
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/sktracker.io.html#sktracker.io.ome.OMEModel.get_physical_size">get_physical_size() (sktracker.io.ome.OMEModel method)</a>
   </dt>
@@ -268,11 +300,63 @@
 
       </dl></dd>
   </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.get_tif">get_tif() (sktracker.io.StackIO method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.stackio.StackIO.get_tif">(sktracker.io.stackio.StackIO method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.get_tif_from_list">get_tif_from_list() (sktracker.io.StackIO method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.stackio.StackIO.get_tif_from_list">(sktracker.io.stackio.StackIO method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
 </tr></table>
 
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.image_iterator">image_iterator() (sktracker.io.StackIO method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.stackio.StackIO.image_iterator">(sktracker.io.stackio.StackIO method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.image_path">image_path (sktracker.io.StackIO attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.stackio.StackIO.image_path">(sktracker.io.stackio.StackIO attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.image_path_list">image_path_list (sktracker.io.StackIO attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.stackio.StackIO.image_path_list">(sktracker.io.stackio.StackIO attribute)</a>
+  </dt>
+
+      </dl></dd>
       
   <dt><a href="api/sktracker.io.html#sktracker.io.imread">imread() (in module sktracker.io)</a>
   </dt>
@@ -343,6 +427,8 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_lsm">is_lsm (sktracker.io.TiffFile attribute)</a>
   </dt>
@@ -353,8 +439,6 @@
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_mdgel">is_mdgel (sktracker.io.TiffFile attribute)</a>
   </dt>
@@ -438,8 +522,68 @@
   </dl></td>
 </tr></table>
 
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.ObjectsIO.keys">keys() (sktracker.io.ObjectsIO method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.objectsio.ObjectsIO.keys">(sktracker.io.objectsio.ObjectsIO method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.list_iterator">list_iterator() (sktracker.io.StackIO method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.stackio.StackIO.list_iterator">(sktracker.io.stackio.StackIO method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.utils.load_img_list">load_img_list() (in module sktracker.io.utils)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.metadata_json">metadata_json() (in module sktracker.data)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.ObjectsIO">ObjectsIO (class in sktracker.io)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.objectsio.ObjectsIO">(class in sktracker.io.objectsio)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel">OMEModel (class in sktracker.io)</a>
@@ -458,6 +602,18 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="api/sktracker.detection.html#sktracker.detection.peak_detector">peak_detector() (in module sktracker.detection)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.detection.html#sktracker.detection.peak_detector.peak_detector">(in module sktracker.detection.peak_detector)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
   <dt><a href="api/sktracker.utils.html#sktracker.utils.print_progress">print_progress() (in module sktracker.utils)</a>
   </dt>
 
@@ -473,6 +629,14 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.sample_h5">sample_h5() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.sample_ome">sample_ome() (in module sktracker.data)</a>
+  </dt>
+
       
   <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.series">series (sktracker.io.TiffFile attribute)</a>
   </dt>
@@ -551,10 +715,30 @@
   <dt><a href="api/sktracker.html#module-sktracker">sktracker (module)</a>
   </dt>
 
+      
+  <dt><a href="api/sktracker.data.html#module-sktracker.data">sktracker.data (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.detection.html#module-sktracker.detection">sktracker.detection (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.detection.html#module-sktracker.detection.peak_detector">sktracker.detection.peak_detector (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io">sktracker.io (module)</a>
+  </dt>
+
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="api/sktracker.io.html#module-sktracker.io">sktracker.io (module)</a>
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.metadataio">sktracker.io.metadataio (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.objectsio">sktracker.io.objectsio (module)</a>
   </dt>
 
       
@@ -562,11 +746,15 @@
   </dt>
 
       
-  <dt><a href="api/sktracker.io.html#module-sktracker.io.tiff_metadata">sktracker.io.tiff_metadata (module)</a>
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.stackio">sktracker.io.stackio (module)</a>
   </dt>
 
       
   <dt><a href="api/sktracker.io.html#module-sktracker.io.tifffile">sktracker.io.tifffile (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.utils">sktracker.io.utils (module)</a>
   </dt>
 
       
@@ -589,6 +777,24 @@
   <dt><a href="api/sktracker.html#module-sktracker.version">sktracker.version (module)</a>
   </dt>
 
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.stack_list">stack_list() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.stack_list_dir">stack_list_dir() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO">StackIO (class in sktracker.io)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.stackio.StackIO">(class in sktracker.io.stackio)</a>
+  </dt>
+
+      </dl></dd>
   </dl></td>
 </tr></table>
 
@@ -615,8 +821,6 @@
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/sktracker.io.html#sktracker.io.ome.OMEModel.tostring">tostring() (sktracker.io.ome.OMEModel method)</a>
   </dt>
@@ -627,6 +831,16 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.tubhiswt_4D">tubhiswt_4D() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.TZ_nucleus">TZ_nucleus() (in module sktracker.data)</a>
+  </dt>
+
   </dl></td>
 </tr></table>
 
@@ -640,6 +854,22 @@
       <dd><dl>
         
   <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.uniform_ifd">(sktracker.io.OMEModel method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.validate_metadata">validate_metadata() (in module sktracker.io)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.metadataio.validate_metadata">(in module sktracker.io.metadataio)</a>
   </dt>
 
       </dl></dd>
