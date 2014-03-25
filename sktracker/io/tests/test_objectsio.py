@@ -1,8 +1,6 @@
 import os
 import tempfile
 
-from nose import with_setup
-
 from sktracker import data
 from sktracker.io import StackIO
 from sktracker.io import ObjectsIO
