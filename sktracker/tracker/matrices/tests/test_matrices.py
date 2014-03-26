@@ -7,11 +7,11 @@ def nan_ident(size):
     mat = np.identity(size)
     mat[mat == 0] = np.nan
     return mat
-    
+
 def test_cost_matrix_mocked_mat():
-    
+
     blocks = np.array([[np.ones((1, 2)), np.ones((1, 3)), nan_ident(1), None],
-                       [np.ones((3, 2)), None, None, nan_ident(3)], 
+                       [np.ones((3, 2)), None, None, nan_ident(3)],
                        [nan_ident(2), None, None, None],
                        [None, nan_ident(3), None, None]])
 
@@ -28,9 +28,9 @@ def test_cost_matrix_mocked_mat():
     assert  np.all(cm.mat[np.isfinite(cm.mat)] == true_mat[np.isfinite(true_mat)])
 
 def test_cost_matrix_mocked_flat():
-    
+
     blocks = np.array([[np.ones((1, 2)), np.ones((1, 3)), nan_ident(1), None],
-                       [np.ones((3, 2)), None, None, nan_ident(3)], 
+                       [np.ones((3, 2)), None, None, nan_ident(3)],
                        [nan_ident(2), None, None, None],
                        [None, nan_ident(3), None, None]])
 
@@ -45,7 +45,7 @@ def test_cost_matrix_mocked_flat():
                                              1.,  1.,  1.,  2.,  2.,  2.,  2.,  1.,  2.,  2.,  2.,  2.,  1.,
                                              2.,  1.,  2.,  1.,  2.]))
     idx_in, idx_out, costs = cm.get_flat()
-    
+
     assert (np.all(idx_in == tru_in)
             and np.all(idx_out == tru_out)
             and np.all(costs == tru_costs))
