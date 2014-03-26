@@ -31,6 +31,22 @@ if VERSION.endswith('dev'):
     DEPENDENCIES['sphinx'] = (1, 2)
     DEPENDENCIES['coverage'] = (3, 7)
 
+def configuration(parent_package='', top_path=None):
+
+    from numpy.distutils.misc_util import Configuration
+    config = Configuration(None, parent_package, top_path)
+
+    config.set_options(
+            ignore_setup_xxx_py=True,
+            assume_default_configuration=True,
+            delegate_options_to_subpackages=True,
+            quiet=True)
+
+    config.add_subpackage('sktracker')
+    config.add_data_dir(os.path.join('sktracker', 'data'))
+
+    return config
+
 def write_version_py(filename='sktracker/version.py'):
     template = """# This file is generated from the sktracker setup.py
 __version__ = '%s'
@@ -109,6 +125,8 @@ if __name__ == "__main__":
             'Operating System :: Unix',
             'Operating System :: MacOS',
         ],
+
+        configuration=configuration,
 
         packages=setuptools.find_packages(exclude=['doc']),
         include_package_data=True,
