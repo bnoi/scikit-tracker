@@ -24,6 +24,7 @@ before_install:
     - pip install coverage
 
 install:
+    - python setup.py build_ext --inplace
     - python setup.py install
 
 script:

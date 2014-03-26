@@ -4,6 +4,7 @@ import re
 import setuptools
 from numpy.distutils.core import setup
 from distutils.command.build_py import build_py
+from Cython.Build import cythonize
 
 from sktracker import __version__
 
@@ -137,4 +138,5 @@ if __name__ == "__main__":
         },
 
         cmdclass={'build_py': build_py},
+        ext_modules = cythonize(["*.pyx"]),
     )
