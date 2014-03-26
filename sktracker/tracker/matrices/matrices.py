@@ -37,8 +37,9 @@ class CostMatrix():
         """Solves the linear assignement problem on `self.mat`.
         """
 
-        idxs_in, idxs_out, costs = self.get_flat()
-        self.in_links, self.out_links = lapjv(idxs_in, idxs_out, costs)
+        idxs_in, idxs_out, self.costs = self.get_flat()
+        
+        self.in_links, self.out_links = lapjv(idxs_in, idxs_out, self.costs)
 
     def get_masked(self):
         """Get masked array.
@@ -88,7 +89,7 @@ class CostMatrix():
 
         rec_shape = np.array(self.mat.shape)
         size = rec_shape[0]
-        row_shapes, col_shapes = self._get_shapes()
+        row_shapes, col_shapes = self.get_shapes()
 
         # Show matrix
         cax = ax.imshow(self.mat, interpolation='none', cmap=colormap,
@@ -159,7 +160,7 @@ class CostMatrix():
         """Concatenate a matrix of block to a single matrix : the cost matrix.
         """
 
-        row_shapes, col_shapes = self._get_shapes()
+        row_shapes, col_shapes = self.get_shapes()
 
         nrows = row_shapes.sum()
         ncols = col_shapes.sum()
@@ -174,7 +175,7 @@ class CostMatrix():
                 self.mat[start_i:start_i+shape_i,
                          start_j:start_j+shape_j] = self.blocks[i, j]
 
-    def _get_shapes(self):
+    def get_shapes(self):
         """Get whole matrix blocks shape.
 
         Returns

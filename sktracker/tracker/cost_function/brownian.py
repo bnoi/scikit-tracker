@@ -65,8 +65,3 @@ class BrownianCostFunction(AbstractLinkCostFunction):
         distances /= dt
         distances[distances > max_speed] = np.nan
         return distances ** 2
-
-
-
-
-        
