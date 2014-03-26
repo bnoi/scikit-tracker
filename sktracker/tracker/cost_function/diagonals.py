@@ -14,8 +14,8 @@ class DiagCostFunction(AbstractDiagCostFunction):
     def __init__(self, context):
         super().__init__(context, {})
         if not 'cost' in context.keys():
-            raise ValueError('''The class DiagCostFunction requires'''
-                             ''' that the `context` dictionnary contains a `cost` key''')
+            raise ValueError('''The class DiagCostFunction requires '''
+                             '''the `context` dictionnary to contain a `cost` key''')
         
     def build(self, objects):
         """

@@ -1,8 +1,8 @@
 import logging
 import numpy as np
 
-from ..cost_function import LinkCostFunction
-from ..cost_function import DiagCostFunction
+from ..cost_function import AbstractLinkCostFunction
+from ..cost_function import AbstractDiagCostFunction
 
 log = logging.getLogger(__name__)
 
@@ -221,7 +221,7 @@ class LinkBlock(Block):
         self.objects_in = objects_in
         self.objects_out = objects_out
 
-        if not isinstance(cost_function, LinkCostFunction):
+        if not isinstance(cost_function, AbstractLinkCostFunction):
             raise TypeError("cost_function needs to inherit from "
                             "sktracker.tracker.cost_function.LinkCostFunction")
         self.cost_function = cost_function
@@ -254,7 +254,7 @@ class DiagBlock(Block):
 
         self.objects = objects
 
-        if not isinstance(cost_function, DiagCostFunction):
+        if not isinstance(cost_function, AbstractDiagCostFunction):
             raise TypeError("cost_function needs to inherit from "
                             "sktracker.tracker.cost_function.DiagCostFunction")
 

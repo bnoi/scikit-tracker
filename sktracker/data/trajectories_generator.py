@@ -2,12 +2,49 @@ import numpy as np
 import pandas as pd
 
 
+def brownian_trajectories_generator(n_part=5, n_times=100,
+                                    p_disapear=0, sigma=1.,
+                                    init_dispersion=10.,
+                                    seed=None):
+    if seed is not None:
+        np.random.seed(seed)
+
+    init_dispersion *= sigma
+    time_stamps, labels = np.mgrid[:n_times, :n_part]
+
+    positions = np.random.normal(scale=sigma,
+                                 size=(n_times, n_part, 3))
+    init_pos = np.random.normal(scale=init_dispersion,
+                                size=(n_part, 3))
+    positions[0, ...] = init_pos
+    positions = positions.cumsum(axis=0)
+    
+    index = pd.MultiIndex.from_arrays([time_stamps.flatten(),
+                                       labels.flatten()],
+                                       names=('t_stamp', 'label'))
+    
+    trajs = pd.DataFrame(positions.reshape(n_times*n_part, 3),
+                        index=index, columns=['x', 'y', 'z'])
+
+    disapear = np.random.binomial(n_part, p_disapear, n_times * n_part)
+    disapear = np.where(disapear == 1)[::-1][0]
+    if disapear.size > 0:
+        trajs = trajs.drop(trajs.index[disapear])
+
+    trajs['true_label'] = trajs.index.get_level_values(1)
+
+    grouped = trajs.groupby(level='t_stamp')
+    trajs = grouped.apply(_shuffle)
+ 
+    trajs['t'] = trajs.index.get_level_values('t_stamp').values.astype(np.float)
+    return trajs
+
 def trajectories_generator(n_part=5,
                            n_times=100,
                            noise=1e-10,
                            p_disapear=1e-10,
                            sampling=10,
-                           seed=0):
+                           seed=None):
     """Build and return fake trajectories with x, y, z and t features.
 
     Parameters
@@ -61,7 +98,7 @@ def trajectories_generator(n_part=5,
 
     """
 
-    if seed:
+    if seed is not None:
         np.random.seed(seed)
 
     times = np.arange(n_times)
@@ -89,7 +126,7 @@ def trajectories_generator(n_part=5,
     if disapear.size > 0:
         trajs = trajs.drop(trajs.index[disapear])
 
-    trajs['true_label'] = trajs.index.get_level_values(1)
+    trajs['true_label'] = trajs.index.get_level_values('label')
 
     grouped = trajs.groupby(level='t_stamp')
     trajs = grouped.apply(_shuffle)

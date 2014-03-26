@@ -26,13 +26,15 @@ class BrownianCostFunction(AbstractLinkCostFunction):
            this parameter's value are set to np.nan
 
     """
-    DEFAUL_PARAMETERS = {'distance_metric':'euclidean',
-                         'max_speed':1.,
-                         'coords':['x', 'y', 'z']}
     
-    def __init__(self, context, parameters):
-        super().__init__(self)
+    def __init__(self, parameters):
 
+        _parameters = {'distance_metric':'euclidean',
+                       'max_speed':1.,
+                       'coords':['x', 'y', 'z']}
+        _parameters.update(parameters)
+        super().__init__({}, _parameters)
+        
     def build(self, pos_in, pos_out):
         """
         Computes and returns the cost matrix between pos_in and pos_out.
@@ -54,8 +56,8 @@ class BrownianCostFunction(AbstractLinkCostFunction):
         """
         coords = self.parameters['coords']
         distance_metric = self.parameters['distance_metric']
-        max_speed = distance_metric = self.parameters['max_speed']
-        self.check_columns([pos_in, pos_out], list(coords).append('t'))
+        max_speed = self.parameters['max_speed']
+        self.check_columns([pos_in, pos_out], list(coords)+['t'])
         distances = cdist(pos_in[coords].astype(np.float),
                           pos_out[coords].astype(np.float),
                           metric=distance_metric)

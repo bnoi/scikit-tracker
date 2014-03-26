@@ -7,8 +7,10 @@ directory before its path is returned.
 import os
 import tempfile
 import shutil
+import pandas as pd
 
-from .trajectories_generator import trajectories_generator
+
+from .trajectories_generator import trajectories_generator, brownian_trajectories_generator
 
 from ..io.utils import load_img_list
 
@@ -69,3 +71,11 @@ def TC_BF_cells():
     """
     """
     return os.path.join(data_path, "TC_BF_cells.ome.tif")
+
+def brownian_trajs_df():
+    """
+    """
+    with pd.get_store( os.path.join(data_path, "brownian_trajectories.h5")) as store:
+        trajs =  store['trajs']
+    return trajs
+    

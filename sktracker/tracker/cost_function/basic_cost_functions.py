@@ -12,13 +12,9 @@ class AbstractCostFunction:
         Missing parameters will be filled by DEFAULT_PARAMETERS
     """
 
-    DEFAULT_PARAMETERS = {}
-
     def __init__(self, context, parameters):
         self.context = context
-
-        # self.parameters = DEFAULT_PARAMETERS.copy()
-        # self.parameters.update(parameters)
+        self.parameters = parameters
 
     def build(self):
         """
@@ -52,8 +48,6 @@ class AbstractLinkCostFunction(AbstractCostFunction):
         Missing parameters will be filled by DEFAULT_PARAMETERS
     """
 
-    DEFAULT_PARAMETERS = {}
-
     def __init__(self, context, parameters):
         super().__init__(context, parameters)
 
@@ -72,9 +66,6 @@ class AbstractDiagCostFunction(AbstractCostFunction):
     parameters : dict
         Missing parameters will be filled by DEFAULT_PARAMETERS
     """
-
-    DEFAULT_PARAMETERS = {}
-
     def __init__(self, context, parameters):
         super().__init__(context, parameters)
 

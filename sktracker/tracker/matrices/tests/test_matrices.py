@@ -6,8 +6,8 @@ from sktracker.tracker.matrices import LinkBlock
 from sktracker.tracker.matrices import DiagBlock
 from sktracker.tracker.matrices import CostMatrix
 
-from sktracker.tracker.cost_function import LinkCostFunction
-from sktracker.tracker.cost_function import DiagCostFunction
+from sktracker.tracker.cost_function import AbstractLinkCostFunction
+from sktracker.tracker.cost_function import AbstractDiagCostFunction
 
 
 def nan_ident(size):
@@ -75,8 +75,8 @@ def test_cost_matrix_with_mock_trajs():
 
 def build_cost_matrix(pos0, pos1):
 
-    link_cost_func = LinkCostFunction(None, {})
-    diag_cost_func = DiagCostFunction(None, {})
+    link_cost_func = AbstractLinkCostFunction(None, {})
+    diag_cost_func = AbstractDiagCostFunction(None, {})
 
     link_block = LinkBlock(pos0, pos1, link_cost_func)
     death_block = DiagBlock(pos0, diag_cost_func)
