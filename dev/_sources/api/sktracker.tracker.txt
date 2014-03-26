@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    sktracker.tracker.cost_function
     sktracker.tracker.matrices
 
 Module contents

@@ -1,0 +1,38 @@
+sktracker.tracker.cost_function package
+=======================================
+
+Submodules
+----------
+
+sktracker.tracker.cost_function.basic_cost_functions module
+-----------------------------------------------------------
+
+.. automodule:: sktracker.tracker.cost_function.basic_cost_functions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.tracker.cost_function.brownian module
+-----------------------------------------------
+
+.. automodule:: sktracker.tracker.cost_function.brownian
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.tracker.cost_function.diagonals module
+------------------------------------------------
+
+.. automodule:: sktracker.tracker.cost_function.diagonals
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.tracker.cost_function
+    :members:
+    :undoc-members:
+    :show-inheritance:
