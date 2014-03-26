@@ -1,3 +1,4 @@
-from .basic_cost_functions import CostFunction
-from .basic_cost_functions import LinkCostFunction
-from .basic_cost_functions import DiagCostFunction
+from .basic_cost_functions import AbstractCostFunction
+from .basic_cost_functions import AbstractLinkCostFunction
+from .basic_cost_functions import AbstractDiagCostFunction
+from .brownian import BrownianCostFunction

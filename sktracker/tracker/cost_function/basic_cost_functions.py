@@ -1,8 +1,8 @@
-from collections import defaultdict
+
 
 import numpy as np
 
-class CostFunction:
+class AbstractCostFunction:
     """Abstract class.
 
     Parameters
@@ -25,7 +25,24 @@ class CostFunction:
         """
         pass
 
-class LinkCostFunction(CostFunction):
+    def check_columns(self, objects, cols):
+        """Check pandas.DataFrame column names.
+
+        Parameters
+        ----------
+        objects : list of pandas.DataFrame
+        cols : list column names to check
+        """
+        cols_set = set(cols)
+        for obj in objects:
+            actual_cols_set = set(obj.columns.values)
+            if not cols_set.issubset(actual_cols_set):
+                raise ValueError("The passed dataframe doesn't"
+                                 " contain the required columns."
+                                 "Missing columns: {}".format(
+                                     cols_set.difference(actual_cols_set)))
+            
+class AbstractLinkCostFunction(AbstractCostFunction):
     """Basic cost function.
 
     Parameters
@@ -46,7 +63,7 @@ class LinkCostFunction(CostFunction):
         mat = np.zeros((len(objects_in), len(objects_out)))
         return mat
 
-class DiagCostFunction(CostFunction):
+class AbstractDiagCostFunction(AbstractCostFunction):
     """Basic cost function for diagonal block.
 
     Parameters
