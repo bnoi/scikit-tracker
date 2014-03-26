@@ -20,6 +20,7 @@ before_install:
     - conda install --yes nose
     - conda install --yes sphinx
     - conda install --yes pip
+    - conda install --yes cython
     - pip install coverage
 
 install:
