@@ -10,7 +10,7 @@ class CostMatrix():
 
     Parameters
     ----------
-    blocks : 2D `numpy.ndarray` of objects
+    blocks : 2D `numpy.ndarray` of `numpy.ndarray` or None
         Each array value is a block or None (filled with np.nan).
 
     """
@@ -182,6 +182,7 @@ class CostMatrix():
 class Block():
     """A matrix block.
     """
+
     def build(self):
         """Compute and built block.
         """
@@ -192,15 +193,17 @@ class LinkBlock(Block):
 
     Parameters
     ----------
-    objects_in : 1D array of objects
+    objects_in : 1D array of `pandas.DataFrame`
         To fill Y block axis.
-    objects_out : 1D array of objects
+    objects_out : 1D array of `pandas.DataFrame`
         To fill X block axis.
     cost_function : `sktracker.tracker.CostFunction`
         Used to compute block costs.
 
     """
-    def __init__(self, objects_in,
+
+    def __init__(self,
+                 objects_in,
                  objects_out,
                  cost_function):
         self.objects_in = objects_in
@@ -223,7 +226,7 @@ class DiagBlock(Block):
 
     Parameters
     ----------
-    objects : 1D array of objects
+    objects : 1D array of `pandas.DataFrame`
         To fill the identity matrix.
     cost_function : `sktracker.tracker.CostFunction`
         Used to compute block costs.
