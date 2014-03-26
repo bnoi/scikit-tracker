@@ -6,6 +6,9 @@ from sktracker.tracker.matrices import LinkBlock
 from sktracker.tracker.matrices import DiagBlock
 from sktracker.tracker.matrices import CostMatrix
 
+from sktracker.tracker.cost_function import LinkCostFunction
+from sktracker.tracker.cost_function import DiagCostFunction
+
 
 def nan_ident(size):
     mat = np.identity(size)
@@ -61,8 +64,8 @@ def test_cost_matrix_with_mock_trajs():
 
     times_stamp = trajs.index.get_level_values('t_stamp').unique()
 
-    t_0_vec = np.arange(0, times_stamp[-1])
-    t_1_vec = np.arange(1, times_stamp[-1] + 1)
+    t_0_vec = times_stamp[:-1]
+    t_1_vec = times_stamp[1:]
 
     for t0, t1 in zip(t_0_vec, t_1_vec):
         pos0 = trajs.ix[t0]
@@ -72,12 +75,19 @@ def test_cost_matrix_with_mock_trajs():
 
 def build_cost_matrix(pos0, pos1):
 
-    link_block = LinkBlock(pos0, pos1, lambda x: x**2)
-    death_block = DiagBlock(pos0, lambda x: x**2)
-    birth_block = DiagBlock(pos1, lambda x: x**2)
+    link_cost_func = LinkCostFunction(None, {})
+    diag_cost_func = DiagCostFunction(None, {})
 
-    cost_matrix_structure = [[link_block.get_matrix(),  death_block.get_matrix()],
-                             [birth_block.get_matrix(), None]]
+    link_block = LinkBlock(pos0, pos1, link_cost_func)
+    death_block = DiagBlock(pos0, diag_cost_func)
+    birth_block = DiagBlock(pos1, diag_cost_func)
+
+    link_block.build()
+    death_block.build()
+    birth_block.build()
+
+    cost_matrix_structure = [[link_block.mat,  death_block.mat],
+                             [birth_block.mat, None]]
 
     cm = CostMatrix(cost_matrix_structure)
 

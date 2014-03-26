@@ -1,6 +1,9 @@
 import logging
 import numpy as np
 
+from ..cost_function import LinkCostFunction
+from ..cost_function import DiagCostFunction
+
 log = logging.getLogger(__name__)
 
 
@@ -191,13 +194,8 @@ class Block():
     """A matrix block.
     """
 
-    def _build(self):
+    def build(self):
         """Compute and built block.
-        """
-        pass
-
-    def get_matrix(self):
-        """Get block matrix.
         """
         pass
 
@@ -219,27 +217,27 @@ class LinkBlock(Block):
                  objects_in,
                  objects_out,
                  cost_function):
+
         self.objects_in = objects_in
         self.objects_out = objects_out
+
+        if not isinstance(cost_function, LinkCostFunction):
+            raise TypeError("cost_function needs to inherit from "
+                            "sktracker.tracker.cost_function.LinkCostFunction")
         self.cost_function = cost_function
         self.mat = None
 
-    def _build(self):
+    def build(self):
         """Compute and built block.
         """
-        self.mat = self.cost_function(self.objects_in,
-                                      self.objects_out)
+
+        self.mat = self.cost_function.build(self.objects_in, self.objects_out)
+
         if self.mat.shape != (len(self.objects_in),
                               len(self.objects_out)):
             raise ValueError('cost_function does not returns'
                              ' a correct cost matrix')
 
-    def get_matrix(self):
-        """Get matrix.
-        """
-        self.mat = np.zeros((len(self.objects_in), len(self.objects_out)))
-        self.mat = self.cost_function(self.mat)
-        return self.mat
 
 class DiagBlock(Block):
     """DiagBlock are built with one single vector. It is an identity matrix.
@@ -255,23 +253,33 @@ class DiagBlock(Block):
     def __init__(self, objects, cost_function):
 
         self.objects = objects
+
+        if not isinstance(cost_function, DiagCostFunction):
+            raise TypeError("cost_function needs to inherit from "
+                            "sktracker.tracker.cost_function.DiagCostFunction")
+
         self.cost_function = cost_function
         self.vect = None
+        self.mat = None
 
-    def _build(self):
+    def build(self):
         """Compute and built block.
         """
-        self.vect = self.cost_function(self.objects)
+        self.vect = self.cost_function.build(self.objects)
+
         if self.vect.size != len(self.objects):
             raise ValueError('cost_function does not returns'
                              ' a correct cost vector')
 
-    def get_matrix(self):
+        self._get_matrix()
+
+    def _get_matrix(self):
         """Get matrix and replace 0 values with `numpy.nan`.
         """
-        self.mat = np.identity(len(self.objects))
-        self.mat = self.cost_function(self.mat)
-        self.mat[self.mat == 0] = np.nan
-        return self.mat
+
+        size = self.vect.shape[0]
+        self.mat = np.empty((size, size))
+        self.mat[:] = np.nan
+        self.mat[np.diag_indices(size)] = self.vect
 
 
