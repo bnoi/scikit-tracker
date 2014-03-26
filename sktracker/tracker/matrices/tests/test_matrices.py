@@ -1,6 +1,10 @@
 import numpy as np
-from sktracker.tracker import matrices
 
+from sktracker.tracker import matrices
+from sktracker import data
+from sktracker.tracker.matrices import LinkBlock
+from sktracker.tracker.matrices import DiagBlock
+from sktracker.tracker.matrices import CostMatrix
 
 
 def nan_ident(size):
@@ -49,3 +53,35 @@ def test_cost_matrix_mocked_flat():
     assert (np.all(idx_in == tru_in)
             and np.all(idx_out == tru_out)
             and np.all(costs == tru_costs))
+
+def test_cost_matrix_with_mock_trajs():
+
+    trajs = data.trajectories_generator(n_part=5, n_times=100, noise=1e-10,
+                                        p_disapear=0.4, sampling=10, seed=0)
+
+    times_stamp = trajs.index.get_level_values('t_stamp').unique()
+
+    t_0_vec = np.arange(0, times_stamp[-1])
+    t_1_vec = np.arange(1, times_stamp[-1] + 1)
+
+    for t0, t1 in zip(t_0_vec, t_1_vec):
+        pos0 = trajs.ix[t0]
+        pos1 = trajs.ix[t1]
+
+        yield build_cost_matrix, pos0, pos1
+
+def build_cost_matrix(pos0, pos1):
+
+    link_block = LinkBlock(pos0, pos1, lambda x: x**2)
+    death_block = DiagBlock(pos0, lambda x: x**2)
+    birth_block = DiagBlock(pos1, lambda x: x**2)
+
+    cost_matrix_structure = [[link_block.get_matrix(),  death_block.get_matrix()],
+                             [birth_block.get_matrix(), None]]
+
+    cm = CostMatrix(cost_matrix_structure)
+
+    cost_matrix_shape = (pos0.shape[0] + pos1.shape[0],
+                         pos0.shape[0] + pos1.shape[0])
+
+    assert cm.mat.shape == cost_matrix_shape

@@ -10,18 +10,50 @@ class CostMatrix():
 
     Parameters
     ----------
-    blocks : 2D `numpy.ndarray` of `numpy.ndarray` or None
+    blocks : 2D list of `numpy.ndarray` or None
         Each array value is a block or None (filled with np.nan).
 
     """
 
     def __init__(self, blocks):
 
-        self.blocks = blocks
+        if isinstance(blocks, list):
+            self.blocks = np.atleast_2d(blocks)
+        else:
+            self.blocks = blocks
+
         self._concatenate_blocks()
         self._fill_lrb()
 
-    def view(self, colormap="RdBlu"):
+    def get_masked(self):
+        """Get masked array.
+
+        Returns
+        -------
+        mat : `numpy.ndarray`
+            A masked array on `numpy.nan` of the cost matrix.
+        """
+        return np.ma.masked_invalid(self.mat)
+
+    def get_flat(self):
+        """Get flat vectors according to the cost matrix.
+
+        Returns
+        -------
+        idxs_in : 1D `numpy.ndarray`
+            Y axis indexes.
+        idxs_out : 1D `numpy.ndarray`
+            X axis indexes.
+        costs : 1D `numpy.ndarray`
+            Associated costs (matrix value).
+        """
+        masked = self.get_masked()
+        costs = masked.compressed()
+        idxs_in, idxs_out = np.where(
+            np.logical_not(np.ma.getmask(masked)))
+        return idxs_in, idxs_out, costs
+
+    def view(self, ax=None, colormap="gray", **kwargs):
         """Display cost matrice on a plot.
 
         Parameters
@@ -34,15 +66,18 @@ class CostMatrix():
 
         import matplotlib.pyplot as plt
 
-        fig, ax = plt.subplots()
+        if ax:
+            fig = ax.get_figure()
+        else:
+            fig, ax = plt.subplots()
 
         rec_shape = np.array(self.mat.shape)
         size = rec_shape[0]
-        row_shapes, col_shapes = cm._get_shapes()
+        row_shapes, col_shapes = self._get_shapes()
 
         # Show matrix
         cax = ax.imshow(self.mat, interpolation='none', cmap=colormap,
-                        extent=[0, size, 0, size])
+                        extent=[0, size, 0, size], **kwargs)
         cbar = fig.colorbar(cax)
 
         ax.grid(False)
@@ -60,7 +95,6 @@ class CostMatrix():
 
         col_labels = np.hstack(np.array([list(range(s)) for s in col_shapes.astype(np.int)]))
         row_labels = np.hstack(np.array([list(reversed(range(s))) for s in row_shapes[::-1].astype(np.int)]))
-        #row_labels = size - row_labels
 
         ax.set_xticklabels(col_labels)
         ax.set_yticklabels(row_labels)
@@ -80,6 +114,8 @@ class CostMatrix():
 
         ax.set_xlim(0, size)
         ax.set_ylim(0, size)
+
+        return ax
 
     def _fill_lrb(self):
         """Fill the lower contiguous block of NaN values with the transposed
@@ -116,34 +152,6 @@ class CostMatrix():
             for j, (start_j, shape_j) in enumerate(zip(col_corners, col_shapes)):
                 self.mat[start_i:start_i+shape_i,
                          start_j:start_j+shape_j] = self.blocks[i, j]
-
-    def get_masked(self):
-        """Get masked array.
-
-        Returns
-        -------
-        mat : `numpy.ndarray`
-            A masked array on `numpy.nan` of the cost matrix.
-        """
-        return np.ma.masked_invalid(self.mat)
-
-    def get_flat(self):
-        """Get flat vectors according to the cost matrix.
-
-        Returns
-        -------
-        idxs_in : 1D `numpy.ndarray`
-            Y axis indexes.
-        idxs_out : 1D `numpy.ndarray`
-            X axis indexes.
-        costs : 1D `numpy.ndarray`
-            Associated costs (matrix value).
-        """
-        masked = self.get_masked()
-        costs = masked.compressed()
-        idxs_in, idxs_out = np.where(
-            np.logical_not(np.ma.getmask(masked)))
-        return idxs_in, idxs_out, costs
 
     def _get_shapes(self):
         """Get whole matrix blocks shape.
@@ -183,8 +191,13 @@ class Block():
     """A matrix block.
     """
 
-    def build(self):
+    def _build(self):
         """Compute and built block.
+        """
+        pass
+
+    def get_matrix(self):
+        """Get block matrix.
         """
         pass
 
@@ -211,7 +224,7 @@ class LinkBlock(Block):
         self.cost_function = cost_function
         self.mat = None
 
-    def build(self):
+    def _build(self):
         """Compute and built block.
         """
         self.mat = self.cost_function(self.objects_in,
@@ -220,6 +233,13 @@ class LinkBlock(Block):
                               len(self.objects_out)):
             raise ValueError('cost_function does not returns'
                              ' a correct cost matrix')
+
+    def get_matrix(self):
+        """Get matrix.
+        """
+        self.mat = np.zeros((len(self.objects_in), len(self.objects_out)))
+        self.mat = self.cost_function(self.mat)
+        return self.mat
 
 class DiagBlock(Block):
     """DiagBlock are built with one single vector. It is an identity matrix.
@@ -238,7 +258,7 @@ class DiagBlock(Block):
         self.cost_function = cost_function
         self.vect = None
 
-    def build(self):
+    def _build(self):
         """Compute and built block.
         """
         self.vect = self.cost_function(self.objects)
@@ -246,11 +266,12 @@ class DiagBlock(Block):
             raise ValueError('cost_function does not returns'
                              ' a correct cost vector')
 
-    def _get_matrix(self):
-        """Build identity matrix and replace 0 values with `numpy.nan`.
+    def get_matrix(self):
+        """Get matrix and replace 0 values with `numpy.nan`.
         """
-        mat = np.identity(size)
-        mat[mat == 0] = np.nan
-        return mat
+        self.mat = np.identity(len(self.objects))
+        self.mat = self.cost_function(self.mat)
+        self.mat[self.mat == 0] = np.nan
+        return self.mat
 
 
