@@ -21,6 +21,7 @@ before_install:
     - conda install --yes sphinx
     - conda install --yes pip
     - conda install --yes cython
+    - conda install --yes libpython
     - pip install coverage
 
 install:
