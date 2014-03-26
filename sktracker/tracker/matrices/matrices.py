@@ -3,6 +3,7 @@ import numpy as np
 
 from ..cost_function import AbstractLinkCostFunction
 from ..cost_function import AbstractDiagCostFunction
+from ..lapjv import lapjv
 
 log = logging.getLogger(__name__)
 
@@ -27,6 +28,17 @@ class CostMatrix():
 
         self._concatenate_blocks()
         self._fill_lrb()
+
+        self.in_links = None
+        self.out_links = None
+        self.assigned_costs = None
+
+    def solve(self):
+        """Solves the linear assignement problem on `self.mat`.
+        """
+
+        idxs_in, idxs_out, costs = self.get_flat()
+        self.in_links, self.out_links = lapjv(idxs_in, idxs_out, costs)
 
     def get_masked(self):
         """Get masked array.
@@ -114,6 +126,12 @@ class CostMatrix():
             x = p[1] + 0.5
             y = size - 1 - p[0] + 0.5
             ax.scatter(x, y, marker='x', s=500, color='red', alpha=0.3)
+
+        # Show LAPJV solutions
+        if self.out_links is not None:
+            for idx_out, idx_in in enumerate(self.out_links):
+                ax.scatter(idx_out + 0.5, size - 1 - idx_in + 0.5, marker='o',
+                           s=500, color='green', alpha=0.4)
 
         ax.set_xlim(0, size)
         ax.set_ylim(0, size)
