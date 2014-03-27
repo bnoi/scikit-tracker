@@ -18,7 +18,7 @@ class BrownianCostFunction(AbstractLinkCostFunction):
         * 'distance_metric': a string, default 'euclidean',
           passed to `scipy.spatial.distance.cdist`
           (see this function documentation for more)
-    
+
         * 'coords': a list of column names on which to compute the distance,
             default ['x', 'y', 'z']
         * 'max_speed': a float, default 1. All the values of the cost matrix
@@ -26,15 +26,15 @@ class BrownianCostFunction(AbstractLinkCostFunction):
            this parameter's value are set to np.nan
 
     """
-    
+
     def __init__(self, parameters):
 
-        _parameters = {'distance_metric':'euclidean',
-                       'max_speed':1.,
-                       'coords':['x', 'y', 'z']}
+        _parameters = {'distance_metric': 'euclidean',
+                       'max_speed': 1.,
+                       'coords': ['x', 'y', 'z']}
         _parameters.update(parameters)
         super().__init__({}, _parameters)
-        
+
     def build(self, pos_in, pos_out):
         """
         Computes and returns the cost matrix between pos_in and pos_out.
