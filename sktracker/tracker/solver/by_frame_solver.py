@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 import numpy as np
 
 from ...utils import print_progress
@@ -134,7 +136,10 @@ class ByFrameSolver(AbstractSolver):
         last_out_link = row_shapes[0]
         last_in_link = col_shapes[0]
 
-        for idx_out, idx_in in enumerate(self.cm.out_links[:last_out_link]):
+        out_links = self.cm.out_links[:last_out_link]
+
+        new_labels = OrderedDict({})
+        for idx_out, idx_in in enumerate(out_links):
             if idx_in >= last_in_link:
                 # new segment
                 new_label = self.trajs['new_label'].max() + 1.
@@ -142,7 +147,14 @@ class ByFrameSolver(AbstractSolver):
                 # assignment
                 new_label = self.trajs.loc[self.t_in]['new_label'].iloc[idx_in]
                 self._update_max_assign_cost(self.cm.mat[idx_in, idx_out])
-            self.trajs.loc[self.t_out, 'new_label'].iloc[idx_out] = new_label
+
+                new_labels[idx_out] = new_label
+
+        new_labels = OrderedDict(sorted(new_labels.items()))
+        new_labels = list(new_labels.values())
+
+        if new_labels:
+            self.trajs.loc[self.t_out, 'new_label'] = new_labels
 
     def _update_max_assign_cost(self, cost):
         if cost > self.max_assigned_cost:
