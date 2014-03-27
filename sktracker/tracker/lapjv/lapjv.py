@@ -18,15 +18,15 @@ All rights reserved.
 import numpy as np
 
 import pyximport
-pyximport.install(setup_args={'include_dirs':[np.get_include()]})
+pyximport.install(setup_args={'include_dirs': [np.get_include()]})
 
 from ._lapjv import reduction_transfer
 from ._lapjv import augmenting_row_reduction
 from ._lapjv import augment
 
 
-def lapjv(i, j, costs, wants_dual_variables = False,
-          augmenting_row_reductions = 2, use_slow=False):
+def lapjv(i, j, costs, wants_dual_variables=False,
+          augmenting_row_reductions=2, use_slow=False):
     '''Sparse linear assignment solution using Jonker-Volgenant algorithm
 
     i,j - similarly-sized vectors that pair the object at index i[n] with
@@ -55,7 +55,6 @@ def lapjv(i, j, costs, wants_dual_variables = False,
     returns (x, y), the pairs of assignments that represent the solution
     or (x, y, u, v) if the dual variables are requested.
     '''
-    import os
     i = np.atleast_1d(i).astype(int)
     j = np.atleast_1d(j).astype(int)
     costs = np.atleast_1d(costs)
@@ -79,7 +78,7 @@ def lapjv(i, j, costs, wants_dual_variables = False,
     assert not np.any(i_count == 0), "all i must be paired with at least one j"
     i_index = np.hstack([[0], np.cumsum(i_count[:-1])])
 
-    n = len(j_count) # dimension of the square cost matrix
+    n = len(j_count)  # dimension of the square cost matrix
     assert n == len(i_count), "There must be the same number of unique i and j"
 
     # # # # # # # #
@@ -126,14 +125,14 @@ def lapjv(i, j, costs, wants_dual_variables = False,
     # i is the minimum of more than one j, perform reduction transfer
     #
     assignment_count = np.bincount(min_i[min_i != n])
-    #print assignment_count
+    # print assignment_count
     assignment_count = np.hstack(
         (assignment_count, np.zeros(n - len(assignment_count), int)))
     free_i = assignment_count == 0
     one_i = assignment_count == 1
-    #print one_i
-    #order = np.lexsort((costs, i)) Replace with this after all is done
-    order = np.lexsort((j,i))
+    # print one_i
+    # order = np.lexsort((costs, i)) Replace with this after all is done
+    order = np.lexsort((j, i))
     j = np.ascontiguousarray(j[order], np.uint32)
     costs = np.ascontiguousarray(costs[order], np.float64)
     i_index = np.ascontiguousarray(i_index, np.uint32)
@@ -149,7 +148,7 @@ def lapjv(i, j, costs, wants_dual_variables = False,
         #
         ii = np.ascontiguousarray(np.argwhere(free_i).flatten(), np.uint32)
         if len(ii) > 0:
-            for iii in range (augmenting_row_reductions):
+            for iii in range(augmenting_row_reductions):
                 ii = slow_augmenting_row_reduction(
                     n, ii, j, i_index, i_count, x, y, u, v, costs)
         slow_augment(n, ii,
@@ -170,9 +169,10 @@ def lapjv(i, j, costs, wants_dual_variables = False,
         augment(n, ii,
                 j, i_index, i_count, x, y, u, v, costs)
     if wants_dual_variables:
-        return x,y,u,v
+        return x, y, u, v
     else:
-        return x,y
+        return x, y
+
 
 def slow_reduction_transfer(ii, j, idx, count, x, u, v, c):
     '''Perform the reduction transfer step from the Jonker-Volgenant algorithm
@@ -211,9 +211,10 @@ def slow_reduction_transfer(ii, j, idx, count, x, u, v, c):
         except ValueError:
             print(c[idx[i]:(idx[i] + count[i])] - v[jj])
             print(idx[i], idx[i] + count[i], jj, j1)
-            continue #raise
+            continue  # raise
         v[j1] = v[j1] - uu + u[i]
         u[i] = uu
+
 
 def slow_augmenting_row_reduction(n, ii, jj, idx, count, x, y, u, v, c):
     '''Perform the augmenting row reduction step
@@ -279,7 +280,8 @@ def slow_augmenting_row_reduction(n, ii, jj, idx, count, x, y, u, v, c):
                 free.append(i1)
         x[i] = j1
         y[j1] = i
-    return np.array(free,np.uint32)
+    return np.array(free, np.uint32)
+
 
 def slow_augment(n, ii, jj, idx, count, x, y, u, v, c):
     '''Perform the augmentation step to assign unassigned i and j
@@ -412,4 +414,3 @@ def slow_augment(n, ii, jj, idx, count, x, y, u, v, c):
 #     j = np.load("c:/temp/bad/img-1557/j.npy")
 #     costs = np.load("c:/temp/bad/img-1557/c.npy")
 #     lapjv(i, j, costs)
-
