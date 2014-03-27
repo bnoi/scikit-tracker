@@ -15,6 +15,7 @@ def nan_ident(size):
     mat[mat == 0] = np.nan
     return mat
 
+
 def test_cost_matrix_mocked_mat():
 
     blocks = np.array([[np.ones((1, 2)), np.ones((1, 3)), nan_ident(1), None],
@@ -23,16 +24,18 @@ def test_cost_matrix_mocked_mat():
                        [None, nan_ident(3), None, None]])
 
     cm = matrices.CostMatrix(blocks)
-    true_mat = np.array([[  1.,   1.,   1.,   1.,   1.,   1.,  np.nan,  np.nan,  np.nan],
-                         [  1.,   1.,  np.nan,  np.nan,  np.nan,  np.nan,   1.,  np.nan,  np.nan],
-                         [  1.,   1.,  np.nan,  np.nan,  np.nan,  np.nan,  np.nan,   1.,  np.nan],
-                         [  1.,   1.,  np.nan,  np.nan,  np.nan,  np.nan,  np.nan,  np.nan,   1.],
-                         [  1.,  np.nan,  np.nan,  np.nan,  np.nan,   2.,   2.,   2.,   2.],
-                         [ np.nan,   1.,  np.nan,  np.nan,  np.nan,   2.,   2.,   2.,   2.],
-                         [ np.nan,  np.nan,   1.,  np.nan,  np.nan,   2.,  np.nan,  np.nan,  np.nan],
-                         [ np.nan,  np.nan,  np.nan,   1.,  np.nan,   2.,  np.nan,  np.nan,  np.nan],
-                         [ np.nan,  np.nan,  np.nan,  np.nan,   1.,   2.,  np.nan,  np.nan,  np.nan]])
-    assert  np.all(cm.mat[np.isfinite(cm.mat)] == true_mat[np.isfinite(true_mat)])
+    true_mat = np.array([[ 1.,   1.,   1.,   1.,   1.,   1.,  np.nan,  np.nan,  np.nan],
+                         [ 1.,   1.,  np.nan,  np.nan,  np.nan,  np.nan,   1.,  np.nan,  np.nan],
+                         [ 1.,   1.,  np.nan,  np.nan,  np.nan,  np.nan,  np.nan,   1.,  np.nan],
+                         [ 1.,   1.,  np.nan,  np.nan,  np.nan,  np.nan,  np.nan,  np.nan,   1.],
+                         [ 1.,  np.nan,  np.nan,  np.nan,  np.nan,   2.,   2.,   2.,   2.],
+                         [np.nan,   1.,  np.nan,  np.nan,  np.nan,   2.,   2.,   2.,   2.],
+                         [np.nan,  np.nan,   1.,  np.nan,  np.nan,   2.,  np.nan,  np.nan,  np.nan],
+                         [np.nan,  np.nan,  np.nan,   1.,  np.nan,   2.,  np.nan,  np.nan,  np.nan],
+                         [np.nan,  np.nan,  np.nan,  np.nan,   1.,   2.,  np.nan,  np.nan,  np.nan]])
+
+    assert np.all(cm.mat[np.isfinite(cm.mat)] == true_mat[np.isfinite(true_mat)])
+
 
 def test_cost_matrix_mocked_flat():
 
@@ -57,6 +60,7 @@ def test_cost_matrix_mocked_flat():
             and np.all(idx_out == tru_out)
             and np.all(costs == tru_costs))
 
+
 def test_cost_matrix_with_mock_trajs():
 
     trajs = data.trajectories_generator(n_part=5, n_times=100, noise=1e-10,
@@ -73,6 +77,7 @@ def test_cost_matrix_with_mock_trajs():
 
         yield build_cost_matrix, pos0, pos1
 
+
 def build_cost_matrix(pos0, pos1):
 
     link_cost_func = AbstractLinkCostFunction(None, {})
@@ -81,10 +86,6 @@ def build_cost_matrix(pos0, pos1):
     link_block = LinkBlock(pos0, pos1, link_cost_func)
     death_block = DiagBlock(pos0, diag_cost_func)
     birth_block = DiagBlock(pos1, diag_cost_func)
-
-    link_block.build()
-    death_block.build()
-    birth_block.build()
 
     cost_matrix_structure = [[link_block.mat,  death_block.mat],
                              [birth_block.mat, None]]
