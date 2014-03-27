@@ -109,9 +109,9 @@ class ByFrameSolver:
 
         self.trajs.set_index('new_label', append=True, inplace=True)
         self.trajs.reset_index(level='label', drop=True, inplace=True)
-        self.trajs.index.names = ['t', 'label']
+        self.trajs.index.names = ['t_stamp', 'label']
         self.trajs.sortlevel('label', inplace=True)
-        self.trajs.sortlevel('t', inplace=True)
+        self.trajs.sortlevel('t_stamp', inplace=True)
         relabel_fromzero(self.trajs, 'label', inplace=True)
 
 
