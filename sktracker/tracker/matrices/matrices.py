@@ -38,7 +38,7 @@ class CostMatrix():
         """
 
         idxs_in, idxs_out, self.costs = self.get_flat()
-        
+
         self.in_links, self.out_links = lapjv(idxs_in, idxs_out, self.costs)
 
     def get_masked(self):
@@ -94,7 +94,7 @@ class CostMatrix():
         # Show matrix
         cax = ax.imshow(self.mat, interpolation='none', cmap=colormap,
                         extent=[0, size, 0, size], **kwargs)
-        cbar = fig.colorbar(cax)
+        fig.colorbar(cax)
 
         ax.grid(False)
 
@@ -145,7 +145,7 @@ class CostMatrix():
         """
 
         # Find the lower contiguous block of NaN values
-        ii, jj = np.where(np.isfinite(self.mat) == False)
+        ii, jj = np.where(np.isfinite(self.mat) is False)
         for i, j in zip(ii, jj):
             if np.isnan(self.mat[i:, j:]).all():
                 break
@@ -212,11 +212,8 @@ class CostMatrix():
 class Block():
     """A matrix block.
     """
+    pass
 
-    def build(self):
-        """Compute and built block.
-        """
-        pass
 
 class LinkBlock(Block):
     """LinkBlock are built with two vectors.
@@ -246,7 +243,9 @@ class LinkBlock(Block):
         self.cost_function = cost_function
         self.mat = None
 
-    def build(self):
+        self._build()
+
+    def _build(self):
         """Compute and built block.
         """
 
@@ -254,7 +253,8 @@ class LinkBlock(Block):
 
         if self.mat.shape != (len(self.objects_in),
                               len(self.objects_out)):
-            raise ValueError('cost_function does not returns'
+            self.mat = None
+            raise ValueError('Cost_function does not returns'
                              ' a correct cost matrix')
 
 
@@ -300,5 +300,3 @@ class DiagBlock(Block):
         self.mat = np.empty((size, size))
         self.mat[:] = np.nan
         self.mat[np.diag_indices(size)] = self.vect
-
-
