@@ -15,7 +15,7 @@ class ByFrameSolver:
     """
     def __init__(self, trajs, cost_functions):
         
-        self.trajs = trajs
+        self.trajs = trajs.copy()
         self.t_in = 0
         self.t_out = 0
         
