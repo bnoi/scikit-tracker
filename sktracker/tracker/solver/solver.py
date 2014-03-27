@@ -1,7 +1,7 @@
 
-from ..matrices import LinkBlock
-from ..matrices import DiagBlock
-from ..matrices import CostMatrix
+from .matrices import LinkBlock
+from .matrices import DiagBlock
+from .matrices import CostMatrix
 
 from ..cost_function import AbstractLinkCostFunction
 from ..cost_function import AbstractDiagCostFunction
