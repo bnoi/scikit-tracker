@@ -1,0 +1,30 @@
+sktracker.tracker.solver package
+================================
+
+Submodules
+----------
+
+sktracker.tracker.solver.byframesolver module
+---------------------------------------------
+
+.. automodule:: sktracker.tracker.solver.byframesolver
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.tracker.solver.solver module
+--------------------------------------
+
+.. automodule:: sktracker.tracker.solver.solver
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.tracker.solver
+    :members:
+    :undoc-members:
+    :show-inheritance:

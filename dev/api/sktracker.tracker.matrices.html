@@ -33,8 +33,8 @@
   
     <link rel="top" title="sktracker vdev docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
-        <link rel="next" title="sktracker.utils package" href="sktracker.utils.html"/>
-        <link rel="prev" title="sktracker.tracker.cost_function package" href="sktracker.tracker.cost_function.html"/> 
+        <link rel="next" title="sktracker.tracker.solver package" href="sktracker.tracker.solver.html"/>
+        <link rel="prev" title="sktracker.tracker.lapjv package" href="sktracker.tracker.lapjv.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -149,12 +149,6 @@
 <em class="property">class </em><tt class="descclassname">sktracker.tracker.matrices.matrices.</tt><tt class="descname">Block</tt><a class="headerlink" href="#sktracker.tracker.matrices.matrices.Block" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>A matrix block.</p>
-<dl class="method">
-<dt id="sktracker.tracker.matrices.matrices.Block.build">
-<tt class="descname">build</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.Block.build" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute and built block.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -220,6 +214,34 @@ Cost matrix is built from matrices blocks.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sktracker.tracker.matrices.matrices.CostMatrix.get_shapes">
+<tt class="descname">get_shapes</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.CostMatrix.get_shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get whole matrix blocks shape.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>row_shapes</strong> : 1D <cite>numpy.ndarray</cite></p>
+<blockquote>
+<div><p>Row shapes.</p>
+</div></blockquote>
+<p><strong>col_shapes</strong> : 1D <cite>numpy.ndarray</cite></p>
+<blockquote class="last">
+<div><p>Column shapes.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.tracker.matrices.matrices.CostMatrix.solve">
+<tt class="descname">solve</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.CostMatrix.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the linear assignement problem on <cite>self.mat</cite>.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sktracker.tracker.matrices.matrices.CostMatrix.view">
 <tt class="descname">view</tt><big>(</big><em>ax=None</em>, <em>colormap='gray'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.CostMatrix.view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display cost matrice on a plot.</p>
@@ -261,12 +283,6 @@ Cost matrix is built from matrices blocks.</p>
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="sktracker.tracker.matrices.matrices.DiagBlock.build">
-<tt class="descname">build</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.DiagBlock.build" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute and built block.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -294,12 +310,6 @@ Cost matrix is built from matrices blocks.</p>
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="sktracker.tracker.matrices.matrices.LinkBlock.build">
-<tt class="descname">build</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.LinkBlock.build" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute and built block.</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -314,10 +324,10 @@ Cost matrix is built from matrices blocks.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.utils.html" class="btn btn-neutral float-right" title="sktracker.utils package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.tracker.solver.html" class="btn btn-neutral float-right" title="sktracker.tracker.solver package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sktracker.tracker.cost_function.html" class="btn btn-neutral" title="sktracker.tracker.cost_function package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sktracker.tracker.lapjv.html" class="btn btn-neutral" title="sktracker.tracker.lapjv package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

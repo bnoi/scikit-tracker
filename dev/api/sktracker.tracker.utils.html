@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker package &mdash; sktracker vdev docs</title>
+  <title>sktracker.tracker.utils package &mdash; sktracker vdev docs</title>
   
 
   
@@ -32,9 +32,9 @@
 
   
     <link rel="top" title="sktracker vdev docs" href="../index.html"/>
-        <link rel="up" title="sktracker package" href="sktracker.html"/>
-        <link rel="next" title="sktracker.tracker.cost_function package" href="sktracker.tracker.cost_function.html"/>
-        <link rel="prev" title="sktracker.io package" href="sktracker.io.html"/> 
+        <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
+        <link rel="next" title="sktracker.utils package" href="sktracker.utils.html"/>
+        <link rel="prev" title="sktracker.tracker.solver package" href="sktracker.tracker.solver.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -124,10 +124,12 @@
       
           <li><a href="sktracker.html">sktracker package</a> &raquo;</li>
       
-    <li>sktracker.tracker package</li>
+          <li><a href="sktracker.tracker.html">sktracker.tracker package</a> &raquo;</li>
+      
+    <li>sktracker.tracker.utils package</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="../_sources/api/sktracker.tracker.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/api/sktracker.tracker.utils.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -135,50 +137,49 @@
 </div>
           <div role="main">
             
-  <div class="section" id="sktracker-tracker-package">
-<h1>sktracker.tracker package<a class="headerlink" href="#sktracker-tracker-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.html">sktracker.tracker.cost_function package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.cost_function.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.basic_cost_functions">sktracker.tracker.cost_function.basic_cost_functions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.brownian">sktracker.tracker.cost_function.brownian module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.diagonals">sktracker.tracker.cost_function.diagonals module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.lapjv.html">sktracker.tracker.lapjv package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.lapjv.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.lapjv.html#module-sktracker.tracker.lapjv.lapjv">sktracker.tracker.lapjv.lapjv module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.lapjv.html#module-sktracker.tracker.lapjv">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.matrices.html">sktracker.tracker.matrices package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.matrices.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.matrices.html#module-sktracker.tracker.matrices.matrices">sktracker.tracker.matrices.matrices module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.matrices.html#module-sktracker.tracker.matrices">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.solver.html">sktracker.tracker.solver package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.solver.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.solver.html#module-sktracker.tracker.solver.byframesolver">sktracker.tracker.solver.byframesolver module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.solver.html#module-sktracker.tracker.solver.solver">sktracker.tracker.solver.solver module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.solver.html#module-sktracker.tracker.solver">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.utils.html">sktracker.tracker.utils package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.utils.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.utils.html#module-sktracker.tracker.utils.scores">sktracker.tracker.utils.scores module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.utils.html#module-sktracker.tracker.utils">Module contents</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="sktracker-tracker-utils-package">
+<h1>sktracker.tracker.utils package<a class="headerlink" href="#sktracker-tracker-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="module-sktracker.tracker.utils.scores">
+<span id="sktracker-tracker-utils-scores-module"></span><h2>sktracker.tracker.utils.scores module<a class="headerlink" href="#module-sktracker.tracker.utils.scores" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="sktracker.tracker.utils.scores.get_scores_on_trajectories">
+<tt class="descclassname">sktracker.tracker.utils.scores.</tt><tt class="descname">get_scores_on_trajectories</tt><big>(</big><em>trajs, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.utils.scores.get_scores_on_trajectories" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : pd.DataFrame</p>
+<blockquote>
+<div><p>MultiIndex need to contain &#8216;t_stamp&#8217; and &#8216;label&#8217; and columns need to have at least
+&#8216;true_label&#8217;</p>
+</div></blockquote>
+<p><strong>coords</strong> : list</p>
+<blockquote>
+<div><p>Features on which process scoring.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>min_chi_square</strong> : float</p>
+<p><strong>conserved_trajectories_number</strong> : float</p>
+<blockquote>
+<div><p>Between 0 and 1.</p>
+</div></blockquote>
+<p><strong>scores</strong> : numpy.ndarray</p>
+<blockquote class="last">
+<div><p>Chi square matrix.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
-<div class="section" id="module-sktracker.tracker">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sktracker.tracker.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.utils" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -188,10 +189,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.tracker.cost_function.html" class="btn btn-neutral float-right" title="sktracker.tracker.cost_function package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.utils.html" class="btn btn-neutral float-right" title="sktracker.utils package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sktracker.io.html" class="btn btn-neutral" title="sktracker.io package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sktracker.tracker.solver.html" class="btn btn-neutral" title="sktracker.tracker.solver package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

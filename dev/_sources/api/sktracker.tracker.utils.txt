@@ -1,0 +1,22 @@
+sktracker.tracker.utils package
+===============================
+
+Submodules
+----------
+
+sktracker.tracker.utils.scores module
+-------------------------------------
+
+.. automodule:: sktracker.tracker.utils.scores
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.tracker.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
