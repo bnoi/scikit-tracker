@@ -145,7 +145,7 @@ class CostMatrix():
         """
 
         # Find the lower contiguous block of NaN values
-        ii, jj = np.where(np.isfinite(self.mat) is False)
+        ii, jj = np.where(np.isfinite(self.mat) == False)
         for i, j in zip(ii, jj):
             if np.isnan(self.mat[i:, j:]).all():
                 break
@@ -280,13 +280,16 @@ class DiagBlock(Block):
         self.cost_function = cost_function
         self.vect = None
         self.mat = None
+        self._build()
 
-    def build(self):
+    def _build(self):
         """Compute and built block.
         """
         self.vect = self.cost_function.build(self.objects)
 
         if self.vect.size != len(self.objects):
+            self.mat = None
+            self.vect = None
             raise ValueError('cost_function does not returns'
                              ' a correct cost vector')
 
