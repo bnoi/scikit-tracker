@@ -59,10 +59,6 @@ def test_brownian_case_solve_lapjv():
     death_block = DiagBlock(pos0, diag_cost_func)
     birth_block = DiagBlock(pos1, diag_cost_func)
 
-    link_block.build()
-    death_block.build()
-    birth_block.build()
-
     cost_matrix_structure = [[link_block.mat, death_block.mat],
                              [birth_block.mat, None]]
 
