@@ -1,2 +1,3 @@
 from .solver import AbstractSolver
-from .byframesolver import ByFrameSolver
+from .by_frame_solver import ByFrameSolver
+from .gap_close_solver import GapCloseSolver

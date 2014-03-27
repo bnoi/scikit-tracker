@@ -5,7 +5,7 @@ from sktracker.tracker.solver import ByFrameSolver
 from sktracker.tracker.utils import get_scores_on_trajectories
 
 
-def test_byframe_solver():
+def test_by_frame_solver():
 
     true_trajs = data.brownian_trajs_df()
 
@@ -17,7 +17,7 @@ def test_byframe_solver():
     assert min_chi_square == 1 and conserved_trajectories_number == 1
 
 
-def test_byframe_solver_with_bad_parameters():
+def test_by_frame_solver_with_bad_parameters():
 
     true_trajs = data.brownian_trajs_df()
 
@@ -29,7 +29,7 @@ def test_byframe_solver_with_bad_parameters():
     assert min_chi_square == 1 and conserved_trajectories_number == 0.2
 
 
-def test_byframe_solver_progress_bar():
+def test_by_frame_solver_progress_bar():
 
     true_trajs = data.brownian_trajs_df()
 
