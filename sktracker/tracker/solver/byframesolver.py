@@ -35,7 +35,6 @@ class ByFrameSolver:
                             ''' inherit from AbstractDiagCostFunction'''.format(self.death_cf))
         
         self.max_assigned_cost = self.death_cf.context['cost'] / 1.05
-                     
         
     @property
     def blocks_structure(self):
@@ -94,13 +93,12 @@ class ByFrameSolver:
             else:
                 # assignment
                 new_label = self.trajs.loc[self.t_in]['new_label'].iloc[idx_in]
-                self._update_max_assign_cost(self.cm.costs[idx_in])
+                self._update_max_assign_cost(self.cm.mat[idx_in, idx_out])
             self.trajs.loc[self.t_out, 'new_label'].iloc[idx_out] = new_label
 
     def _update_max_assign_cost(self, cost):
         if cost > self.max_assigned_cost:
             self.max_assigned_cost = cost
-            
             ## Update context
             self.birth_cf.context['cost'] = self.max_assigned_cost * 1.05
             self.death_cf.context['cost'] = self.max_assigned_cost * 1.05
