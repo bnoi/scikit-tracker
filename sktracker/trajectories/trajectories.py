@@ -12,14 +12,14 @@ class Trajectories(pd.DataFrame):
     ----------
     t_stamps : ndarray
         unique values of the `t_stamps` index of the `self.trajs` dataframe
-    
+
     labels : ndarray
         unique values of the `labels` index of the `self.trajs` dataframe
 
     iter_segments : iterator
         yields a `(label, segment)` pair where `label` is iterated over `self.labels`
         and `segment` is a chunk of `self.trajs`
-    
+
     """
     def __init__(self, trajs):
 
@@ -27,6 +27,7 @@ class Trajectories(pd.DataFrame):
         if not isinstance(self, pd.DataFrame):
             raise TypeError('''The constructor argument `trajs`
                             must be a pandas.DataFrame instance''')
+
     @property
     def t_stamps(self):
         return self.index.get_level_values('t_stamp').unique()
@@ -43,13 +44,13 @@ class Trajectories(pd.DataFrame):
     def iter_segments(self):
         for lbl, idxs in self._segment_idxs:
             yield lbl, self.loc[idxs]
-    
+
     def get_segments(self):
         """
         Returns a dictionnary with labels as keys and segments as values
 
-        A segment contains all the data from `self.trajs` with 
-        
+        A segment contains all the data from `self.trajs` with
+
         """
         return {key: segment for key, segment
                 in self.iter_segments}
@@ -97,3 +98,51 @@ class Trajectories(pd.DataFrame):
         names[names.index('new_label')] = level
         trajs.index.set_names(names, inplace=True)
         return trajs
+
+    def show(self, xaxis='t',
+             yaxis='x',
+             groupby_args={'level': "label"},
+             ax=None):
+        """Show trajectories
+
+        Parameters
+        ----------
+        xaxis : str
+        yaxis : str
+        groupby : dict
+            How to group trajectories
+        ax : matplotlib Axes
+            None will create a new one.
+
+        Returns
+        -------
+        matplotlib axis instance
+
+        Examples
+        --------
+        >>> from sktracker import data
+        >>> from sktracker.tracker.solver import ByFrameSolver
+        >>> true_trajs = data.brownian_trajectories_generator(p_disapear=0.1)
+        >>> solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=2)
+        >>> trajs = solver.track(progress_bar=False)
+        >>> fig, (ax1, ax2) = plt.subplots(nrows=2)
+        >>> ax1 = trajs.show(xaxis='t', yaxis='x', groupby_args={'level': "label"}, ax=ax1)
+        >>> ax2 = trajs.show(xaxis='t', yaxis='x', groupby_args={'by': "true_label"}, ax=ax2)
+
+        """
+
+        import matplotlib.pyplot as plt
+
+        if ax is None:
+            ax = plt.gca()
+
+        gp = self.groupby(**groupby_args).groups
+        for k, v in gp.items():
+            traj = self.loc[v]
+            ax.plot(traj[xaxis], traj[yaxis], '-o')
+
+        ax.set_xlabel(xaxis)
+        ax.set_ylabel(yaxis)
+        ax.set_title(str(groupby_args))
+
+        return ax
