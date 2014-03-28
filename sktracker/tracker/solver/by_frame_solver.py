@@ -89,7 +89,6 @@ class ByFrameSolver(AbstractSolver):
 
         n = len(ts_in)
         for i, (t_in, t_out) in enumerate(zip(ts_in, ts_out)):
-
             if progress_bar:
                 progress = i / n * 100
                 message = "t_in : {} | t_out {}".format(t_in, t_out)
@@ -101,7 +100,6 @@ class ByFrameSolver(AbstractSolver):
             print_progress(-1)
 
         self.relabel_trajs()
-
         return self.trajs
 
     def one_frame(self, t_in, t_out):
@@ -131,8 +129,11 @@ class ByFrameSolver(AbstractSolver):
         """
 
         row_shapes, col_shapes = self.cm.get_shapes()
-        last_out_link = row_shapes[0]
-        last_in_link = col_shapes[0]
+        last_in_link = row_shapes[0]
+        last_out_link = col_shapes[0]
+
+        new_labels_in = self.trajs.loc[self.t_in, 'new_label'].values
+        new_labels_out = np.arange(last_out_link)
 
         for idx_out, idx_in in enumerate(self.cm.out_links[:last_out_link]):
             if idx_in >= last_in_link:
@@ -140,9 +141,13 @@ class ByFrameSolver(AbstractSolver):
                 new_label = self.trajs['new_label'].max() + 1.
             else:
                 # assignment
-                new_label = self.trajs.loc[self.t_in]['new_label'].iloc[idx_in]
+                new_label = new_labels_in[idx_in]
                 self._update_max_assign_cost(self.cm.mat[idx_in, idx_out])
-            self.trajs.loc[self.t_out, 'new_label'].iloc[idx_out] = new_label
+            
+            new_labels_out[idx_out] = new_label
+            self.trajs.loc[self.t_out, 'new_label'] = new_labels_out
+            ### The line below looks much slower than the line above
+            # self.trajs.loc[self.t_out, 'new_label'].iloc[idx_out] = new_label
 
     def _update_max_assign_cost(self, cost):
         if cost > self.max_assigned_cost:
