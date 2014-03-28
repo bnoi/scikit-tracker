@@ -12,7 +12,7 @@ class Trajectories(pd.DataFrame):
     ----------
     t_stamps : ndarray
         unique values of the `t_stamps` index of the `self.trajs` dataframe
-    
+
     labels : ndarray
         unique values of the `labels` index of the `self.trajs` dataframe
 
@@ -101,3 +101,51 @@ class Trajectories(pd.DataFrame):
         names[names.index('new_label')] = level
         trajs.index.set_names(names, inplace=True)
         return trajs
+
+    def show(self, xaxis='t',
+             yaxis='x',
+             groupby_args={'level': "label"},
+             ax=None):
+        """Show trajectories
+
+        Parameters
+        ----------
+        xaxis : str
+        yaxis : str
+        groupby : dict
+            How to group trajectories
+        ax : matplotlib Axes
+            None will create a new one.
+
+        Returns
+        -------
+        matplotlib axis instance
+
+        Examples
+        --------
+        >>> from sktracker import data
+        >>> from sktracker.tracker.solver import ByFrameSolver
+        >>> true_trajs = data.brownian_trajectories_generator(p_disapear=0.1)
+        >>> solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=2)
+        >>> trajs = solver.track(progress_bar=False)
+        >>> fig, (ax1, ax2) = plt.subplots(nrows=2)
+        >>> ax1 = trajs.show(xaxis='t', yaxis='x', groupby_args={'level': "label"}, ax=ax1)
+        >>> ax2 = trajs.show(xaxis='t', yaxis='x', groupby_args={'by': "true_label"}, ax=ax2)
+
+        """
+
+        import matplotlib.pyplot as plt
+
+        if ax is None:
+            ax = plt.gca()
+
+        gp = self.groupby(**groupby_args).groups
+        for k, v in gp.items():
+            traj = self.loc[v]
+            ax.plot(traj[xaxis], traj[yaxis], '-o')
+
+        ax.set_xlabel(xaxis)
+        ax.set_ylabel(yaxis)
+        ax.set_title(str(groupby_args))
+
+        return ax

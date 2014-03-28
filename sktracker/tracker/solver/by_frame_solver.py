@@ -46,8 +46,6 @@ class ByFrameSolver(AbstractSolver):
 
         self.max_assigned_cost = self.death_cf.context['cost'] / 1.05
 
-
-        
     @classmethod
     def for_brownian_motion(cls, trajs, max_speed, coords=['x', 'y', 'z']):
         """
@@ -154,10 +152,10 @@ class ByFrameSolver(AbstractSolver):
                 # assignment
                 new_label = new_labels_in[idx_in]
                 self._update_max_assign_cost(self.cm.mat[idx_in, idx_out])
-            
+
             new_labels_out[idx_out] = new_label
             self.trajs.loc[self.t_out, 'new_label'] = new_labels_out
-            ### The line below looks much slower than the two lines above
+            # The line below looks much slower than the two lines above
             # self.trajs.loc[self.t_out, 'new_label'].iloc[idx_out] = new_label
 
     def _update_max_assign_cost(self, cost):

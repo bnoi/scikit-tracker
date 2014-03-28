@@ -2,6 +2,8 @@ import numpy as np
 from numpy.testing import assert_array_almost_equal
 from numpy.testing import assert_array_equal
 
+from nose.tools import assert_raises
+
 from sktracker import data
 from sktracker.tracker.matrices import LinkBlock
 from sktracker.tracker.matrices import DiagBlock
@@ -68,3 +70,19 @@ def test_brownian_case_solve_lapjv():
 
     assert_array_equal(cm.in_links, np.array([2, 4, 3, 1, 0, 9, 8, 5, 7, 6]))
     assert_array_equal(cm.out_links, np.array([4, 3, 0, 2, 1, 7, 9, 8, 6, 5]))
+
+
+def test_abstract_cost_function_check_context():
+
+    c_func = DiagCostFunction({'cost': 1})
+
+    assert_raises(ValueError, c_func.check_context, 'test_string', str)
+
+    c_func.context['test_string'] = 5
+
+    assert_raises(TypeError, c_func.check_context, 'test_string', str)
+
+    c_func.context['test_string'] = "i am a string"
+    c_func.check_context('test_string', str)
+
+    assert True

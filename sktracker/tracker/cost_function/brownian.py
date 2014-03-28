@@ -57,11 +57,15 @@ class BrownianCostFunction(AbstractLinkCostFunction):
         coords = self.parameters['coords']
         distance_metric = self.parameters['distance_metric']
         max_speed = self.parameters['max_speed']
+
         self.check_columns([pos_in, pos_out], list(coords)+['t'])
+
         distances = cdist(pos_in[coords].astype(np.float),
                           pos_out[coords].astype(np.float),
                           metric=distance_metric)
+
         dt = pos_out['t'].iloc[0] - pos_in['t'].iloc[0]
+
         distances /= np.abs(dt)
         distances[distances > max_speed] = np.nan
         return distances ** 2
