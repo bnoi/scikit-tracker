@@ -31,13 +31,29 @@ class AbstractSolver:
         if not isinstance(obj, cost_funtion_type):
             raise TypeError(error_mess.format(obj, cost_funtion_type.__name__))
 
-    def relabel_trajs(self):
-        """Relabel trajectories from zero.
+    def relabel_trajs(self, new_labels=None):
         """
+        Sets the trajectory index `label` to new values.
+        
+        Parameters
+        ----------
+        new_labels: ndarray or None, default None
+            The new label. If it is not provided, the function wil look for
+            will look for a column named "new_label" in `trajs` and use this
+            as the new label index
+        
+        """
+        if new_labels is not None:
+            self.trajs['new_label'] = new_labels
 
-        self.trajs.set_index('new_label', append=True, inplace=True)
+        try:
+            self.trajs.set_index('new_label', append=True, inplace=True)
+        except KeyError:
+            raise('''Column "new_label" was not found in `trajs` and none
+                      was provided''')
+
         self.trajs.reset_index(level='label', drop=True, inplace=True)
-        self.trajs.index.names = ['t_stamp', 'label']
+        self.trajs.index.set_names(['t_stamp', 'label'], inplace=True)
         self.trajs.sortlevel('label', inplace=True)
         self.trajs.sortlevel('t_stamp', inplace=True)
         self.trajs.relabel_fromzero('label', inplace=True)

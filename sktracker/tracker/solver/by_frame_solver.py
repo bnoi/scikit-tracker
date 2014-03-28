@@ -93,8 +93,8 @@ class ByFrameSolver(AbstractSolver):
             For testing purpose only
         """
 
-        old_label = self.trajs.index.get_level_values('label').values
-        self.trajs['new_label'] = old_label.astype(np.float)
+        old_labels = self.trajs.index.get_level_values('label').values
+        self.trajs['new_label'] = old_labels.astype(np.float)
         ts_in = self.trajs.t_stamps[:-1]
         ts_out = self.trajs.t_stamps[1:]
 

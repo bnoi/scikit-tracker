@@ -19,6 +19,10 @@ class Trajectories(pd.DataFrame):
     iter_segments : iterator
         yields a `(label, segment)` pair where `label` is iterated over `self.labels`
         and `segment` is a chunk of `self.trajs`
+
+    segment_idxs : dictionnary
+        Keys are the segent label and values are a list
+        of  `(t_stamp, label)` tuples for each time point of the segment
     
     """
     def __init__(self, trajs):
@@ -36,12 +40,12 @@ class Trajectories(pd.DataFrame):
         return self.index.get_level_values('label').unique()
 
     @property
-    def _segment_idxs(self):
+    def segment_idxs(self):
         return self.groupby(level='label').groups
 
     @property
     def iter_segments(self):
-        for lbl, idxs in self._segment_idxs:
+        for lbl, idxs in self.segment_idxs:
             yield lbl, self.loc[idxs]
     
     def get_segments(self):
