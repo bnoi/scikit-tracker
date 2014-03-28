@@ -70,7 +70,7 @@ def directed_trajectories_generator(n_part=5,
                                     n_times=100,
                                     noise=1e-10,
                                     p_disapear=1e-10,
-                                    sampling=10,
+                                    sampling=100,
                                     seed=None):
     """Build and return fake directed trajectories with x, y, z and t features.
 
@@ -179,7 +179,7 @@ def _positions(times, phase, sampling=5):
     """
     Computes a swirly trajectory
     """
-    sampling *= 2. * np.pi
+    sampling /= 2. * np.pi
     xs = times * np.cos(times / sampling + phase)
     ys = np.sin(times / sampling - phase)**2
     zs = times / 10.
