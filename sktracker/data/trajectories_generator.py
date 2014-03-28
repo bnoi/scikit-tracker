@@ -2,10 +2,36 @@ import numpy as np
 import pandas as pd
 
 
-def brownian_trajectories_generator(n_part=5, n_times=100,
-                                    p_disapear=0, sigma=1.,
+def brownian_trajectories_generator(n_part=5,
+                                    n_times=100,
+                                    p_disapear=0,
+                                    sigma=1.,
                                     init_dispersion=10.,
                                     seed=None):
+    """Build and return fake brownian trajectories with x, y, z and t features.
+
+    Parameters
+    ----------
+    n_part : int
+        Number of trajectories
+    n_times : int
+        Number of time points
+    p_disapear : float
+        Probability that a particle disapears in one frame
+    sigma : float
+        Brownian motion parameters.
+    init_dispersion : float
+        Initial dispersion amplitude.
+    seed : float
+        See value for random function.
+
+    Returns
+    -------
+    trajs : `pandas.DataFrame`
+        Simulated trajectories. Column named `true_label` contains correct
+        object labels.
+
+    """
     if seed is not None:
         np.random.seed(seed)
 
@@ -18,13 +44,13 @@ def brownian_trajectories_generator(n_part=5, n_times=100,
                                 size=(n_part, 3))
     positions[0, ...] = init_pos
     positions = positions.cumsum(axis=0)
-    
+
     index = pd.MultiIndex.from_arrays([time_stamps.flatten(),
                                        labels.flatten()],
-                                       names=('t_stamp', 'label'))
-    
+                                      names=('t_stamp', 'label'))
+
     trajs = pd.DataFrame(positions.reshape(n_times*n_part, 3),
-                        index=index, columns=['x', 'y', 'z'])
+                         index=index, columns=['x', 'y', 'z'])
 
     disapear = np.random.binomial(n_part, p_disapear, n_times * n_part)
     disapear = np.where(disapear == 1)[::-1][0]
@@ -35,17 +61,18 @@ def brownian_trajectories_generator(n_part=5, n_times=100,
 
     grouped = trajs.groupby(level='t_stamp')
     trajs = grouped.apply(_shuffle)
- 
+
     trajs['t'] = trajs.index.get_level_values('t_stamp').values.astype(np.float)
     return trajs
 
-def trajectories_generator(n_part=5,
-                           n_times=100,
-                           noise=1e-10,
-                           p_disapear=1e-10,
-                           sampling=10,
-                           seed=None):
-    """Build and return fake trajectories with x, y, z and t features.
+
+def directed_trajectories_generator(n_part=5,
+                                    n_times=100,
+                                    noise=1e-10,
+                                    p_disapear=1e-10,
+                                    sampling=10,
+                                    seed=None):
+    """Build and return fake directed trajectories with x, y, z and t features.
 
     Parameters
     ----------
@@ -108,7 +135,7 @@ def trajectories_generator(n_part=5,
 
     index = pd.MultiIndex.from_arrays([time_stamps.flatten(),
                                        labels.flatten()],
-                                       names=('t_stamp', 'label'))
+                                      names=('t_stamp', 'label'))
 
     all_pos = np.zeros((n_times * n_part, 3))
     for n in range(n_part):
@@ -135,6 +162,7 @@ def trajectories_generator(n_part=5,
 
     return trajs
 
+
 def _shuffle(df):
     """
     Shuffles the input `pandas.DataFrame` and returns it.
@@ -145,6 +173,7 @@ def _shuffle(df):
                       index=df.index,
                       columns=df.columns)
     return df
+
 
 def _positions(times, phase, sampling=5):
     """
