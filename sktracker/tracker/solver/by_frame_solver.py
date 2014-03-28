@@ -32,7 +32,8 @@ class ByFrameSolver(AbstractSolver):
 
         self.coords = coords
 
-        self.check_trajs_df_structure(index=['t_stamp', 'label'], columns=['t'] + coords)
+        self.trajs.check_trajs_df_structure(index=['t_stamp', 'label'],
+                                            columns=['t'] + coords)
 
         self.link_cf = cost_functions['link']
         self.check_cost_function_type(self.link_cf, AbstractLinkCostFunction)
@@ -45,6 +46,8 @@ class ByFrameSolver(AbstractSolver):
 
         self.max_assigned_cost = self.death_cf.context['cost'] / 1.05
 
+
+        
     @classmethod
     def for_brownian_motion(cls, trajs, max_speed, coords=['x', 'y', 'z']):
         """
@@ -70,6 +73,14 @@ class ByFrameSolver(AbstractSolver):
         return [[self.link_block.mat, self.death_block.mat],
                 [self.birth_block.mat, None]]
 
+    @property
+    def pos_in(self):
+        return self.trajs.loc[self.t_in]
+
+    @property
+    def pos_out(self):
+        return self.trajs.loc[self.t_out]
+
     def track(self, progress_bar=False, progress_bar_out=None):
         """
 
@@ -84,8 +95,8 @@ class ByFrameSolver(AbstractSolver):
 
         old_label = self.trajs.index.get_level_values('label').values
         self.trajs['new_label'] = old_label.astype(np.float)
-        ts_in = self.times[:-1]
-        ts_out = self.times[1:]
+        ts_in = self.trajs.t_stamps[:-1]
+        ts_out = self.trajs.t_stamps[1:]
 
         n = len(ts_in)
         for i, (t_in, t_out) in enumerate(zip(ts_in, ts_out)):

@@ -35,8 +35,8 @@ def test_solver_check_trajs_df_structure():
     trajs = data.brownian_trajs_df()
     solver = AbstractSolver(trajs)
 
-    solver.check_trajs_df_structure(index=['t_stamp', 'label'])
-    solver.check_trajs_df_structure(columns=['x', 'y', 't'])
+    solver.trajs.check_trajs_df_structure(index=['t_stamp', 'label'])
+    solver.trajs.check_trajs_df_structure(columns=['x', 'y', 't'])
 
     assert True
 
@@ -46,4 +46,4 @@ def test_solver_check_trajs_df_structure_failure():
     trajs = data.brownian_trajs_df()
     solver = AbstractSolver(trajs)
 
-    assert_raises(ValueError, solver.check_trajs_df_structure, ['t_wrong_stamp', 'label'])
+    assert_raises(ValueError, solver.trajs.check_trajs_df_structure, ['t_wrong_stamp', 'label'])
