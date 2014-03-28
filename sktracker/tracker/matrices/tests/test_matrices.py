@@ -63,8 +63,12 @@ def test_cost_matrix_mocked_flat():
 
 def test_cost_matrix_with_mock_trajs():
 
-    trajs = data.trajectories_generator(n_part=5, n_times=100, noise=1e-10,
-                                        p_disapear=0.4, sampling=10, seed=0)
+    trajs = data.directed_trajectories_generator(n_part=5,
+                                                 n_times=100,
+                                                 noise=1e-10,
+                                                 p_disapear=0.4,
+                                                 sampling=10,
+                                                 seed=0)
 
     times_stamp = trajs.index.get_level_values('t_stamp').unique()
 
