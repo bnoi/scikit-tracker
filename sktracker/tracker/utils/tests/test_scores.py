@@ -1,6 +1,6 @@
 from sktracker import data
 
-from sktracker.tracker.cost_function import BrownianCostFunction
+from sktracker.tracker.cost_function.brownian import BrownianCostFunction
 from sktracker.tracker.cost_function import DiagCostFunction
 from sktracker.tracker.solver import ByFrameSolver
 from sktracker.tracker.utils import get_scores_on_trajectories

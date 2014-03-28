@@ -7,7 +7,7 @@ from sktracker import data
 from sktracker.tracker.solver import AbstractSolver
 from sktracker.tracker.cost_function import AbstractLinkCostFunction
 from sktracker.tracker.cost_function import AbstractDiagCostFunction
-from sktracker.tracker.cost_function import BrownianCostFunction
+from sktracker.tracker.cost_function.brownian import BrownianCostFunction
 
 
 def test_solver_check_cost_function_type():
