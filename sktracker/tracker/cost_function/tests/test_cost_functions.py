@@ -9,7 +9,7 @@ from sktracker.tracker.matrices import LinkBlock
 from sktracker.tracker.matrices import DiagBlock
 from sktracker.tracker.matrices import CostMatrix
 
-from sktracker.tracker.cost_function import BrownianCostFunction
+from sktracker.tracker.cost_function.brownian import BrownianCostFunction
 from sktracker.tracker.cost_function import DiagCostFunction
 
 

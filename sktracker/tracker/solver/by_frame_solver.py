@@ -9,7 +9,7 @@ from ..matrices import CostMatrix
 from ..cost_function import AbstractLinkCostFunction
 from ..cost_function import AbstractDiagCostFunction
 
-from ..cost_function import BrownianCostFunction
+from ..cost_function.brownian import BrownianCostFunction
 from ..cost_function import DiagCostFunction
 
 from . import AbstractSolver

@@ -1,6 +1,7 @@
 import numpy as np
-from scipy.spatial.distance import cdist
+from scipy.spatial.distance import cdist, pdist
 from . import AbstractLinkCostFunction
+from . import AbstractGCLinkCostFunction
 
 
 class BrownianCostFunction(AbstractLinkCostFunction):
@@ -69,3 +70,37 @@ class BrownianCostFunction(AbstractLinkCostFunction):
         distances /= np.abs(dt)
         distances[distances > max_speed] = np.nan
         return distances ** 2
+
+
+class GCBrownianCostFunction(AbstractGCLinkCostFunction):
+    """
+    """
+
+    def __init__(self, context, parameters):
+        super().__init__(context, parameters)
+
+    def build(self, labels_in, labels_out):
+        """
+        """
+        self.update()
+        coords = self.parameters['coords']
+        distance_metric = self.parameters['distance_metric']
+        max_speed = self.parameters['max_speed']
+        distances = np.empty((len(labels_in),
+                              len(labels_out)))
+        distances.fill(np.nan)
+        for idx_in, idx_out in zip(self.idxs_in, self.idxs_out):
+            pos_in = self.trajs.loc[idx_in]
+            pos_out = self.trajs.loc[idx_out]
+            distance = pdist(np.vstack([pos_in[coords].values,
+                                        pos_out[coords].values]),
+                             metric=distance_metric)
+            #print(pos_in.x, pos_out.x, distance)
+            distances[idx_in[1], idx_out[1]] = distance
+            # dt = pos_out.t - pos_in.t
+            # distances /= np.abs(dt)
+            # print(dt)
+        distances[distances > max_speed] = np.nan
+        #print(distances)
+        return distances ** 2
+

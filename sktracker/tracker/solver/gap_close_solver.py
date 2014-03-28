@@ -53,13 +53,18 @@ class GapCloseSolver(AbstractSolver):
 
     def track(self):
 
-        pos_in, pos_out = self._get_positions()
-        if pos_in.empty:
+        labels = self.trajs.labels
+        idxs_in, idxs_out = self._get_candidates()
+        self.link_cf.context['trajs'] = self.trajs
+        self.link_cf.context['idxs_in'] = idxs_in
+        self.link_cf.context['idxs_out'] = idxs_out
+        
+        if not len(idxs_in):
             log.info('No gap needs closing here...')
             return self.trajs
         old_labels = self.trajs.index.get_level_values('label').values
         self.trajs['new_label'] = old_labels.astype(np.float)
-        self.link_block = LinkBlock(pos_in, pos_out, self.link_cf)
+        self.link_block = LinkBlock(labels, labels, self.link_cf)
 
         # ''' TFA: For track segment ends and starts, the alternative cost (b and d in Fig. 1c) had to be
         # comparable in magnitude to the costs of potential assignments, making the rejection
@@ -72,47 +77,47 @@ class GapCloseSolver(AbstractSolver):
         # (data not shown). We attribute this robustness to the fact that track initiations and
         # terminations competed globally, in space and time, with all other potential
         # assignments. Thus, the alternative cost was taken as the 90th percentile.'''
-        percentile = 90
+
+        percentile = 99
         link_costs = np.ma.masked_invalid(self.link_block.mat).compressed()
         cost = np.percentile(link_costs, percentile)
-        self.birth_block.context['cost'] = cost
-        self.death_block.context['cost'] = cost
-        
-        self.birth_block = DiagBlock(pos_out, self.birth_cf)
-        self.death_block = DiagBlock(pos_in, self.death_cf)
+        self.birth_cf.context['cost'] = cost
+        self.death_cf.context['cost'] = cost
+        self.birth_block = DiagBlock(labels, self.birth_cf)
+        self.death_block = DiagBlock(labels, self.death_cf)
         self.cm = CostMatrix(self.blocks_structure)
         self.cm.solve()
         self.assign()
-
-    def _get_positions(self):
+        return self.trajs
+        
+        
+    def _get_candidates(self):
         """
         
         """
         max_gap = self.maximum_gap
         labels = self.trajs.labels
-        bounds = np.array([[idxs[0][0], idxs[-1][0]] for idxs
+        bounds = np.array([(idxs[0][0], idxs[-1][0]) for idxs
                            in self.trajs.segment_idxs.values()])
-
         start_times = bounds[:, 0]
         stop_times = bounds[:, 1]
         ss_in, ss_out = np.meshgrid(labels, labels)
         gaps_size = start_times[ss_out] - stop_times[ss_in]
         matches = np.argwhere((gaps_size > 0) * (gaps_size < max_gap))
         if not matches.shape[0]:
-            return pd.DataFrame([]), pd.DataFrame([])
+            return [], []
         matches_in = matches[:, 0]
         matches_out = matches[:, 1]
         
         in_idxs = [(in_time, in_lbl) for (in_time, in_lbl)
                    in zip(start_times[matches_in],
                           self.trajs.labels[matches_in])]
-        pos_in = self.trajs[in_idxs]
-
-        out_idxs = [(in_time, in_lbl) for (in_time, in_lbl)
+        #pos_in = self.trajs.loc[in_idxs]
+        out_idxs = [(out_time, out_lbl) for (out_time, out_lbl)
                     in zip(start_times[matches_out],
                            self.trajs.labels[matches_out])]
-        pos_out = self.trajs[out_idxs]
-        return pos_in, pos_out        
+        #pos_out = self.trajs.loc[out_idxs]
+        return in_idxs, out_idxs
 
     def assign(self):
         """

@@ -45,7 +45,7 @@ class Trajectories(pd.DataFrame):
 
     @property
     def iter_segments(self):
-        for lbl, idxs in self.segment_idxs:
+        for lbl, idxs in self.segment_idxs.values():
             yield lbl, self.loc[idxs]
     
     def get_segments(self):
