@@ -41,7 +41,6 @@ def get_scores_on_trajectories(trajs, coords=['x', 'y', 'z']):
             scores[new_label, true_label] = score
 
     min_chi_square = np.min(scores, axis=1).sum()
-    min_chi_square = np.exp(-min_chi_square)
     conserved_trajectories_number = scores.shape[1] / scores.shape[0]
 
     return min_chi_square, conserved_trajectories_number, scores

@@ -20,4 +20,4 @@ def test_get_scores_on_trajectories():
 
     min_chi_square, conserved_trajectories_number, scores = get_scores_on_trajectories(trajs)
 
-    assert min_chi_square == 1 and conserved_trajectories_number == 1
+    assert min_chi_square == 0 and conserved_trajectories_number == 1

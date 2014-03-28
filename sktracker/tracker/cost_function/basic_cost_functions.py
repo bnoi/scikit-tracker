@@ -47,6 +47,10 @@ class AbstractCostFunction:
         type : class name
             To check context value type.
 
+        Returns
+        -------
+        The desired key's value in context.
+
         """
 
         message = "Context {} does not contain required key : {}"
@@ -56,6 +60,8 @@ class AbstractCostFunction:
         message = "Context value {} does not have valid key type : {}"
         if not isinstance(self.context[key], obj_type):
             raise TypeError(message.format(self.context[key], obj_type))
+
+        return self.context[key]
 
 
 class AbstractLinkCostFunction(AbstractCostFunction):
