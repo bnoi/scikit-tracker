@@ -146,7 +146,7 @@ class ByFrameSolver(AbstractSolver):
             
             new_labels_out[idx_out] = new_label
             self.trajs.loc[self.t_out, 'new_label'] = new_labels_out
-            ### The line below looks much slower than the line above
+            ### The line below looks much slower than the two lines above
             # self.trajs.loc[self.t_out, 'new_label'].iloc[idx_out] = new_label
 
     def _update_max_assign_cost(self, cost):
