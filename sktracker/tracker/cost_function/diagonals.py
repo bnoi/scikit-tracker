@@ -4,7 +4,7 @@ from . import AbstractDiagCostFunction
 
 class DiagCostFunction(AbstractDiagCostFunction):
     """Basic cost function for a diagonal block.
-    
+
     Parameters
     ----------
     context: `dict`
@@ -16,7 +16,7 @@ class DiagCostFunction(AbstractDiagCostFunction):
         if not 'cost' in context.keys():
             raise ValueError('''The class DiagCostFunction requires '''
                              '''the `context` dictionnary to contain a `cost` key''')
-        
+
     def build(self, objects):
         """
         Returns a vector with shape `(len(objects))` filled by

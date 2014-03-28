@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class AbstractCostFunction:
     """Abstract class.
 
@@ -35,7 +36,28 @@ class AbstractCostFunction:
                                  " contain the required columns."
                                  "Missing columns: {}".format(
                                      cols_set.difference(actual_cols_set)))
-            
+
+    def check_context(self, key, obj_type):
+        """Check wether self.context contain a key on a specific type.
+
+        Parameters
+        ----------
+        key : str
+            Key to find in self.context.
+        type : class name
+            To check context value type.
+
+        """
+
+        message = "Context {} does not contain required key : {}"
+        if key not in self.context.keys():
+            raise ValueError(message.format(self.context, key))
+
+        message = "Context value {} does not have valid key type : {}"
+        if not isinstance(self.context[key], obj_type):
+            raise TypeError(message.format(self.context[key], obj_type))
+
+
 class AbstractLinkCostFunction(AbstractCostFunction):
     """Basic cost function.
 
@@ -54,6 +76,7 @@ class AbstractLinkCostFunction(AbstractCostFunction):
         """
         mat = np.zeros((len(objects_in), len(objects_out)))
         return mat
+
 
 class AbstractDiagCostFunction(AbstractCostFunction):
     """Basic cost function for diagonal block.
