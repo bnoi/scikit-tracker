@@ -14,7 +14,7 @@ def test_by_frame_solver():
 
     min_chi_square, conserved_trajectories_number, scores = get_scores_on_trajectories(trajs)
 
-    assert min_chi_square == 1 and conserved_trajectories_number == 1
+    assert min_chi_square == 0 and conserved_trajectories_number == 1
 
 
 def test_by_frame_solver_with_bad_parameters():
@@ -26,7 +26,7 @@ def test_by_frame_solver_with_bad_parameters():
 
     min_chi_square, conserved_trajectories_number, scores = get_scores_on_trajectories(trajs)
 
-    assert min_chi_square == 1 and conserved_trajectories_number == 0.2
+    assert min_chi_square == 0 and conserved_trajectories_number == 0.2
 
 
 def test_by_frame_solver_progress_bar():
