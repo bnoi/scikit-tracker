@@ -121,10 +121,10 @@ class BasicDirectedCostFunction(AbstractLinkCostFunction):
 
                 r_out = pos_out.loc[idx_out]
 
-                vec_speed_out = (r_out[coords] - r_in[coords])
+                vec_speed_out = (r_out[coords] - r_in[coords]) / np.abs(dt)
 
-                current_speed = np.linalg.norm(vec_speed_out) / np.abs(dt)
-                print(current_speed)
+                current_speed = np.linalg.norm(vec_speed_out)
+
                 if current_speed > max_speed:
                     score = np.nan
                 else:
@@ -133,4 +133,5 @@ class BasicDirectedCostFunction(AbstractLinkCostFunction):
 
                 distances[i, j] = score
 
+        distances -= distances.min()
         return distances
