@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.solver package &mdash; sktracker 0.2.dev-ra27cc55 docs</title>
+  <title>sktracker.tracker.solver package &mdash; sktracker 0.2.dev-r2d24d55 docs</title>
   
 
   
@@ -31,10 +31,10 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-ra27cc55 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r2d24d55 docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="next" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/>
-        <link rel="prev" title="sktracker.tracker.matrices package" href="sktracker.tracker.matrices.html"/> 
+        <link rel="prev" title="sktracker.tracker.matrix package" href="sktracker.tracker.matrix.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -144,38 +144,104 @@
 </div>
 <div class="section" id="module-sktracker.tracker.solver.by_frame_solver">
 <span id="sktracker-tracker-solver-by-frame-solver-module"></span><h2>sktracker.tracker.solver.by_frame_solver module<a class="headerlink" href="#module-sktracker.tracker.solver.by_frame_solver" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.solver.gap_close_solver">
+<span id="sktracker-tracker-solver-gap-close-solver-module"></span><h2>sktracker.tracker.solver.gap_close_solver module<a class="headerlink" href="#module-sktracker.tracker.solver.gap_close_solver" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.solver.solver">
+<span id="sktracker-tracker-solver-solver-module"></span><h2>sktracker.tracker.solver.solver module<a class="headerlink" href="#module-sktracker.tracker.solver.solver" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.solver">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.solver" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="sktracker.tracker.solver.by_frame_solver.ByFrameSolver">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.solver.by_frame_solver.</tt><tt class="descname">ByFrameSolver</tt><big>(</big><em>trajs, cost_functions, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.by_frame_solver.ByFrameSolver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#sktracker.tracker.solver.solver.AbstractSolver" title="sktracker.tracker.solver.solver.AbstractSolver"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.solver.solver.AbstractSolver</span></tt></a></p>
+<dt id="sktracker.tracker.solver.AbstractSolver">
+<em class="property">class </em><tt class="descclassname">sktracker.tracker.solver.</tt><tt class="descname">AbstractSolver</tt><big>(</big><em>trajs</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.AbstractSolver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : pandas.DataFrame</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference internal" href="sktracker.trajectories.html#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a></p>
+<blockquote class="last">
+<div><p>The trajectories</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="sktracker.tracker.solver.AbstractSolver.check_cost_function_type">
+<tt class="descname">check_cost_function_type</tt><big>(</big><em>obj</em>, <em>cost_funtion_type</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.AbstractSolver.check_cost_function_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check wether an object inherit from another one.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>obj</strong> : object</p>
+<p><strong>cost_funtion_type</strong> : class name</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>TypeError</strong> : <cite>obj</cite> type does not inherit from <cite>cost_funtion_type</cite></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.tracker.solver.AbstractSolver.relabel_trajs">
+<tt class="descname">relabel_trajs</tt><big>(</big><em>new_labels=None</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.AbstractSolver.relabel_trajs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the trajectory index <cite>label</cite> to new values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_labels: :class:`numpy.ndarray` or None, default None</strong></p>
+<blockquote class="last">
+<div><p>The new label. If it is not provided, the function wil look for
+will look for a column named &#8220;new_label&#8221; in <cite>trajs</cite> and use this
+as the new label index</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sktracker.tracker.solver.ByFrameSolver">
+<em class="property">class </em><tt class="descclassname">sktracker.tracker.solver.</tt><tt class="descname">ByFrameSolver</tt><big>(</big><em>trajs, cost_functions, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.solver.solver.AbstractSolver</span></tt></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 <p class="last"><strong>cost_functions</strong> : list of list</p>
 </td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="sktracker.tracker.solver.by_frame_solver.ByFrameSolver.assign">
-<tt class="descname">assign</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.by_frame_solver.ByFrameSolver.assign" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.ByFrameSolver.assign">
+<tt class="descname">assign</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.assign" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="sktracker.tracker.solver.by_frame_solver.ByFrameSolver.blocks_structure">
-<tt class="descname">blocks_structure</tt><a class="headerlink" href="#sktracker.tracker.solver.by_frame_solver.ByFrameSolver.blocks_structure" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.ByFrameSolver.blocks_structure">
+<tt class="descname">blocks_structure</tt><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.blocks_structure" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">
-<dt id="sktracker.tracker.solver.by_frame_solver.ByFrameSolver.for_brownian_motion">
-<em class="property">classmethod </em><tt class="descname">for_brownian_motion</tt><big>(</big><em>trajs, max_speed, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.by_frame_solver.ByFrameSolver.for_brownian_motion" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.ByFrameSolver.for_brownian_motion">
+<em class="property">classmethod </em><tt class="descname">for_brownian_motion</tt><big>(</big><em>trajs, max_speed, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.for_brownian_motion" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : pandas.DataFrame</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 <p><strong>max_speed</strong> : float</p>
 <blockquote>
 <div><p>Max objects velocity</p>
@@ -188,8 +254,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="sktracker.tracker.solver.by_frame_solver.ByFrameSolver.one_frame">
-<tt class="descname">one_frame</tt><big>(</big><em>t_in</em>, <em>t_out</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.by_frame_solver.ByFrameSolver.one_frame" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.ByFrameSolver.one_frame">
+<tt class="descname">one_frame</tt><big>(</big><em>t_in</em>, <em>t_out</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.one_frame" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -203,23 +269,23 @@
 </dd></dl>
 
 <dl class="attribute">
-<dt id="sktracker.tracker.solver.by_frame_solver.ByFrameSolver.pos_in">
-<tt class="descname">pos_in</tt><a class="headerlink" href="#sktracker.tracker.solver.by_frame_solver.ByFrameSolver.pos_in" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.ByFrameSolver.pos_in">
+<tt class="descname">pos_in</tt><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.pos_in" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="sktracker.tracker.solver.by_frame_solver.ByFrameSolver.pos_out">
-<tt class="descname">pos_out</tt><a class="headerlink" href="#sktracker.tracker.solver.by_frame_solver.ByFrameSolver.pos_out" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.ByFrameSolver.pos_out">
+<tt class="descname">pos_out</tt><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.pos_out" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.tracker.solver.by_frame_solver.ByFrameSolver.track">
-<tt class="descname">track</tt><big>(</big><em>progress_bar=False</em>, <em>progress_bar_out=None</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.by_frame_solver.ByFrameSolver.track" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.ByFrameSolver.track">
+<tt class="descname">track</tt><big>(</big><em>progress_bar=False</em>, <em>progress_bar_out=None</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.track" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self.trajs</strong> : pandas.DataFrame</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self.trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 <p><strong>progress_bar</strong> : bool</p>
 <blockquote>
 <div><p>Display progress bar</p>
@@ -236,103 +302,37 @@
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-sktracker.tracker.solver.gap_close_solver">
-<span id="sktracker-tracker-solver-gap-close-solver-module"></span><h2>sktracker.tracker.solver.gap_close_solver module<a class="headerlink" href="#module-sktracker.tracker.solver.gap_close_solver" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="sktracker.tracker.solver.gap_close_solver.GapCloseSolver">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.solver.gap_close_solver.</tt><tt class="descname">GapCloseSolver</tt><big>(</big><em>trajs, cost_functions, maximum_gap, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.gap_close_solver.GapCloseSolver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#sktracker.tracker.solver.solver.AbstractSolver" title="sktracker.tracker.solver.solver.AbstractSolver"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.solver.solver.AbstractSolver</span></tt></a></p>
+<dt id="sktracker.tracker.solver.GapCloseSolver">
+<em class="property">class </em><tt class="descclassname">sktracker.tracker.solver.</tt><tt class="descname">GapCloseSolver</tt><big>(</big><em>trajs, cost_functions, maximum_gap, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.solver.solver.AbstractSolver</span></tt></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : pandas.DataFrame</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 <p class="last"><strong>cost_functions</strong> : list of list</p>
 </td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="sktracker.tracker.solver.gap_close_solver.GapCloseSolver.assign">
-<tt class="descname">assign</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.gap_close_solver.GapCloseSolver.assign" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.GapCloseSolver.assign">
+<tt class="descname">assign</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver.assign" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="sktracker.tracker.solver.gap_close_solver.GapCloseSolver.blocks_structure">
-<tt class="descname">blocks_structure</tt><a class="headerlink" href="#sktracker.tracker.solver.gap_close_solver.GapCloseSolver.blocks_structure" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.GapCloseSolver.blocks_structure">
+<tt class="descname">blocks_structure</tt><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver.blocks_structure" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.tracker.solver.gap_close_solver.GapCloseSolver.track">
-<tt class="descname">track</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.gap_close_solver.GapCloseSolver.track" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.solver.GapCloseSolver.track">
+<tt class="descname">track</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver.track" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-sktracker.tracker.solver.solver">
-<span id="sktracker-tracker-solver-solver-module"></span><h2>sktracker.tracker.solver.solver module<a class="headerlink" href="#module-sktracker.tracker.solver.solver" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="sktracker.tracker.solver.solver.AbstractSolver">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.solver.solver.</tt><tt class="descname">AbstractSolver</tt><big>(</big><em>trajs</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.solver.AbstractSolver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <tt class="xref py py-class docutils literal"><span class="pre">Trajectories</span></tt> object</p>
-<blockquote class="last">
-<div><p>The trajectories</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="sktracker.tracker.solver.solver.AbstractSolver.check_cost_function_type">
-<tt class="descname">check_cost_function_type</tt><big>(</big><em>obj</em>, <em>cost_funtion_type</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.solver.AbstractSolver.check_cost_function_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check wether an object inherit from another one.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>obj</strong> : object</p>
-<p><strong>cost_funtion_type</strong> : class</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>TypeError</strong> : <cite>obj</cite> type does not inherit from <cite>cost_funtion_type</cite></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.tracker.solver.solver.AbstractSolver.relabel_trajs">
-<tt class="descname">relabel_trajs</tt><big>(</big><em>new_labels=None</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.solver.AbstractSolver.relabel_trajs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the trajectory index <cite>label</cite> to new values.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_labels: ndarray or None, default None</strong></p>
-<blockquote class="last">
-<div><p>The new label. If it is not provided, the function wil look for
-will look for a column named &#8220;new_label&#8221; in <cite>trajs</cite> and use this
-as the new label index</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-sktracker.tracker.solver">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.solver" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -345,7 +345,7 @@ as the new label index</p>
         <a href="sktracker.tracker.utils.html" class="btn btn-neutral float-right" title="sktracker.tracker.utils package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sktracker.tracker.matrices.html" class="btn btn-neutral" title="sktracker.tracker.matrices package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sktracker.tracker.matrix.html" class="btn btn-neutral" title="sktracker.tracker.matrix package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -374,7 +374,7 @@ as the new label index</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-ra27cc55',
+            VERSION:'0.2.dev-r2d24d55',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.utils package &mdash; sktracker 0.2.dev-ra27cc55 docs</title>
+  <title>sktracker.utils package &mdash; sktracker 0.2.dev-r2d24d55 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-ra27cc55 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r2d24d55 docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="Contribute to development" href="../contribute.html"/>
         <link rel="prev" title="sktracker.trajectories package" href="sktracker.trajectories.html"/> 
@@ -142,108 +142,12 @@
 </div>
 <div class="section" id="module-sktracker.utils.color_system">
 <span id="sktracker-utils-color-system-module"></span><h2>sktracker.utils.color_system module<a class="headerlink" href="#module-sktracker.utils.color_system" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.utils.color_system.color">
-<tt class="descclassname">sktracker.utils.color_system.</tt><tt class="descname">color</tt><big>(</big><em>astr</em>, <em>color='ENDC'</em><big>)</big><a class="headerlink" href="#sktracker.utils.color_system.color" title="Permalink to this definition">¶</a></dt>
-<dd><p>Colorized string variable.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>astr: string</strong></p>
-<blockquote>
-<div><p>String to colorize.</p>
-</div></blockquote>
-<p><strong>color: string</strong></p>
-<blockquote>
-<div><p>Which color to use (ENDC means &#8220;reset color&#8221;):</p>
-<p>&#8216;ENDC&#8217;, &#8216;BOLD&#8217;, &#8216;UNDERLINE&#8217;, &#8216;BLINK&#8217;, &#8216;INVERT&#8217;, &#8216;CONCEALD&#8217;, &#8216;STRIKE&#8217;, &#8216;GREY30&#8217;,
-&#8216;GREY40&#8217;, &#8216;GREY65&#8217;, &#8216;GREY70&#8217;, &#8216;GREY20_BG&#8217;, &#8216;GREY33_BG&#8217;, &#8216;GREY80_BG&#8217;,
-&#8216;GREY93_BG&#8217;, &#8216;DARK_RED&#8217;, &#8216;RED&#8217;, &#8216;RED_BG&#8217;, &#8216;LIGHT_RED_BG&#8217;, &#8216;DARK_YELLOW&#8217;,
-&#8216;YELLOW&#8217;, &#8216;YELLOW_BG&#8217;, &#8216;LIGHT_YELLOW_BG&#8217;, &#8216;DARK_BLUE&#8217;, &#8216;BLUE&#8217;, &#8216;BLUE_BG&#8217;,
-&#8216;LIGHT_BLUE_BG&#8217;, &#8216;DARK_MAGENTA&#8217;, &#8216;PURPLE&#8217;, &#8216;MAGENTA_BG&#8217;, &#8216;LIGHT_PURPLE_BG&#8217;,
-&#8216;DARK_CYAN&#8217;, &#8216;AUQA&#8217;, &#8216;CYAN_BG&#8217;, &#8216;LIGHT_AUQA_BG&#8217;, &#8216;DARK_GREEN&#8217;, &#8216;GREEN&#8217;,
-&#8216;GREEN_BG&#8217;, &#8216;LIGHT_GREEN_BG&#8217;, &#8216;BLACK&#8217;</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String with colored terminal code.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker.utils</span> <span class="kn">import</span> <span class="n">color</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">color</span><span class="p">(</span><span class="s">&quot;I am a RED string&quot;</span><span class="p">,</span> <span class="s">&quot;RED&quot;</span><span class="p">))</span>
-<span class="go">I am a RED string</span>
-<span class="gp">&gt;&gt;&gt; </span> <span class="c"># Displayed in red in a terminal</span>
-</pre></div>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.utils.ipython">
 <span id="sktracker-utils-ipython-module"></span><h2>sktracker.utils.ipython module<a class="headerlink" href="#module-sktracker.utils.ipython" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.utils.ipython.in_ipython">
-<tt class="descclassname">sktracker.utils.ipython.</tt><tt class="descname">in_ipython</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.utils.ipython.in_ipython" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test if current python process is an IPython process or not.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True wether current process is IPython, False in the other case.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.utils.progress">
 <span id="sktracker-utils-progress-module"></span><h2>sktracker.utils.progress module<a class="headerlink" href="#module-sktracker.utils.progress" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.utils.progress.print_progress">
-<tt class="descclassname">sktracker.utils.progress.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em>, <em>message=None</em>, <em>out=None</em><big>)</big><a class="headerlink" href="#sktracker.utils.progress.print_progress" title="Permalink to this definition">¶</a></dt>
-<dd><p>Display a progress bar filled with a variable value. print_progress
-also works under IPython notebook.</p>
-<p>Se <cite>progress</cite> to -1 to remove the progress bar.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>progress: int</strong></p>
-<blockquote>
-<div><p>Variable value use to fill the progress bar. Should be between 0
-and 100.</p>
-</div></blockquote>
-<p><strong>out: OutStream</strong></p>
-<blockquote>
-<div><p>Where to stream progress bar. None will redirect output to <cite>sys.stdout</cite>.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None. Display the progress bar.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">time</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker.utils</span> <span class="kn">import</span> <span class="n">print_progress</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span>    <span class="n">print_progress</span><span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
-<span class="go">100% [=================================================&gt;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">print_progress</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.utils">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.utils" title="Permalink to this headline">¶</a></h2>
@@ -253,7 +157,7 @@ and 100.</p>
 <tt class="descclassname">sktracker.utils.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em>, <em>message=None</em>, <em>out=None</em><big>)</big><a class="headerlink" href="#sktracker.utils.print_progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display a progress bar filled with a variable value. print_progress
 also works under IPython notebook.</p>
-<p>Se <cite>progress</cite> to -1 to remove the progress bar.</p>
+<p>Set <cite>progress</cite> to -1 to remove the progress bar.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -385,7 +289,7 @@ and 100.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-ra27cc55',
+            VERSION:'0.2.dev-r2d24d55',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

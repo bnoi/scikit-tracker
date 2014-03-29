@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.utils package &mdash; sktracker 0.2.dev-ra27cc55 docs</title>
+  <title>sktracker.tracker.utils package &mdash; sktracker 0.2.dev-r2d24d55 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-ra27cc55 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r2d24d55 docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="next" title="sktracker.trajectories package" href="sktracker.trajectories.html"/>
         <link rel="prev" title="sktracker.tracker.solver package" href="sktracker.tracker.solver.html"/> 
@@ -144,17 +144,20 @@
 </div>
 <div class="section" id="module-sktracker.tracker.utils.scores">
 <span id="sktracker-tracker-utils-scores-module"></span><h2>sktracker.tracker.utils.scores module<a class="headerlink" href="#module-sktracker.tracker.utils.scores" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.utils" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="sktracker.tracker.utils.scores.get_scores_on_trajectories">
-<tt class="descclassname">sktracker.tracker.utils.scores.</tt><tt class="descname">get_scores_on_trajectories</tt><big>(</big><em>trajs, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.utils.scores.get_scores_on_trajectories" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.utils.get_scores_on_trajectories">
+<tt class="descclassname">sktracker.tracker.utils.</tt><tt class="descname">get_scores_on_trajectories</tt><big>(</big><em>trajs, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.utils.get_scores_on_trajectories" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : pd.DataFrame</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 <blockquote>
-<div><p>MultiIndex need to contain &#8216;t_stamp&#8217; and &#8216;label&#8217; and columns need to have at least
-&#8216;true_label&#8217;</p>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">pandas.MultiIndex</span></tt> need to contain &#8216;t_stamp&#8217; and &#8216;label&#8217; and columns need to have
+at least &#8216;true_label&#8217;</p>
 </div></blockquote>
 <p><strong>coords</strong> : list</p>
 <blockquote>
@@ -167,7 +170,7 @@
 <blockquote>
 <div><p>Between 0 and 1.</p>
 </div></blockquote>
-<p><strong>scores</strong> : numpy.ndarray</p>
+<p><strong>scores</strong> : <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.8)"><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></a></p>
 <blockquote class="last">
 <div><p>Chi square matrix.</p>
 </div></blockquote>
@@ -177,9 +180,6 @@
 </table>
 </dd></dl>
 
-</div>
-<div class="section" id="module-sktracker.tracker.utils">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.utils" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -221,7 +221,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-ra27cc55',
+            VERSION:'0.2.dev-r2d24d55',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

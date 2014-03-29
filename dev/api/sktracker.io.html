@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.io package &mdash; sktracker 0.2.dev-ra27cc55 docs</title>
+  <title>sktracker.io package &mdash; sktracker 0.2.dev-r2d24d55 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-ra27cc55 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r2d24d55 docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="prev" title="sktracker.detection package" href="sktracker.detection.html"/> 
@@ -142,466 +142,15 @@
 </div>
 <div class="section" id="module-sktracker.io.metadataio">
 <span id="sktracker-io-metadataio-module"></span><h2>sktracker.io.metadataio module<a class="headerlink" href="#module-sktracker.io.metadataio" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.io.metadataio.get_metadata">
-<tt class="descclassname">sktracker.io.metadataio.</tt><tt class="descname">get_metadata</tt><big>(</big><em>filename</em>, <em>json_discovery=False</em><big>)</big><a class="headerlink" href="#sktracker.io.metadataio.get_metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get image file metadata
-Metadata will be retrieved from TIFF IFD comments. OME is automatically
-detected. Additionnaly a file called metadata.json can be in the same
-directory or in the parent directory will be read to initialize metadata.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename: str</strong></p>
-<blockquote>
-<div><p>Filename of the image</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">metadata: dict</p>
-<blockquote class="last">
-<div><p>A dict with all metadata retrieved from the Tiff file</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.io.metadataio.validate_metadata">
-<tt class="descclassname">sktracker.io.metadataio.</tt><tt class="descname">validate_metadata</tt><big>(</big><em>metadata, keys=['DimensionOrder', 'Shape', 'FileName']</em><big>)</big><a class="headerlink" href="#sktracker.io.metadataio.validate_metadata" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.io.objectsio">
 <span id="sktracker-io-objectsio-module"></span><h2>sktracker.io.objectsio module<a class="headerlink" href="#module-sktracker.io.objectsio" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="sktracker.io.objectsio.ObjectsIO">
-<em class="property">class </em><tt class="descclassname">sktracker.io.objectsio.</tt><tt class="descname">ObjectsIO</tt><big>(</big><em>metadata=None</em>, <em>store_path=None</em>, <em>base_dir=None</em><big>)</big><a class="headerlink" href="#sktracker.io.objectsio.ObjectsIO" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>Manipulate and pass along data issued from detected
-objects.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>metadata</strong> : dict</p>
-<blockquote>
-<div><p>Metadata related to an image or images list.</p>
-</div></blockquote>
-<p><strong>store_path</strong> : str</p>
-<blockquote>
-<div><p>Path to HDF5 file where metadata and objects are stored.</p>
-</div></blockquote>
-<p><strong>base_dir</strong> : str</p>
-<blockquote class="last">
-<div><p>Root directory (join to find <cite>store_path</cite>)</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="classmethod">
-<dt id="sktracker.io.objectsio.ObjectsIO.from_h5">
-<em class="property">classmethod </em><tt class="descname">from_h5</tt><big>(</big><em>store_path</em>, <em>base_dir=None</em><big>)</big><a class="headerlink" href="#sktracker.io.objectsio.ObjectsIO.from_h5" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load ObjectsIO from HDF5 file.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>store_path</strong> : str</p>
-<blockquote>
-<div><p>HDF5 file path.</p>
-</div></blockquote>
-<p><strong>base_dir</strong> : str</p>
-<blockquote class="last">
-<div><p>Root directory</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.objectsio.ObjectsIO.keys">
-<tt class="descname">keys</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.objectsio.ObjectsIO.keys" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return list of objects in HDF5 file.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.io.ome">
 <span id="sktracker-io-ome-module"></span><h2>sktracker.io.ome module<a class="headerlink" href="#module-sktracker.io.ome" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="sktracker.io.ome.OMEModel">
-<em class="property">class </em><tt class="descclassname">sktracker.io.ome.</tt><tt class="descname">OMEModel</tt><big>(</big><em>xml_str</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>OMEModel allows OME xml manipulation in order to read and write OME
-metadata.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xml_str: str</strong></p>
-<blockquote class="last">
-<div><p>OME XML string</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.df_planes">
-<tt class="descname">df_planes</tt><big>(</big><em>sup_cols=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.df_planes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get OME Plane tags as <cite>pd.DataFrame</cite>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sup_cols: list</strong></p>
-<blockquote>
-<div><p>Supplementaries columns to retrieve</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">df_planes: <cite>pd.DataFrame</cite></p>
-<blockquote class="last">
-<div><p>Contains OME XML Plane informations</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.get_metadata">
-<tt class="descname">get_metadata</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.get_metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve global metadata from OME.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">metadata: dict</p>
-<blockquote class="last">
-<div><p>Metadata from OME XML</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Notes</p>
-<p>If some metadata are missing (such as <cite>z-size</cite>), they are inferred from
-Plane tags.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.get_physical_size">
-<tt class="descname">get_physical_size</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.get_physical_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get physical size for each dimensions (X, Y and Z) if possible.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">physical_size: dict</p>
-<blockquote class="last">
-<div><p>Contains physical size for available dimensions</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.set_filename">
-<tt class="descname">set_filename</tt><big>(</big><em>new_file_name</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_filename" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set new filename for each TiffData</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_file_name: str</strong></p>
-<blockquote class="last">
-<div><p>New filename to set</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Notes</p>
-<p>Filename will be the same for each TiffData. Do not use if you&#8217;re dataset
-use several Tiff files.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.set_name">
-<tt class="descname">set_name</tt><big>(</big><em>new_name</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set first Image tag name.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_name: str</strong></p>
-<blockquote class="last">
-<div><p>New name to set</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.set_physical_size">
-<tt class="descname">set_physical_size</tt><big>(</big><em>size_x=None</em>, <em>size_y=None</em>, <em>size_z=None</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_physical_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set physical X, Y and Z size (in um).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size_x: float</strong></p>
-<blockquote>
-<div><p>Physicial size for x pixels in um</p>
-</div></blockquote>
-<p><strong>size_x: float</strong></p>
-<blockquote>
-<div><p>Physicial size for x pixels in um</p>
-</div></blockquote>
-<p><strong>size_x: float</strong></p>
-<blockquote class="last">
-<div><p>Physicial size for x pixels in um</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.set_size_t">
-<tt class="descname">set_size_t</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_size_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set correct size for T dimensions in Plane according to Plane tag.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.set_xy_size">
-<tt class="descname">set_xy_size</tt><big>(</big><em>size_x</em>, <em>size_y</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_xy_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set X and Y size.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size_x: int</strong></p>
-<blockquote>
-<div><p>X size</p>
-</div></blockquote>
-<p><strong>size_y: int</strong></p>
-<blockquote class="last">
-<div><p>Y size</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.set_z_size">
-<tt class="descname">set_z_size</tt><big>(</big><em>size_z</em><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.set_z_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set Z size.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size_z: int</strong></p>
-<blockquote class="last">
-<div><p>Z size</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.tostring">
-<tt class="descname">tostring</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.tostring" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write in memory OME XML to string.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">output: str</p>
-<blockquote class="last">
-<div><p>OME XML as string</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.ome.OMEModel.uniform_ifd">
-<tt class="descname">uniform_ifd</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ome.OMEModel.uniform_ifd" title="Permalink to this definition">¶</a></dt>
-<dd><p>OME with more than one Tiff file has to be converted before save them
-in a single Tiff file to make correct IFD in TiffData tags.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.io.stackio">
 <span id="sktracker-io-stackio-module"></span><h2>sktracker.io.stackio module<a class="headerlink" href="#module-sktracker.io.stackio" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="sktracker.io.stackio.StackIO">
-<em class="property">class </em><tt class="descclassname">sktracker.io.stackio.</tt><tt class="descname">StackIO</tt><big>(</big><em>image_path=None</em>, <em>image_path_list=None</em>, <em>metadata=None</em>, <em>base_dir=None</em>, <em>json_discovery=False</em><big>)</big><a class="headerlink" href="#sktracker.io.stackio.StackIO" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>StackIO is designed to deal with Input/Output images. It can retrieve all
-kind of metadata with various methods. It also allows fast and efficient way
-to get image data (in memory or via an iterator).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>image_path</strong> : str or None</p>
-<p><strong>image_path_list</strong> : list or None</p>
-<p><strong>base_dir</strong> : path or None</p>
-<blockquote>
-<div><p>Specify a root directory relative to <cite>image_path</cite>.</p>
-</div></blockquote>
-<p><strong>json_discovery</strong> : bool</p>
-<blockquote class="last">
-<div><p>Find metadata in metadata.json files</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="classmethod">
-<dt id="sktracker.io.stackio.StackIO.from_objectsio">
-<em class="property">classmethod </em><tt class="descname">from_objectsio</tt><big>(</big><em>objectsio</em><big>)</big><a class="headerlink" href="#sktracker.io.stackio.StackIO.from_objectsio" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load images and metadata from <cite>sktracker.io.ObjectsIO</cite></p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>objectsio</strong> : object</p>
-<blockquote class="last">
-<div><p><cite>sktracker.io.ObjectsIO</cite> instance.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.stackio.StackIO.get_tif">
-<tt class="descname">get_tif</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.stackio.StackIO.get_tif" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get TiffFile instance.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>tf</strong> : object</p>
-<blockquote class="last">
-<div><p>An <cite>sktracker.io.TiffFile</cite> instance.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.stackio.StackIO.get_tif_from_list">
-<tt class="descname">get_tif_from_list</tt><big>(</big><em>index=0</em><big>)</big><a class="headerlink" href="#sktracker.io.stackio.StackIO.get_tif_from_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get TiffFile instance from images list.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>tf</strong> : object</p>
-<blockquote class="last">
-<div><p>An <cite>sktracker.io.TiffFile</cite> instance.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.stackio.StackIO.image_iterator">
-<tt class="descname">image_iterator</tt><big>(</big><em>position=-2</em>, <em>channel_index=0</em>, <em>memmap=True</em><big>)</big><a class="headerlink" href="#sktracker.io.stackio.StackIO.image_iterator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate over image T and Z dimensions. A channel has to be
-choosen and will be excluded from the iterator.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
-<blockquote>
-<div><p>Dimensions on which you want to iterate. For example, -2 will only
-keep the two last dimensions, usually X and Y.</p>
-</div></blockquote>
-<p><strong>channel_index</strong> : int</p>
-<blockquote>
-<div><p>Channel position to remove</p>
-</div></blockquote>
-<p><strong>memmap</strong> : bool</p>
-<blockquote>
-<div><p>If True, use <cite>numpy.memmap</cite> to read arrays from file if possible.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Python iterator over the image array.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.stackio.StackIO.image_path">
-<tt class="descname">image_path</tt><a class="headerlink" href="#sktracker.io.stackio.StackIO.image_path" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.stackio.StackIO.image_path_list">
-<tt class="descname">image_path_list</tt><a class="headerlink" href="#sktracker.io.stackio.StackIO.image_path_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.stackio.StackIO.list_iterator">
-<tt class="descname">list_iterator</tt><big>(</big><em>memmap=True</em><big>)</big><a class="headerlink" href="#sktracker.io.stackio.StackIO.list_iterator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an iterator over each image from
-<cite>self.image_path_list</cite> as an array</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>memmap</strong> : bool</p>
-<blockquote>
-<div><p>If True, use <cite>numpy.memmap</cite> to read arrays from file if possible.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Python iterator over the image list.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.io.tifffile">
 <span id="sktracker-io-tifffile-module"></span><h2>sktracker.io.tifffile module<a class="headerlink" href="#module-sktracker.io.tifffile" title="Permalink to this headline">¶</a></h2>
@@ -710,406 +259,14 @@ Microscopy Environment consortium respectively.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tif</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<dl class="function">
-<dt id="sktracker.io.tifffile.imsave">
-<tt class="descclassname">sktracker.io.tifffile.</tt><tt class="descname">imsave</tt><big>(</big><em>filename</em>, <em>data</em>, <em>photometric=None</em>, <em>planarconfig=None</em>, <em>resolution=None</em>, <em>description=None</em>, <em>software='tifffile.py'</em>, <em>byteorder=None</em>, <em>bigtiff=False</em>, <em>compress=0</em>, <em>extratags=()</em><big>)</big><a class="headerlink" href="#sktracker.io.tifffile.imsave" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write image data to TIFF file.</p>
-<p>Image data are written in one stripe per plane.
-Dimensions larger than 2 or 3 (depending on photometric mode and
-planar configuration) are flattened and saved as separate pages.
-The &#8216;sample_format&#8217; and &#8216;bits_per_sample&#8217; TIFF tags are derived from
-the data type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> : str</p>
-<blockquote>
-<div><p>Name of file to write.</p>
-</div></blockquote>
-<p><strong>data</strong> : array_like</p>
-<blockquote>
-<div><p>Input image. The last dimensions are assumed to be image height,
-width, and samples.</p>
-</div></blockquote>
-<p><strong>photometric</strong> : {&#8216;minisblack&#8217;, &#8216;miniswhite&#8217;, &#8216;rgb&#8217;}</p>
-<blockquote>
-<div><p>The color space of the image data.
-By default this setting is inferred from the data shape.</p>
-</div></blockquote>
-<p><strong>planarconfig</strong> : {&#8216;contig&#8217;, &#8216;planar&#8217;}</p>
-<blockquote>
-<div><p>Specifies if samples are stored contiguous or in separate planes.
-By default this setting is inferred from the data shape.
-&#8216;contig&#8217;: last dimension contains samples.
-&#8216;planar&#8217;: third last dimension contains samples.</p>
-</div></blockquote>
-<p><strong>resolution</strong> : (float, float) or ((int, int), (int, int))</p>
-<blockquote>
-<div><p>X and Y resolution in dots per inch as float or rational numbers.</p>
-</div></blockquote>
-<p><strong>description</strong> : str</p>
-<blockquote>
-<div><p>The subject of the image. Saved with the first page only.</p>
-</div></blockquote>
-<p><strong>software</strong> : str</p>
-<blockquote>
-<div><p>Name of the software used to create the image.
-Saved with the first page only.</p>
-</div></blockquote>
-<p><strong>byteorder</strong> : {&#8216;&lt;&#8217;, &#8216;&gt;&#8217;}</p>
-<blockquote>
-<div><p>The endianness of the data in the file.
-By default this is the system&#8217;s native byte order.</p>
-</div></blockquote>
-<p><strong>bigtiff</strong> : bool</p>
-<blockquote>
-<div><p>If True, the BigTIFF format is used.
-By default the standard TIFF format is used for data less than 2000 MB.</p>
-</div></blockquote>
-<p><strong>compress</strong> : int</p>
-<blockquote>
-<div><p>Values from 0 to 9 controlling the level of zlib compression.
-If 0, data are written uncompressed (default).</p>
-</div></blockquote>
-<p><strong>extratags: sequence of tuples</strong></p>
-<blockquote class="last">
-<div><p>Additional tags as [(code, dtype, count, value, writeonce)].</p>
-<dl class="docutils">
-<dt>code <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">The TIFF tag Id.</p>
-</dd>
-<dt>dtype <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data type of items in <cite>value</cite> in Python struct format.
-One of B, s, H, I, 2I, b, h, i, f, d, Q, or q.</p>
-</dd>
-<dt>count <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">Number of data values. Not used for string values.</p>
-</dd>
-<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">sequence</span></dt>
-<dd><p class="first last"><cite>Count</cite> values compatible with <cite>dtype</cite>.</p>
-</dd>
-<dt>writeonce <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">If True, the tag is written to the first page only.</p>
-</dd>
-</dl>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">301</span><span class="p">,</span> <span class="mi">219</span><span class="p">),</span> <span class="s">&#39;float32&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;temp.tif&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">301</span><span class="p">,</span> <span class="mi">219</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s">&#39;uint8&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">127</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="s">u&#39;{&quot;shape&quot;: </span><span class="si">%s</span><span class="s">}&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;temp.tif&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">extratags</span><span class="o">=</span><span class="p">[(</span><span class="mi">270</span><span class="p">,</span> <span class="s">&#39;s&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="bp">True</span><span class="p">)])</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.io.tifffile.imread">
-<tt class="descclassname">sktracker.io.tifffile.</tt><tt class="descname">imread</tt><big>(</big><em>files</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.io.tifffile.imread" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return image data from TIFF file(s) as numpy array.</p>
-<p>The first image series is returned if no arguments are provided.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>files</strong> : str or list</p>
-<blockquote>
-<div><p>File name, glob pattern, or list of file names.</p>
-</div></blockquote>
-<p><strong>key</strong> : int, slice, or sequence of page indices</p>
-<blockquote>
-<div><p>Defines which pages to return as array.</p>
-</div></blockquote>
-<p><strong>series</strong> : int</p>
-<blockquote>
-<div><p>Defines which series of pages in file to return as array.</p>
-</div></blockquote>
-<p><strong>multifile</strong> : bool</p>
-<blockquote>
-<div><p>If True (default), OME-TIFF data may include pages from multiple files.</p>
-</div></blockquote>
-<p><strong>pattern</strong> : str</p>
-<blockquote class="last">
-<div><p>Regular expression pattern that matches axes names and indices in
-file names.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#39;test.tif&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(256, 256, 4)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span> <span class="o">=</span> <span class="n">imread</span><span class="p">([</span><span class="s">&#39;test.tif&#39;</span><span class="p">,</span> <span class="s">&#39;test.tif&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(2, 256, 256, 4)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.io.tifffile.imshow">
-<tt class="descclassname">sktracker.io.tifffile.</tt><tt class="descname">imshow</tt><big>(</big><em>data</em>, <em>title=None</em>, <em>vmin=0</em>, <em>vmax=None</em>, <em>cmap=None</em>, <em>bitspersample=None</em>, <em>photometric='rgb'</em>, <em>interpolation='nearest'</em>, <em>dpi=96</em>, <em>figure=None</em>, <em>subplot=111</em>, <em>maxdim=8192</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.io.tifffile.imshow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot n-dimensional images using matplotlib.pyplot.</p>
-<p>Return figure, subplot and plot axis.
-Requires pyplot already imported <tt class="docutils literal"><span class="pre">from</span> <span class="pre">matplotlib</span> <span class="pre">import</span> <span class="pre">pyplot</span></tt>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>bitspersample</strong> : int or None</p>
-<blockquote>
-<div><p>Number of bits per channel in integer RGB images.</p>
-</div></blockquote>
-<p><strong>photometric</strong> : {&#8216;miniswhite&#8217;, &#8216;minisblack&#8217;, &#8216;rgb&#8217;, or &#8216;palette&#8217;}</p>
-<blockquote>
-<div><p>The color space of the image data.</p>
-</div></blockquote>
-<p><strong>title</strong> : str</p>
-<blockquote>
-<div><p>Window and subplot title.</p>
-</div></blockquote>
-<p><strong>figure</strong> : matplotlib.figure.Figure (optional).</p>
-<blockquote>
-<div><p>Matplotlib to use for plotting.</p>
-</div></blockquote>
-<p><strong>subplot</strong> : int</p>
-<blockquote>
-<div><p>A matplotlib.pyplot.subplot axis.</p>
-</div></blockquote>
-<p><strong>maxdim</strong> : int</p>
-<blockquote>
-<div><p>maximum image size in any dimension.</p>
-</div></blockquote>
-<p><strong>kwargs</strong> : optional</p>
-<blockquote class="last">
-<div><p>Arguments for matplotlib.pyplot.imshow.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="class">
-<dt id="sktracker.io.tifffile.TiffFile">
-<em class="property">class </em><tt class="descclassname">sktracker.io.tifffile.</tt><tt class="descname">TiffFile</tt><big>(</big><em>arg</em>, <em>name=None</em>, <em>multifile=False</em><big>)</big><a class="headerlink" href="#sktracker.io.tifffile.TiffFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>Read image and meta-data from TIFF, STK, LSM, and FluoView files.</p>
-<p>TiffFile instances must be closed using the close method, which is
-automatically called when using the &#8216;with&#8217; statement.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tif</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="p">(</span><span class="s">&#39;test.tif&#39;</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">images</span> <span class="o">=</span> <span class="n">tif</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
-<span class="gp">... </span><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">finally</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">tif</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="24%" />
-<col width="76%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>pages</td>
-<td>(list) All TIFF pages in file.</td>
-</tr>
-<tr class="row-even"><td>series</td>
-<td>(list of Records(shape, dtype, axes, TiffPages)) TIFF pages with compatible shapes and types.</td>
-</tr>
-<tr class="row-odd"><td>micromanager_metadata: dict</td>
-<td>Extra MicroManager non-TIFF metadata in the file, if exists.</td>
-</tr>
-<tr class="row-even"><td>All attributes are read-only.</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="sktracker.io.tifffile.TiffFile.asarray">
-<tt class="descname">asarray</tt><big>(</big><em>key=None</em>, <em>series=None</em>, <em>memmap=False</em><big>)</big><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.asarray" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return image data of multiple TIFF pages as numpy array.</p>
-<p>By default the first image series is returned.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>key</strong> : int, slice, or sequence of page indices</p>
-<blockquote>
-<div><p>Defines which pages to return as array.</p>
-</div></blockquote>
-<p><strong>series</strong> : int</p>
-<blockquote>
-<div><p>Defines which series of pages to return as array.</p>
-</div></blockquote>
-<p><strong>memmap</strong> : bool</p>
-<blockquote class="last">
-<div><p>If True, use numpy.memmap to read arrays from file if possible.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.tifffile.TiffFile.close">
-<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Close open file handle(s).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.fstat">
-<tt class="descname">fstat</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.fstat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_bigtiff">
-<tt class="descname">is_bigtiff</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_bigtiff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_fluoview">
-<tt class="descname">is_fluoview</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_fluoview" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_imagej">
-<tt class="descname">is_imagej</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_imagej" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_lsm">
-<tt class="descname">is_lsm</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_lsm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_mdgel">
-<tt class="descname">is_mdgel</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_mdgel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_mediacy">
-<tt class="descname">is_mediacy</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_mediacy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_micromanager">
-<tt class="descname">is_micromanager</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_micromanager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_nih">
-<tt class="descname">is_nih</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_nih" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_ome">
-<tt class="descname">is_ome</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_ome" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_palette">
-<tt class="descname">is_palette</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_palette" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_rgb">
-<tt class="descname">is_rgb</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_rgb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.is_stk">
-<tt class="descname">is_stk</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.is_stk" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="sktracker.io.tifffile.TiffFile.series">
-<tt class="descname">series</tt><a class="headerlink" href="#sktracker.io.tifffile.TiffFile.series" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lazy object attribute whose value is computed on first access.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="sktracker.io.tifffile.TiffSequence">
-<em class="property">class </em><tt class="descclassname">sktracker.io.tifffile.</tt><tt class="descname">TiffSequence</tt><big>(</big><em>files</em>, <em>imread=&lt;class 'sktracker.io.tifffile.TiffFile'&gt;</em>, <em>pattern='axes'</em><big>)</big><a class="headerlink" href="#sktracker.io.tifffile.TiffSequence" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>Sequence of image files.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span> <span class="o">=</span> <span class="n">TiffSequence</span><span class="p">(</span><span class="s">&quot;test.oif.files/*.tif&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span> <span class="o">=</span> <span class="n">ims</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(2, 100, 256, 256)</span>
-</pre></div>
-</div>
-<dl class="method">
-<dt id="sktracker.io.tifffile.TiffSequence.asarray">
-<tt class="descname">asarray</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.io.tifffile.TiffSequence.asarray" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read image data from all files and return as single numpy array.</p>
-<p>Raise IndexError if image shapes don&#8217;t match.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.io.tifffile.TiffSequence.close">
-<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.tifffile.TiffSequence.close" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 <div class="section" id="module-sktracker.io.utils">
 <span id="sktracker-io-utils-module"></span><h2>sktracker.io.utils module<a class="headerlink" href="#module-sktracker.io.utils" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.io.utils.load_img_list">
-<tt class="descclassname">sktracker.io.utils.</tt><tt class="descname">load_img_list</tt><big>(</big><em>directory</em><big>)</big><a class="headerlink" href="#sktracker.io.utils.load_img_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads a list of images from <cite>directory</cite>.</p>
-<p>To be recognized as an image and thus loaded, a file must end with
-either of the extensions defined in the variable <cite>_EXTENSION</cite>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">img_list: list of strings</p>
-<blockquote class="last">
-<div><p>The file paths to the images, with the file names appended to the included directory</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.io">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.io" title="Permalink to this headline">¶</a></h2>
-<p><cite>sktracker.io</cite> module is designed to easly and quickly open Tiff files and
+<p><a class="reference internal" href="#module-sktracker.io" title="sktracker.io"><tt class="xref py py-mod docutils literal"><span class="pre">sktracker.io</span></tt></a> module is designed to easly and quickly open Tiff files and
 to be able to parse and import any kind of metadata.</p>
 <p>Finally, an OME module is provided to read and write OME xml metadata. See
 <a class="reference external" href="https://www.openmicroscopy.org/site/support/ome-model/">https://www.openmicroscopy.org/site/support/ome-model/</a> for details.</p>
@@ -1172,7 +329,7 @@ metadata.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">df_planes: <cite>pd.DataFrame</cite></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">df_planes: <tt class="xref py py-class docutils literal"><span class="pre">pd.DataFrame</span></tt></p>
 <blockquote class="last">
 <div><p>Contains OME XML Plane informations</p>
 </div></blockquote>
@@ -1735,9 +892,9 @@ automatically called when using the &#8216;with&#8217; statement.</p>
 <dt id="sktracker.io.StackIO">
 <em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">StackIO</tt><big>(</big><em>image_path=None</em>, <em>image_path_list=None</em>, <em>metadata=None</em>, <em>base_dir=None</em>, <em>json_discovery=False</em><big>)</big><a class="headerlink" href="#sktracker.io.StackIO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>StackIO is designed to deal with Input/Output images. It can retrieve all
-kind of metadata with various methods. It also allows fast and efficient way
-to get image data (in memory or via an iterator).</p>
+<p>StackIO is designed to deal with Input/Output images
+It can retrieve all kind of metadata with various methods. It also allows fast and
+efficient way to get image data (in memory or via an iterator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1759,16 +916,12 @@ to get image data (in memory or via an iterator).</p>
 <dl class="classmethod">
 <dt id="sktracker.io.StackIO.from_objectsio">
 <em class="property">classmethod </em><tt class="descname">from_objectsio</tt><big>(</big><em>objectsio</em><big>)</big><a class="headerlink" href="#sktracker.io.StackIO.from_objectsio" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load images and metadata from <cite>sktracker.io.ObjectsIO</cite></p>
+<dd><p>Load images and metadata from <a class="reference internal" href="#sktracker.io.ObjectsIO" title="sktracker.io.ObjectsIO"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.io.ObjectsIO</span></tt></a></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>objectsio</strong> : object</p>
-<blockquote class="last">
-<div><p><cite>sktracker.io.ObjectsIO</cite> instance.</p>
-</div></blockquote>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>objectsio</strong> : <a class="reference internal" href="#sktracker.io.ObjectsIO" title="sktracker.io.ObjectsIO"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.io.ObjectsIO</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -1782,11 +935,7 @@ to get image data (in memory or via an iterator).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>tf</strong> : object</p>
-<blockquote class="last">
-<div><p>An <cite>sktracker.io.TiffFile</cite> instance.</p>
-</div></blockquote>
-</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>tf</strong> : <a class="reference internal" href="#sktracker.io.TiffFile" title="sktracker.io.TiffFile"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.io.TiffFile</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -1800,11 +949,7 @@ to get image data (in memory or via an iterator).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>tf</strong> : object</p>
-<blockquote class="last">
-<div><p>An <cite>sktracker.io.TiffFile</cite> instance.</p>
-</div></blockquote>
-</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>tf</strong> : <a class="reference internal" href="#sktracker.io.TiffFile" title="sktracker.io.TiffFile"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.io.TiffFile</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -1977,7 +1122,7 @@ objects.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-ra27cc55',
+            VERSION:'0.2.dev-r2d24d55',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

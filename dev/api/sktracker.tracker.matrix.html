@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.matrices package &mdash; sktracker 0.2.dev-ra27cc55 docs</title>
+  <title>sktracker.tracker.matrix package &mdash; sktracker 0.2.dev-r2d24d55 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-ra27cc55 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r2d24d55 docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="next" title="sktracker.tracker.solver package" href="sktracker.tracker.solver.html"/>
         <link rel="prev" title="sktracker.tracker.lapjv package" href="sktracker.tracker.lapjv.html"/> 
@@ -126,10 +126,10 @@
       
           <li><a href="sktracker.tracker.html">sktracker.tracker package</a> &raquo;</li>
       
-    <li>sktracker.tracker.matrices package</li>
+    <li>sktracker.tracker.matrix package</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="../_sources/api/sktracker.tracker.matrices.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/api/sktracker.tracker.matrix.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -137,23 +137,22 @@
 </div>
           <div role="main">
             
-  <div class="section" id="sktracker-tracker-matrices-package">
-<h1>sktracker.tracker.matrices package<a class="headerlink" href="#sktracker-tracker-matrices-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="sktracker-tracker-matrix-package">
+<h1>sktracker.tracker.matrix package<a class="headerlink" href="#sktracker-tracker-matrix-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-sktracker.tracker.matrices.matrices">
-<span id="sktracker-tracker-matrices-matrices-module"></span><h2>sktracker.tracker.matrices.matrices module<a class="headerlink" href="#module-sktracker.tracker.matrices.matrices" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sktracker.tracker.matrix.block">
+<span id="sktracker-tracker-matrix-block-module"></span><h2>sktracker.tracker.matrix.block module<a class="headerlink" href="#module-sktracker.tracker.matrix.block" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.matrix.matrix">
+<span id="sktracker-tracker-matrix-matrix-module"></span><h2>sktracker.tracker.matrix.matrix module<a class="headerlink" href="#module-sktracker.tracker.matrix.matrix" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.matrix">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.matrix" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="sktracker.tracker.matrices.matrices.Block">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrices.matrices.</tt><tt class="descname">Block</tt><a class="headerlink" href="#sktracker.tracker.matrices.matrices.Block" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>A matrix block.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="sktracker.tracker.matrices.matrices.CostMatrix">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrices.matrices.</tt><tt class="descname">CostMatrix</tt><big>(</big><em>blocks</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.CostMatrix" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.matrix.CostMatrix">
+<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrix.</tt><tt class="descname">CostMatrix</tt><big>(</big><em>blocks</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.CostMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>This class represents the cost matrix which will be given to LAPJV solver.
 Cost matrix is built from matrices blocks.</p>
@@ -161,7 +160,7 @@ Cost matrix is built from matrices blocks.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>blocks</strong> : 2D list of <cite>numpy.ndarray</cite> or None</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>blocks</strong> : 2D list of <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.8)"><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></a> or None</p>
 <blockquote class="last">
 <div><p>Each array value is a block or None (filled with np.nan).</p>
 </div></blockquote>
@@ -170,8 +169,8 @@ Cost matrix is built from matrices blocks.</p>
 </tbody>
 </table>
 <dl class="method">
-<dt id="sktracker.tracker.matrices.matrices.CostMatrix.get_flat">
-<tt class="descname">get_flat</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.CostMatrix.get_flat" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.matrix.CostMatrix.get_flat">
+<tt class="descname">get_flat</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.CostMatrix.get_flat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get flat vectors according to the cost matrix.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -196,8 +195,8 @@ Cost matrix is built from matrices blocks.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sktracker.tracker.matrices.matrices.CostMatrix.get_masked">
-<tt class="descname">get_masked</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.CostMatrix.get_masked" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.matrix.CostMatrix.get_masked">
+<tt class="descname">get_masked</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.CostMatrix.get_masked" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get masked array.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -214,18 +213,18 @@ Cost matrix is built from matrices blocks.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sktracker.tracker.matrices.matrices.CostMatrix.get_shapes">
-<tt class="descname">get_shapes</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.CostMatrix.get_shapes" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.matrix.CostMatrix.get_shapes">
+<tt class="descname">get_shapes</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.CostMatrix.get_shapes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get whole matrix blocks shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>row_shapes</strong> : 1D <cite>numpy.ndarray</cite></p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>row_shapes</strong> : 1D <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.8)"><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></a></p>
 <blockquote>
 <div><p>Row shapes.</p>
 </div></blockquote>
-<p><strong>col_shapes</strong> : 1D <cite>numpy.ndarray</cite></p>
+<p><strong>col_shapes</strong> : 1D <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.8)"><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></a></p>
 <blockquote class="last">
 <div><p>Column shapes.</p>
 </div></blockquote>
@@ -236,14 +235,14 @@ Cost matrix is built from matrices blocks.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sktracker.tracker.matrices.matrices.CostMatrix.solve">
-<tt class="descname">solve</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.CostMatrix.solve" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.matrix.CostMatrix.solve">
+<tt class="descname">solve</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.CostMatrix.solve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solves the linear assignement problem on <cite>self.mat</cite>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sktracker.tracker.matrices.matrices.CostMatrix.view">
-<tt class="descname">view</tt><big>(</big><em>ax=None</em>, <em>colormap='gray'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.CostMatrix.view" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.matrix.CostMatrix.view">
+<tt class="descname">view</tt><big>(</big><em>ax=None</em>, <em>colormap='gray'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.CostMatrix.view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display cost matrice on a plot.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -263,19 +262,30 @@ Cost matrix is built from matrices blocks.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="sktracker.tracker.matrices.matrices.DiagBlock">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrices.matrices.</tt><tt class="descname">DiagBlock</tt><big>(</big><em>objects</em>, <em>cost_function</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.DiagBlock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#sktracker.tracker.matrices.matrices.Block" title="sktracker.tracker.matrices.matrices.Block"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.matrices.matrices.Block</span></tt></a></p>
-<p>DiagBlock are built with one single vector. It is an identity matrix.</p>
+<dt id="sktracker.tracker.matrix.Block">
+<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrix.</tt><tt class="descname">Block</tt><a class="headerlink" href="#sktracker.tracker.matrix.Block" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>A matrix block.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="sktracker.tracker.matrix.LinkBlock">
+<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrix.</tt><tt class="descname">LinkBlock</tt><big>(</big><em>objects_in</em>, <em>objects_out</em>, <em>cost_function</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.LinkBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.matrix.block.Block</span></tt></p>
+<p>LinkBlock are built with two vectors.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>objects</strong> : 1D array of <cite>pandas.DataFrame</cite></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>objects_in</strong> : 1D array of <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 <blockquote>
-<div><p>To fill the identity matrix.</p>
+<div><p>To fill Y block axis.</p>
 </div></blockquote>
-<p><strong>cost_function</strong> : <cite>sktracker.tracker.CostFunction</cite></p>
+<p><strong>objects_out</strong> : 1D array of <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
+<blockquote>
+<div><p>To fill X block axis.</p>
+</div></blockquote>
+<p><strong>cost_function</strong> : <a class="reference internal" href="sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.AbstractCostFunction" title="sktracker.tracker.cost_function.AbstractCostFunction"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.cost_function.AbstractCostFunction</span></tt></a></p>
 <blockquote class="last">
 <div><p>Used to compute block costs.</p>
 </div></blockquote>
@@ -286,23 +296,19 @@ Cost matrix is built from matrices blocks.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="sktracker.tracker.matrices.matrices.LinkBlock">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrices.matrices.</tt><tt class="descname">LinkBlock</tt><big>(</big><em>objects_in</em>, <em>objects_out</em>, <em>cost_function</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrices.matrices.LinkBlock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#sktracker.tracker.matrices.matrices.Block" title="sktracker.tracker.matrices.matrices.Block"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.matrices.matrices.Block</span></tt></a></p>
-<p>LinkBlock are built with two vectors.</p>
+<dt id="sktracker.tracker.matrix.DiagBlock">
+<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrix.</tt><tt class="descname">DiagBlock</tt><big>(</big><em>objects</em>, <em>cost_function</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.DiagBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.matrix.block.Block</span></tt></p>
+<p>DiagBlock are built with one single vector. It is an identity matrix.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>objects_in</strong> : 1D array of <cite>pandas.DataFrame</cite></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>objects</strong> : 1D array of <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 <blockquote>
-<div><p>To fill Y block axis.</p>
+<div><p>To fill the identity matrix.</p>
 </div></blockquote>
-<p><strong>objects_out</strong> : 1D array of <cite>pandas.DataFrame</cite></p>
-<blockquote>
-<div><p>To fill X block axis.</p>
-</div></blockquote>
-<p><strong>cost_function</strong> : <cite>sktracker.tracker.CostFunction</cite></p>
+<p><strong>cost_function</strong> : <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.CostFunction</span></tt></p>
 <blockquote class="last">
 <div><p>Used to compute block costs.</p>
 </div></blockquote>
@@ -312,9 +318,6 @@ Cost matrix is built from matrices blocks.</p>
 </table>
 </dd></dl>
 
-</div>
-<div class="section" id="module-sktracker.tracker.matrices">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.matrices" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -356,7 +359,7 @@ Cost matrix is built from matrices blocks.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-ra27cc55',
+            VERSION:'0.2.dev-r2d24d55',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

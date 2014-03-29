@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.data package &mdash; sktracker 0.2.dev-ra27cc55 docs</title>
+  <title>sktracker.data package &mdash; sktracker 0.2.dev-r2d24d55 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-ra27cc55 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r2d24d55 docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.detection package" href="sktracker.detection.html"/>
         <link rel="prev" title="sktracker package" href="sktracker.html"/> 
@@ -142,54 +142,15 @@
 </div>
 <div class="section" id="module-sktracker.data.trajectories_generator">
 <span id="sktracker-data-trajectories-generator-module"></span><h2>sktracker.data.trajectories_generator module<a class="headerlink" href="#module-sktracker.data.trajectories_generator" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.data">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.data" title="Permalink to this headline">¶</a></h2>
+<p>Test dataset and fake auto generated trajectories.</p>
+<p>When data function end with _temp. The file is being copied to a temporary
+directory before its path is returned.</p>
 <dl class="function">
-<dt id="sktracker.data.trajectories_generator.brownian_trajectories_generator">
-<tt class="descclassname">sktracker.data.trajectories_generator.</tt><tt class="descname">brownian_trajectories_generator</tt><big>(</big><em>n_part=5</em>, <em>n_times=100</em>, <em>p_disapear=0</em>, <em>sigma=1.0</em>, <em>init_dispersion=10.0</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#sktracker.data.trajectories_generator.brownian_trajectories_generator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build and return fake brownian trajectories with x, y, z and t features.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_part</strong> : int</p>
-<blockquote>
-<div><p>Number of trajectories</p>
-</div></blockquote>
-<p><strong>n_times</strong> : int</p>
-<blockquote>
-<div><p>Number of time points</p>
-</div></blockquote>
-<p><strong>p_disapear</strong> : float</p>
-<blockquote>
-<div><p>Probability that a particle disapears in one frame</p>
-</div></blockquote>
-<p><strong>sigma</strong> : float</p>
-<blockquote>
-<div><p>Brownian motion parameters.</p>
-</div></blockquote>
-<p><strong>init_dispersion</strong> : float</p>
-<blockquote>
-<div><p>Initial dispersion amplitude.</p>
-</div></blockquote>
-<p><strong>seed</strong> : float</p>
-<blockquote>
-<div><p>See value for random function.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <cite>pandas.DataFrame</cite></p>
-<blockquote class="last">
-<div><p>Simulated trajectories. Column named <cite>true_label</cite> contains correct
-object labels.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.data.trajectories_generator.directed_trajectories_generator">
-<tt class="descclassname">sktracker.data.trajectories_generator.</tt><tt class="descname">directed_trajectories_generator</tt><big>(</big><em>n_part=5</em>, <em>n_times=100</em>, <em>noise=1e-10</em>, <em>p_disapear=1e-10</em>, <em>sampling=100</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#sktracker.data.trajectories_generator.directed_trajectories_generator" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.data.directed_trajectories_generator">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">directed_trajectories_generator</tt><big>(</big><em>n_part=5</em>, <em>n_times=100</em>, <em>noise=1e-10</em>, <em>p_disapear=1e-10</em>, <em>sampling=100</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#sktracker.data.directed_trajectories_generator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build and return fake directed trajectories with x, y, z and t features.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -223,7 +184,7 @@ for one period of an oscillating function.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <cite>pandas.DataFrame</cite></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 <blockquote class="last">
 <div><p>Simulated trajectories. Column named <cite>true_label</cite> contains correct
 object labels.</p>
@@ -259,12 +220,51 @@ object labels.</p>
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="module-sktracker.data">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.data" title="Permalink to this headline">¶</a></h2>
-<p>Test dataset and fake auto generated trajectories.</p>
-<p>When data function end with _temp. The file is being copied to a temporary
-directory before its path is returned.</p>
+<dl class="function">
+<dt id="sktracker.data.brownian_trajectories_generator">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">brownian_trajectories_generator</tt><big>(</big><em>n_part=5</em>, <em>n_times=100</em>, <em>p_disapear=0</em>, <em>sigma=1.0</em>, <em>init_dispersion=10.0</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#sktracker.data.brownian_trajectories_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build and return fake brownian trajectories with x, y, z and t features.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_part</strong> : int</p>
+<blockquote>
+<div><p>Number of trajectories</p>
+</div></blockquote>
+<p><strong>n_times</strong> : int</p>
+<blockquote>
+<div><p>Number of time points</p>
+</div></blockquote>
+<p><strong>p_disapear</strong> : float</p>
+<blockquote>
+<div><p>Probability that a particle disapears in one frame</p>
+</div></blockquote>
+<p><strong>sigma</strong> : float</p>
+<blockquote>
+<div><p>Brownian motion parameters.</p>
+</div></blockquote>
+<p><strong>init_dispersion</strong> : float</p>
+<blockquote>
+<div><p>Initial dispersion amplitude.</p>
+</div></blockquote>
+<p><strong>seed</strong> : float</p>
+<blockquote>
+<div><p>See value for random function.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
+<blockquote class="last">
+<div><p>Simulated trajectories. Column named <cite>true_label</cite> contains correct
+object labels.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="function">
 <dt id="sktracker.data.CZT_peaks">
 <tt class="descclassname">sktracker.data.</tt><tt class="descname">CZT_peaks</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.CZT_peaks" title="Permalink to this definition">¶</a></dt>
@@ -272,8 +272,25 @@ directory before its path is returned.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="sktracker.data.TC_BF_cells">
-<tt class="descclassname">sktracker.data.</tt><tt class="descname">TC_BF_cells</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.TC_BF_cells" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.data.sample_ome">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">sample_ome</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.sample_ome" title="Permalink to this definition">¶</a></dt>
+<dd><p>OME Tiff with fluo spots and cells in BF and CTZ dimensions.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.data.tubhiswt_4D">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">tubhiswt_4D</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.tubhiswt_4D" title="Permalink to this definition">¶</a></dt>
+<dd><p>OME XML file from OME sample dataset.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.data.stack_list_dir">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">stack_list_dir</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.stack_list_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="sktracker.data.stack_list">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">stack_list</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.stack_list" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -282,8 +299,8 @@ directory before its path is returned.</p>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="sktracker.data.brownian_trajs_df">
-<tt class="descclassname">sktracker.data.</tt><tt class="descname">brownian_trajs_df</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.brownian_trajs_df" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.data.TC_BF_cells">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">TC_BF_cells</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.TC_BF_cells" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -302,26 +319,9 @@ directory before its path is returned.</p>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="sktracker.data.sample_ome">
-<tt class="descclassname">sktracker.data.</tt><tt class="descname">sample_ome</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.sample_ome" title="Permalink to this definition">¶</a></dt>
-<dd><p>OME Tiff with fluo spots and cells in BF and CTZ dimensions.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.data.stack_list">
-<tt class="descclassname">sktracker.data.</tt><tt class="descname">stack_list</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.stack_list" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.data.brownian_trajs_df">
+<tt class="descclassname">sktracker.data.</tt><tt class="descname">brownian_trajs_df</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.brownian_trajs_df" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.data.stack_list_dir">
-<tt class="descclassname">sktracker.data.</tt><tt class="descname">stack_list_dir</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.stack_list_dir" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.data.tubhiswt_4D">
-<tt class="descclassname">sktracker.data.</tt><tt class="descname">tubhiswt_4D</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.data.tubhiswt_4D" title="Permalink to this definition">¶</a></dt>
-<dd><p>OME XML file from OME sample dataset.</p>
-</dd></dl>
 
 </div>
 </div>
@@ -364,7 +364,7 @@ directory before its path is returned.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-ra27cc55',
+            VERSION:'0.2.dev-r2d24d55',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

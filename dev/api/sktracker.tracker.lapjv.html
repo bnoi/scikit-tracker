@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.lapjv package &mdash; sktracker 0.2.dev-ra27cc55 docs</title>
+  <title>sktracker.tracker.lapjv package &mdash; sktracker 0.2.dev-r2d24d55 docs</title>
   
 
   
@@ -31,9 +31,9 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-ra27cc55 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r2d24d55 docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
-        <link rel="next" title="sktracker.tracker.matrices package" href="sktracker.tracker.matrices.html"/>
+        <link rel="next" title="sktracker.tracker.matrix package" href="sktracker.tracker.matrix.html"/>
         <link rel="prev" title="sktracker.tracker.cost_function package" href="sktracker.tracker.cost_function.html"/> 
 
   
@@ -155,9 +155,12 @@ See the accompanying file LICENSE for details.</p>
 <p>Copyright (c) 2003-2009 Massachusetts Institute of Technology
 Copyright (c) 2009-2013 Broad Institute
 All rights reserved.</p>
+</div>
+<div class="section" id="module-sktracker.tracker.lapjv">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.lapjv" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="sktracker.tracker.lapjv.lapjv.lapjv">
-<tt class="descclassname">sktracker.tracker.lapjv.lapjv.</tt><tt class="descname">lapjv</tt><big>(</big><em>i</em>, <em>j</em>, <em>costs</em>, <em>wants_dual_variables=False</em>, <em>augmenting_row_reductions=2</em>, <em>use_slow=False</em><big>)</big><a class="headerlink" href="#sktracker.tracker.lapjv.lapjv.lapjv" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.tracker.lapjv.lapjv">
+<tt class="descclassname">sktracker.tracker.lapjv.</tt><tt class="descname">lapjv</tt><big>(</big><em>i</em>, <em>j</em>, <em>costs</em>, <em>wants_dual_variables=False</em>, <em>augmenting_row_reductions=2</em>, <em>use_slow=False</em><big>)</big><a class="headerlink" href="#sktracker.tracker.lapjv.lapjv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sparse linear assignment solution using Jonker-Volgenant algorithm</p>
 <dl class="docutils">
 <dt>i,j - similarly-sized vectors that pair the object at index i[n] with</dt>
@@ -183,73 +186,6 @@ value here.</dd>
 or (x, y, u, v) if the dual variables are requested.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="sktracker.tracker.lapjv.lapjv.slow_augment">
-<tt class="descclassname">sktracker.tracker.lapjv.lapjv.</tt><tt class="descname">slow_augment</tt><big>(</big><em>n</em>, <em>ii</em>, <em>jj</em>, <em>idx</em>, <em>count</em>, <em>x</em>, <em>y</em>, <em>u</em>, <em>v</em>, <em>c</em><big>)</big><a class="headerlink" href="#sktracker.tracker.lapjv.lapjv.slow_augment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the augmentation step to assign unassigned i and j</p>
-<p>n - the # of i and j, also the marker of unassigned x and y
-ii - the unassigned i
-jj - the ragged arrays of j for each i
-idx - the index of the first j for each i
-count - the number of j for each i
-x - the assignments of j for each i
-y - the assignments of i for each j
-u,v - the dual variables
-c - the costs</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.tracker.lapjv.lapjv.slow_augmenting_row_reduction">
-<tt class="descclassname">sktracker.tracker.lapjv.lapjv.</tt><tt class="descname">slow_augmenting_row_reduction</tt><big>(</big><em>n</em>, <em>ii</em>, <em>jj</em>, <em>idx</em>, <em>count</em>, <em>x</em>, <em>y</em>, <em>u</em>, <em>v</em>, <em>c</em><big>)</big><a class="headerlink" href="#sktracker.tracker.lapjv.lapjv.slow_augmenting_row_reduction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the augmenting row reduction step
-from the Jonker-Volgenaut algorithm</p>
-<p>n - the number of i and j in the linear assignment problem
-ii - the unassigned i
-jj - the j-index of every entry in c
-idx - the index of the first entry for each i
-count - the number of entries for each i
-x - the assignment of j to i
-y - the assignment of i to j
-u - the dual variable &#8220;u&#8221; which will be updated. It should be</p>
-<blockquote>
-<div>initialized to zero for the first reduction transfer.</div></blockquote>
-<p>v - the dual variable &#8220;v&#8221; which will be reduced in-place
-c - the cost for each entry.</p>
-<p>returns the new unassigned i</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.tracker.lapjv.lapjv.slow_reduction_transfer">
-<tt class="descclassname">sktracker.tracker.lapjv.lapjv.</tt><tt class="descname">slow_reduction_transfer</tt><big>(</big><em>ii</em>, <em>j</em>, <em>idx</em>, <em>count</em>, <em>x</em>, <em>u</em>, <em>v</em>, <em>c</em><big>)</big><a class="headerlink" href="#sktracker.tracker.lapjv.lapjv.slow_reduction_transfer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the reduction transfer step from the Jonker-Volgenant algorithm</p>
-<p>The data is input in a ragged array in terms of &#8220;i&#8221; structured as a
-vector of values for each i,j combination where:</p>
-<p>ii - the i to be reduced
-j - the j-index of every entry
-idx - the index of the first entry for each i
-count - the number of entries for each i
-x - the assignment of j to i
-u - the dual variable &#8220;u&#8221; which will be updated. It should be</p>
-<blockquote>
-<div>initialized to zero for the first reduction transfer.</div></blockquote>
-<p>v - the dual variable &#8220;v&#8221; which will be reduced in-place
-c - the cost for each entry.</p>
-<p>The code described in the paper is:</p>
-<p>for each assigned row i do
-begin</p>
-<blockquote>
-<div>j1:=x[i]; u=min {c[i,j]-v[j] | j=1..n, j != j1};
-v[j1]:=v[j1]-(u-u[i]);
-u[i] = u;</div></blockquote>
-<p>end;</p>
-<p>The authors note that reduction transfer can be applied in later stages
-of the algorithm but does not seem to provide a substantial benefit
-in speed.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-sktracker.tracker.lapjv">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.lapjv" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -259,7 +195,7 @@ in speed.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.tracker.matrices.html" class="btn btn-neutral float-right" title="sktracker.tracker.matrices package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.tracker.matrix.html" class="btn btn-neutral float-right" title="sktracker.tracker.matrix package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="sktracker.tracker.cost_function.html" class="btn btn-neutral" title="sktracker.tracker.cost_function package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -291,7 +227,7 @@ in speed.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-ra27cc55',
+            VERSION:'0.2.dev-r2d24d55',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

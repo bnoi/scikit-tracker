@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.detection package &mdash; sktracker 0.2.dev-ra27cc55 docs</title>
+  <title>sktracker.detection package &mdash; sktracker 0.2.dev-r2d24d55 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-ra27cc55 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r2d24d55 docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.io package" href="sktracker.io.html"/>
         <link rel="prev" title="sktracker.data package" href="sktracker.data.html"/> 
@@ -140,113 +140,14 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="sktracker-detection-cell-boundaries-detector-module">
-<h2>sktracker.detection.cell_boundaries_detector module<a class="headerlink" href="#sktracker-detection-cell-boundaries-detector-module" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-sktracker.detection.cell_boundaries_detector"></span></div>
+<div class="section" id="module-sktracker.detection.cell_boundaries_detector">
+<span id="sktracker-detection-cell-boundaries-detector-module"></span><h2>sktracker.detection.cell_boundaries_detector module<a class="headerlink" href="#module-sktracker.detection.cell_boundaries_detector" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="module-sktracker.detection.nuclei_detector">
 <span id="sktracker-detection-nuclei-detector-module"></span><h2>sktracker.detection.nuclei_detector module<a class="headerlink" href="#module-sktracker.detection.nuclei_detector" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.detection.nuclei_detector.nuclei_detector">
-<tt class="descclassname">sktracker.detection.nuclei_detector.</tt><tt class="descname">nuclei_detector</tt><big>(</big><em>data_iterator</em>, <em>metadata={}</em>, <em>parameters={}</em>, <em>parallel=False</em>, <em>verbose=False</em>, <em>mapper=None</em>, <em>show_progress=False</em><big>)</big><a class="headerlink" href="#sktracker.detection.nuclei_detector.nuclei_detector" title="Permalink to this definition">¶</a></dt>
-<dd><p>TODO</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data_iterator</strong> : Python iterator over dataset</p>
-<p><strong>metadata: dict</strong></p>
-<p><strong>parameters</strong> : dict</p>
-<p><strong>parallel</strong> : bool</p>
-<p><strong>verbose</strong> : bool</p>
-<p><strong>mapper</strong> : bool</p>
-<p class="last"><strong>show_progress</strong> : bool</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.detection.peak_detector">
 <span id="sktracker-detection-peak-detector-module"></span><h2>sktracker.detection.peak_detector module<a class="headerlink" href="#module-sktracker.detection.peak_detector" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.detection.peak_detector.peak_detector">
-<tt class="descclassname">sktracker.detection.peak_detector.</tt><tt class="descname">peak_detector</tt><big>(</big><em>data_iterator</em>, <em>metadata</em>, <em>parallel=True</em>, <em>verbose=True</em>, <em>show_progress=False</em>, <em>parameters={}</em><big>)</big><a class="headerlink" href="#sktracker.detection.peak_detector.peak_detector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gaussian peak detection described in Segré et al. Nature Methods, (2008).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data_iterator</strong> : python iterator</p>
-<blockquote>
-<div><p>To iterate over data.</p>
-</div></blockquote>
-<p><strong>metadata</strong> : dict</p>
-<blockquote>
-<div><p>Metadata to scale detected peaks and parameters.</p>
-</div></blockquote>
-<p><strong>parallel</strong> : bool</p>
-<blockquote>
-<div><p>Used several processes at once.</p>
-</div></blockquote>
-<p><strong>show_progress</strong> : bool (default: False)</p>
-<blockquote>
-<div><p>Print progress bar during detection.</p>
-</div></blockquote>
-<p><strong>verbose</strong> : bool (default: True)</p>
-<blockquote>
-<div><p>Display informations during detection.</p>
-</div></blockquote>
-<p><strong>parameters</strong> : dict</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>Contains gaussian detection algorithm parameters:</dt>
-<dd><ul class="first last">
-<li><dl class="first docutils">
-<dt>w_s: int, optional</dt>
-<dd><p class="first last">Width (in um) of the sliding window over which the hypothesis ratio
-is computed <span class="math">\(w_s\)</span> in the article. It should be wide enough
-to contain some background to allow a proper noise evaluation.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>peak_radius: float, optional</dt>
-<dd><p class="first last">Typical radius (in um) of the peaks to detect. It must be higher than one
-(as peaks less that a pixel wide would yield bogus results</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>threshold: float, optional</dt>
-<dd><p class="first last">Criterium for a positive detection (i.e. the null hypothesis is false).
-Corresponds to the <a href="#id1"><span class="problematic" id="id2">:mat:`\chi^2`</span></a> parameter in the Constant False
-Alarm Rate section of the article supplementary text (p. 12).
-A higher <cite>threshold</cite> corresponds to a more stringent test.
-According to the authors, this parameters needs to be adjusted
-once for a given data set.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>max_peaks <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
-<dd><p class="first last">Deflation loop will stop if detected peaks is higher than max_peaks.</p>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><cite>pandas.DataFrame</cite> array containing detected peaks.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.detection">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.detection" title="Permalink to this headline">¶</a></h2>
@@ -302,7 +203,7 @@ to contain some background to allow a proper noise evaluation.</p>
 <li><dl class="first docutils">
 <dt>threshold: float, optional</dt>
 <dd><p class="first last">Criterium for a positive detection (i.e. the null hypothesis is false).
-Corresponds to the <a href="#id3"><span class="problematic" id="id4">:mat:`\chi^2`</span></a> parameter in the Constant False
+Corresponds to the <span class="math">\(\chi^2\)</span> parameter in the Constant False
 Alarm Rate section of the article supplementary text (p. 12).
 A higher <cite>threshold</cite> corresponds to a more stringent test.
 According to the authors, this parameters needs to be adjusted
@@ -322,7 +223,7 @@ once for a given data set.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><cite>pandas.DataFrame</cite> array containing detected peaks.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>trajs</strong> : <tt class="xref py py-class docutils literal"><span class="pre">pd.DataFrame</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -332,7 +233,7 @@ once for a given data set.</p>
 <dl class="function">
 <dt id="sktracker.detection.cell_boundaries_detector">
 <tt class="descclassname">sktracker.detection.</tt><tt class="descname">cell_boundaries_detector</tt><big>(</big><em>data_iterator</em>, <em>metadata</em>, <em>verbose=True</em>, <em>show_progress=False</em>, <em>parameters={}</em><big>)</big><a class="headerlink" href="#sktracker.detection.cell_boundaries_detector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find cell boundary in BF microscopy image.</p>
+<dd><p>Find cell boundary in bright field microscopy image.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -384,7 +285,10 @@ once for a given data set.</p>
 <p><strong>parallel</strong> : bool</p>
 <p><strong>verbose</strong> : bool</p>
 <p><strong>mapper</strong> : bool</p>
-<p class="last"><strong>show_progress</strong> : bool</p>
+<p><strong>show_progress</strong> : bool</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>trajs</strong> : <tt class="xref py py-class docutils literal"><span class="pre">pd.DataFrame</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -432,7 +336,7 @@ once for a given data set.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-ra27cc55',
+            VERSION:'0.2.dev-r2d24d55',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

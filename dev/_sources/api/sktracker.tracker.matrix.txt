@@ -1,0 +1,30 @@
+sktracker.tracker.matrix package
+================================
+
+Submodules
+----------
+
+sktracker.tracker.matrix.block module
+-------------------------------------
+
+.. automodule:: sktracker.tracker.matrix.block
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.tracker.matrix.matrix module
+--------------------------------------
+
+.. automodule:: sktracker.tracker.matrix.matrix
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.tracker.matrix
+    :members:
+    :undoc-members:
+    :show-inheritance:
