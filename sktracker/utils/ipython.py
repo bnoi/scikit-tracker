@@ -1,4 +1,4 @@
-__all__ = ['in_ipython']
+__all__ = []
 
 
 def in_ipython():
@@ -13,4 +13,4 @@ def in_ipython():
     except NameError:
         return False
     else:
-        return True # pragma: no cover
+        return True  # pragma: no cover

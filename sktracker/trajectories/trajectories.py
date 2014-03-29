@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+__all__ = []
+
 
 class Trajectories(pd.DataFrame):
     """
@@ -11,10 +13,10 @@ class Trajectories(pd.DataFrame):
     Attributes
     ----------
     t_stamps : ndarray
-        unique values of the `t_stamps` index of the `self.trajs` dataframe
+        unique values of the `t_stamps` index of `self.trajs`
 
     labels : ndarray
-        unique values of the `labels` index of the `self.trajs` dataframe
+        unique values of the `labels` index of `self.trajs`
 
     iter_segments : iterator
         yields a `(label, segment)` pair where `label` is iterated over `self.labels`
@@ -23,7 +25,11 @@ class Trajectories(pd.DataFrame):
     segment_idxs : dictionnary
         Keys are the segent label and values are a list
         of  `(t_stamp, label)` tuples for each time point of the segment
-    
+
+    Parameters
+    ----------
+    trajs : :class:`pandas.DataFrame`
+
     """
     def __init__(self, trajs):
 
@@ -31,6 +37,7 @@ class Trajectories(pd.DataFrame):
         if not isinstance(self, pd.DataFrame):
             raise TypeError('''The constructor argument `trajs`
                             must be a pandas.DataFrame instance''')
+
     @property
     def t_stamps(self):
         return self.index.get_level_values('t_stamp').unique()
@@ -47,13 +54,13 @@ class Trajectories(pd.DataFrame):
     def iter_segments(self):
         for lbl, idxs in self.segment_idxs.values():
             yield lbl, self.loc[idxs]
-    
-    def get_segments(self):
-        """
-        Returns a dictionnary with labels as keys and segments as values
 
-        A segment contains all the data from `self.trajs` with 
-        
+    def get_segments(self):
+        """A segment contains all the data from `self.trajs` with
+
+        Returns
+        -------
+        A dict with labels as keys and segments as values
         """
         return {key: segment for key, segment
                 in self.iter_segments}
@@ -114,12 +121,12 @@ class Trajectories(pd.DataFrame):
         yaxis : str
         groupby : dict
             How to group trajectories
-        ax : matplotlib Axes
+        ax : :class:`matplotlib.axes.Axes`
             None will create a new one.
 
         Returns
         -------
-        matplotlib axis instance
+        :class:`matplotlib.axes.Axes`
 
         Examples
         --------

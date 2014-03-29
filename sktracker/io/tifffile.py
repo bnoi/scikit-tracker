@@ -153,7 +153,8 @@ import numpy
 
 __version__ = '2014.02.05'
 __docformat__ = 'restructuredtext en'
-__all__ = ['imsave', 'imread', 'imshow', 'TiffFile', 'TiffSequence']
+# __all__ = ['imsave', 'imread', 'imshow', 'TiffFile', 'TiffSequence']
+__all__ = []
 
 
 def imsave(filename, data, photometric=None, planarconfig=None,

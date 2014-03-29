@@ -1,4 +1,4 @@
-__all__ = ['color', ]
+__all__ = []
 
 CODE = {
     'ENDC': 0,  # RESET COLOR

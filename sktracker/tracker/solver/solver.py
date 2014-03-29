@@ -1,12 +1,14 @@
 from ...trajectories import Trajectories
 
+__all__ = []
+
 
 class AbstractSolver:
     """
 
     Parameters
     ----------
-    trajs : :class:`Trajectories` object
+    trajs : :class:`sktracker.trajectories.Trajectories`
         The trajectories
     """
 
@@ -19,7 +21,7 @@ class AbstractSolver:
         Parameters
         ----------
         obj : object
-        cost_funtion_type : class
+        cost_funtion_type : class name
 
         Raises
         ------
@@ -34,14 +36,14 @@ class AbstractSolver:
     def relabel_trajs(self, new_labels=None):
         """
         Sets the trajectory index `label` to new values.
-        
+
         Parameters
         ----------
-        new_labels: ndarray or None, default None
+        new_labels: :class:`numpy.ndarray` or None, default None
             The new label. If it is not provided, the function wil look for
             will look for a column named "new_label" in `trajs` and use this
             as the new label index
-        
+
         """
         if new_labels is not None:
             self.trajs['new_label'] = new_labels

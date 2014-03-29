@@ -5,6 +5,8 @@ import pandas as pd
 log = logging.getLogger(__name__)
 from . import validate_metadata
 
+__all__ = []
+
 
 class ObjectsIO():
     """
@@ -67,7 +69,7 @@ class ObjectsIO():
         Parameters
         ----------
         obj : object
-            `pandas.DataFrame`, `pandas.Series` or dict
+            :class:`pandas.DataFrame`, :class:`pandas.Series` or dict
         name : str
             Name of the object. Will be used when reading HDF5 file
 

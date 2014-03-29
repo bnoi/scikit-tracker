@@ -1,6 +1,8 @@
 import numpy as np
 from . import AbstractDiagCostFunction
 
+__all__ = []
+
 
 class DiagCostFunction(AbstractDiagCostFunction):
     """Basic cost function for a diagonal block.
@@ -13,7 +15,7 @@ class DiagCostFunction(AbstractDiagCostFunction):
 
     def __init__(self, context):
         super().__init__(context, {})
-        if not 'cost' in context.keys():
+        if 'cost' not in context.keys():
             raise ValueError('''The class DiagCostFunction requires '''
                              '''the `context` dictionnary to contain a `cost` key''')
 
@@ -24,7 +26,7 @@ class DiagCostFunction(AbstractDiagCostFunction):
 
         Parameters
         ----------
-        `object`: sequence
+        objects: sequence
             The object to which corresponds this diagonal cost
         """
         vect = np.ones(len(objects)) * self.context['cost']

@@ -14,13 +14,14 @@ from ..utils import print_progress
 
 log = logging.getLogger(__name__)
 
-__all__ = ['peak_detector']
+__all__ = []
 
 DEFAULT_PARAMETERS = {'w_s': 0.7,
                       'peak_radius': 0.2,
                       'threshold': 27.,
                       'max_peaks': 1e4
                       }
+
 
 def peak_detector(data_iterator,
                   metadata,
@@ -53,7 +54,7 @@ def peak_detector(data_iterator,
                 (as peaks less that a pixel wide would yield bogus results
             - threshold: float, optional
                 Criterium for a positive detection (i.e. the null hypothesis is false).
-                Corresponds to the :mat:`\chi^2` parameter in the Constant False
+                Corresponds to the :math:`\chi^2` parameter in the Constant False
                 Alarm Rate section of the article supplementary text (p. 12).
                 A higher `threshold` corresponds to a more stringent test.
                 According to the authors, this parameters needs to be adjusted
@@ -63,7 +64,7 @@ def peak_detector(data_iterator,
 
     Returns
     -------
-    `pandas.DataFrame` array containing detected peaks.
+    trajs : :class:`pd.DataFrame`
     """
 
     if not verbose:

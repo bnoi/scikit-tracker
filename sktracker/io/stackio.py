@@ -8,12 +8,13 @@ from . import TiffFile
 
 log = logging.getLogger(__name__)
 
-__all__ = ['StackIO']
+__all__ = []
+
 
 class StackIO:
-    """StackIO is designed to deal with Input/Output images. It can retrieve all
-    kind of metadata with various methods. It also allows fast and efficient way
-    to get image data (in memory or via an iterator).
+    """StackIO is designed to deal with Input/Output images
+    It can retrieve all kind of metadata with various methods. It also allows fast and
+    efficient way to get image data (in memory or via an iterator.
 
     Parameters
     ----------
@@ -47,8 +48,8 @@ class StackIO:
         if not self._image_path_list:
             return
         if self.base_dir:
-             return [os.path.join(self.base_dir, image)
-                     for image in self._image_path_list]
+            return [os.path.join(self.base_dir, image)
+                    for image in self._image_path_list]
         else:
             return self._image_path_list
 
@@ -61,12 +62,11 @@ class StackIO:
 
     @classmethod
     def from_objectsio(cls, objectsio):
-        """Load images and metadata from `sktracker.io.ObjectsIO`
+        """Load images and metadata from :class:`sktracker.io.ObjectsIO`
 
         Parameters
         ----------
-        objectsio : object
-            `sktracker.io.ObjectsIO` instance.
+        objectsio : :class:`sktracker.io.ObjectsIO`
         """
 
         return cls(image_path=objectsio.image_path, metadata=objectsio.metadata)
@@ -76,9 +76,7 @@ class StackIO:
 
         Returns
         -------
-        tf : object
-            An `sktracker.io.TiffFile` instance.
-
+        tf : :class:`sktracker.io.TiffFile`
         """
 
         tf = TiffFile(self.image_path)
@@ -89,8 +87,7 @@ class StackIO:
 
         Returns
         -------
-        tf : object
-            An `sktracker.io.TiffFile` instance.
+        tf : :class:`sktracker.io.TiffFile`
 
         """
 
@@ -145,6 +142,7 @@ class StackIO:
         A Python iterator over the image list.
         """
         image_list = self.image_path_list
+
         def stack_iter():
             for filename in image_list:
                 stack = TiffFile(filename).asarray(memmap=memmap)

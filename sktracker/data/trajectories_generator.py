@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+__all__ = []
+
 
 def brownian_trajectories_generator(n_part=5,
                                     n_times=100,
@@ -27,7 +29,7 @@ def brownian_trajectories_generator(n_part=5,
 
     Returns
     -------
-    trajs : `pandas.DataFrame`
+    trajs : :class:`pandas.DataFrame`
         Simulated trajectories. Column named `true_label` contains correct
         object labels.
 
@@ -93,7 +95,7 @@ def directed_trajectories_generator(n_part=5,
 
     Returns
     -------
-    trajs : `pandas.DataFrame`
+    trajs : :class:`pandas.DataFrame`
         Simulated trajectories. Column named `true_label` contains correct
         object labels.
 

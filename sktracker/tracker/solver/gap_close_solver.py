@@ -1,11 +1,11 @@
 import numpy as np
-import pandas as pd
 import logging
 
 log = logging.getLogger(__name__)
-from ..matrices import LinkBlock
-from ..matrices import DiagBlock
-from ..matrices import CostMatrix
+
+from ..matrix import LinkBlock
+from ..matrix import DiagBlock
+from ..matrix import CostMatrix
 
 from ..cost_function import AbstractLinkCostFunction
 from ..cost_function import AbstractDiagCostFunction
@@ -15,18 +15,20 @@ from ..cost_function import AbstractDiagCostFunction
 
 from . import AbstractSolver
 
+__all__ = []
+
 
 class GapCloseSolver(AbstractSolver):
     """
 
     Parameters
     ----------
-    trajs : pandas.DataFrame
+    trajs : :class:`pandas.DataFrame`
     cost_functions : list of list
     """
     def __init__(self, trajs, cost_functions,
                  maximum_gap, coords=['x', 'y', 'z']):
-        
+
         super().__init__(trajs)
 
         self.coords = coords
@@ -50,7 +52,6 @@ class GapCloseSolver(AbstractSolver):
         return [[self.link_block.mat, self.death_block.mat],
                 [self.birth_block.mat, None]]
 
-
     def track(self):
 
         labels = self.trajs.labels
@@ -58,7 +59,7 @@ class GapCloseSolver(AbstractSolver):
         self.link_cf.context['trajs'] = self.trajs
         self.link_cf.context['idxs_in'] = idxs_in
         self.link_cf.context['idxs_out'] = idxs_out
-        
+
         if not len(idxs_in):
             log.info('No gap needs closing here...')
             return self.trajs
@@ -89,11 +90,10 @@ class GapCloseSolver(AbstractSolver):
         self.cm.solve()
         self.assign()
         return self.trajs
-        
-        
+
     def _get_candidates(self):
         """
-        
+
         """
         max_gap = self.maximum_gap
         labels = self.trajs.labels
@@ -108,15 +108,15 @@ class GapCloseSolver(AbstractSolver):
             return [], []
         matches_in = matches[:, 0]
         matches_out = matches[:, 1]
-        
+
         in_idxs = [(in_time, in_lbl) for (in_time, in_lbl)
                    in zip(start_times[matches_in],
                           self.trajs.labels[matches_in])]
-        #pos_in = self.trajs.loc[in_idxs]
+        # pos_in = self.trajs.loc[in_idxs]
         out_idxs = [(out_time, out_lbl) for (out_time, out_lbl)
                     in zip(start_times[matches_out],
                            self.trajs.labels[matches_out])]
-        #pos_out = self.trajs.loc[out_idxs]
+        # pos_out = self.trajs.loc[out_idxs]
         return in_idxs, out_idxs
 
     def assign(self):
@@ -125,25 +125,23 @@ class GapCloseSolver(AbstractSolver):
         row_shapes, col_shapes = self.cm.get_shapes()
         old_labels = self.trajs.index.get_level_values(level='label').values
         new_labels = old_labels.copy()
-        unique_old = self.trajs.labels.copy() #np.unique(old_labels)
-        unique_new = self.trajs.labels.copy() #np.unique(new_labels)
+        unique_old = self.trajs.labels.copy()  # np.unique(old_labels)
+        unique_new = self.trajs.labels.copy()  # np.unique(new_labels)
 
         last_in_link = row_shapes[0]
         last_out_link = col_shapes[0]
 
         for idx_out, idx_in in enumerate(self.cm.out_links[:last_out_link]):
             if idx_in >= last_in_link:
-                ## no merge
+                # no merge
                 unique_new[idx_out] = unique_new.max() + 1
             else:
                 # do merge
                 new_label = unique_new[idx_in]
                 unique_new[idx_out] = new_label
-                
+
         for old, new in zip(unique_old, unique_new):
             new_labels[old_labels == old] = new
 
         self.relabel_trajs(new_labels)
         return self.trajs
-
-            

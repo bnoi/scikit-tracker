@@ -6,3 +6,9 @@ from .gap_close import AbstractGCLinkCostFunction
 
 # from .brownian import BrownianCostFunction, GCBrownianCostFunction
 # from .directed import BasicDirectedCostFunction
+
+__all__ = ["AbstractCostFunction",
+           "AbstractLinkCostFunction",
+           "AbstractDiagCostFunction",
+           "DiagCostFunction",
+           "AbstractGCLinkCostFunction"]

@@ -15,11 +15,12 @@ from skimage.morphology import label
 
 from ..utils.progress import print_progress
 
-__all__ = ['peak_detector']
+__all__ = []
 
 DEFAULT_PARAMETERS = {'object_height': 3,
                       'minimal_area': 160,
                       }
+
 
 def cell_boundaries_detector(data_iterator,
                              metadata,
@@ -27,7 +28,7 @@ def cell_boundaries_detector(data_iterator,
                              show_progress=False,
                              parameters={}):
     """
-    Find cell boundary in BF microscopy image.
+    Find cell boundary in bright field microscopy image.
 
     Parameters
     ----------
@@ -47,7 +48,8 @@ def cell_boundaries_detector(data_iterator,
 
     Return
     ------
-    `pd.DataFrame` : contains cell boundary properties for each T
+    trajs : :class:`pd.DataFrame`
+        Contains cell boundary properties for each time_stamp
     """
 
     if not verbose:
@@ -66,10 +68,10 @@ def cell_boundaries_detector(data_iterator,
 
     # Find number of stacks to process
     # Only iteration over T and Z are assumed
-    n_stack = metadata['SizeT'] * metadata['SizeZ']
+    # n_stack = metadata['SizeT'] * metadata['SizeZ']
 
-    sizeX =  metadata['SizeX']
-    sizeY =  metadata['SizeY']
+    sizeX = metadata['SizeX']
+    sizeY = metadata['SizeY']
 
     # calculate the correlation image from the z-stack
     cellprop = []

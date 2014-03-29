@@ -1,17 +1,20 @@
-"""Object detection and tracking for cell biology
-
-`scikit-tracker` is bla bla bla.
-
-Subpackages
------------
-utils
-    Utilities functions
-
-"""
-
 from .version import __version__
 
-__all__ = ['__version__', 'set_log_level']
+from . import data
+from . import detection
+from . import io
+from . import trajectories
+from . import tracker
+from . import utils
+
+__all__ = ['__version__',
+           'set_log_level',
+           'data',
+           'io',
+           'trajectories',
+           'detection',
+           'tracker',
+           'utils']
 
 
 def setup_log():  # pragma: no cover

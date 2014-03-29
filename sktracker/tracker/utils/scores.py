@@ -1,14 +1,16 @@
 import numpy as np
 
+__all__ = []
+
 
 def get_scores_on_trajectories(trajs, coords=['x', 'y', 'z']):
     """
 
     Parameters
     ----------
-    trajs : pd.DataFrame
-        MultiIndex need to contain 't_stamp' and 'label' and columns need to have at least
-        'true_label'
+    trajs : :class:`pandas.DataFrame`
+        :class:`pandas.MultiIndex` need to contain 't_stamp' and 'label' and columns need to have
+        at least 'true_label'
     coords : list
         Features on which process scoring.
 
@@ -17,9 +19,10 @@ def get_scores_on_trajectories(trajs, coords=['x', 'y', 'z']):
     min_chi_square : float
     conserved_trajectories_number : float
         Between 0 and 1.
-    scores : numpy.ndarray
+    scores : :class:`numpy.ndarray`
         Chi square matrix.
     """
+
     gp_new = trajs.groupby(level='label').groups
     gp_true = trajs.groupby('true_label').groups
 

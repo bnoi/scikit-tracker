@@ -1,10 +1,9 @@
 import numpy as np
 
-from sktracker.tracker import matrices
 from sktracker import data
-from sktracker.tracker.matrices import LinkBlock
-from sktracker.tracker.matrices import DiagBlock
-from sktracker.tracker.matrices import CostMatrix
+from sktracker.tracker.matrix import LinkBlock
+from sktracker.tracker.matrix import DiagBlock
+from sktracker.tracker.matrix import CostMatrix
 
 from sktracker.tracker.cost_function import AbstractLinkCostFunction
 from sktracker.tracker.cost_function import AbstractDiagCostFunction
@@ -23,7 +22,7 @@ def test_cost_matrix_mocked_mat():
                        [nan_ident(2), None, None, None],
                        [None, nan_ident(3), None, None]])
 
-    cm = matrices.CostMatrix(blocks)
+    cm = CostMatrix(blocks)
     true_mat = np.array([[ 1.,   1.,   1.,   1.,   1.,   1.,  np.nan,  np.nan,  np.nan],
                          [ 1.,   1.,  np.nan,  np.nan,  np.nan,  np.nan,   1.,  np.nan,  np.nan],
                          [ 1.,   1.,  np.nan,  np.nan,  np.nan,  np.nan,  np.nan,   1.,  np.nan],
@@ -44,7 +43,7 @@ def test_cost_matrix_mocked_flat():
                        [nan_ident(2), None, None, None],
                        [None, nan_ident(3), None, None]])
 
-    cm = matrices.CostMatrix(blocks)
+    cm = CostMatrix(blocks)
     tru_in, tru_out, tru_costs = (np.array([0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3,
                                             3, 3, 4, 4, 4, 4, 4, 5, 5, 5,
                                             5, 5, 6, 6, 7, 7, 8, 8]),

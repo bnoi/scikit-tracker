@@ -1,4 +1,4 @@
-import io #That's python core io module
+import io
 import logging
 import uuid
 from xml.etree import cElementTree as ElementTree
@@ -8,7 +8,7 @@ import pandas as pd
 
 log = logging.getLogger(__name__)
 
-__all__ = ['OMEModel']
+__all__ = []
 
 NAMESPACE_2012 = "http://www.openmicroscopy.org/Schemas/OME/2012-06"
 NAMESPACE_2013 = "http://www.openmicroscopy.org/Schemas/OME/2013-06"
@@ -60,7 +60,7 @@ class OMEModel():
 
         Returns
         -------
-        df_planes: `pd.DataFrame`
+        df_planes: :class:`pd.DataFrame`
             Contains OME XML Plane informations
 
         """

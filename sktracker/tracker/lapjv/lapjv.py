@@ -30,6 +30,8 @@ except:
     from ._lapjv import augmenting_row_reduction
     from ._lapjv import augment
 
+__all__ = []
+
 
 def lapjv(i, j, costs, wants_dual_variables=False,
           augmenting_row_reductions=2, use_slow=False):

@@ -15,7 +15,7 @@ from skimage.measure import regionprops
 
 log = logging.getLogger(__name__)
 
-__all__ = ['nuclei_detector']
+__all__ = []
 
 DEFAULT_PARAMETERS = {'segment_method': 'otsu',
                       'correction': 1.,
@@ -49,6 +49,7 @@ def nuclei_detector(data_iterator,
 
     Returns
     -------
+    trajs : :class:`pd.DataFrame`
     '''
 
     _parameters = DEFAULT_PARAMETERS.copy()

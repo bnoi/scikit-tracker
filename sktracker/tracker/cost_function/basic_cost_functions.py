@@ -1,5 +1,7 @@
 import numpy as np
 
+__all__ = []
+
 
 class AbstractCostFunction:
     """Abstract class.
@@ -25,7 +27,7 @@ class AbstractCostFunction:
 
         Parameters
         ----------
-        objects : list of pandas.DataFrame
+        objects : list of :class:`pandas.DataFrame`
         cols : list column names to check
         """
         cols_set = set(cols)
@@ -50,7 +52,6 @@ class AbstractCostFunction:
         Returns
         -------
         The desired key's value in context.
-
         """
 
         message = "Context {} does not contain required key : {}"

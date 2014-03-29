@@ -1,7 +1,11 @@
 import numpy as np
+
 from . import AbstractLinkCostFunction
 from ...trajectories import Trajectories
-            
+
+__all__ = []
+
+
 class AbstractGCLinkCostFunction(AbstractLinkCostFunction):
     """
     """
@@ -15,13 +19,13 @@ class AbstractGCLinkCostFunction(AbstractLinkCostFunction):
         _parameters.update(parameters)
         super().__init__({}, _parameters)
         self.context = context
-    
+
     def update(self):
         """
         Updates the object's attributes according to context
         """
         self.trajs = self.context['trajs']
-        ## Just in case the parent didn't do it
+        # Just in case the parent didn't do it
         self.trajs.relabel_fromzero('label', inplace=True)
 
         self.idxs_in = self.context['idxs_in']
@@ -29,7 +33,7 @@ class AbstractGCLinkCostFunction(AbstractLinkCostFunction):
         if not len(self.idxs_in) == len(self.idxs_out):
             raise ValueError('''`self.context['idxs_in']` and `self.context['idxs_out']`
                              must have the same length ''')
-        if not 'trajs' in self.context.keys():
+        if 'trajs' not in self.context.keys():
             raise ValueError('''The class GCLinkCostFunction requires '''
                              '''the `self.context` dictionnary to contain a `trajs` key''')
 

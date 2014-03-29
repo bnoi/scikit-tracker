@@ -7,6 +7,8 @@ log = logging.getLogger(__name__)
 from . import TiffFile
 from . import OMEModel
 
+__all__ = []
+
 
 def get_metadata(filename, json_discovery=False):
     """Get image file metadata

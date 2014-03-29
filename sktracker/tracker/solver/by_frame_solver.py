@@ -2,9 +2,9 @@ import numpy as np
 
 from ...utils import print_progress
 
-from ..matrices import LinkBlock
-from ..matrices import DiagBlock
-from ..matrices import CostMatrix
+from ..matrix import LinkBlock
+from ..matrix import DiagBlock
+from ..matrix import CostMatrix
 
 from ..cost_function import AbstractLinkCostFunction
 from ..cost_function import AbstractDiagCostFunction
@@ -14,13 +14,15 @@ from ..cost_function import DiagCostFunction
 
 from . import AbstractSolver
 
+__all__ = []
+
 
 class ByFrameSolver(AbstractSolver):
     """
 
     Parameters
     ----------
-    trajs : pandas.DataFrame
+    trajs : :class:`pandas.DataFrame`
     cost_functions : list of list
     """
     def __init__(self, trajs, cost_functions, coords=['x', 'y', 'z']):
@@ -52,7 +54,7 @@ class ByFrameSolver(AbstractSolver):
 
         Parameters
         ----------
-        trajs : pandas.DataFrame
+        trajs : :class:`pandas.DataFrame`
         max_speed : float
             Max objects velocity
         coords : list
@@ -84,7 +86,7 @@ class ByFrameSolver(AbstractSolver):
 
         Returns
         -------
-        self.trajs : pandas.DataFrame
+        self.trajs : :class:`pandas.DataFrame`
         progress_bar : bool
             Display progress bar
         progress_bar_out : OutStream

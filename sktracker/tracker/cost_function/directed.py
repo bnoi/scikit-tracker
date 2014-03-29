@@ -6,6 +6,8 @@ from scipy import interpolate
 from ...trajectories import Trajectories
 from . import AbstractLinkCostFunction
 
+__all__ = []
+
 
 class BasicDirectedCostFunction(AbstractLinkCostFunction):
     """This class generates cost matrices for directed motion

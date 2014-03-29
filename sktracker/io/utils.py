@@ -7,6 +7,8 @@ log = logging.getLogger(__name__)
 _EXTENSIONS = ('tif', 'tiff', 'TIF',
                'TIFF', 'STK')
 
+__all__ = []
+
 
 def load_img_list(directory):
     '''Loads a list of images from `directory`.
@@ -16,7 +18,8 @@ def load_img_list(directory):
 
     Parameter
     ---------
-    diretory: str, a path to an existing directory
+    directory: str
+        A path to an existing directory
 
     Returns
     -------

@@ -5,9 +5,9 @@ from numpy.testing import assert_array_equal
 from nose.tools import assert_raises
 
 from sktracker import data
-from sktracker.tracker.matrices import LinkBlock
-from sktracker.tracker.matrices import DiagBlock
-from sktracker.tracker.matrices import CostMatrix
+from sktracker.tracker.matrix import LinkBlock
+from sktracker.tracker.matrix import DiagBlock
+from sktracker.tracker.matrix import CostMatrix
 
 from sktracker.tracker.cost_function.brownian import BrownianCostFunction
 from sktracker.tracker.cost_function import DiagCostFunction
