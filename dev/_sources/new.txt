@@ -1,4 +1,7 @@
 What's new
 ==========
 
-.. include:: release/release_0.1.txt
+.. toctree::
+   :maxdepth: 2
+
+   release/release_0.1.txt
