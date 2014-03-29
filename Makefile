@@ -18,6 +18,7 @@ build:
 
 clean:
 	find . -name "*.so" -o -name "*.pyc" -o -name "*.pyx.md5" | xargs rm -f
+	rm -rf build/ dist/ scikit_tracker.egg-info/
 
 test:
 	nosetests sktracker -v
