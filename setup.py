@@ -50,7 +50,11 @@ except ImportError as e:
 
 extensions = [Extension("sktracker.tracker.lapjv._lapjv",
                         ["sktracker/tracker/lapjv/_lapjv.pyx"],
-                        include_dirs=[np.get_include()])
+                        include_dirs=[np.get_include()]),
+
+              Extension("sktracker.io._tifffile",
+                        ["sktracker/io/_tifffile.c"],
+                        include_dirs=[np.get_include()]),
               ]
 
 if __name__ == "__main__":
