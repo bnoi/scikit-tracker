@@ -1,11 +1,8 @@
 import os
 import re
-
-# import numpy
-
 from setuptools import setup, find_packages
 
-from distutils.command.build_py import build_py
+# import numpy
 # from Cython.Build import cythonize
 
 from sktracker import __version__
@@ -119,11 +116,11 @@ if __name__ == "__main__":
             'console_scripts': [],
         },
 
-        cmdclass={'build_py': build_py},
+        # cmdclass={'build_py': build_py},
         # ext_modules=cythonize("*.pyx", include_path=[numpy.get_include()]),
 
         test_suite='nose.collector',
 
         install_requires=DEPENDENCIES,
-        setup_requires=DEPENDENCIES,
+        setup_requires=["Cython >= 0.20"],
     )
