@@ -18,18 +18,19 @@ LICENSE = 'BSD 3-Clause'
 DOWNLOAD_URL = 'https://github.com/bnoi/scikit-tracker'
 VERSION = 'dev'
 PYTHON_VERSION = (3, 3)
-DEPENDENCIES = {'numpy': (1, 8),
-                'scipy': (0, 12),
-                'pandas': (0, 13),
-                'skimage': (0, 9),
-                'sklearn': (0, 13),
-                'Cython': (0, 20)
-                }
+DEPENDENCIES = ["numpy >= 1.8",
+                "scipy >= 0.12",
+                "pandas >= 0.13",
+                "skimage >= 0.9",
+                "sklearn >= 0.13",
+                "Cython >= 0.20"
+                ]
 
 if VERSION.endswith('dev'):
-    DEPENDENCIES['nose'] = (1, 3)
-    DEPENDENCIES['sphinx'] = (1, 2)
-    DEPENDENCIES['coverage'] = (3, 7)
+    DEPENDENCIES += ["nose >= 1.3",
+                     "sphinx >= 1.2",
+                     "coverage >= 3.7"
+                     ]
 
 
 def configuration(parent_package='', top_path=None):
@@ -76,28 +77,7 @@ def get_package_version(package):
     return tuple(version)
 
 
-def check_requirements():
-    if sys.version_info < PYTHON_VERSION:
-        raise SystemExit('You need Python version {].{} or later.'.format(PYTHON_VERSION))
-
-    for package_name, min_version in DEPENDENCIES.items():
-        dep_error = False
-        try:
-            package = __import__(package_name)
-        except ImportError:
-            dep_error = True
-        else:
-            package_version = get_package_version(package)
-            if min_version > package_version:
-                dep_error = True
-
-        if dep_error:
-            raise ImportError('You need `{}` version {}.{} or later.'.format(((package_name, ) +
-                              min_version)))
-
 if __name__ == "__main__":
-
-    check_requirements()
 
     write_version_py()
 
@@ -141,4 +121,7 @@ if __name__ == "__main__":
         ext_modules=cythonize(["*.pyx"]),
 
         test_suite='nose.collector',
+
+        install_requires=DEPENDENCIES,
+
     )
