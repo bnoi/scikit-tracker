@@ -1,5 +1,4 @@
 import os
-import sys
 import re
 import setuptools
 from numpy.distutils.core import setup
@@ -123,5 +122,6 @@ if __name__ == "__main__":
         test_suite='nose.collector',
 
         install_requires=DEPENDENCIES,
+        setup_requires=DEPENDENCIES,
 
     )
