@@ -35,11 +35,9 @@ nosetests.xml
 .project
 .pydevproject
 
-sktracker/version.py
 doc/build
 doc/gh-pages
 doc/source/api
-
 
 # Emacs
 *.*~
