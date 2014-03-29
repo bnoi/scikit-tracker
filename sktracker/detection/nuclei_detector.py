@@ -17,13 +17,15 @@ log = logging.getLogger(__name__)
 
 __all__ = ['nuclei_detector']
 
-DEFAULT_PARAMETERS = {'segment_method':'otsu',
-                      'correction':1.,
-                      'smooth':10,
-                      'min_radius':2.,
-                      'max_radius':8.,
-                      'num_cells':8,
-                      'min_z_size':4.}
+DEFAULT_PARAMETERS = {'segment_method': 'otsu',
+                      'correction': 1.,
+                      'smooth': 10,
+                      'min_radius': 2.,
+                      'max_radius': 8.,
+                      'num_cells': 8,
+                      'min_z_size': 4.
+                      }
+
 
 def nuclei_detector(data_iterator,
                     metadata={},
@@ -33,16 +35,30 @@ def nuclei_detector(data_iterator,
                     mapper=None,
                     show_progress=False):
     '''
+    TODO
+
+    Parameters
+    ----------
+    data_iterator : Python iterator over dataset
+    metadata: dict
+    parameters : dict
+    parallel : bool
+    verbose : bool
+    mapper : bool
+    show_progress : bool
+
+    Returns
+    -------
     '''
-    
+
     _parameters = DEFAULT_PARAMETERS.copy()
     _parameters.update(parameters)
     parameters = _parameters
-    
+
     parameters['min_z_size'] = parameters['min_z_size'] / metadata['PhysicalSizeZ']
     parameters['min_radius'] /= metadata['PhysicalSizeX']
     parameters['max_radius'] /= metadata['PhysicalSizeX']
-    
+
     arguments = zip(data_iterator, itertools.repeat(parameters))
     if parallel and mapper is not None:
         results = mapper.map(detect_one_stack,
@@ -65,10 +81,11 @@ def nuclei_detector(data_iterator,
     real_times = nuclei_positions.index.get_level_values('t_stamp').astype(np.float)
     real_times *= metadata['TimeIncrement']
     nuclei_positions['t'] = real_times
+
     return nuclei_positions
 
-def detect_one_stack(args,
-                     full_output=False):
+
+def detect_one_stack(args, full_output=False):
     z_stack, parameters = args
     if len(z_stack.shape) == 2:
         z_stack = z_stack[np.newaxis, ...]
@@ -80,7 +97,7 @@ def detect_one_stack(args,
     if not len(all_props):
         log.warning('No cell found after labelling')
         if full_output:
-            output = {'labeled_stack':labeled_stack}
+            output = {'labeled_stack': labeled_stack}
             return output
         else:
             return {}
@@ -110,6 +127,7 @@ def detect_one_stack(args,
     else:
         output = {'positions': positions,}
     return output
+
 
 def label_stack(z_stack, parameters):
     '''
@@ -146,7 +164,7 @@ def label_stack(z_stack, parameters):
         labeled_stack[n] = label_from_thresh(frame, thresh, parameters)
     return labeled_stack
 
-    
+
 def label_from_thresh(frame, thresh, parameters):
 
     smooth = parameters['smooth']
@@ -164,6 +182,7 @@ def label_from_thresh(frame, thresh, parameters):
                                     indices=False, labels=image)
         markers = ndimage.label(local_maxi)[0]
         return watershed(-distance, markers, mask=image)
+
 
 def get_regionprops(labeled_stack, z_stack, parameters):
     '''
@@ -197,6 +216,7 @@ def get_regionprops(labeled_stack, z_stack, parameters):
     all_props = pd.DataFrame(all_props, index=indices, columns=columns)
     return all_props
 
+
 def cluster_regions(all_props, parameters):
 
     radius = parameters['max_radius']
@@ -212,7 +232,7 @@ def cluster_regions(all_props, parameters):
     if all_props.shape[0] < 3:
         return all_props[['x', 'y', 'z', 'w', 'I']]
 
-    ### Hierarchical clustering
+    # Hierarchical clustering
     dist_mat = squareform(pdist(positions.values))
     link_mat = hierarchy.linkage(dist_mat)
     cluster_idx = hierarchy.fcluster(link_mat, radius,
@@ -232,9 +252,10 @@ def cluster_regions(all_props, parameters):
     all_props = all_props.sort_index()
     return all_props
 
+
 def get_cell_positions(all_props, interpolate=True):
 
-    ### Intensity should be summed, not averaged
+    # Intensity should be summed, not averaged
     intensities = all_props['I'].groupby(
         level='label').sum()
     intensities /= intensities.max()
@@ -242,6 +263,7 @@ def get_cell_positions(all_props, interpolate=True):
         level='label').apply(df_average, 'I')
     cell_positions['I'] = intensities
     return cell_positions
+
 
 def df_average(df, weights_column):
     values = df.copy().iloc[0]

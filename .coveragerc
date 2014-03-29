@@ -3,3 +3,4 @@ omit =
     */sktracker/io/tifffile.py
     */sktracker/data/*
     */sktracker/tracker/lapjv/*
+    */sktracker/version.py

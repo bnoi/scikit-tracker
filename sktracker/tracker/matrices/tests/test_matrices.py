@@ -64,7 +64,7 @@ def test_cost_matrix_mocked_flat():
 def test_cost_matrix_with_mock_trajs():
 
     trajs = data.directed_trajectories_generator(n_part=5,
-                                                 n_times=100,
+                                                 n_times=10,
                                                  noise=1e-10,
                                                  p_disapear=0.4,
                                                  sampling=10,
@@ -79,7 +79,10 @@ def test_cost_matrix_with_mock_trajs():
         pos0 = trajs.ix[t0]
         pos1 = trajs.ix[t1]
 
-        yield build_cost_matrix, pos0, pos1
+        fn = lambda: build_cost_matrix(pos0, pos1)
+        fn.description = "Check CostMatrix build is correct for t0 = {} and t1 = {}".format(t0, t1)
+
+        yield fn
 
 
 def build_cost_matrix(pos0, pos1):

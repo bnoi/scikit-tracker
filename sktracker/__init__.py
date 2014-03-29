@@ -1,6 +1,6 @@
 """Object detection and tracking for cell biology
 
-`scikit-learn` is bla bla bla.
+`scikit-tracker` is bla bla bla.
 
 Subpackages
 -----------
@@ -9,14 +9,14 @@ utils
 
 """
 
-import logging
+from .version import __version__
 
-try:
-    from .version import __version__
-except ImportError: # pragma: no cover
-    __version__ = "dev" # pragma: no cover
+__all__ = ['__version__', 'set_log_level']
 
-def setup_log(): # pragma: no cover
+
+def setup_log():  # pragma: no cover
+
+    import logging
 
     from .utils import color
     from .utils import in_ipython
@@ -39,7 +39,25 @@ def setup_log(): # pragma: no cover
     formatter = logging.Formatter(logformat, "%Y-%m-%d %H:%M:%S")
     handler.setFormatter(formatter)
     logger.addHandler(handler)
-    logger.setLevel(logging.DEBUG)
     logger.propagate = False
 
+
+def set_log_level(loglevel):
+    """
+    Parameters
+    ----------
+    loglevel : str
+        Should be DEBUG, INFO, WARNING, ERROR, CRITICAL
+    """
+
+    import logging
+
+    numeric_level = getattr(logging, loglevel.upper(), None)
+    if not isinstance(numeric_level, int):  # pragma: no cover
+        raise ValueError('Invalid log level : {}'.format(loglevel))
+
+    logger = logging.getLogger(__name__)
+    logger.setLevel(numeric_level)
+
 setup_log()
+set_log_level('ERROR')

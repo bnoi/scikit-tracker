@@ -1,4 +1,3 @@
-import os
 import tempfile
 
 from sktracker import data
@@ -20,7 +19,7 @@ def test_objectsio():
                   'peak_radius': 0.2,
                   'threshold': 27,
                   'max_peaks': 4
-                 }
+                  }
 
     peaks = peak_detector(data_iterator(),
                           st.metadata,
@@ -33,6 +32,7 @@ def test_objectsio():
     oio["detected"] = peaks
 
     assert (oio.keys() == ['/detected', '/metadata']) and (oio["detected"].shape == (28, 6))
+
 
 def test_from_h5():
 

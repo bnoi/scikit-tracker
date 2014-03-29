@@ -61,6 +61,7 @@ def get_metadata(filename, json_discovery=False):
 
     return md
 
+
 def _get_from_metadata_json(filename):
     """Get metadata from json file
     metadata.json file will be read in the same or the parent directory of the
@@ -86,18 +87,18 @@ def _get_from_metadata_json(filename):
     for metadata_path in candidats:
         if os.path.isfile(metadata_path):
             try:
-                log.info('Load metadata from %s' % metadata_path)
                 metadata = json.load(open(metadata_path))
             except:
                 pass
 
     return metadata
 
+
 def validate_metadata(metadata,
                       keys=['DimensionOrder', 'Shape', 'FileName']):
     err = []
     for key in keys:
-        if not key in metadata.keys():
+        if key not in metadata.keys():
             err.append(key)
     if len(err):
         raise ValueError('metadata missing the following key(s):\n'
