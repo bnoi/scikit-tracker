@@ -8,23 +8,22 @@ from Cython.Build import cythonize
 
 from sktracker import __version__
 
-DISTNAME            = 'scikit-tracker'
-DESCRIPTION         = 'Object detection and tracking for cell biology'
-LONG_DESCRIPTION    = open('README.md').read()
-MAINTAINER          = 'Guillaume Gay and Hadrien Mary'
-MAINTAINER_EMAIL    = 'gllm.gay@gmail.com'
-URL                 = 'http://bnoi.github.io/scikit-tracker'
-LICENSE             = 'BSD 3-Clause'
-DOWNLOAD_URL        = 'https://github.com/bnoi/scikit-tracker'
-VERSION             = 'dev'
-PYTHON_VERSION      = (3, 3)
-DEPENDENCIES        =  {
-                        'numpy': (1, 8),
-                        'scipy': (0, 12),
-                        'pandas': (0, 13),
-                        'skimage': (0, 9),
-                        'sklearn': (0, 13),
-                      }
+DISTNAME = 'scikit-tracker'
+DESCRIPTION = 'Object detection and tracking for cell biology'
+LONG_DESCRIPTION = open('README.md').read()
+MAINTAINER = 'Guillaume Gay and Hadrien Mary'
+MAINTAINER_EMAIL = 'gllm.gay@gmail.com'
+URL = 'http://bnoi.github.io/scikit-tracker'
+LICENSE = 'BSD 3-Clause'
+DOWNLOAD_URL = 'https://github.com/bnoi/scikit-tracker'
+VERSION = 'dev'
+PYTHON_VERSION = (3, 3)
+DEPENDENCIES = {'numpy': (1, 8),
+                'scipy': (0, 12),
+                'pandas': (0, 13),
+                'skimage': (0, 9),
+                'sklearn': (0, 13),
+                }
 
 # Only require Cython if we have a developer checkout
 if VERSION.endswith('dev'):
@@ -32,21 +31,22 @@ if VERSION.endswith('dev'):
     DEPENDENCIES['sphinx'] = (1, 2)
     DEPENDENCIES['coverage'] = (3, 7)
 
+
 def configuration(parent_package='', top_path=None):
 
     from numpy.distutils.misc_util import Configuration
     config = Configuration(None, parent_package, top_path)
 
-    config.set_options(
-            ignore_setup_xxx_py=True,
-            assume_default_configuration=True,
-            delegate_options_to_subpackages=True,
-            quiet=True)
+    config.set_options(ignore_setup_xxx_py=True,
+                       assume_default_configuration=True,
+                       delegate_options_to_subpackages=True,
+                       quiet=True)
 
     config.add_subpackage('sktracker')
     config.add_data_dir(os.path.join('sktracker', 'data'))
 
     return config
+
 
 def write_version_py(filename='sktracker/version.py'):
     template = """# This file is generated from the sktracker setup.py
@@ -61,6 +61,7 @@ __version__ = '%s'
     finally:
         vfile.close()
 
+
 def get_package_version(package):
     version = []
     for version_attr in ('version', 'VERSION', '__version__'):
@@ -74,10 +75,10 @@ def get_package_version(package):
                     pass
     return tuple(version)
 
+
 def check_requirements():
     if sys.version_info < PYTHON_VERSION:
-        raise SystemExit('You need Python version %d.%d or later.' \
-                         % PYTHON_VERSION)
+        raise SystemExit('You need Python version {].{} or later.'.format(PYTHON_VERSION))
 
     for package_name, min_version in DEPENDENCIES.items():
         dep_error = False
@@ -91,9 +92,8 @@ def check_requirements():
                 dep_error = True
 
         if dep_error:
-            raise ImportError('You need `%s` version %d.%d or later.' \
-                              % ((package_name, ) + min_version))
-
+            raise ImportError('You need `{}` version {}.{} or later.'.format(((package_name, ) +
+                              min_version)))
 
 if __name__ == "__main__":
 
@@ -131,12 +131,14 @@ if __name__ == "__main__":
 
         packages=setuptools.find_packages(exclude=['doc']),
         include_package_data=True,
-        zip_safe=False, # the package can run out of an .egg file
+        zip_safe=False,  # the package can run out of an .egg file
 
         entry_points={
             'console_scripts': [],
         },
 
         cmdclass={'build_py': build_py},
-        ext_modules = cythonize(["*.pyx"]),
+        ext_modules=cythonize(["*.pyx"]),
+
+        test_suite='nose.collector',
     )
