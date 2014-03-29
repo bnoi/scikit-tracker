@@ -1,9 +1,12 @@
 import os
 import re
-import setuptools
-from numpy.distutils.core import setup
+
+# import numpy
+
+from setuptools import setup, find_packages
+
 from distutils.command.build_py import build_py
-from Cython.Build import cythonize
+# from Cython.Build import cythonize
 
 from sktracker import __version__
 
@@ -20,8 +23,8 @@ PYTHON_VERSION = (3, 3)
 DEPENDENCIES = ["numpy >= 1.8",
                 "scipy >= 0.12",
                 "pandas >= 0.13",
-                "skimage >= 0.9",
-                "sklearn >= 0.13",
+                "scikit-image >= 0.9",
+                "scikit-learn >= 0.13",
                 "Cython >= 0.20"
                 ]
 
@@ -108,7 +111,7 @@ if __name__ == "__main__":
 
         configuration=configuration,
 
-        packages=setuptools.find_packages(exclude=['doc']),
+        packages=find_packages(exclude=['doc']),
         include_package_data=True,
         zip_safe=False,  # the package can run out of an .egg file
 
@@ -117,11 +120,10 @@ if __name__ == "__main__":
         },
 
         cmdclass={'build_py': build_py},
-        ext_modules=cythonize(["*.pyx"]),
+        # ext_modules=cythonize("*.pyx", include_path=[numpy.get_include()]),
 
         test_suite='nose.collector',
 
         install_requires=DEPENDENCIES,
         setup_requires=DEPENDENCIES,
-
     )
