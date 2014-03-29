@@ -30,5 +30,6 @@ doc:
 	cd doc/ && make clean && make api && make html
 
 push_doc:
+	cd doc/ && make clean && make api && make html
 	cd doc/ && python gh-pages.py
 	cd doc/gh-pages/ && git push origin gh-pages && cd ../../
