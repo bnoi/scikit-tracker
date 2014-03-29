@@ -23,9 +23,9 @@ DEPENDENCIES = {'numpy': (1, 8),
                 'pandas': (0, 13),
                 'skimage': (0, 9),
                 'sklearn': (0, 13),
+                'Cython': (0, 20)
                 }
 
-# Only require Cython if we have a developer checkout
 if VERSION.endswith('dev'):
     DEPENDENCIES['nose'] = (1, 3)
     DEPENDENCIES['sphinx'] = (1, 2)
