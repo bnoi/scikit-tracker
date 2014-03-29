@@ -3,30 +3,21 @@
 In practice, you should use either actual clean tags from a current build or
 something like 'current' as a stable URL for the mest current version of the """
 
-#-----------------------------------------------------------------------------
 # Imports
-#-----------------------------------------------------------------------------
 import os
 import re
 import shutil
 import sys
 from os import chdir as cd
-from os.path import join as pjoin
 
 from subprocess import Popen, PIPE, CalledProcessError, check_call
-
-#-----------------------------------------------------------------------------
-# Globals
-#-----------------------------------------------------------------------------
 
 pages_dir = 'gh-pages'
 html_dir = 'build/html'
 pdf_dir = 'build/latex'
 pages_repo = 'git@github.com:bnoi/scikit-tracker.git'
 
-#-----------------------------------------------------------------------------
-# Functions
-#-----------------------------------------------------------------------------
+
 def sh(cmd):
     """Execute command in a subshell, return status code."""
     return check_call(cmd, shell=True)
@@ -61,36 +52,28 @@ def sh3(cmd):
 
 def init_repo(path):
     """clone the gh-pages repo if we haven't already."""
-    sh("git clone %s %s"%(pages_repo, path))
+    sh("git clone %s %s" % (pages_repo, path))
     here = os.getcwd()
     cd(path)
     sh('git checkout gh-pages')
     cd(here)
 
-#-----------------------------------------------------------------------------
 # Script starts
-#-----------------------------------------------------------------------------
+
 if __name__ == '__main__':
-    # find the version number from setup.py
-    setup_lines = open('../setup.py').readlines()
-    tag = 'vUndefined'
-    for l in setup_lines:
-        if l.startswith('VERSION'):
-            tag = l.split("'")[1]
 
-            if "dev" in tag:
-                tag = "dev"
-            elif len(tag.split('.')) >= 3:
-                tag = '.'.join(tag.split('.')[:-1] + ['x'])
+    import sktracker
+    version = sktracker.__version__
 
-            break
+    if "dev" in version:
+        tag = "dev"
+    else:
+        tag = version
 
     startdir = os.getcwd()
     if not os.path.exists(pages_dir):
-        # init the repo
         init_repo(pages_dir)
     else:
-        # ensure up-to-date before operating
         cd(pages_dir)
         sh('git checkout gh-pages')
         sh('git pull')
@@ -102,9 +85,6 @@ if __name__ == '__main__':
     # directory, and then copy the html tree in there
     shutil.rmtree(dest, ignore_errors=True)
     shutil.copytree(html_dir, dest)
-
-    # copy pdf file into tree
-    #shutil.copy(pjoin(pdf_dir, 'scikits.image.pdf'), pjoin(dest, 'scikits.image.pdf'))
 
     try:
         cd(pages_dir)

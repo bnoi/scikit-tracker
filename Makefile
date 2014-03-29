@@ -27,7 +27,7 @@ coverage:
 	nosetests sktracker --with-coverage --cover-package=sktracker -v
 
 doc:
-	cd doc/ && make api && make html
+	cd doc/ && make clean && make api && make html
 
 push_doc:
 	cd doc/ && python gh-pages.py

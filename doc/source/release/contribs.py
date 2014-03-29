@@ -10,6 +10,7 @@ if len(sys.argv) != 2:
 
 tag = sys.argv[1]
 
+
 def call(cmd):
     return subprocess.check_output(shlex.split(cmd)).decode('utf-8').split('\n')
 
@@ -39,6 +40,7 @@ surname:\n""")
 
 authors = call("git log --since='%s' --format=%%aN" % tag_date)
 authors = [a.strip() for a in authors if a.strip()]
+
 
 def key(author):
     author = [v for v in author.split() if v[0] in string.ascii_letters]

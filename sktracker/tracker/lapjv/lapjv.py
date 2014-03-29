@@ -17,12 +17,18 @@ All rights reserved.
 
 import numpy as np
 
-import pyximport
-pyximport.install(setup_args={'include_dirs': [np.get_include()]})
+try:
+    from ._lapjv import reduction_transfer
+    from ._lapjv import augmenting_row_reduction
+    from ._lapjv import augment
+except:
+    # Try on the fly Cython compilation
+    import pyximport
+    pyximport.install(setup_args={'include_dirs': [np.get_include()]})
 
-from ._lapjv import reduction_transfer
-from ._lapjv import augmenting_row_reduction
-from ._lapjv import augment
+    from ._lapjv import reduction_transfer
+    from ._lapjv import augmenting_row_reduction
+    from ._lapjv import augment
 
 
 def lapjv(i, j, costs, wants_dual_variables=False,

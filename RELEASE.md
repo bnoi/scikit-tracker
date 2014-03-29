@@ -1,5 +1,7 @@
 # How to make a new release of `scikit-tracker`
 
+**THIS PROCEDURE NEEDS MORE WORK (can wait until 0.2 is released)**
+
 - Update release notes.
 
   - To show a list of contributors and changes, run

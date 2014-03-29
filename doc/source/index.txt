@@ -1,7 +1,7 @@
 Scikit-tracker's documentation
 ==============================
 
-- **Version** : dev (april 2014)
+- **Version** : |version|
 - **Source code** : https://github.com/bnoi/scikit-tracker
 - **Issues, ideas and discussions** : https://github.com/bnoi/scikit-tracker/issues
 

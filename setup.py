@@ -1,12 +1,15 @@
-import os
-import re
-from setuptools import setup, find_packages
+import warnings
 
-# import numpy
-# from Cython.Build import cythonize
+from setuptools import find_packages
+from setuptools import setup
+from setuptools import Extension
 
-from sktracker import __version__
+# Get version number
+import sys
+sys.path.append('.')
+import sktracker
 
+# Fill project desciption fields
 DISTNAME = 'scikit-tracker'
 DESCRIPTION = 'Object detection and tracking for cell biology'
 LONG_DESCRIPTION = open('README.md').read()
@@ -15,14 +18,13 @@ MAINTAINER_EMAIL = 'gllm.gay@gmail.com'
 URL = 'http://bnoi.github.io/scikit-tracker'
 LICENSE = 'BSD 3-Clause'
 DOWNLOAD_URL = 'https://github.com/bnoi/scikit-tracker'
-VERSION = 'dev'
+VERSION = sktracker.__version__
 PYTHON_VERSION = (3, 3)
 DEPENDENCIES = ["numpy >= 1.8",
                 "scipy >= 0.12",
                 "pandas >= 0.13",
                 "scikit-image >= 0.9",
                 "scikit-learn >= 0.13",
-                "Cython >= 0.20"
                 ]
 
 if VERSION.endswith('dev'):
@@ -31,54 +33,27 @@ if VERSION.endswith('dev'):
                      "coverage >= 3.7"
                      ]
 
+# Try to use Cython to compile .pyx files.
+# If Cython it not available then try to compile .c related files.
+# So be sure to always have the .c version for each .pyx files.
+# You can generate .c files with python setup.py build_ext --inplace
+try:
+    import numpy as np
+except ImportError as e:
+    raise ImportError("Numpy is needed to compile .pyx extensions. Use : pip install numpy")
 
-def configuration(parent_package='', top_path=None):
+try:
+    from Cython.Distutils import build_ext
+except ImportError as e:
+    from setuptools.command.build_ext import build_ext
+    warnings.warn("Cython is not present. .pyx extensions will be build against .c files.")
 
-    from numpy.distutils.misc_util import Configuration
-    config = Configuration(None, parent_package, top_path)
-
-    config.set_options(ignore_setup_xxx_py=True,
-                       assume_default_configuration=True,
-                       delegate_options_to_subpackages=True,
-                       quiet=True)
-
-    config.add_subpackage('sktracker')
-    config.add_data_dir(os.path.join('sktracker', 'data'))
-
-    return config
-
-
-def write_version_py(filename='sktracker/version.py'):
-    template = """# This file is generated from the sktracker setup.py
-__version__ = '%s'
-"""
-
-    vfile = open(os.path.join(os.path.dirname(__file__),
-                              filename), 'w')
-
-    try:
-        vfile.write(template % VERSION)
-    finally:
-        vfile.close()
-
-
-def get_package_version(package):
-    version = []
-    for version_attr in ('version', 'VERSION', '__version__'):
-        if hasattr(package, version_attr) \
-                and isinstance(getattr(package, version_attr), str):
-            version_info = getattr(package, version_attr, '')
-            for part in re.split('\D+', version_info):
-                try:
-                    version.append(int(part))
-                except ValueError:
-                    pass
-    return tuple(version)
-
+extensions = [Extension("sktracker.tracker.lapjv._lapjv",
+                        ["sktracker/tracker/lapjv/_lapjv.pyx"],
+                        include_dirs=[np.get_include()])
+              ]
 
 if __name__ == "__main__":
-
-    write_version_py()
 
     setup(
         name=DISTNAME,
@@ -106,21 +81,19 @@ if __name__ == "__main__":
             'Operating System :: MacOS',
         ],
 
-        configuration=configuration,
-
-        packages=find_packages(exclude=['doc']),
-        include_package_data=True,
-        zip_safe=False,  # the package can run out of an .egg file
-
-        entry_points={
-            'console_scripts': [],
+        packages=find_packages(),
+        package_data={
+            '': ['data/*.h5', 'data/*.xml', 'data/*.tif'],
         },
 
-        # cmdclass={'build_py': build_py},
-        # ext_modules=cythonize("*.pyx", include_path=[numpy.get_include()]),
-
+        tests_require='nose',
         test_suite='nose.collector',
 
-        install_requires=DEPENDENCIES,
-        setup_requires=["Cython >= 0.20"],
+        # Should DEPENDENCIES need to be included or let the user install them himself ?
+        install_requires=[],
+        # install_requires=DEPENDENCIES,
+        setup_requires=['numpy'],
+
+        cmdclass={"build_ext": build_ext},
+        ext_modules=extensions,
     )
