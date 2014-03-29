@@ -1,5 +1,4 @@
-"""`sktracker.detection` module aims to detect objects of interests in images.
-
+""":mod:`sktracker.detection` module aims to detect objects of interests in images.
 """
 
 from .peak_detector import peak_detector
