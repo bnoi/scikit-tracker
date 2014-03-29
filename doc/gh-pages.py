@@ -101,7 +101,7 @@ if __name__ == '__main__':
             sh('ln -s %s stable' % tag)
 
         sh('git add . --all')
-        sh2('git commit -am "Updated doc release: %s" --allow-empty' % tag)
+        sh2('git commit -am "Updated doc release: {}" --allow-empty'.format(version))
 
         print('Most recent commit:')
         sys.stdout.flush()
