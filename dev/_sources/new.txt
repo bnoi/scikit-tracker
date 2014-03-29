@@ -1,4 +1,4 @@
 What's new
 ==========
 
-.. include:: ../release/release_0.1.txt
+.. include:: release/release_0.1.txt

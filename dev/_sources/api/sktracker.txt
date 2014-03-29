@@ -10,6 +10,7 @@ Subpackages
     sktracker.detection
     sktracker.io
     sktracker.tracker
+    sktracker.trajectories
     sktracker.utils
 
 Submodules

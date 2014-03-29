@@ -4,10 +4,18 @@ sktracker.tracker.solver package
 Submodules
 ----------
 
-sktracker.tracker.solver.byframesolver module
----------------------------------------------
+sktracker.tracker.solver.by_frame_solver module
+-----------------------------------------------
 
-.. automodule:: sktracker.tracker.solver.byframesolver
+.. automodule:: sktracker.tracker.solver.by_frame_solver
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.tracker.solver.gap_close_solver module
+------------------------------------------------
+
+.. automodule:: sktracker.tracker.solver.gap_close_solver
     :members:
     :undoc-members:
     :show-inheritance:

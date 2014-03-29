@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker package &mdash; sktracker vdev docs</title>
+  <title>sktracker package &mdash; sktracker 0.2.dev-rf5a6310 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker vdev docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-rf5a6310 docs" href="../index.html"/>
         <link rel="next" title="sktracker.data package" href="sktracker.data.html"/>
         <link rel="prev" title="Theory about some featured algorithms" href="../theory.html"/> 
 
@@ -177,6 +177,8 @@
 <li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.basic_cost_functions">sktracker.tracker.cost_function.basic_cost_functions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.brownian">sktracker.tracker.cost_function.brownian module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.diagonals">sktracker.tracker.cost_function.diagonals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.directed">sktracker.tracker.cost_function.directed module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.gap_close">sktracker.tracker.cost_function.gap_close module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function">Module contents</a></li>
 </ul>
 </li>
@@ -194,7 +196,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sktracker.tracker.solver.html">sktracker.tracker.solver package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.solver.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.solver.html#module-sktracker.tracker.solver.byframesolver">sktracker.tracker.solver.byframesolver module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.solver.html#module-sktracker.tracker.solver.by_frame_solver">sktracker.tracker.solver.by_frame_solver module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.solver.html#module-sktracker.tracker.solver.gap_close_solver">sktracker.tracker.solver.gap_close_solver module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.solver.html#module-sktracker.tracker.solver.solver">sktracker.tracker.solver.solver module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sktracker.tracker.solver.html#module-sktracker.tracker.solver">Module contents</a></li>
 </ul>
@@ -210,10 +213,15 @@
 <li class="toctree-l2"><a class="reference internal" href="sktracker.tracker.html#module-sktracker.tracker">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.trajectories.html">sktracker.trajectories package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.trajectories.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.trajectories.html#module-sktracker.trajectories.trajectories">sktracker.trajectories.trajectories module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.trajectories.html#module-sktracker.trajectories">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="sktracker.utils.html">sktracker.utils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.utils.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.utils.html#module-sktracker.utils.color_system">sktracker.utils.color_system module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.utils.html#module-sktracker.utils.dataframes">sktracker.utils.dataframes module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.utils.html#module-sktracker.utils.ipython">sktracker.utils.ipython module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.utils.html#module-sktracker.utils.progress">sktracker.utils.progress module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.utils.html#module-sktracker.utils">Module contents</a></li>
@@ -285,7 +293,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'dev',
+            VERSION:'0.2.dev-rf5a6310',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

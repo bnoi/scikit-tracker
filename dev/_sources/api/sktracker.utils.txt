@@ -12,14 +12,6 @@ sktracker.utils.color_system module
     :undoc-members:
     :show-inheritance:
 
-sktracker.utils.dataframes module
----------------------------------
-
-.. automodule:: sktracker.utils.dataframes
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 sktracker.utils.ipython module
 ------------------------------
 

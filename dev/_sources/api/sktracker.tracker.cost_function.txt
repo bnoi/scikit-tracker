@@ -28,6 +28,22 @@ sktracker.tracker.cost_function.diagonals module
     :undoc-members:
     :show-inheritance:
 
+sktracker.tracker.cost_function.directed module
+-----------------------------------------------
+
+.. automodule:: sktracker.tracker.cost_function.directed
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.tracker.cost_function.gap_close module
+------------------------------------------------
+
+.. automodule:: sktracker.tracker.cost_function.gap_close
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
