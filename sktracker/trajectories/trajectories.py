@@ -65,6 +65,29 @@ class Trajectories(pd.DataFrame):
         return {key: segment for key, segment
                 in self.iter_segments}
 
+    def reverse(self):
+        """Reverse trajectories.
+
+        Returns
+        -------
+        A copy of current :class:`sktracker.trajectories.Trajectories`
+        """
+
+        trajs = self.copy()
+        trajs.reset_index(inplace=True)
+        trajs['t_stamp'] = trajs['t_stamp'] * -1
+        trajs['t'] = trajs['t'] * -1
+        trajs.sort('t_stamp', inplace=True)
+        trajs.set_index(['t_stamp', 'label'], inplace=True)
+        return trajs
+
+    def copy(self):
+        """
+        """
+
+        trajs = super().copy()
+        return Trajectories(trajs)
+
     def check_trajs_df_structure(self, index=None, columns=None):
         """Check wether trajcetories contains a specified structure.
 
@@ -108,7 +131,7 @@ class Trajectories(pd.DataFrame):
             nu_lbls[old_lbls == uv] = n
 
         if not inplace:
-            trajs = Trajectories(self.copy())
+            trajs = self.copy()
         else:
             trajs = self
 

@@ -50,3 +50,17 @@ def test_structure():
     assert_raises(ValueError, trajs.check_trajs_df_structure, ['t_stamp', 'label'], ['dx'])
 
     trajs.check_trajs_df_structure(['t_stamp', 'label'], ['x', 'y', 'z'])
+
+
+def test_copy():
+    trajs = data.brownian_trajs_df()
+    trajs = Trajectories(trajs)
+
+    assert isinstance(trajs.copy(), Trajectories)
+
+
+def test_reverse():
+    trajs = data.brownian_trajs_df()
+    trajs = Trajectories(trajs)
+
+    assert trajs.reverse().shape == (25, 5)

@@ -143,7 +143,7 @@ class ByFrameSolver(AbstractSolver):
         last_in_link = row_shapes[0]
         last_out_link = col_shapes[0]
 
-        new_labels_in = self.trajs.loc[self.t_in, 'new_label'].values
+        new_labels_in = self.trajs.loc[self.t_in]['new_label'].values
         new_labels_out = np.arange(last_out_link)
 
         for idx_out, idx_in in enumerate(self.cm.out_links[:last_out_link]):
