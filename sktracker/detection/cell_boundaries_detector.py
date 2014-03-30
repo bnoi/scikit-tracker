@@ -18,13 +18,11 @@ from ..utils.progress import print_progress
 __all__ = []
 
 DEFAULT_PARAMETERS = {'object_height': 3,
-                      'minimal_area': 160,
-                      }
+                      'minimal_area': 160}
 
 
 def cell_boundaries_detector(data_iterator,
                              metadata,
-                             verbose=True,
                              show_progress=False,
                              parameters={}):
     """
@@ -48,27 +46,17 @@ def cell_boundaries_detector(data_iterator,
 
     Return
     ------
-    trajs : :class:`pd.DataFrame`
+    shapes : :class:`pd.DataFrame`
         Contains cell boundary properties for each time_stamp
     """
-
-    if not verbose:
-        log.disabled = True
 
     _parameters = DEFAULT_PARAMETERS.copy()
     _parameters.update(parameters)
     parameters = _parameters
 
-    # Scale parameters in pixels
-    parameters['minimal_area'] /= metadata['PhysicalSizeX']
-
     # Load parameters
-    sigma = parameters['object_height'] // metadata['SizeZ']
-    minimal_area = parameters['minimal_area'] / metadata['SizeX']
-
-    # Find number of stacks to process
-    # Only iteration over T and Z are assumed
-    # n_stack = metadata['SizeT'] * metadata['SizeZ']
+    sigma = parameters['object_height'] / metadata['PhysicalSizeZ']
+    minimal_area = parameters['minimal_area'] / metadata['PhysicalSizeX']
 
     sizeX = metadata['SizeX']
     sizeY = metadata['SizeY']
@@ -82,15 +70,15 @@ def cell_boundaries_detector(data_iterator,
             p = int(float(t + 1) / t_tot * 100.)
             print_progress(p)
 
-        if (np.any(imt) != 0 or (t != 0 and not np.array_equal(imt, im[t - 1]))):
-            corr = np.zeros((sizeX, sizeY))
+        if np.any(imt) != 0:
+            corr = np.zeros((sizeY, sizeX))
 
-            for x, y in np.ndindex(sizeX, sizeY):
-                Iz = imt[:, x, y]
+            for y, x in np.ndindex(sizeY, sizeX):
+                Iz = imt[:, y, x]
                 z = np.array(range(len(Iz)))
                 zf = len(Iz) / 2
-                corr[x, y] = integrate.simps(
-                    Iz[z] * (z - zf) * np.exp(-(zf - z) ** 2 / (2 * sigma ** 2)), z)
+                corr[y, x] = integrate.simps(Iz[z] * (z - zf) * np.exp(-(zf - z) ** 2 /
+                                             (2 * sigma ** 2)), z)
 
             # create binary mask of the correlation image
             thresh = threshold_otsu(corr)
@@ -116,7 +104,6 @@ def cell_boundaries_detector(data_iterator,
                 if np.any(labelized):
                     prevcellprop = regionprops(
                         labelized, intensity_image=corr)[0]
-                    print(prevcellprop)
 
                 prevarea = area
                 if prevcellprop:
@@ -140,22 +127,23 @@ def cell_boundaries_detector(data_iterator,
 
     # class cell morphology in time in the props Dataframe (time, centroid X,
     # centroid Y, ...)
-    listprop = ['centroid_x', 'centroid_y',
-                'orientation', 'major_axis', 'minor_axis']
+    listprop = ['centroid_x', 'centroid_y', 'orientation', 'major_axis', 'minor_axis']
     cell_Prop = np.zeros((len(listprop) + 1, metadata["SizeT"]))
 
     for i in range(metadata["SizeT"]):
         if cellprop[i]:
             cell_Prop[0, i] = i
-            cell_Prop[1, i] = cellprop[i]['centroid'][0]
-            cell_Prop[2, i] = cellprop[i]['centroid'][1]
+            cell_Prop[1, i] = cellprop[i]['centroid'][0] * metadata['PhysicalSizeX']
+            cell_Prop[2, i] = cellprop[i]['centroid'][1] * metadata['PhysicalSizeX']
             cell_Prop[3, i] = cellprop[i]['orientation']
-            cell_Prop[4, i] = cellprop[i]['major_axis_length']
-            cell_Prop[5, i] = cellprop[i]['minor_axis_length']
+            cell_Prop[4, i] = cellprop[i]['major_axis_length'] * metadata['PhysicalSizeX']
+            cell_Prop[5, i] = cellprop[i]['minor_axis_length'] * metadata['PhysicalSizeX']
 
     cell_Prop = cell_Prop.T
-    props = pd.DataFrame(cell_Prop, columns=['t'] + listprop)
-    props = props.set_index('t')
+    props = pd.DataFrame(cell_Prop, columns=['t_stamp'] + listprop)
+    props = props.set_index('t_stamp')
+    props['t'] = props.index.get_level_values('t_stamp') * metadata['TimeIncrement']
+    props = props.astype(np.float)
 
     if np.all(props == 0):
         return pd.DataFrame([])

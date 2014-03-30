@@ -11,17 +11,17 @@ def test_peak_detector():
     data_iterator = st.image_iterator(channel_index=0)
 
     parameters = {'w_s': 0.7,
-              'peak_radius': 0.2,
-              'threshold': 27,
-              'max_peaks': 4
-             }
+                  'peak_radius': 0.2,
+                  'threshold': 27,
+                  'max_peaks': 4
+                  }
 
     peaks = peak_detector(data_iterator(),
-                    st.metadata,
-                    parallel=True,
-                    verbose=False,
-                    show_progress=False,
-                    parameters=parameters)
+                          st.metadata,
+                          parallel=True,
+                          verbose=False,
+                          show_progress=False,
+                          parameters=parameters)
 
     assert peaks.shape == (28, 6)
 
@@ -34,16 +34,15 @@ def test_peak_detector_no_peaks():
     data_iterator = st.image_iterator(channel_index=0)
 
     parameters = {'w_s': 0.7,
-              'peak_radius': 0.2,
-              'threshold': 300,
-              'max_peaks': 4
-             }
+                  'peak_radius': 0.2,
+                  'threshold': 300,
+                  'max_peaks': 4}
 
     peaks = peak_detector(data_iterator(),
-                    st.metadata,
-                    parallel=True,
-                    verbose=False,
-                    show_progress=False,
-                    parameters=parameters)
+                          st.metadata,
+                          parallel=True,
+                          verbose=False,
+                          show_progress=False,
+                          parameters=parameters)
 
-    assert peaks.empty == True
+    assert peaks.empty is True
