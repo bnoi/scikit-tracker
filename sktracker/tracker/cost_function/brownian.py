@@ -97,11 +97,11 @@ class GCBrownianCostFunction(AbstractGCLinkCostFunction):
             distance = pdist(np.vstack([pos_in[coords].values,
                                         pos_out[coords].values]),
                              metric=distance_metric)
-            # print(pos_in.x, pos_out.x, distance)
+            #print(pos_in.x, pos_out.x, distance)
             distances[idx_in[1], idx_out[1]] = distance
-            # dt = pos_out.t - pos_in.t
-            # distances /= np.abs(dt)
-            # print(dt)
+            dt = pos_out.t - pos_in.t
+            distances /= np.abs(dt)
+            #print(dt)
         distances[distances > max_speed] = np.nan
         # print(distances)
         return distances ** 2

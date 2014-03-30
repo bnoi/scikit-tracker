@@ -106,11 +106,11 @@ class GapCloseSolver(AbstractSolver):
         matches = np.argwhere((gaps_size > 0) * (gaps_size < max_gap))
         if not matches.shape[0]:
             return [], []
-        matches_in = matches[:, 0]
-        matches_out = matches[:, 1]
+        matches_in = matches[:, 1]
+        matches_out = matches[:, 0]
 
         in_idxs = [(in_time, in_lbl) for (in_time, in_lbl)
-                   in zip(start_times[matches_in],
+                   in zip(stop_times[matches_in],
                           self.trajs.labels[matches_in])]
         # pos_in = self.trajs.loc[in_idxs]
         out_idxs = [(out_time, out_lbl) for (out_time, out_lbl)
