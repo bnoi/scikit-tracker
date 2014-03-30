@@ -10,6 +10,7 @@ virtualenv:
     system_site_packages: false
 
 before_install:
+    - sudo apt-get install tk-dev
     - wget http://repo.continuum.io/miniconda/Miniconda3-3.0.0-Linux-x86_64.sh -O miniconda.sh
     - chmod +x miniconda.sh
     - ./miniconda.sh -b
@@ -21,6 +22,7 @@ before_install:
     - conda install --yes sphinx
     - conda install --yes pip
     - conda install --yes cython
+    - conda install --yes matplotlib
     - pip install coverage
 
 install:

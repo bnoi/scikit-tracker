@@ -33,10 +33,10 @@ class Trajectories(pd.DataFrame):
     """
     def __init__(self, trajs):
 
+        if not isinstance(trajs, pd.DataFrame):
+            raise TypeError("The constructor argument `trajs` "
+                            "must be a pandas.DataFrame instance")
         super().__init__(trajs)
-        if not isinstance(self, pd.DataFrame):
-            raise TypeError('''The constructor argument `trajs`
-                            must be a pandas.DataFrame instance''')
 
     @property
     def t_stamps(self):
@@ -52,7 +52,7 @@ class Trajectories(pd.DataFrame):
 
     @property
     def iter_segments(self):
-        for lbl, idxs in self.segment_idxs.values():
+        for lbl, idxs in self.segment_idxs.items():
             yield lbl, self.loc[idxs]
 
     def get_segments(self):
@@ -91,6 +91,16 @@ class Trajectories(pd.DataFrame):
                 raise ValueError(error_mess.format(columns))
 
     def relabel_fromzero(self, level, inplace=False):
+        """
+        Parameters
+        ----------
+        level : str
+        inplace : bool
+
+        Returns
+        -------
+        trajs
+        """
 
         old_lbls = self.index.get_level_values(level)
         nu_lbls = old_lbls.values.astype(np.uint16).copy()
@@ -101,6 +111,7 @@ class Trajectories(pd.DataFrame):
             trajs = Trajectories(self.copy())
         else:
             trajs = self
+
         trajs['new_label'] = nu_lbls
         trajs.set_index('new_label', append=True, inplace=True)
         trajs.reset_index(level, drop=True, inplace=True)
@@ -112,7 +123,7 @@ class Trajectories(pd.DataFrame):
     def show(self, xaxis='t',
              yaxis='x',
              groupby_args={'level': "label"},
-             ax=None):
+             ax=None):  # pragma: no cover
         """Show trajectories
 
         Parameters
