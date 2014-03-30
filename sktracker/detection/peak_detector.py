@@ -26,7 +26,6 @@ DEFAULT_PARAMETERS = {'w_s': 0.7,
 def peak_detector(data_iterator,
                   metadata,
                   parallel=True,
-                  verbose=True,
                   show_progress=False,
                   parameters={}):
     """Gaussian peak detection described in Segré et al. Nature Methods, (2008).
@@ -41,8 +40,6 @@ def peak_detector(data_iterator,
         Used several processes at once.
     show_progress : bool (default: False)
         Print progress bar during detection.
-    verbose : bool (default: True)
-        Display informations during detection.
     parameters : dict
         Contains gaussian detection algorithm parameters:
             - w_s: int, optional
@@ -66,9 +63,6 @@ def peak_detector(data_iterator,
     -------
     trajs : :class:`pd.DataFrame`
     """
-
-    if not verbose:
-        log.disabled = True
 
     _parameters = DEFAULT_PARAMETERS.copy()
     _parameters.update(parameters)

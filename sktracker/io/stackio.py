@@ -94,7 +94,7 @@ class StackIO:
         tf = TiffFile(self.image_path_list[index])
         return tf
 
-    def image_iterator(self, position=-2, channel_index=0, memmap=True):
+    def image_iterator(self, position=-2, channel_index=0, memmap=False):
         """Iterate over image T and Z dimensions. A channel has to be
         choosen and will be excluded from the iterator.
 
@@ -103,19 +103,25 @@ class StackIO:
         position : int
             Dimensions on which you want to iterate. For example, -2 will only
             keep the two last dimensions, usually X and Y.
-        channel_index : int
-            Channel position to remove
+        channel_index : int or str
+            Channel position to remove. If str, Channels metadata will be used.
         memmap : bool
             If True, use `numpy.memmap` to read arrays from file if possible.
 
         Returns
         -------
         A Python iterator over the image array.
-
         """
 
         tf = self.get_tif()
         arr = tf.asarray(memmap=memmap)
+
+        if isinstance(channel_index, str):
+            if 'Channels' in self.metadata.keys():
+                channel_index = self.metadata['Channels'].index(channel_index)
+            else:
+                log.warning("Metadata does not contain Channels key. channel_index is set to 0.")
+                channel_index = 0
 
         # Get only one single channel
         channel_position = self.metadata['DimensionOrder'].index('C')
