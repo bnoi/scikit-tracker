@@ -37,10 +37,11 @@ class StackIO:
         self.base_dir = base_dir
         if image_path_list:
             image_path = image_path_list[0]
+
         if metadata:
             self.metadata = metadata
         else:
-            self.metadata = get_metadata(image_path, json_discovery)
+            self.metadata = get_metadata(image_path, json_discovery, base_dir=self.base_dir)
         self._image_path_list = image_path_list
 
     @property

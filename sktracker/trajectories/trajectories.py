@@ -123,6 +123,7 @@ class Trajectories(pd.DataFrame):
     def show(self, xaxis='t',
              yaxis='x',
              groupby_args={'level': "label"},
+             shape='-o',
              ax=None):  # pragma: no cover
         """Show trajectories
 
@@ -160,7 +161,7 @@ class Trajectories(pd.DataFrame):
         gp = self.groupby(**groupby_args).groups
         for k, v in gp.items():
             traj = self.loc[v]
-            ax.plot(traj[xaxis], traj[yaxis], '-o')
+            ax.plot(traj[xaxis], traj[yaxis], shape)
 
         ax.set_xlabel(xaxis)
         ax.set_ylabel(yaxis)

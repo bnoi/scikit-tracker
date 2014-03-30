@@ -1,8 +1,13 @@
 import logging
 import os
+import xml.etree.cElementTree as et
+
+import numpy as np
 import pandas as pd
 
 log = logging.getLogger(__name__)
+
+from . import StackIO
 from . import validate_metadata
 
 __all__ = []
@@ -122,6 +127,58 @@ class ObjectsIO():
         return cls(metadata=metadata,
                    store_path=store_path,
                    base_dir=base_dir)
+
+    @classmethod
+    def from_trackmate_xml(cls, trackmate_xml_path):
+        """Load ObjectsIO from TrackMate XML.
+
+        Parameters
+        ----------
+        trackmate_xml_path : str
+            TrackMate XML file path.
+        """
+
+        root = et.fromstring(open(trackmate_xml_path).read())
+        image_data = root.find('Settings').find('ImageData')
+
+        filename = image_data.get('filename')
+        folder = image_data.get('folder')
+
+        st = StackIO(filename, base_dir=folder)
+        metadata = st.metadata
+
+        validate_metadata(metadata)
+
+        oio = cls(metadata=metadata, base_dir=folder)
+
+        # Get detected spots from XML file
+        objects = []
+        object_labels = [('t_stamp', 'FRAME'),
+                         ('t', 'POSITION_T'),
+                         ('x', 'POSITION_X'),
+                         ('y', 'POSITION_Y'),
+                         ('z', 'POSITION_Z'),
+                         ('I', 'MEAN_INTENSITY'),
+                         ('w', 'ESTIMATED_DIAMETER')]
+
+        spots = root.find('Model').find('AllSpots')
+        for frame in spots.findall('SpotsInFrame'):
+            for spot in frame.findall('Spot'):
+
+                single_object = []
+                for label, trackmate_label in object_labels:
+                    single_object.append(spot.get(trackmate_label))
+
+                objects.append(single_object)
+
+        trajs = pd.DataFrame(objects, columns=[label[0] for label in object_labels])
+        trajs['label'] = np.arange(trajs.shape[0])
+        trajs['t_stamp'] = trajs['t_stamp'].values.astype(np.float)
+        trajs.set_index(['t_stamp', 'label'], inplace=True)
+        trajs = trajs.astype(np.float)
+
+        oio['trajs'] = trajs
+        return oio
 
 
 def _serialize(attr):

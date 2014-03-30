@@ -10,7 +10,7 @@ from . import OMEModel
 __all__ = []
 
 
-def get_metadata(filename, json_discovery=False):
+def get_metadata(filename, json_discovery=False, base_dir=None):
     """Get image file metadata
     Metadata will be retrieved from TIFF IFD comments. OME is automatically
     detected. Additionnaly a file called metadata.json can be in the same
@@ -29,7 +29,10 @@ def get_metadata(filename, json_discovery=False):
     """
     md = {}
 
-    tf = TiffFile(filename)
+    if base_dir:
+        tf = TiffFile(os.path.join(base_dir, filename))
+    else:
+        tf = TiffFile(filename)
 
     axes = tf.series[0]['axes']
     shape = tf.series[0]['shape']
