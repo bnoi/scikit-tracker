@@ -19,7 +19,6 @@ def test_peak_detector():
     peaks = peak_detector(data_iterator(),
                           st.metadata,
                           parallel=True,
-                          verbose=False,
                           show_progress=False,
                           parameters=parameters)
 
@@ -41,7 +40,6 @@ def test_peak_detector_no_peaks():
     peaks = peak_detector(data_iterator(),
                           st.metadata,
                           parallel=True,
-                          verbose=False,
                           show_progress=False,
                           parameters=parameters)
 

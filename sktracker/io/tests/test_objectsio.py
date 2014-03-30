@@ -24,7 +24,6 @@ def test_objectsio():
     peaks = peak_detector(data_iterator(),
                           st.metadata,
                           parallel=True,
-                          verbose=False,
                           show_progress=True,
                           parameters=parameters)
 

@@ -98,6 +98,13 @@ class StackIO:
         """Iterate over image T and Z dimensions. A channel has to be
         choosen and will be excluded from the iterator.
 
+        Notes
+        -----
+        For now image_iterator load the whole image in memory and build iterator from it.
+        To avoid filling memory you can try to use memmap=True but it often fails. In the
+        future, image_iterator should only build iterator without filling memory with whole
+        image.
+
         Parameters
         ----------
         position : int

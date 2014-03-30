@@ -119,10 +119,6 @@ def peak_detector(data_iterator,
                            ((i + 1), n_stack, n_peaks, pos))
                 print_progress(percent_progression, message)
 
-            elif verbose:
-                log.info('Detection done for stack number %i: %i peaks detected (%i/%i - %i%%)' %
-                     (pos, n_peaks, i + 1, n_stack, percent_progression))
-
             all_peaks.append((pos, peaks))
 
         if show_progress:
