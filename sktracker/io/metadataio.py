@@ -39,7 +39,7 @@ def get_metadata(filename, json_discovery=False):
 
     if tf.is_imagej or tf.is_ome:
 
-        for dim_label in ['T', 'C', 'Z', 'Y', 'X']:
+        for dim_label in md['DimensionOrder']:
             try:
                 dim_id = axes.index(dim_label)
                 md["Size" + dim_label] = shape[dim_id]
