@@ -33,7 +33,6 @@ class ObjectsIO():
                  store_path=None,
                  base_dir=None):
 
-        self.metadata = metadata
         validate_metadata(metadata)
         self.base_dir = base_dir
 
@@ -49,7 +48,15 @@ class ObjectsIO():
             self.store_path = os.path.join(base_dir, store_path)
             self.image_path = os.path.join(base_dir, metadata['FileName'])
 
-        self.__setitem__('metadata', _serialize(self.metadata))
+        self.metadata = metadata
+
+    @property
+    def metadata(self):
+        return self.__getitem__('metadata')
+
+    @metadata.setter
+    def metadata(self, value):
+        self.__setitem__('metadata', value)
 
     def __getitem__(self, name):
         """Get an object from HDF5 file.
@@ -144,10 +151,12 @@ class ObjectsIO():
         filename = image_data.get('filename')
         folder = image_data.get('folder')
 
-        st = StackIO(filename, base_dir=folder)
-        metadata = st.metadata
-
-        validate_metadata(metadata)
+        if os.path.isfile(os.path.join(folder, filename)):
+            st = StackIO(filename, base_dir=folder)
+            metadata = st.metadata
+        else:
+            metadata = {}
+            metadata['FileName'] = trackmate_xml_path
 
         oio = cls(metadata=metadata, base_dir=folder)
 

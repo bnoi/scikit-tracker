@@ -38,3 +38,9 @@ def test_from_h5():
     store_path = data.sample_h5_temp()
     oio = ObjectsIO.from_h5(store_path, base_dir=tempfile.gettempdir())
     assert validate_metadata(oio.metadata)
+
+
+def test_from_trackmate_xml():
+    xml_fname = data.trackmate_xml_temp()
+    oio = ObjectsIO.from_trackmate_xml(xml_fname)
+    assert oio['trajs'].shape == (91, 6)

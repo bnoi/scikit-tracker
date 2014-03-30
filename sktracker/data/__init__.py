@@ -30,7 +30,9 @@ __all__ = ['directed_trajectories_generator',
            'metadata_json',
            'sample_h5',
            'sample_h5_temp',
-           'brownian_trajs_df']
+           'brownian_trajs_df',
+           'trackmate_xml_temp',
+           'trackmate_xml']
 
 # Image files
 
@@ -111,3 +113,19 @@ def brownian_trajs_df():
     with pd.get_store(os.path.join(data_path, "brownian_trajectories.h5")) as store:
         trajs = store['trajs']
     return trajs
+
+# XML files
+
+
+def trackmate_xml():
+    return os.path.join(data_path, "trackmate_example.xml")
+
+
+def trackmate_xml_temp():
+    """
+    """
+    d = tempfile.gettempdir()
+    f_ori = os.path.join(data_path, "trackmate_example.xml")
+    f_dest = os.path.join(d, "trackmate_example.xml")
+    shutil.copy(f_ori, f_dest)
+    return f_dest

@@ -99,8 +99,7 @@ def _get_from_metadata_json(filename):
     return metadata
 
 
-def validate_metadata(metadata,
-                      keys=['DimensionOrder', 'Shape', 'FileName']):
+def validate_metadata(metadata, keys=[]):
     err = []
     for key in keys:
         if key not in metadata.keys():
