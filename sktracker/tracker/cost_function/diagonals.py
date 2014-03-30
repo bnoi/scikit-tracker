@@ -1,7 +1,7 @@
 import numpy as np
 from . import AbstractDiagCostFunction
 
-__all__ = []
+__all__ = ["DiagCostFunction"]
 
 
 class DiagCostFunction(AbstractDiagCostFunction):

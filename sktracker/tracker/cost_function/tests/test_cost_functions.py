@@ -9,8 +9,8 @@ from sktracker.tracker.matrix import LinkBlock
 from sktracker.tracker.matrix import DiagBlock
 from sktracker.tracker.matrix import CostMatrix
 
-from sktracker.tracker.cost_function.brownian import BrownianCostFunction
-from sktracker.tracker.cost_function import DiagCostFunction
+from sktracker.tracker.cost_function.brownian import BrownianLinkCostFunction
+from sktracker.tracker.cost_function.diagonals import DiagCostFunction
 
 
 def test_brownian_case():
@@ -23,7 +23,7 @@ def test_brownian_case():
     pos0 = trajs.ix[t0]
     pos1 = trajs.ix[t1]
 
-    link_cost_func = BrownianCostFunction({'max_speed': 5.})
+    link_cost_func = BrownianLinkCostFunction({'max_speed': 5.})
     diag_cost_func = DiagCostFunction({'cost': 10.})
 
     link_block = LinkBlock(pos0, pos1, link_cost_func)
@@ -54,7 +54,7 @@ def test_brownian_case_solve_lapjv():
     pos0 = trajs.ix[t0]
     pos1 = trajs.ix[t1]
 
-    link_cost_func = BrownianCostFunction({'max_speed': 5.})
+    link_cost_func = BrownianLinkCostFunction({'max_speed': 5.})
     diag_cost_func = DiagCostFunction({'cost': 10.})
 
     link_block = LinkBlock(pos0, pos1, link_cost_func)

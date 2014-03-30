@@ -1,12 +1,10 @@
-import numpy as np
-
 from . import AbstractLinkCostFunction
 from ...trajectories import Trajectories
 
-__all__ = []
+__all__ = ["AbstractGapCloseLinkCostFunction"]
 
 
-class AbstractGCLinkCostFunction(AbstractLinkCostFunction):
+class AbstractGapCloseLinkCostFunction(AbstractLinkCostFunction):
     """
     """
 

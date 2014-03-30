@@ -7,14 +7,14 @@ from sktracker import data
 from sktracker.tracker.solver import AbstractSolver
 from sktracker.tracker.cost_function import AbstractLinkCostFunction
 from sktracker.tracker.cost_function import AbstractDiagCostFunction
-from sktracker.tracker.cost_function.brownian import BrownianCostFunction
+from sktracker.tracker.cost_function.brownian import BrownianLinkCostFunction
 
 
 def test_solver_check_cost_function_type():
 
     trajs = pd.DataFrame([])
     solver = AbstractSolver(trajs)
-    cost_function = BrownianCostFunction(parameters={'max_speed': 1})
+    cost_function = BrownianLinkCostFunction(parameters={'max_speed': 1})
 
     solver.check_cost_function_type(cost_function, AbstractLinkCostFunction)
 
@@ -25,9 +25,10 @@ def test_solver_check_cost_function_type_failure():
 
     trajs = pd.DataFrame([])
     solver = AbstractSolver(trajs)
-    cost_function = BrownianCostFunction(parameters={'max_speed': 1})
+    cost_function = BrownianLinkCostFunction(parameters={'max_speed': 1})
 
-    assert_raises(TypeError, solver.check_cost_function_type, cost_function, AbstractDiagCostFunction)
+    assert_raises(TypeError, solver.check_cost_function_type, cost_function,
+                  AbstractDiagCostFunction)
 
 
 def test_solver_check_trajs_df_structure():

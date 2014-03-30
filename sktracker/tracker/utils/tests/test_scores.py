@@ -1,7 +1,7 @@
 from sktracker import data
 
-from sktracker.tracker.cost_function.brownian import BrownianCostFunction
-from sktracker.tracker.cost_function import DiagCostFunction
+from sktracker.tracker.cost_function.brownian import BrownianLinkCostFunction
+from sktracker.tracker.cost_function.diagonals import DiagCostFunction
 from sktracker.tracker.solver import ByFrameSolver
 from sktracker.tracker.utils import get_scores_on_trajectories
 
@@ -10,7 +10,7 @@ def test_get_scores_on_trajectories():
 
     true_trajs = data.brownian_trajs_df()
 
-    cost_functions = {'link': BrownianCostFunction({'max_speed': 5.}),
+    cost_functions = {'link': BrownianLinkCostFunction({'max_speed': 5.}),
                       'birth': DiagCostFunction({'cost': 5**2}),
                       'death': DiagCostFunction({'cost': 5**2})}
 

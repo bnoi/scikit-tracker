@@ -9,8 +9,8 @@ from ..matrix import CostMatrix
 from ..cost_function import AbstractLinkCostFunction
 from ..cost_function import AbstractDiagCostFunction
 
-from ..cost_function.brownian import BrownianCostFunction
-from ..cost_function import DiagCostFunction
+from ..cost_function.brownian import BrownianLinkCostFunction
+from ..cost_function.diagonals import DiagCostFunction
 
 from . import AbstractSolver
 
@@ -61,8 +61,8 @@ class ByFrameSolver(AbstractSolver):
         """
 
         guessed_cost = max_speed ** 2
-        cost_functions = {'link': BrownianCostFunction({'max_speed': max_speed,
-                                                        'coords': coords}),
+        cost_functions = {'link': BrownianLinkCostFunction({'max_speed': max_speed,
+                                                            'coords': coords}),
                           'birth': DiagCostFunction({'cost': guessed_cost}),
                           'death': DiagCostFunction({'cost': guessed_cost})}
 

@@ -1,12 +1,13 @@
 import numpy as np
 from scipy.spatial.distance import cdist, pdist
+
 from . import AbstractLinkCostFunction
-from . import AbstractGCLinkCostFunction
+from .gap_close import AbstractGapCloseLinkCostFunction
 
-__all__ = []
+__all__ = ["BrownianLinkCostFunction", "BrownianGapCloseCostFunction"]
 
 
-class BrownianCostFunction(AbstractLinkCostFunction):
+class BrownianLinkCostFunction(AbstractLinkCostFunction):
     """This class generates cost matrices for brownian motion
     trajectories.
 
@@ -74,7 +75,7 @@ class BrownianCostFunction(AbstractLinkCostFunction):
         return distances ** 2
 
 
-class GCBrownianCostFunction(AbstractGCLinkCostFunction):
+class BrownianGapCloseCostFunction(AbstractGapCloseLinkCostFunction):
     """
     """
 
