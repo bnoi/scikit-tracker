@@ -108,8 +108,10 @@ class CostMatrix:
         ax.set_xticks(np.arange(0.5, size + 0.5))
         ax.set_yticks(np.arange(0.5, size + 0.5))
 
-        col_labels = np.hstack(np.array([list(range(s)) for s in col_shapes.astype(np.int)]))
-        row_labels = np.hstack(np.array([list(reversed(range(s))) for s in row_shapes[::-1].astype(np.int)]))
+        col_labels = np.hstack(np.array([list(range(s))
+                                         for s in col_shapes.astype(np.int)]))
+        row_labels = np.hstack(np.array([list(reversed(range(s)))
+                                         for s in row_shapes[::-1].astype(np.int)]))
 
         ax.set_xticklabels(col_labels)
         ax.set_yticklabels(row_labels)
@@ -205,4 +207,4 @@ class CostMatrix:
                 raise ValueError("Blocks don't fit vertically")
             col_shapes[n] = shapes[0]
 
-        return row_shapes, col_shapes
+        return row_shapes.astype(np.int), col_shapes.astype(np.int)
