@@ -5,6 +5,8 @@ from numpy.testing import assert_array_almost_equal
 
 import numpy as np
 import matplotlib
+import tempfile
+import pandas as pd
 
 from sktracker import data
 from sktracker.trajectories import Trajectories
@@ -64,3 +66,13 @@ def test_reverse():
     trajs = Trajectories(trajs)
 
     assert trajs.reverse().shape == (25, 5)
+
+def test_write_hdf():
+
+    trajs = data.brownian_trajs_df()
+    trajs = Trajectories(trajs)
+    tmp_store = tempfile.NamedTemporaryFile(suffix='h5')
+    with pd.get_store(tmp_store.name) as store:
+        store['trajs'] = trajs
+    
+    
