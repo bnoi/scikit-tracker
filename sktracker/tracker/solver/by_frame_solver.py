@@ -46,7 +46,7 @@ class ByFrameSolver(AbstractSolver):
         self.death_cf = cost_functions['death']
         self.check_cost_function_type(self.death_cf, AbstractDiagCostFunction)
 
-        self.max_assigned_cost = 0
+        self.max_assigned_cost = self.death_cf.context['cost'] / 1.05
 
     @classmethod
     def for_brownian_motion(cls, trajs, max_speed, coords=['x', 'y', 'z']):
@@ -134,7 +134,7 @@ class ByFrameSolver(AbstractSolver):
         self.cm = CostMatrix(self.blocks_structure)
         self.cm.solve()
         self.assign()
-
+        
     def assign(self):
         """
         """
@@ -163,6 +163,5 @@ class ByFrameSolver(AbstractSolver):
     def _update_max_assign_cost(self, cost):
         if cost > self.max_assigned_cost:
             self.max_assigned_cost = cost
-
             self.birth_cf.context['cost'] = self.max_assigned_cost * 1.05
             self.death_cf.context['cost'] = self.max_assigned_cost * 1.05

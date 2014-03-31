@@ -44,9 +44,9 @@ class StackIO:
             self.metadata = get_metadata(image_path, json_discovery, base_dir=self.base_dir)
         if image_path_list:
                 self.metadata['SizeT'] = len(image_path_list),
-                self.metadata['Shape'] = ([len(image_path_list)]
-                                          + self.metadata['Shape'])
-                self.metadata['DimensionOrder'] = 'T'+self.metadata['DimensionOrder']
+                self.metadata['Shape'] = ((len(image_path_list),)
+                                          + tuple(self.metadata['Shape']))
+                self.metadata['DimensionOrder'] = 'T'+''.join(self.metadata['DimensionOrder'])
         self._image_path_list = image_path_list
         
     @property
