@@ -1,5 +1,4 @@
 from . import AbstractCostFunction
-from ...trajectories import Trajectories
 
 __all__ = ["AbstractGapCloseCostFunction"]
 
@@ -17,8 +16,8 @@ class AbstractGapCloseCostFunction(AbstractCostFunction):
         """Check wether idxs_in and idxs_out have the same length.
         """
 
-        idxs_in = self.check_context('idxs_in', Trajectories)
-        idxs_out = self.check_context('idxs_out', Trajectories)
+        idxs_in = self.check_context('idxs_in', list)
+        idxs_out = self.check_context('idxs_out', list)
 
         if not len(idxs_in) == len(idxs_out):
             raise ValueError('''self.context['idxs_in'] and self.context['idxs_out']

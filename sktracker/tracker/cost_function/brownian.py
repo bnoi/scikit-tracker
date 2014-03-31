@@ -4,6 +4,7 @@ from scipy.spatial.distance import cdist, pdist
 
 from . import AbstractCostFunction
 from .gap_close import AbstractGapCloseCostFunction
+from ...trajectories import Trajectories
 
 __all__ = ["BrownianLinkCostFunction", "BrownianGapCloseCostFunction"]
 
@@ -110,8 +111,8 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
         max_speed = self.parameters['max_speed']
 
         # Check context
-        idxs_in = self.check_context('idxs_in', Trajectories)
-        idxs_out = self.check_context('idxs_out', Trajectories)
+        idxs_in = self.check_context('idxs_in', list)
+        idxs_out = self.check_context('idxs_out', list)
         trajs = self.check_context('trajs', Trajectories)
 
         # Just in case the parent didn't do it
@@ -122,17 +123,17 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
                               len(idxs_out)))
         distances.fill(np.nan)
 
-        for idx_in, idx_out in zip(self.idxs_in, self.idxs_out):
-            pos_in = self.trajs.loc[idx_in]
-            pos_out = self.trajs.loc[idx_out]
+        for idx_in, idx_out in zip(idxs_in, idxs_out):
+            pos_in = trajs.loc[idx_in]
+            pos_out = trajs.loc[idx_out]
             distance = pdist(np.vstack([pos_in[coords].values,
                                         pos_out[coords].values]),
                              metric=distance_metric)
-            #print(pos_in.x, pos_out.x, distance)
+            # print(pos_in.x, pos_out.x, distance)
             distances[idx_in[1], idx_out[1]] = distance
             dt = pos_out.t - pos_in.t
             distances /= np.abs(dt)
-            #print(dt)
+            # print(dt)
 
         distances[distances > max_speed] = np.nan
         distances = distances ** 2

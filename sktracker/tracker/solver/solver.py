@@ -28,7 +28,7 @@ class AbstractSolver:
         TypeError : `obj` type does not inherit from `cost_funtion_type`
         """
 
-        error_mess = ''' The cost function {} doesn't inherit from {}'''
+        error_mess = '''The cost function {} doesn't inherit from {}'''
 
         if not isinstance(obj, cost_funtion_type):
             raise TypeError(error_mess.format(obj, cost_funtion_type.__name__))

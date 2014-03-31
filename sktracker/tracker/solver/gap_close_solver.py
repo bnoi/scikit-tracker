@@ -46,25 +46,30 @@ class GapCloseSolver(AbstractSolver):
 
     @classmethod
     def for_brownian_motion(cls, trajs, max_speed, maximum_gap, coords=['x', 'y', 'z']):
+        """
+        """
 
-        guessed_cost = max_speed ** 2
-        cost_functions = {'link': BrownianGapCloseCostFunction({},
-                                                               {'max_speed': max_speed,
-                                                                'coords': ['x', 'y', 'z']}),
-                          'birth': DiagonalCostFunction({'cost': guessed_cost}),
-                          'death': DiagonalCostFunction({'cost': guessed_cost})}
+        guessed_cost = float(max_speed ** 2)
+
+        link_cost_func = BrownianGapCloseCostFunction(parameters={'max_speed': max_speed})
+        birth_cost_func = DiagonalCostFunction(context={'cost': guessed_cost})
+        death_cost_func = DiagonalCostFunction(context={'cost': guessed_cost})
+
+        cost_functions = {'link': link_cost_func,
+                          'birth': birth_cost_func,
+                          'death': death_cost_func}
 
         return cls(trajs, cost_functions, maximum_gap, coords=coords)
 
     @property
     def blocks_structure(self):
-        return [[self.link_block.mat, self.death_block.mat],
-                [self.birth_block.mat, None]]
+        return [[self.link_cf.get_block(), self.death_cf.get_block()],
+                [self.birth_cf.get_block(), None]]
 
     def track(self):
 
-        labels = self.trajs.labels
         idxs_in, idxs_out = self._get_candidates()
+
         self.link_cf.context['trajs'] = self.trajs
         self.link_cf.context['idxs_in'] = idxs_in
         self.link_cf.context['idxs_out'] = idxs_out
@@ -72,9 +77,9 @@ class GapCloseSolver(AbstractSolver):
         if not len(idxs_in):
             log.info('No gap needs closing here...')
             return self.trajs
+
         old_labels = self.trajs.index.get_level_values('label').values
         self.trajs['new_label'] = old_labels.astype(np.float)
-        self.link_block = LinkBlock(labels, labels, self.link_cf)
 
         # ''' TFA: For track segment ends and starts, the alternative
         # cost (b and d in Fig. 1c) had to be comparable in magnitude
@@ -94,12 +99,14 @@ class GapCloseSolver(AbstractSolver):
         # the alternative cost was taken as the 90th percentile.'''
 
         percentile = 90
-        link_costs = np.ma.masked_invalid(self.link_block.mat).compressed()
+
+        # Here self.link_cf.get_block() is called while it's also called
+        # in self.blocks_structure property. We may have a performance issue.
+        link_costs = np.ma.masked_invalid(self.link_cf.get_block()).compressed()
         cost = np.percentile(link_costs, percentile)
         self.birth_cf.context['cost'] = cost
         self.death_cf.context['cost'] = cost
-        self.birth_block = DiagBlock(labels, self.birth_cf)
-        self.death_block = DiagBlock(labels, self.death_cf)
+
         self.cm = CostMatrix(self.blocks_structure)
         self.cm.solve()
         self.assign()
