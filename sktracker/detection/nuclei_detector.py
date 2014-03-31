@@ -13,6 +13,9 @@ from skimage.morphology import disk, watershed
 from skimage.feature import peak_local_max
 from skimage.measure import regionprops
 
+from ..io import ObjectsIO
+from ..trajectories import Trajectories
+
 log = logging.getLogger(__name__)
 
 __all__ = []
@@ -79,6 +82,7 @@ def nuclei_detector(data_iterator,
         raw_cell_positions,
         keys=raw_cell_positions.keys(),
         names=('t_stamp', 'label'))
+
     real_times = nuclei_positions.index.get_level_values('t_stamp').astype(np.float)
     real_times *= metadata['TimeIncrement']
     nuclei_positions['t'] = real_times
@@ -86,8 +90,7 @@ def nuclei_detector(data_iterator,
     nuclei_positions['y'] *=  metadata['PhysicalSizeY']
     nuclei_positions['z'] *=  metadata['PhysicalSizeZ']
     nuclei_positions['w'] *=  metadata['PhysicalSizeX']
-    
-    return nuclei_positions
+    return Trajectories(nuclei_positions)
 
 
 def detect_one_stack(args, full_output=False):

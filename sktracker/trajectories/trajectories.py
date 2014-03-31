@@ -148,8 +148,8 @@ class Trajectories(pd.DataFrame):
     def show(self, xaxis='t',
              yaxis='x',
              groupby_args={'level': "label"},
-             shape='-o',
-             ax=None):  # pragma: no cover
+             line_style='-o',
+             ax=None, **kwargs):  # pragma: no cover
         """Show trajectories
 
         Parameters
@@ -160,7 +160,8 @@ class Trajectories(pd.DataFrame):
             How to group trajectories
         ax : :class:`matplotlib.axes.Axes`
             None will create a new one.
-
+        **kwargs are passed to the plot function
+        
         Returns
         -------
         :class:`matplotlib.axes.Axes`
@@ -179,14 +180,15 @@ class Trajectories(pd.DataFrame):
         """
 
         import matplotlib.pyplot as plt
-
         if ax is None:
             ax = plt.gca()
-
+        colors = self.get_colors()
         gp = self.groupby(**groupby_args).groups
         for k, v in gp.items():
             traj = self.loc[v]
-            ax.plot(traj[xaxis], traj[yaxis], shape)
+            c = colors[v[0][1]] # that's the label
+            ax.plot(traj[xaxis], traj[yaxis],
+                    line_style, c=c, **kwargs)
 
         ax.set_xlabel(xaxis)
         ax.set_ylabel(yaxis)
@@ -194,4 +196,15 @@ class Trajectories(pd.DataFrame):
 
         return ax
 
+    def get_colors(self):
+        import matplotlib.pyplot as plt
+        ccycle = plt.rcParams['axes.color_cycle']
+        num_colors = len(ccycle)
+        clrs = {}
+        for label in self.labels:
+            clrs[label] = ccycle[label % num_colors]
+        return clrs
+
+## Register the trajectories for storing in HDFStore
+## as a regular DataFrame
 pytables._TYPE_MAP[Trajectories] = 'frame'
