@@ -9,7 +9,7 @@ def test_by_frame_solver():
 
     true_trajs = data.brownian_trajs_df()
 
-    solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=5)
+    solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=5, penality=2.)
     trajs = solver.track()
 
     min_chi_square, conserved_trajectories_number, scores = get_scores_on_trajectories(trajs)
@@ -35,7 +35,7 @@ def test_by_frame_solver_progress_bar():
 
     out = io.StringIO()
 
-    solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=5)
+    solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=5, penality=2.)
     solver.track(progress_bar=True, progress_bar_out=out)
 
     real_bar = out.getvalue().replace(" ", "").replace("=", "")

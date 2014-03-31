@@ -46,10 +46,11 @@ class ByFrameSolver(AbstractSolver):
         self.death_cf = cost_functions['death']
         self.check_cost_function_type(self.death_cf, AbstractDiagCostFunction)
 
-        self.max_assigned_cost = self.death_cf.context['cost'] / 1.05
+        self.max_assigned_cost = 0#self.death_cf.context['cost']
 
     @classmethod
-    def for_brownian_motion(cls, trajs, max_speed, coords=['x', 'y', 'z']):
+    def for_brownian_motion(cls, trajs, max_speed, penality=1.05,
+                            coords=['x', 'y', 'z']):
         """
 
         Parameters
@@ -59,13 +60,13 @@ class ByFrameSolver(AbstractSolver):
             Max objects velocity
         coords : list
         """
-
         guessed_cost = max_speed ** 2
+        diag_context = {'cost': guessed_cost,
+                       'penality': penality}
         cost_functions = {'link': BrownianLinkCostFunction({'max_speed': max_speed,
                                                             'coords': coords}),
-                          'birth': DiagCostFunction({'cost': guessed_cost}),
-                          'death': DiagCostFunction({'cost': guessed_cost})}
-
+                          'birth': DiagCostFunction(diag_context),
+                          'death': DiagCostFunction(diag_context)}
         return cls(trajs, cost_functions, coords=coords)
 
     @property
@@ -163,5 +164,6 @@ class ByFrameSolver(AbstractSolver):
     def _update_max_assign_cost(self, cost):
         if cost > self.max_assigned_cost:
             self.max_assigned_cost = cost
-            self.birth_cf.context['cost'] = self.max_assigned_cost * 1.05
-            self.death_cf.context['cost'] = self.max_assigned_cost * 1.05
+            new_b_cost = self.max_assigned_cost * self.birth_cf.context['penality']
+            self.birth_cf.context['cost'] = new_b_cost
+            self.death_cf.context['cost'] = new_b_cost

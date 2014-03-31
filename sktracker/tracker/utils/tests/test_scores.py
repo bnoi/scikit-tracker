@@ -11,8 +11,8 @@ def test_get_scores_on_trajectories():
     true_trajs = data.brownian_trajs_df()
 
     cost_functions = {'link': BrownianLinkCostFunction({'max_speed': 5.}),
-                      'birth': DiagCostFunction({'cost': 5**2}),
-                      'death': DiagCostFunction({'cost': 5**2})}
+                      'birth': DiagCostFunction({'cost': 5**2, 'penality' : 2.}),
+                      'death': DiagCostFunction({'cost': 5**2, 'penality' : 2.})}
 
     solver = ByFrameSolver(true_trajs, cost_functions)
 
