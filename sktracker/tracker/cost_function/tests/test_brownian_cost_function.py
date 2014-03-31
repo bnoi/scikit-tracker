@@ -4,7 +4,7 @@ from numpy.testing import assert_array_almost_equal
 from sktracker import data
 
 from sktracker.tracker.cost_function.brownian import BrownianLinkCostFunction
-from sktracker.tracker.cost_function.brownian import  BrownianGapCloseCostFunction
+from sktracker.tracker.cost_function.brownian import BrownianGapCloseCostFunction
 
 
 def test_brownian_link():

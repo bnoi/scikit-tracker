@@ -69,7 +69,7 @@ class CostMatrix:
             np.logical_not(np.ma.getmask(masked)))
         return idxs_in, idxs_out, costs
 
-    def view(self, ax=None, colormap="gray", **kwargs):
+    def view(self, ax=None, colormap="gray", **kwargs):  # pragma: no cover
         """Display cost matrice on a plot.
 
         Parameters
