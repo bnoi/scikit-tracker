@@ -32,7 +32,8 @@ __all__ = ['directed_trajectories_generator',
            'sample_h5_temp',
            'brownian_trajs_df',
            'trackmate_xml_temp',
-           'trackmate_xml']
+           'trackmate_xml',
+           'with_gaps_df']
 
 # Image files
 
@@ -114,9 +115,14 @@ def brownian_trajs_df():
         trajs = store['trajs']
     return trajs
 
+def with_gaps_df():
+    """
+    """
+    with pd.get_store(os.path.join(data_path, "with_gaps.h5")) as store:
+        trajs = store['trajs']
+    return trajs
+
 # XML files
-
-
 def trackmate_xml():
     return os.path.join(data_path, "trackmate_example.xml")
 

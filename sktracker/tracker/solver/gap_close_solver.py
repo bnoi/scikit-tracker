@@ -10,8 +10,8 @@ from ..matrix import CostMatrix
 from ..cost_function import AbstractLinkCostFunction
 from ..cost_function import AbstractDiagCostFunction
 
-# from ..cost_function import BrownianCostFunction
-# from ..cost_function import DiagCostFunction
+from ..cost_function.brownian import BrownianGapCloseCostFunction
+from ..cost_function.diagonals import DiagCostFunction
 
 from . import AbstractSolver
 
@@ -47,6 +47,18 @@ class GapCloseSolver(AbstractSolver):
 
         self.maximum_gap = maximum_gap
 
+    @classmethod
+    def for_brownian_motion(cls, trajs, max_speed, maximum_gap, coords=['x', 'y', 'z']):
+
+        guessed_cost = max_speed ** 2
+        cost_functions = {'link': BrownianGapCloseCostFunction({},
+                                                               {'max_speed': max_speed,
+                                                                'coords': ['x', 'y', 'z']}),
+                          'birth': DiagCostFunction({'cost': guessed_cost}),
+                          'death': DiagCostFunction({'cost': guessed_cost})}
+
+        return cls(trajs, cost_functions, maximum_gap, coords=coords)
+        
     @property
     def blocks_structure(self):
         return [[self.link_block.mat, self.death_block.mat],
@@ -67,19 +79,24 @@ class GapCloseSolver(AbstractSolver):
         self.trajs['new_label'] = old_labels.astype(np.float)
         self.link_block = LinkBlock(labels, labels, self.link_cf)
 
-        # ''' TFA: For track segment ends and starts, the alternative cost (b and d in Fig. 1c) had to be
-        # comparable in magnitude to the costs of potential assignments, making the rejection
-        # of gap closing, merging and splitting an accessible alternative. At the same time, the
-        # alternative cost had to be at the higher end of the range of potential assignment costs,
-        # so that the algorithm did not fail to close gaps and capture merge and split events. We
-        # performed empirical tests of the sensitivity of tracking results to variations in the
-        # alternative cost. We found that in a range 80th – 100th percentile of all potential
-        # assignment costs the outcome of gap closing, merging and splitting varied negligibly
-        # (data not shown). We attribute this robustness to the fact that track initiations and
-        # terminations competed globally, in space and time, with all other potential
-        # assignments. Thus, the alternative cost was taken as the 90th percentile.'''
+        # ''' TFA: For track segment ends and starts, the alternative
+        # cost (b and d in Fig. 1c) had to be comparable in magnitude
+        # to the costs of potential assignments, making the rejection
+        # of gap closing, merging and splitting an accessible
+        # alternative. At the same time, the alternative cost had to
+        # be at the higher end of the range of potential assignment
+        # costs, so that the algorithm did not fail to close gaps and
+        # capture merge and split events. We performed empirical tests
+        # of the sensitivity of tracking results to variations in the
+        # alternative cost. We found that in a range 80th – 100th
+        # percentile of all potential assignment costs the outcome of
+        # gap closing, merging and splitting varied negligibly (data
+        # not shown). We attribute this robustness to the fact that
+        # track initiations and terminations competed globally, in
+        # space and time, with all other potential assignments. Thus,
+        # the alternative cost was taken as the 90th percentile.'''
 
-        percentile = 99
+        percentile = 90
         link_costs = np.ma.masked_invalid(self.link_block.mat).compressed()
         cost = np.percentile(link_costs, percentile)
         self.birth_cf.context['cost'] = cost

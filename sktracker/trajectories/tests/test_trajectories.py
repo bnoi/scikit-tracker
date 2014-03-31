@@ -74,5 +74,3 @@ def test_write_hdf():
     tmp_store = tempfile.NamedTemporaryFile(suffix='h5')
     with pd.get_store(tmp_store.name) as store:
         store['trajs'] = trajs
-    
-    
