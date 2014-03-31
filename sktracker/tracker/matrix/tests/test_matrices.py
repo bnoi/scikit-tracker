@@ -1,12 +1,9 @@
 import numpy as np
 
 from sktracker import data
-from sktracker.tracker.matrix import LinkBlock
-from sktracker.tracker.matrix import DiagBlock
 from sktracker.tracker.matrix import CostMatrix
 
-from sktracker.tracker.cost_function import AbstractLinkCostFunction
-from sktracker.tracker.cost_function import AbstractDiagCostFunction
+from sktracker.tracker.cost_function import CostFunction
 
 
 def nan_ident(size):

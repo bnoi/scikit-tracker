@@ -1,41 +1,25 @@
-from . import AbstractLinkCostFunction
+from . import AbstractCostFunction
 from ...trajectories import Trajectories
 
-__all__ = ["AbstractGapCloseLinkCostFunction"]
+__all__ = ["AbstractGapCloseCostFunction"]
 
 
-class AbstractGapCloseLinkCostFunction(AbstractLinkCostFunction):
+class AbstractGapCloseCostFunction(AbstractCostFunction):
     """
     """
 
     def __init__(self, context, parameters):
-        super().__init__(context, parameters)
-
-        _parameters = {'distance_metric': 'euclidean',
-                       'max_speed': 1.,
-                       'coords': ['x', 'y', 'z']}
-        _parameters.update(parameters)
-        super().__init__({}, _parameters)
-        self.context = context
-
-    def update(self):
         """
-        Updates the object's attributes according to context
         """
-        self.trajs = self.context['trajs']
-        # Just in case the parent didn't do it
-        self.trajs.relabel_fromzero('label', inplace=True)
+        super().__init__(context=context, parameters=parameters)
 
-        self.idxs_in = self.context['idxs_in']
-        self.idxs_out = self.context['idxs_out']
-        if not len(self.idxs_in) == len(self.idxs_out):
-            raise ValueError('''`self.context['idxs_in']` and `self.context['idxs_out']`
+    def check_idxs_length(self):
+        """Check wether idxs_in and idxs_out have the same length.
+        """
+
+        idxs_in = self.check_context('idxs_in', Trajectories)
+        idxs_out = self.check_context('idxs_out', Trajectories)
+
+        if not len(idxs_in) == len(idxs_out):
+            raise ValueError('''self.context['idxs_in'] and self.context['idxs_out']
                              must have the same length ''')
-        if 'trajs' not in self.context.keys():
-            raise ValueError('''The class GCLinkCostFunction requires '''
-                             '''the `self.context` dictionnary to contain a `trajs` key''')
-
-        if not isinstance(self.context['trajs'], Trajectories):
-            raise TypeError('''
-                            `self.context['trajs']` should be a `Trajectories` instance
-                            ''')

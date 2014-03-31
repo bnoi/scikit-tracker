@@ -3,15 +3,12 @@ import logging
 
 log = logging.getLogger(__name__)
 
-from ..matrix import LinkBlock
-from ..matrix import DiagBlock
 from ..matrix import CostMatrix
 
-from ..cost_function import AbstractLinkCostFunction
-from ..cost_function import AbstractDiagCostFunction
+from ..cost_function import AbstractCostFunction
 
 from ..cost_function.brownian import BrownianGapCloseCostFunction
-from ..cost_function.diagonals import DiagCostFunction
+from ..cost_function.diagonal import DiagonalCostFunction
 
 from . import AbstractSolver
 
@@ -37,13 +34,13 @@ class GapCloseSolver(AbstractSolver):
                                             columns=['t'] + coords)
 
         self.link_cf = cost_functions['link']
-        self.check_cost_function_type(self.link_cf, AbstractLinkCostFunction)
+        self.check_cost_function_type(self.link_cf, AbstractCostFunction)
 
         self.birth_cf = cost_functions['birth']
-        self.check_cost_function_type(self.birth_cf, AbstractDiagCostFunction)
+        self.check_cost_function_type(self.birth_cf, AbstractCostFunction)
 
         self.death_cf = cost_functions['death']
-        self.check_cost_function_type(self.death_cf, AbstractDiagCostFunction)
+        self.check_cost_function_type(self.death_cf, AbstractCostFunction)
 
         self.maximum_gap = maximum_gap
 
@@ -54,11 +51,11 @@ class GapCloseSolver(AbstractSolver):
         cost_functions = {'link': BrownianGapCloseCostFunction({},
                                                                {'max_speed': max_speed,
                                                                 'coords': ['x', 'y', 'z']}),
-                          'birth': DiagCostFunction({'cost': guessed_cost}),
-                          'death': DiagCostFunction({'cost': guessed_cost})}
+                          'birth': DiagonalCostFunction({'cost': guessed_cost}),
+                          'death': DiagonalCostFunction({'cost': guessed_cost})}
 
         return cls(trajs, cost_functions, maximum_gap, coords=coords)
-        
+
     @property
     def blocks_structure(self):
         return [[self.link_block.mat, self.death_block.mat],
