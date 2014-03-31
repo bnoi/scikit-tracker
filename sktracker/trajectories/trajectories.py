@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+from pandas.io import pytables
+
 
 __all__ = []
 
@@ -191,3 +193,5 @@ class Trajectories(pd.DataFrame):
         ax.set_title(str(groupby_args))
 
         return ax
+
+pytables._TYPE_MAP[Trajectories] = 'frame'
