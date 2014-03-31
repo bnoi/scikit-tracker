@@ -82,7 +82,11 @@ def nuclei_detector(data_iterator,
     real_times = nuclei_positions.index.get_level_values('t_stamp').astype(np.float)
     real_times *= metadata['TimeIncrement']
     nuclei_positions['t'] = real_times
-
+    nuclei_positions['x'] *=  metadata['PhysicalSizeX']
+    nuclei_positions['y'] *=  metadata['PhysicalSizeY']
+    nuclei_positions['z'] *=  metadata['PhysicalSizeZ']
+    nuclei_positions['w'] *=  metadata['PhysicalSizeX']
+    
     return nuclei_positions
 
 
