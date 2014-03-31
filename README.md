@@ -14,10 +14,14 @@ Several algorithms are featured and it is planned to add others:
 
 - Lap Tracker, a robust single-particle tracking : [K. Jaqaman and G. Danuser, Nature Methods, 2008](http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html). The version implemented in **scikit-tracker** is a slightly modified version from the original to allow easy, flexible and yet powerfull parameters adjustements with custom cost function.
 
+## Warning
+
+**scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. We hope to provide soon a 0.2 release with main features working and stable.
+
 ## Documentation
 
-- Stable version : http://bnoi.github.io/scikit-tracker/stable.
-- Dev version : http://bnoi.github.io/scikit-tracker/dev.
+- Stable version : http://bnoi.github.io/scikit-tracker/stable  (currently obsolete, check dev documentation instead)
+- Dev version : http://bnoi.github.io/scikit-tracker/dev
 
 ## Dependencies
 

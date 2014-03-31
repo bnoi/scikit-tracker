@@ -34,6 +34,9 @@ Several algorithms are featured and it is planned to add others:
 .. _K. Jaqaman and G. Danuser, Nature Methods, 2008: http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html
 .. _Julou, T., PNAS, (2013): http://www.pnas.org/content/early/2013/07/10/1301428110
 
+.. warning::
+
+    **scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. We hope to provide soon a 0.2 release with main features working and stable.
 
 Table of content
 ----------------
