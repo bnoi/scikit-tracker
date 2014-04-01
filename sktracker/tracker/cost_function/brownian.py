@@ -129,10 +129,10 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
             distance = pdist(np.vstack([pos_in[coords].values,
                                         pos_out[coords].values]),
                              metric=distance_metric)
-            distances[idx_in[1], idx_out[1]] = distance
             dt = pos_out.t - pos_in.t
-            distance /= np.abs(dt)
+            speed = distance / np.abs(dt)
+            if speed < max_speed:
+                distances[idx_in[1], idx_out[1]] = distance
             #print(dt, pos_in.x, pos_out.x, distance)
-        distances[distances > max_speed] = np.nan
         distances = distances ** 2
         return distances

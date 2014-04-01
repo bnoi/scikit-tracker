@@ -28,4 +28,5 @@ def test_gap_close():
     gc_solver.track()
 
     seg_shapes = [seg[1].shape for seg in gc_solver.trajs.iter_segments]
-    assert seg_shapes == [(16, 5), (19, 5), (19, 5), (2, 5)]
+    assert seg_shapes == [(18, 5), (19, 5), (19, 5)]
+
