@@ -5,8 +5,8 @@ from nose.tools import assert_raises
 from sktracker import data
 
 from sktracker.tracker.solver import AbstractSolver
-from sktracker.tracker.cost_function import AbstractLinkCostFunction
-from sktracker.tracker.cost_function import AbstractDiagCostFunction
+from sktracker.tracker.cost_function import AbstractCostFunction
+from sktracker.tracker.cost_function.diagonal import DiagonalCostFunction
 from sktracker.tracker.cost_function.brownian import BrownianLinkCostFunction
 
 
@@ -16,7 +16,8 @@ def test_solver_check_cost_function_type():
     solver = AbstractSolver(trajs)
     cost_function = BrownianLinkCostFunction(parameters={'max_speed': 1})
 
-    solver.check_cost_function_type(cost_function, AbstractLinkCostFunction)
+    solver.check_cost_function_type(cost_function,
+                                    AbstractCostFunction)
 
     assert True
 
@@ -27,8 +28,10 @@ def test_solver_check_cost_function_type_failure():
     solver = AbstractSolver(trajs)
     cost_function = BrownianLinkCostFunction(parameters={'max_speed': 1})
 
-    assert_raises(TypeError, solver.check_cost_function_type, cost_function,
-                  AbstractDiagCostFunction)
+    assert_raises(TypeError,
+                  solver.check_cost_function_type,
+                  cost_function,
+                  DiagonalCostFunction)
 
 
 def test_solver_check_trajs_df_structure():

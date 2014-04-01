@@ -1,35 +1,50 @@
 import numpy as np
+import pandas as pd
 
 __all__ = []
 
 
 class AbstractCostFunction:
-    """Abstract class.
+    """Abstract class
 
     Parameters
     ----------
     context : dict
     parameters : dict
-        Missing parameters will be filled by DEFAULT_PARAMETERS
     """
 
     def __init__(self, context, parameters):
         self.context = context
         self.parameters = parameters
 
-    def build(self):
+    def get_block(self):
+        """This method can be used. It should be overwritten for any matrix
+        verification returned by self.build.
+
+        Returns
+        -------
+        The matrix used by :class:`sktracker.tracker.matrix.CostMatrix`
         """
+        mat = self._build()
+        return mat
+
+    def _build(self):
+        """This method need to be overwritten by subclasses
         """
-        pass
+        return None
 
     def check_columns(self, objects, cols):
         """Check pandas.DataFrame column names.
 
         Parameters
         ----------
-        objects : list of :class:`pandas.DataFrame`
+        objects : list of :class:`pandas.DataFrame` or :class:`pandas.DataFrame`
         cols : list column names to check
         """
+
+        if isinstance(objects, pd.DataFrame):
+            objects = [objects]
+
         cols_set = set(cols)
         for obj in objects:
             actual_cols_set = set(obj.columns.values)
@@ -63,42 +78,3 @@ class AbstractCostFunction:
             raise TypeError(message.format(self.context[key], obj_type))
 
         return self.context[key]
-
-
-class AbstractLinkCostFunction(AbstractCostFunction):
-    """Basic cost function.
-
-    Parameters
-    ----------
-    context : dict
-    parameters : dict
-        Missing parameters will be filled by DEFAULT_PARAMETERS
-    """
-
-    def __init__(self, context, parameters):
-        super().__init__(context, parameters)
-
-    def build(self, objects_in, objects_out):
-        """
-        """
-        mat = np.zeros((len(objects_in), len(objects_out)))
-        return mat
-
-
-class AbstractDiagCostFunction(AbstractCostFunction):
-    """Basic cost function for diagonal block.
-
-    Parameters
-    ----------
-    context : dict
-    parameters : dict
-        Missing parameters will be filled by DEFAULT_PARAMETERS
-    """
-    def __init__(self, context, parameters):
-        super().__init__(context, parameters)
-
-    def build(self, objects):
-        """
-        """
-        vec = np.zeros(len(objects))
-        return vec

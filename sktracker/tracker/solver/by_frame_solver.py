@@ -2,15 +2,10 @@ import numpy as np
 
 from ...utils import print_progress
 
-from ..matrix import LinkBlock
-from ..matrix import DiagBlock
 from ..matrix import CostMatrix
-
-from ..cost_function import AbstractLinkCostFunction
-from ..cost_function import AbstractDiagCostFunction
-
+from ..cost_function import AbstractCostFunction
 from ..cost_function.brownian import BrownianLinkCostFunction
-from ..cost_function.diagonals import DiagCostFunction
+from ..cost_function.diagonal import DiagonalCostFunction
 
 from . import AbstractSolver
 
@@ -38,13 +33,13 @@ class ByFrameSolver(AbstractSolver):
                                             columns=['t'] + coords)
 
         self.link_cf = cost_functions['link']
-        self.check_cost_function_type(self.link_cf, AbstractLinkCostFunction)
+        self.check_cost_function_type(self.link_cf, AbstractCostFunction)
 
         self.birth_cf = cost_functions['birth']
-        self.check_cost_function_type(self.birth_cf, AbstractDiagCostFunction)
+        self.check_cost_function_type(self.birth_cf, AbstractCostFunction)
 
         self.death_cf = cost_functions['death']
-        self.check_cost_function_type(self.death_cf, AbstractDiagCostFunction)
+        self.check_cost_function_type(self.death_cf, AbstractCostFunction)
 
         self.max_assigned_cost = 0#self.death_cf.context['cost']
 
@@ -67,12 +62,22 @@ class ByFrameSolver(AbstractSolver):
                                                             'coords': coords}),
                           'birth': DiagCostFunction(diag_context),
                           'death': DiagCostFunction(diag_context)}
+        guessed_cost = float(max_speed ** 2)
+
+        link_cost_func = BrownianLinkCostFunction(parameters={'max_speed': max_speed})
+        birth_cost_func = DiagonalCostFunction(context={'cost': guessed_cost})
+        death_cost_func = DiagonalCostFunction(context={'cost': guessed_cost})
+
+        cost_functions = {'link': link_cost_func,
+                          'birth': birth_cost_func,
+                          'death': death_cost_func}
+
         return cls(trajs, cost_functions, coords=coords)
 
     @property
     def blocks_structure(self):
-        return [[self.link_block.mat, self.death_block.mat],
-                [self.birth_block.mat, None]]
+        return [[self.link_cf.get_block(), self.birth_cf.get_block()],
+                [self.death_cf.get_block(), None]]
 
     @property
     def pos_in(self):
@@ -125,17 +130,20 @@ class ByFrameSolver(AbstractSolver):
 
         self.t_in = t_in
         self.t_out = t_out
+
         pos_in = self.pos_in
         pos_out = self.pos_out
 
-        self.link_block = LinkBlock(pos_in, pos_out, self.link_cf)
-        self.birth_block = DiagBlock(pos_out, self.birth_cf)
-        self.death_block = DiagBlock(pos_in, self.death_cf)
+        self.link_cf.context['pos_in'] = pos_in
+        self.link_cf.context['pos_out'] = pos_out
+
+        self.birth_cf.context['objects'] = pos_out
+        self.death_cf.context['objects'] = pos_in
 
         self.cm = CostMatrix(self.blocks_structure)
         self.cm.solve()
         self.assign()
-        
+
     def assign(self):
         """
         """
