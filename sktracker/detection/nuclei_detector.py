@@ -186,7 +186,7 @@ def label_from_thresh(frame, thresh, parameters):
         image = frame > thresh
         distance = ndimage.distance_transform_edt(image)
         local_maxi = peak_local_max(distance,
-                                    min_distance=min_radius,
+                                    min_distance=np.int(min_radius),
                                     indices=False, labels=image)
         markers = ndimage.label(local_maxi)[0]
         return watershed(-distance, markers, mask=image)
@@ -204,20 +204,20 @@ def get_regionprops(labeled_stack, z_stack, parameters):
     min_radius = parameters['min_radius']
     max_radius = parameters['max_radius']
     all_props = []
-    properties = ['Area', 'WeightedCentroid', 'MeanIntensity']
+    #properties = ['Area', 'WeightedCentroid', 'MeanIntensity']
     columns = ('x', 'y', 'z', 'I', 'w')
     indices = []
     for z, frame in enumerate(labeled_stack):
-        f_prop = regionprops(frame.astype(np.int), properties,
+        f_prop = regionprops(frame.astype(np.int),# properties,
                              intensity_image=z_stack[z])
         for d in f_prop:
-            radius = (d['Area'] / np.pi)**0.5
+            radius = (d.area / np.pi)**0.5
             if (min_radius  < radius < max_radius):
-                all_props.append([d['WeightedCentroid'][0],
-                                  d['WeightedCentroid'][1],
-                                  z, d['MeanIntensity'] * d['Area'],
+                all_props.append([d.centroid[0],
+                                  d.centroid[1],
+                                  z, d.mean_intensity * d.area,
                                   radius])
-                indices.append((d['Label'], z))
+                indices.append((d.label, z))
     if not len(indices):
         return pd.DataFrame([], index=[])
     indices = pd.MultiIndex.from_tuples(indices, names=('label', 'z'))
