@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.matrix package &mdash; sktracker 0.2.dev-r62426a9 docs</title>
+  <title>sktracker.tracker.matrix package &mdash; sktracker 0.2.dev-rf75f9b7 docs</title>
   
 
   
@@ -21,21 +21,6 @@
 
   
   
-
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:'../',
-        VERSION:'0.2.dev-r62426a9',
-        COLLAPSE_INDEX:false,
-        FILE_SUFFIX:'.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
     
 
   
@@ -43,35 +28,37 @@
   
   
     <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-r62426a9 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-rf75f9b7 docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="next" title="sktracker.tracker.solver package" href="sktracker.tracker.solver.html"/>
         <link rel="prev" title="sktracker.tracker.lapjv package" href="sktracker.tracker.lapjv.html"/> 
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav">
+<body class="wy-body-for-nav" role="document">
 
   <div class="wy-grid-for-nav">
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="../index.html" class="icon icon-home"> scikit-tracker</a>
-        <form class="wy-form" action="../search.html" method="get">
-  <input type="text" name="q" placeholder="Search docs" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
+        <a href="../index.html" class="fa fa-home"> scikit-tracker</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
         
             <ul class="current">
@@ -122,30 +109,38 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top">
-        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
-        <a href="/">scikit-tracker</a>
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">scikit-tracker</a>
       </nav>
 
 
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <ul class="wy-breadcrumbs">
-  <li><a href="../index.html">Docs</a> &raquo;</li>
-  <li><a href="">sktracker.tracker.matrix package</a></li>
-  
-</ul>
-<hr/>
-
-          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="sktracker.html">sktracker package</a> &raquo;</li>
+      
+          <li><a href="sktracker.tracker.html">sktracker.tracker package</a> &raquo;</li>
+      
+    <li>sktracker.tracker.matrix package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/sktracker.tracker.matrix.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
   <div class="section" id="sktracker-tracker-matrix-package">
 <h1>sktracker.tracker.matrix package<a class="headerlink" href="#sktracker-tracker-matrix-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-sktracker.tracker.matrix.block">
-<span id="sktracker-tracker-matrix-block-module"></span><h2>sktracker.tracker.matrix.block module<a class="headerlink" href="#module-sktracker.tracker.matrix.block" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-sktracker.tracker.matrix.matrix">
 <span id="sktracker-tracker-matrix-matrix-module"></span><h2>sktracker.tracker.matrix.matrix module<a class="headerlink" href="#module-sktracker.tracker.matrix.matrix" title="Permalink to this headline">¶</a></h2>
@@ -263,86 +258,32 @@ Cost matrix is built from matrices blocks.</p>
 
 </dd></dl>
 
-<dl class="class">
-<dt id="sktracker.tracker.matrix.Block">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrix.</tt><tt class="descname">Block</tt><a class="headerlink" href="#sktracker.tracker.matrix.Block" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>A matrix block.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="sktracker.tracker.matrix.LinkBlock">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrix.</tt><tt class="descname">LinkBlock</tt><big>(</big><em>objects_in</em>, <em>objects_out</em>, <em>cost_function</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.LinkBlock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.matrix.block.Block</span></tt></p>
-<p>LinkBlock are built with two vectors.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>objects_in</strong> : 1D array of <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
-<blockquote>
-<div><p>To fill Y block axis.</p>
-</div></blockquote>
-<p><strong>objects_out</strong> : 1D array of <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
-<blockquote>
-<div><p>To fill X block axis.</p>
-</div></blockquote>
-<p><strong>cost_function</strong> : <a class="reference internal" href="sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.AbstractCostFunction" title="sktracker.tracker.cost_function.AbstractCostFunction"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.cost_function.AbstractCostFunction</span></tt></a></p>
-<blockquote class="last">
-<div><p>Used to compute block costs.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="class">
-<dt id="sktracker.tracker.matrix.DiagBlock">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.matrix.</tt><tt class="descname">DiagBlock</tt><big>(</big><em>objects</em>, <em>cost_function</em><big>)</big><a class="headerlink" href="#sktracker.tracker.matrix.DiagBlock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.matrix.block.Block</span></tt></p>
-<p>DiagBlock are built with one single vector. It is an identity matrix.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>objects</strong> : 1D array of <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
-<blockquote>
-<div><p>To fill the identity matrix.</p>
-</div></blockquote>
-<p><strong>cost_function</strong> : <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.CostFunction</span></tt></p>
-<blockquote class="last">
-<div><p>Used to compute block costs.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 </div>
 
 
+          </div>
           <footer>
   
-    <div class="rst-footer-buttons">
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.tracker.solver.html" class="btn btn-neutral float-right" title="sktracker.tracker.solver package"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="sktracker.tracker.solver.html" class="btn btn-neutral float-right" title="sktracker.tracker.solver package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sktracker.tracker.lapjv.html" class="btn btn-neutral" title="sktracker.tracker.lapjv package"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="sktracker.tracker.lapjv.html" class="btn btn-neutral" title="sktracker.tracker.lapjv package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
 
   <hr/>
 
-  <p>
-      &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
-  </p>
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
+    </p>
+  </div>
 
-  <a href="https://www.github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="http://readthedocs.org">Read the Docs</a>
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
         </div>
       </div>
@@ -351,6 +292,39 @@ Cost matrix is built from matrices blocks.</p>
 
   </div>
   
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.dev-rf75f9b7',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
 
 </body>
 </html>
