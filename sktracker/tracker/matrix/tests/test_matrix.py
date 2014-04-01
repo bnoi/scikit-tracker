@@ -57,7 +57,7 @@ def test_cost_matrix_with_mock_trajs():
     pos1 = trajs.ix[t1]
 
     diag_context = {'cost': 5.**2}
-    diag_params  = {'penality': 2.}
+    diag_params  = {'penalty': 2.}
 
     link_cost_func = BrownianLinkCostFunction(parameters={'max_speed': 5.})
     birth_cost_func = DiagonalCostFunction(context=diag_context,

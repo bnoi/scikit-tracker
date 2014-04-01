@@ -6,7 +6,8 @@ from sktracker.tracker.cost_function.diagonal import DiagonalCostFunction
 
 def test_diagonals():
 
-    cost_func = DiagonalCostFunction(context={'cost': 1.}, parameters={'penality':1.05})
+    cost_func = DiagonalCostFunction(context={'cost': 1.},
+                                     parameters={'penalty':1.05})
 
     objects = np.arange(0, 4)
     cost_func.context['objects'] = objects
