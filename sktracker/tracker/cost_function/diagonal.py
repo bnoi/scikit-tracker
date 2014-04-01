@@ -10,7 +10,8 @@ class DiagonalCostFunction(AbstractCostFunction):
     Parameters
     ----------
     context: `dict`
-       this dictionnary must contain at least a `cost` key
+       this dictionnary must contain at least a `"cost"` key
+    parameters: `dict`
 
     Attributes
     ----------
@@ -26,11 +27,11 @@ class DiagonalCostFunction(AbstractCostFunction):
 
     """
 
-    def __init__(self, context):
+    def __init__(self, context, parameters):
         """
         """
 
-        super().__init__(context=context, parameters={})
+        super().__init__(context=context, parameters=parameters)
         _ = self.check_context('cost', float)
 
     def _build(self):
@@ -45,8 +46,8 @@ class DiagonalCostFunction(AbstractCostFunction):
         return mat
 
     def _vector_to_matrix(self, vector):
-        """Convert a 1D :class:`numpy.ndarray` to identity 2D :class:`numpy.ndarray`.
-        0 value ar replaced by NaN.
+        """Converts a 1D :class:`numpy.ndarray` to identity 2D :class:`numpy.ndarray`
+        with NaNs outside of the diagonal
 
         Parameters
         ----------

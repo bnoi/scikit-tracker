@@ -45,15 +45,21 @@ class GapCloseSolver(AbstractSolver):
         self.maximum_gap = maximum_gap
 
     @classmethod
-    def for_brownian_motion(cls, trajs, max_speed, maximum_gap, coords=['x', 'y', 'z']):
+    def for_brownian_motion(cls, trajs, max_speed, maximum_gap,
+                            penality=1.05, coords=['x', 'y', 'z']):
         """
         """
 
         guessed_cost = float(max_speed ** 2)
 
+        diag_context = {'cost': guessed_cost}
+        diag_params  = {}
+
         link_cost_func = BrownianGapCloseCostFunction(parameters={'max_speed': max_speed})
-        birth_cost_func = DiagonalCostFunction(context={'cost': guessed_cost})
-        death_cost_func = DiagonalCostFunction(context={'cost': guessed_cost})
+        birth_cost_func = DiagonalCostFunction(context=diag_context,
+                                               parameters=diag_params)
+        death_cost_func = DiagonalCostFunction(context=diag_context,
+                                               parameters=diag_params)
 
         cost_functions = {'link': link_cost_func,
                           'birth': birth_cost_func,
