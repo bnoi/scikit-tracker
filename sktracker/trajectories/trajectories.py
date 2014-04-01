@@ -153,9 +153,9 @@ class Trajectories(pd.DataFrame):
         Parameters
         ----------
         group_args : dict
-            Used to group objects with :method:`pandas.DataFrame.groupby`.
+            Used to group objects with :meth:`pandas.DataFrame.groupby`.
         coords : list
-            Column names used ti compute euclidean distance
+            Column names used to compute euclidean distance.
 
         Returns
         -------
