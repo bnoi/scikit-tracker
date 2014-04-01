@@ -46,14 +46,15 @@ class GapCloseSolver(AbstractSolver):
 
     @classmethod
     def for_brownian_motion(cls, trajs, max_speed, maximum_gap,
-                            penality=1.05, coords=['x', 'y', 'z']):
+                            link_percentile=90,
+                            coords=['x', 'y', 'z']):
         """
         """
 
         guessed_cost = float(max_speed ** 2)
 
         diag_context = {'cost': guessed_cost}
-        diag_params  = {}
+        diag_params  = {'link_percentile': link_percentile}
 
         link_cost_func = BrownianGapCloseCostFunction(parameters={'max_speed': max_speed})
         birth_cost_func = DiagonalCostFunction(context=diag_context,
@@ -106,15 +107,17 @@ class GapCloseSolver(AbstractSolver):
         # space and time, with all other potential assignments. Thus,
         # the alternative cost was taken as the 90th percentile.'''
 
-        link_percentile = 90
+        link_percentile_b = self.birth_cf.parameters['link_percentile']
+        link_percentile_d = self.death_cf.parameters['link_percentile']
 
         self.link_cf.get_block()
         link_costs = np.ma.masked_invalid(self.link_cf.mat).compressed()
-        cost = np.percentile(link_costs, link_percentile)
+        cost_b = np.percentile(link_costs, link_percentile_b)
+        cost_d = np.percentile(link_costs, link_percentile_d)
 
-        self.birth_cf.context['cost'] = cost
+        self.birth_cf.context['cost'] = cost_b
         self.birth_cf.get_block()
-        self.death_cf.context['cost'] = cost
+        self.death_cf.context['cost'] = cost_d
         self.death_cf.get_block()
 
         self.cm = CostMatrix(self.blocks_structure)
