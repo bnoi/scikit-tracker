@@ -24,6 +24,7 @@ def plot_3coords(trajs, coords=('x', 'y', 'z'),
     ax_x.set_title('')
     ax_x.set_xlabel('')
 
+
     ax_y.set_ylabel(u'y position')
     ax_y.set_title('')
     ax_y.set_xlabel('')

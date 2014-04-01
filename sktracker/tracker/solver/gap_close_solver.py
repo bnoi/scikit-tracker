@@ -65,7 +65,7 @@ class GapCloseSolver(AbstractSolver):
         cost_functions = {'link': link_cost_func,
                           'birth': birth_cost_func,
                           'death': death_cost_func}
-
+        log.info('Initiating gap close')
         return cls(trajs, cost_functions, maximum_gap, coords=coords)
 
     @property
@@ -112,6 +112,9 @@ class GapCloseSolver(AbstractSolver):
 
         self.link_cf.get_block()
         link_costs = np.ma.masked_invalid(self.link_cf.mat).compressed()
+        if not link_costs.shape[0]:
+            log.info('No suitable gap to fill')
+            return self.trajs
         cost_b = np.percentile(link_costs, link_percentile_b)
         cost_d = np.percentile(link_costs, link_percentile_d)
 
