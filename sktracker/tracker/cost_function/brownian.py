@@ -119,8 +119,8 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
         trajs.relabel_fromzero('label', inplace=True)
 
         # Build matrix
-        distances = np.empty((len(idxs_in),
-                              len(idxs_out)))
+        distances = np.empty((len(trajs.labels),
+                              len(trajs.labels)))
         distances.fill(np.nan)
 
         for idx_in, idx_out in zip(idxs_in, idxs_out):

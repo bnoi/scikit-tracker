@@ -79,6 +79,8 @@ class GapCloseSolver(AbstractSolver):
         self.link_cf.context['trajs'] = self.trajs
         self.link_cf.context['idxs_in'] = idxs_in
         self.link_cf.context['idxs_out'] = idxs_out
+        self.birth_cf.context['objects'] = self.trajs.labels
+        self.death_cf.context['objects'] = self.trajs.labels
 
         if not len(idxs_in):
             log.info('No gap needs closing here...')
