@@ -18,15 +18,12 @@ class AbstractCostFunction:
         self.parameters = parameters
 
     def get_block(self):
-        """This method can be used. It should be overwritten for any matrix
+        """This method will update the values in `self.mat`. It should be overwritten for any matrix
         verification returned by self.build.
 
-        Returns
-        -------
-        The matrix used by :class:`sktracker.tracker.matrix.CostMatrix`
+
         """
-        mat = self._build()
-        return mat
+        self.mat = self._build()
 
     def _build(self):
         """This method needs to be overwritten by subclasses

@@ -10,8 +10,8 @@ def test_diagonals():
 
     objects = np.arange(0, 4)
     cost_func.context['objects'] = objects
-
-    block = cost_func.get_block().flatten()
+    cost_func.get_block()
+    block = cost_func.mat.flatten()
 
     true_block = [1.0, np.nan, np.nan, np.nan, np.nan, 1.0, np.nan, np.nan,
                   np.nan, np.nan, 1.0, np.nan, np.nan, np.nan, np.nan, 1.0]

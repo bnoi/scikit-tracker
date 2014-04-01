@@ -69,8 +69,8 @@ class GapCloseSolver(AbstractSolver):
 
     @property
     def blocks_structure(self):
-        return [[self.link_cf.get_block(), self.death_cf.get_block()],
-                [self.birth_cf.get_block(), None]]
+        return [[self.link_cf.mat, self.death_cf.mat],
+                [self.birth_cf.mat, None]]
 
     def track(self):
 
@@ -104,14 +104,16 @@ class GapCloseSolver(AbstractSolver):
         # space and time, with all other potential assignments. Thus,
         # the alternative cost was taken as the 90th percentile.'''
 
-        percentile = 90
+        link_percentile = 90
 
-        # Here self.link_cf.get_block() is called while it's also called
-        # in self.blocks_structure property. We may have a performance issue.
-        link_costs = np.ma.masked_invalid(self.link_cf.get_block()).compressed()
-        cost = np.percentile(link_costs, percentile)
+        self.link_cf.get_block()
+        link_costs = np.ma.masked_invalid(self.link_cf.mat).compressed()
+        cost = np.percentile(link_costs, link_percentile)
+
         self.birth_cf.context['cost'] = cost
+        self.birth_cf.get_block()
         self.death_cf.context['cost'] = cost
+        self.death_cf.get_block()
 
         self.cm = CostMatrix(self.blocks_structure)
         self.cm.solve()

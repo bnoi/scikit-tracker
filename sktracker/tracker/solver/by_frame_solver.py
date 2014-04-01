@@ -73,8 +73,8 @@ class ByFrameSolver(AbstractSolver):
 
     @property
     def blocks_structure(self):
-        return [[self.link_cf.get_block(), self.birth_cf.get_block()],
-                [self.death_cf.get_block(), None]]
+        return [[self.link_cf.mat, self.birth_cf.mat],
+                [self.death_cf.mat, None]]
 
     @property
     def pos_in(self):
@@ -133,9 +133,13 @@ class ByFrameSolver(AbstractSolver):
 
         self.link_cf.context['pos_in'] = pos_in
         self.link_cf.context['pos_out'] = pos_out
+        self.link_cf.get_block()
 
         self.birth_cf.context['objects'] = pos_out
+        self.birth_cf.get_block()
+
         self.death_cf.context['objects'] = pos_in
+        self.death_cf.get_block()
 
         self.cm = CostMatrix(self.blocks_structure)
         self.cm.solve()

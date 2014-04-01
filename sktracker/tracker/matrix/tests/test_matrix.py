@@ -59,12 +59,16 @@ def test_cost_matrix_with_mock_trajs():
 
     link_cost_func.context['pos_in'] = pos0
     link_cost_func.context['pos_out'] = pos1
+    link_cost_func.get_block()
 
     birth_cost_func.context['objects'] = pos1
-    death_cost_func.context['objects'] = pos0
+    birth_cost_func.get_block()
 
-    cost_matrix_structure = [[link_cost_func.get_block(),  death_cost_func.get_block()],
-                             [birth_cost_func.get_block(), None]]
+    death_cost_func.context['objects'] = pos0
+    death_cost_func.get_block()
+
+    cost_matrix_structure = [[link_cost_func.mat,  death_cost_func.mat],
+                             [birth_cost_func.mat, None]]
 
     cm = CostMatrix(cost_matrix_structure)
     assert cm.mat.shape == (10, 10)
