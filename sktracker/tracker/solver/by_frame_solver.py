@@ -170,5 +170,6 @@ class ByFrameSolver(AbstractSolver):
         if cost > self.max_assigned_cost:
             self.max_assigned_cost = cost
             new_b_cost = self.max_assigned_cost * self.birth_cf.parameters['penality']
+            new_d_cost = self.max_assigned_cost * self.death_cf.parameters['penality']
             self.birth_cf.context['cost'] = new_b_cost
-            self.death_cf.context['cost'] = new_b_cost
+            self.death_cf.context['cost'] = new_d_cost

@@ -29,7 +29,7 @@ class AbstractCostFunction:
         return mat
 
     def _build(self):
-        """This method need to be overwritten by subclasses
+        """This method needs to be overwritten by subclasses
         """
         return None
 
