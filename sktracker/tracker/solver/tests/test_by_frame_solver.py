@@ -1,5 +1,5 @@
 import io
-
+import numpy as np
 from sktracker import data
 from sktracker.tracker.solver import ByFrameSolver
 from sktracker.tracker.utils import get_scores_on_trajectories
@@ -16,6 +16,17 @@ def test_by_frame_solver():
 
     assert min_chi_square == 0 and conserved_trajectories_number == 1
 
+def test_by_frame_solver_with_missing_data():
+
+    true_trajs = data.with_gaps_df()
+
+    solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=5, penality=2.)
+    trajs = solver.track()
+
+    min_chi_square, conserved_trajectories_number, scores = get_scores_on_trajectories(trajs)
+
+    assert min_chi_square == 0 and conserved_trajectories_number == 3 / 7.
+
 
 def test_by_frame_solver_with_bad_parameters():
 
@@ -27,7 +38,6 @@ def test_by_frame_solver_with_bad_parameters():
     min_chi_square, conserved_trajectories_number, scores = get_scores_on_trajectories(trajs)
 
     assert min_chi_square == 0 and conserved_trajectories_number == 0.2
-
 
 def test_by_frame_solver_progress_bar():
 

@@ -13,6 +13,14 @@ def nan_ident(size):
     mat[mat == 0] = np.nan
     return mat
 
+def test_get_shapes():
+    blocks = np.array([[np.ones((1, 2)), np.ones((1, 3)), nan_ident(1), None],
+                       [np.ones((3, 2)), None, None, nan_ident(3)],
+                       [nan_ident(2), None, None, None],
+                       [None, nan_ident(3), None, None]])
+
+    cm = CostMatrix(blocks)
+    cm.get_shapes()
 
 def test_cost_matrix_mocked_mat():
 

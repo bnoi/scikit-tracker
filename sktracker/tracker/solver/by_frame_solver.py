@@ -73,8 +73,8 @@ class ByFrameSolver(AbstractSolver):
 
     @property
     def blocks_structure(self):
-        return [[self.link_cf.mat, self.birth_cf.mat],
-                [self.death_cf.mat, None]]
+        return [[self.link_cf.mat, self.death_cf.mat],
+                [self.birth_cf.mat, None]]
 
     @property
     def pos_in(self):
