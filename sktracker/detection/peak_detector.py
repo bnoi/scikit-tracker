@@ -173,7 +173,7 @@ def peak_detector(data_iterator,
     return peaks_df
 
 
-def find_gaussian_peaks(args):
+def find_gaussian_peaks(args):  # pragma: no cover
     """
     Buffer function for _find_gaussian_peaks
     """
@@ -182,7 +182,7 @@ def find_gaussian_peaks(args):
 
 
 def _find_gaussian_peaks(image, w_s=15, peak_radius=1.5,
-                         threshold=27., max_peaks=1e4):
+                         threshold=27., max_peaks=1e4):  # pragma: no cover
     """
     This function implements the Gaussian peak detection described
     in Segré et al. Nature Methods **5**, 8 (2008). It is based on a
@@ -241,7 +241,7 @@ def _find_gaussian_peaks(image, w_s=15, peak_radius=1.5,
     return peaks
 
 
-def image_deflation(image, peaks, w_s):
+def image_deflation(image, peaks, w_s):  # pragma: no cover
     """
     Substracts the detected Gaussian peaks from the input image and
     returns the deflated image.
@@ -261,7 +261,7 @@ def image_deflation(image, peaks, w_s):
     return d_image
 
 
-def gauss_estimation(image, peaks_coords, w_s):
+def gauss_estimation(image, peaks_coords, w_s):  # pragma: no cover
     """
     Least square fit of a 2D Gauss peaks (with radial symmetry)
     on regions of width `w_s` centered on each element
@@ -294,7 +294,7 @@ def gauss_estimation(image, peaks_coords, w_s):
     return peaks
 
 
-def glrt_detection(image, r0, w_s, threshold):
+def glrt_detection(image, r0, w_s, threshold):  # pragma: no cover
     """
     Implements the Generalized Likelyhood Ratio Test, by
     computing equation 4 in Segré et al. Supplementary Note (p. 12)
@@ -360,7 +360,7 @@ def glrt_detection(image, r0, w_s, threshold):
         return np.array([])
 
 
-def hypothesis_map(patch, g_patch, g_squaresum):
+def hypothesis_map(patch, g_patch, g_squaresum):  # pragma: no cover
     """
     Computes the ratio for a given patch position.
     """
@@ -376,7 +376,7 @@ def hypothesis_map(patch, g_patch, g_squaresum):
     return ratio
 
 
-def gauss_estimate(patch, w_s):
+def gauss_estimate(patch, w_s):  # pragma: no cover
     """
     Least square 2D gauss fit
     """
@@ -386,7 +386,7 @@ def gauss_estimate(patch, w_s):
     return leastsq(errfunc, params0, xtol=0.01)
 
 
-def gauss_continuous(params, w_s):
+def gauss_continuous(params, w_s):  # pragma: no cover
     """2D gauss function with a float center position"""
     xc, yc, width, I, bg = params
     xc = np.float(xc)
@@ -397,7 +397,7 @@ def gauss_continuous(params, w_s):
     return g_patch.flatten()
 
 
-def gauss_patch(r0, w_s):
+def gauss_patch(r0, w_s):  # pragma: no cover
     """
     Computes an w_s by w_s image with a
     power normalized  Gaussian peak with radial symmetry
@@ -409,7 +409,7 @@ def gauss_patch(r0, w_s):
     return g_patch
 
 
-def gauss_discrete(r0, i, j, w_s):
+def gauss_discrete(r0, i, j, w_s):  # pragma: no cover
     """
     2D gauss function with a discrete center position
     """

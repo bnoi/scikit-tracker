@@ -41,7 +41,7 @@ def get_scores_on_trajectories(trajs, coords=['x', 'y', 'z']):
             h.dropna(inplace=True)
 
             score = ((h - p)[['x', 'y', 'z']].sum(axis=1) ** 2).mean()
-            scores[new_label, true_label] = score
+            scores[np.int(new_label), np.int(true_label)] = score
 
     min_chi_square = np.min(scores, axis=1).sum()
     conserved_trajectories_number = scores.shape[1] / scores.shape[0]

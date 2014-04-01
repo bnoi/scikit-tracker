@@ -17,7 +17,7 @@ All rights reserved.
 
 import numpy as np
 
-try:
+try:  # pragma: no cover
     from ._lapjv import reduction_transfer
     from ._lapjv import augmenting_row_reduction
     from ._lapjv import augment
@@ -34,7 +34,7 @@ __all__ = []
 
 
 def lapjv(i, j, costs, wants_dual_variables=False,
-          augmenting_row_reductions=2, use_slow=False):
+          augmenting_row_reductions=2, use_slow=False):  # pragma: no cover
     '''Sparse linear assignment solution using Jonker-Volgenant algorithm
 
     i,j - similarly-sized vectors that pair the object at index i[n] with
@@ -182,7 +182,7 @@ def lapjv(i, j, costs, wants_dual_variables=False,
         return x, y
 
 
-def slow_reduction_transfer(ii, j, idx, count, x, u, v, c):
+def slow_reduction_transfer(ii, j, idx, count, x, u, v, c):  # pragma: no cover
     '''Perform the reduction transfer step from the Jonker-Volgenant algorithm
 
     The data is input in a ragged array in terms of "i" structured as a
@@ -224,7 +224,7 @@ def slow_reduction_transfer(ii, j, idx, count, x, u, v, c):
         u[i] = uu
 
 
-def slow_augmenting_row_reduction(n, ii, jj, idx, count, x, y, u, v, c):
+def slow_augmenting_row_reduction(n, ii, jj, idx, count, x, y, u, v, c):  # pragma: no cover
     '''Perform the augmenting row reduction step
     from the Jonker-Volgenaut algorithm
 
@@ -291,7 +291,7 @@ def slow_augmenting_row_reduction(n, ii, jj, idx, count, x, y, u, v, c):
     return np.array(free, np.uint32)
 
 
-def slow_augment(n, ii, jj, idx, count, x, y, u, v, c):
+def slow_augment(n, ii, jj, idx, count, x, y, u, v, c):  # pragma: no cover
     '''Perform the augmentation step to assign unassigned i and j
 
     n - the # of i and j, also the marker of unassigned x and y

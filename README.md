@@ -20,7 +20,7 @@ Several algorithms are featured and it is planned to add others:
 
 ## Documentation
 
-- Stable version : http://bnoi.github.io/scikit-tracker/stable (currently obsolete, check dev documentation instead)
+- Stable version : http://bnoi.github.io/scikit-tracker/stable  (currently obsolete, check dev documentation instead)
 - Dev version : http://bnoi.github.io/scikit-tracker/dev
 
 ## Dependencies

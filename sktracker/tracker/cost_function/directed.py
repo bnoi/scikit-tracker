@@ -4,12 +4,12 @@ import pandas as pd
 from scipy import interpolate
 
 from ...trajectories import Trajectories
-from . import AbstractLinkCostFunction
+from . import AbstractCostFunction
 
 __all__ = ["BasicDirectedLinkCostFunction"]
 
 
-class BasicDirectedLinkCostFunction(AbstractLinkCostFunction):
+class BasicDirectedLinkCostFunction(AbstractCostFunction):
     """This class generates cost matrices for directed motion
     trajectories.
 
@@ -19,16 +19,28 @@ class BasicDirectedLinkCostFunction(AbstractLinkCostFunction):
     Attributes
     ----------
 
-    paramters: a `dict`
-        used by the `build` method, with the following keys:
-        * 'distance_metric': a string, default 'euclidean',
+    paramters: dict
+        Used by the `build` method, with the following keys:
+
+        - 'distance_metric': a string, default 'euclidean',
           passed to `scipy.spatial.distance.cdist`
           (see this function documentation for more)
-        * 'coords': a list of column names on which to compute the distance,
+
+        - 'coords': a list of column names on which to compute the distance,
             default ['x', 'y', 'z']
-        * 'max_speed': a float, default 1. All the values of the cost matrix
+
+        - 'max_speed': a float, default 1. All the values of the cost matrix
            for which the distance *divided by the time difference* is higher than
            this parameter's value are set to np.nan
+
+    context: dict
+        Context is used to store vectors.
+
+        - pos_in: :class:`pandas.DataFrame`
+            The object coordinates to link from
+
+        - pos_out: :class:`pandas.DataFrame`
+            The object coordinates to link to
 
     """
 
@@ -41,40 +53,30 @@ class BasicDirectedLinkCostFunction(AbstractLinkCostFunction):
                        'coords': ['x', 'y', 'z']}
         _parameters.update(parameters)
 
-        super().__init__({}, _parameters)
+        super().__init__(context={}, parameters=_parameters)
 
-    def build(self, pos_in, pos_out):
+    def _build(self):
         """
-        Computes and returns the cost matrix between pos_in and pos_out.
-
-        Parameters
-        ----------
-
-        pos_in: a :class:`pandas.DataFrame`
-            The object coordinates to link from
-
-        pos_out: a :class:`pandas.DataFrame`
-            The object coordinates to link to
-
-        Notes
-        -----
-
-        Both arguments must contain the columns listed in `self.parameters['coords']`
-        plus one column named 't' containing the time position of each objects.
         """
 
-        # Check if context contains 'trajs'
-        trajs = self.check_context('trajs', Trajectories)
-
+        # Get parameters
         coords = self.parameters['coords']
         max_speed = self.parameters['max_speed']
         past_traj_time = self.parameters['past_traj_time']
         smooth_factor = self.parameters['smooth_factor']
         interpolation_order = self.parameters['interpolation_order']
 
+        # Check context
+        pos_in = self.check_context('pos_in', pd.DataFrame)
+        pos_out = self.check_context('pos_out', pd.DataFrame)
+        trajs = self.check_context('trajs', pd.DataFrame)
+
+        # Chech vectors
+        self.check_columns([pos_in, pos_out], list(coords) + ['t'])
+
         dt = pos_out['t'].iloc[0] - pos_in['t'].iloc[0]
 
-        self.check_columns([pos_in, pos_out], list(coords) + ['t'])
+        # Build matrix
 
         t_in = pos_in.t.unique()[0]
         # t_out = pos_out.t.unique()[0]
@@ -135,5 +137,5 @@ class BasicDirectedLinkCostFunction(AbstractLinkCostFunction):
 
                 distances[i, j] = score
 
-        distances -= distances.min()
+        #distances -= distances.min()
         return distances

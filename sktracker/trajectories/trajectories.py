@@ -161,7 +161,7 @@ class Trajectories(pd.DataFrame):
         ax : :class:`matplotlib.axes.Axes`
             None will create a new one.
         **kwargs are passed to the plot function
-        
+
         Returns
         -------
         :class:`matplotlib.axes.Axes`
