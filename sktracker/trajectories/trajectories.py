@@ -145,6 +145,36 @@ class Trajectories(pd.DataFrame):
         trajs.index.set_names(names, inplace=True)
         return trajs
 
+    def get_mean_distances(self, group_args={'by': 'true_label'},
+                           coords=['x', 'y', 'z']):
+        """Return the mean distances between each timepoints. Objects are grouped
+        following group_args parameters.
+
+        Parameters
+        ----------
+        group_args : dict
+            Used to group objects with :method:`pandas.DataFrame.groupby`.
+        coords : list
+            Column names used ti compute euclidean distance
+
+        Returns
+        -------
+        mean_dist : :class:`pandas.DataFrame`
+        """
+
+        def get_euclidean_distance(vec):
+            vec = vec.loc[:, coords].values
+            dist = (vec[:-1] - vec[1:]) ** 2
+            dist = dist.sum(axis=-1)
+            dist = np.sqrt(dist)
+            return pd.DataFrame(dist, columns=['distance'])
+
+        groups = self.groupby(**group_args)
+        distances = groups.apply(get_euclidean_distance)
+        mean_dist = distances.groupby(level=0).mean()
+
+        return mean_dist
+
     def show(self, xaxis='t',
              yaxis='x',
              groupby_args={'level': "label"},
@@ -186,7 +216,7 @@ class Trajectories(pd.DataFrame):
         gp = self.groupby(**groupby_args).groups
         for k, v in gp.items():
             traj = self.loc[v]
-            c = colors[v[0][1]] # that's the label
+            c = colors[v[0][1]]  # that's the label
             ax.plot(traj[xaxis], traj[yaxis],
                     line_style, c=c, **kwargs)
 
@@ -205,6 +235,6 @@ class Trajectories(pd.DataFrame):
             clrs[label] = ccycle[label % num_colors]
         return clrs
 
-## Register the trajectories for storing in HDFStore
-## as a regular DataFrame
+# Register the trajectories for storing in HDFStore
+# as a regular DataFrame
 pytables._TYPE_MAP[Trajectories] = 'frame'

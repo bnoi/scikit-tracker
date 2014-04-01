@@ -4,7 +4,6 @@ from numpy.testing import assert_array_equal
 from numpy.testing import assert_array_almost_equal
 
 import numpy as np
-import matplotlib
 import tempfile
 import pandas as pd
 
@@ -67,6 +66,7 @@ def test_reverse():
 
     assert trajs.reverse().shape == (25, 5)
 
+
 def test_write_hdf():
 
     trajs = data.brownian_trajs_df()
@@ -74,3 +74,16 @@ def test_write_hdf():
     tmp_store = tempfile.NamedTemporaryFile(suffix='h5')
     with pd.get_store(tmp_store.name) as store:
         store['trajs'] = trajs
+
+
+def get_mean_dist():
+
+    true_trajs = data.brownian_trajs_df()
+
+    trajs = Trajectories(true_trajs)
+    mean_dist = trajs.get_mean_distances()
+
+    true_dist = np.array([1.58959148, 1.42974187,
+                          1.97505829, 1.93212297, 1.30778342])
+
+    assert_array_almost_equal(true_dist, mean_dist.values.flatten())
