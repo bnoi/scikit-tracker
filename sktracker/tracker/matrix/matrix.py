@@ -153,7 +153,7 @@ class CostMatrix:
         # Copy the upper left block and transpose
         lrb = self.mat[:i, :j].T.copy()
         # Give a value higher than the max value
-        lrb[np.isfinite(lrb)] = self.get_masked().max() + 1.
+        lrb[np.isfinite(lrb)] = self.get_masked().max() * 1.1
 
         self.mat[i:, j:] = lrb
 

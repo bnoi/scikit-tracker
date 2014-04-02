@@ -55,7 +55,7 @@ class ByFrameSolver(AbstractSolver):
             Max objects velocity
         coords : list
         """
-        guessed_cost = np.float(max_speed ** 2)
+        guessed_cost = np.float(max_speed ** 2) * penalty
         diag_context = {'cost': guessed_cost}
         diag_params = {'penalty': penalty}
 
