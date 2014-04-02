@@ -35,12 +35,12 @@ def test_cost_matrix_mocked_mat():
                 1.0, np.nan, np.nan, 1.0, 1.0, np.nan, np.nan,
                 np.nan, np.nan, np.nan, 1.0, np.nan, 1.0, 1.0,
                 np.nan, np.nan, np.nan, np.nan, np.nan, np.nan,
-                1.0, 1.0, np.nan, np.nan, np.nan, np.nan, 2.0,
-                2.0, 2.0, 2.0, np.nan, 1.0, np.nan, np.nan, np.nan,
-                2.0, 2.0, 2.0, 2.0, np.nan, np.nan, 1.0, np.nan,
-                np.nan, 2.0, np.nan, np.nan, np.nan, np.nan,
-                np.nan, np.nan, 1.0, np.nan, 2.0, np.nan, np.nan,
-                np.nan, np.nan, np.nan, np.nan, np.nan, 1.0, 2.0,
+                1.0, 1.0, np.nan, np.nan, np.nan, np.nan, 1.1,
+                1.1, 1.1, 1.1, np.nan, 1.0, np.nan, np.nan, np.nan,
+                1.1, 1.1, 1.1, 1.1, np.nan, np.nan, 1.0, np.nan,
+                np.nan, 1.1, np.nan, np.nan, np.nan, np.nan,
+                np.nan, np.nan, 1.0, np.nan, 1.1, np.nan, np.nan,
+                np.nan, np.nan, np.nan, np.nan, np.nan, 1.0, 1.1,
                 np.nan, np.nan, np.nan]
 
     assert_array_equal(cm.mat.flatten(), true_mat)
