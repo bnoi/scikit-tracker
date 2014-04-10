@@ -94,6 +94,7 @@ def nuclei_detector(data_iterator,
 
 
 def detect_one_stack(args, full_output=False):
+
     z_stack, parameters = args
     if len(z_stack.shape) == 2:
         z_stack = z_stack[np.newaxis, ...]
