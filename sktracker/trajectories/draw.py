@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 
 def plot_3coords(trajs, coords=('x', 'y', 'z'),
-                 text=True, fig=None, ls='-o', **kwargs):  # pragma: no cover
+                 text=True, fig=None, **kwargs):  # pragma: no cover
 
     xcoord, ycoord, zcoord = coords
     if fig is None:
@@ -42,6 +42,7 @@ def show_4pannels(trajs, label, coords=('x', 'y', 'z'),
                   axes=None, ax_3d=None,
                   scatter_kw={}, line_kw={},
                   smth=0, smoothing=0):  # pragma: no cover
+
 
     u, v, w = coords
 

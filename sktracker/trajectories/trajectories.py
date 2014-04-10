@@ -178,7 +178,6 @@ class Trajectories(pd.DataFrame):
     def show(self, xaxis='t',
              yaxis='x',
              groupby_args={'level': "label"},
-             line_style='-o',
              ax=None, **kwargs):  # pragma: no cover
         """Show trajectories
 
@@ -214,11 +213,28 @@ class Trajectories(pd.DataFrame):
             ax = plt.gca()
         colors = self.get_colors()
         gp = self.groupby(**groupby_args).groups
+
+        ### Set default kwargs if they are not provided
+        ### Unfortunately you can't pass somthing as '-o'
+        ### as a single linestyle kwarg
+
+        if ((kwargs.get('ls') is None)
+           and (kwargs.get('linestyle') is None)):
+            kwargs['ls'] = '-'
+        if kwargs.get('marker') is None:
+            kwargs['marker'] = 'o'
+        if ((kwargs.get('c') is None)
+            and (kwargs.get('color') is None)):
+            auto_color = True
+        else:
+            auto_color = False
+
         for k, v in gp.items():
             traj = self.loc[v]
-            c = colors[v[0][1]]  # that's the label
-            ax.plot(traj[xaxis], traj[yaxis],
-                    line_style, c=c, **kwargs)
+            if auto_color:
+                c = colors[v[0][1]]  # that's the label
+                kwargs['color'] = c
+            ax.plot(traj[xaxis], traj[yaxis], **kwargs)
 
         ax.set_xlabel(xaxis)
         ax.set_ylabel(yaxis)
