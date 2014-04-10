@@ -1,54 +1,114 @@
 import matplotlib.pyplot as plt
 
+'''
+This module provide utility function to represent the trajectories
+with matplotlib
+
+'''
 
 def plot_3coords(trajs, coords=('x', 'y', 'z'),
-                 text=True, fig=None, **kwargs):  # pragma: no cover
+                        text=True, fig=None, **kwargs):
+    '''
+    Soon to be deprecated, use `plot_stacked_coords` instead
+    '''
+    return plot_stacked_coords(trajs, coords=coords,
+                        text=text, fig=fig, **kwargs)
 
-    xcoord, ycoord, zcoord = coords
+
+def plot_stacked_coords(trajs, coords=('x', 'y', 'z'),
+                        text=False, fig=None, **kwargs):  # pragma: no cover
+    '''
+    Plots stacked graphs with each of the coordinates given in the
+    `coords` argument plotted against time.
+
+    Parameters
+    ----------
+    trajs: a :class:`Trajectories` instance
+    coords: a tuple, default ('x', 'y', 'z')
+        the coordinates (`trajs` column names) to be ploted
+    text: bool, default False
+        if True, will append each trajectory segment's label
+        at the extremities on the upper most plot
+    fig: a matplotlib `Figure`, default `None`
+        the figure on which to plot
+
+    Returns
+    -------
+    axes: a list of :class:`matplotlib.axes.Axes`
+
+    '''
     if fig is None:
         # Create a figure with 3 graphs verticaly stacked
-        fig, (ax_x, ax_y, ax_z) = plt.subplots(3, 1, sharex=True, figsize=(6, 9))
+        fig, axes = plt.subplots(len(coords), 1, sharex=True, figsize=(6, 9))
     else:
-        (ax_x, ax_y, ax_z) = fig.get_axes()
-    # Plot each segment x, y and z positions
-    trajs.show('t', 'x', ax=ax_x, **kwargs)
-    trajs.show('t', 'y', ax=ax_y, **kwargs)
-    trajs.show('t', 'z', ax=ax_z, **kwargs)
+        axes = fig.get_axes()
+
+    for coord, ax in zip(axes, coords):
+        trajs.show('t', coord, ax=ax, **kwargs)
+        ax.set_ylabel('{} coordinate'.format(coord))
+        ax.set_title('')
+        ax.set_xlabel('')
 
     if text:
         for label, segment in trajs.iter_segments:
-            ax_x.text(segment.t.iloc[0], segment.x.iloc[0], str(label))
-            ax_x.text(segment.t.iloc[-1], segment.x.iloc[-1], str(label))
+            axes[0].text(segment.t.iloc[0],
+                         segment[coords[0]].iloc[0], str(label))
+            axes[0].text(segment.t.iloc[-1],
+                         segment[coords[0]].iloc[-1], str(label))
 
-    ax_x.set_ylabel(u'x position')
-    ax_x.set_title('')
-    ax_x.set_xlabel('')
-
-
-    ax_y.set_ylabel(u'y position')
-    ax_y.set_title('')
-    ax_y.set_xlabel('')
-
-    ax_z.set_ylabel(u'z position')
-    ax_z.set_xlabel('Time')
-    ax_z.set_title('')
+    axes[-1].set_xlabel('Time')
 
     fig.tight_layout()
     plt.draw()
-    return (ax_x, ax_y, ax_z)
+    return axes
 
 
-def show_4pannels(trajs, label, coords=('x', 'y', 'z'),
-                  axes=None, ax_3d=None,
-                  scatter_kw={}, line_kw={},
-                  smth=0, smoothing=0):  # pragma: no cover
+def show_4panels(trajs, label, coords=('x', 'y', 'z'),
+                 axes=None, ax_3d=None,
+                 scatter_kw={}, line_kw={},
+                 interpolate=False, interp_kw={}):  # pragma: no cover
+    '''
+    Plots the segment of trajectories `trajs` with label `label` on four panels
+    organized in two cols by two rows like so:
 
 
+        y|     y|
+         |___   |___
+           x      z
+        z|     z| y
+         |___   |/__
+           x      x
+
+
+    Parameters
+    ----------
+    trajs: a :class:`Trajectories` instance
+    label: int
+       the label of the trajectories's segment to plot
+    coords: a tuple of column names
+       default to ('x', 'y', 'z'), the coordinates to plot
+    axes: the axes to plot on
+    ax_3d: the 3D ax on the lower right corner
+    scatter_kw: dict
+       keyword arguments passed to the `plt.scatter` function
+    line_kw: dict
+       keyword arguments passed to the `plt.plot` function
+    interpolate: bool
+       if True, will plot the line as an interpolation of
+       the trajectories (not implemented right now)
+    interp_kw: dict
+       keyword arguments for the interpolation
+
+    Returns
+    -------
+
+    axes, ax3d: the 2D and 3D axes
+    '''
     u, v, w = coords
 
     segment = trajs.get_segments()[label]
 
-    if smoothing != 0:
+    if interpolate:
         raise NotImplementedError
     else:
         segment_i = segment
