@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.2.dev-rb6f15ee docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.2.dev-rf96481f docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-rb6f15ee docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-rf96481f docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.utils package" href="sktracker.utils.html"/>
         <link rel="prev" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/> 
@@ -144,8 +144,103 @@
 <span id="sktracker-trajectories-draw-module"></span><h2>sktracker.trajectories.draw module<a class="headerlink" href="#module-sktracker.trajectories.draw" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="sktracker.trajectories.draw.plot_3coords">
-<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">plot_3coords</tt><big>(</big><em>trajs</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>text=True</em>, <em>fig=None</em>, <em>ls='-o'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.plot_3coords" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">plot_3coords</tt><big>(</big><em>trajs</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>text=True</em>, <em>fig=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.plot_3coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Soon to be deprecated, use <cite>plot_stacked_coords</cite> instead</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.trajectories.draw.plot_stacked_coords">
+<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">plot_stacked_coords</tt><big>(</big><em>trajs</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>text=False</em>, <em>fig=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.plot_stacked_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots stacked graphs with each of the coordinates given in the
+<cite>coords</cite> argument plotted against time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs: a :class:`Trajectories` instance</strong></p>
+<p><strong>coords: a tuple, default (&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;)</strong></p>
+<blockquote>
+<div><p>the coordinates (<cite>trajs</cite> column names) to be ploted</p>
+</div></blockquote>
+<p><strong>text: bool, default False</strong></p>
+<blockquote>
+<div><p>if True, will append each trajectory segment&#8217;s label
+at the extremities on the upper most plot</p>
+</div></blockquote>
+<p><strong>fig: a matplotlib `Figure`, default `None`</strong></p>
+<blockquote>
+<div><p>the figure on which to plot</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">axes: a list of <tt class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.trajectories.draw.show_4panels">
+<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">show_4panels</tt><big>(</big><em>trajs</em>, <em>label</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>axes=None</em>, <em>ax_3d=None</em>, <em>scatter_kw={}</em>, <em>line_kw={}</em>, <em>interpolate=False</em>, <em>interp_kw={}</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.show_4panels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the segment of trajectories <cite>trajs</cite> with label <cite>label</cite> on four panels
+organized in two cols by two rows like so:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>y|     y|</dt>
+<dd><dl class="first last docutils">
+<dt><a href="#id1"><span class="problematic" id="id2">|</span></a>___   <a href="#id3"><span class="problematic" id="id4">|</span></a>___</dt>
+<dd>x      z</dd>
+</dl>
+</dd>
+<dt>z|     z| y</dt>
+<dd><dl class="first last docutils">
+<dt><a href="#id5"><span class="problematic" id="id6">|</span></a>___   <a href="#id7"><span class="problematic" id="id8">|</span></a>/__</dt>
+<dd>x      x</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs: a :class:`Trajectories` instance</strong></p>
+<p><strong>label: int</strong></p>
+<blockquote>
+<div><p>the label of the trajectories&#8217;s segment to plot</p>
+</div></blockquote>
+<p><strong>coords: a tuple of column names</strong></p>
+<blockquote>
+<div><p>default to (&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;), the coordinates to plot</p>
+</div></blockquote>
+<p><strong>axes: the axes to plot on</strong></p>
+<p><strong>ax_3d: the 3D ax on the lower right corner</strong></p>
+<p><strong>scatter_kw: dict</strong></p>
+<blockquote>
+<div><p>keyword arguments passed to the <cite>plt.scatter</cite> function</p>
+</div></blockquote>
+<p><strong>line_kw: dict</strong></p>
+<blockquote>
+<div><p>keyword arguments passed to the <cite>plt.plot</cite> function</p>
+</div></blockquote>
+<p><strong>interpolate: bool</strong></p>
+<blockquote>
+<div><p>if True, will plot the line as an interpolation of
+the trajectories (not implemented right now)</p>
+</div></blockquote>
+<p><strong>interp_kw: dict</strong></p>
+<blockquote>
+<div><p>keyword arguments for the interpolation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">axes, ax3d: the 2D and 3D axes</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 <div class="section" id="module-sktracker.trajectories.trajectories">
@@ -312,7 +407,7 @@ following group_args parameters.</p>
 
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.show">
-<tt class="descname">show</tt><big>(</big><em>xaxis='t'</em>, <em>yaxis='x'</em>, <em>groupby_args={'level': 'label'}</em>, <em>line_style='-o'</em>, <em>ax=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.show" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">show</tt><big>(</big><em>xaxis='t'</em>, <em>yaxis='x'</em>, <em>groupby_args={'level': 'label'}</em>, <em>ax=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.show" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show trajectories</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -354,8 +449,73 @@ following group_args parameters.</p>
 <tt class="descname">t_stamps</tt><a class="headerlink" href="#sktracker.trajectories.Trajectories.t_stamps" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.time_interpolate">
+<tt class="descname">time_interpolate</tt><big>(</big><em>time_step=None</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>s=0</em>, <em>k=3</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.time_interpolate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolates each segment of the trajectories along time
+using <cite>scipy.interpolate.splrep</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_step</strong> : np.float or None, default None</p>
+<blockquote>
+<div><p>the time step between the interpolated trajectory
+if this is <cite>None</cite>, it is computed as the minimum non null
+time difference between two points in the trajectory</p>
+</div></blockquote>
+<p><strong>coords</strong> : tuple of column names, default <cite>(&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;)</cite></p>
+<blockquote>
+<div><blockquote>
+<div><p>the coordinates to interpolate.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>s <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">A smoothing condition. The amount of smoothness is determined by
+satisfying the conditions: sum((w * (y - g))**2,axis=0) &lt;= s where g(x)
+is the smoothed interpolation of (x,y). The user can use s to control
+the tradeoff between closeness and smoothness of fit. Larger s means
+more smoothing while smaller values of s indicate less smoothing.
+Recommended values of s depend on the weights, w. If the weights
+represent the inverse of the standard-deviation of y, then a good s
+value should be found in the range (m-sqrt(2*m),m+sqrt(2*m)) where m is
+the number of datapoints in x, y, and w. default : s=m-sqrt(2*m) if
+weights are supplied. s = 0.0 (interpolating) if no weights are
+supplied.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>k</strong> : int</p>
+<blockquote>
+<div><p>The order of the spline fit. It is recommended to use cubic splines.
+Even order splines should be avoided especially with small s values.
+1 &lt;= k &lt;= 5</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>interpolated</strong> : a <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">Trajectories</span></tt></a> instance</p>
+<blockquote class="last">
+<div><p>The interpolated values with column names identical to <cite>ccords</cite>
+plus the computed speeds (first order derivative) and accelarations
+(second order derivative) if <cite>k</cite> &gt; 2</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<dl class="docutils">
+<dt>The <cite>s</cite> and <cite>k</cite> arguments are passed to <cite>scipy.interpolate.splrep</cite>, see this</dt>
+<dd>function definition for more details</dd>
+<dt>If a segment is too short to be interpolated with the passed order <cite>k</cite>, the order</dt>
+<dd>will be automatically diminished</dd>
+</dl>
+<p>Segments with only one point will be returned as is</p>
 </dd></dl>
 
+</dd></dl>
+
+<p>)</p>
 </div>
 </div>
 
@@ -397,7 +557,7 @@ following group_args parameters.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-rb6f15ee',
+            VERSION:'0.2.dev-rf96481f',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
