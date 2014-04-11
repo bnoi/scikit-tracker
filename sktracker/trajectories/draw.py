@@ -110,6 +110,7 @@ def show_4panels(trajs, label, coords=('x', 'y', 'z'),
 
     if interpolate:
         raise NotImplementedError
+        # segment_i = trajs.time_interpolate(**interp_kw).get_segments()[label]
     else:
         segment_i = segment
 
