@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from pandas.io import pytables
+from scipy.interpolate import splev, splrep
+
 
 
 __all__ = []
@@ -46,7 +48,7 @@ class Trajectories(pd.DataFrame):
 
     @property
     def labels(self):
-        return self.index.get_level_values('label').unique()
+        return self.index.get_level_values('label').unique().astype(np.int)
 
     @property
     def segment_idxs(self):
@@ -251,6 +253,98 @@ class Trajectories(pd.DataFrame):
             clrs[label] = ccycle[label % num_colors]
         return clrs
 
+
+    def time_interpolate(self, time_step=None,
+                         coords=('x', 'y', 'z'), s=0, k=3):
+        """
+        Interpolates each segment of the trajectories along time
+        using `scipy.interpolate.splrep`
+
+        Parameters
+        ----------
+        time_step : np.float or None, default None
+           the time step between the interpolated trajectory
+           if this is `None`, it is computed as the minimum non null
+           time difference between two points in the trajectory
+        coords : tuple of column names, default `('x', 'y', 'z')`
+           the coordinates to interpolate.
+         s : float
+            A smoothing condition. The amount of smoothness is determined by
+            satisfying the conditions: sum((w * (y - g))**2,axis=0) <= s where g(x)
+            is the smoothed interpolation of (x,y). The user can use s to control
+            the tradeoff between closeness and smoothness of fit. Larger s means
+            more smoothing while smaller values of s indicate less smoothing.
+            Recommended values of s depend on the weights, w. If the weights
+            represent the inverse of the standard-deviation of y, then a good s
+            value should be found in the range (m-sqrt(2*m),m+sqrt(2*m)) where m is
+            the number of datapoints in x, y, and w. default : s=m-sqrt(2*m) if
+            weights are supplied. s = 0.0 (interpolating) if no weights are
+            supplied.
+        k : int
+           The order of the spline fit. It is recommended to use cubic splines.
+           Even order splines should be avoided especially with small s values.
+           1 <= k <= 5
+
+        Returns
+        -------
+        interpolated : a :class:`Trajectories` instance
+           The interpolated values with column names identical to `ccords`
+           plus the computed speeds (first order derivative) and accelarations
+           (second order derivative) if `k` > 2
+
+        Notes
+        -----
+        The `s` and `k` arguments are passed to `scipy.interpolate.splrep`, see this
+             function definition for more details
+        If a segment is too short to be interpolated with the passed order `k`, the order
+             will be automatically diminished
+        Segments with only one point will be returned as is
+
+
+        """
+        interpolated = {}
+        if time_step is None:
+            dts = self.t.diff().dropna().unique()
+            time_step = dts[dts != 0].min()
+
+        for label, segment in self.iter_segments:
+            if segment.shape[0] < 2:
+                interpolated[label] = segment[coords+'t']
+            corrected_k = k
+            while segment.shape[0] <= corrected_k:
+                corrected_k -= 1
+            tck = _spline_rep(segment, coords, s=s, k=corrected_k)
+            t0, t1 = segment.t.iloc[0], segment.t.iloc[-1]
+            t_span =  t1 - t0
+            n_pts = np.floor(t_span / time_step) + 1
+            times = np.linspace(t0, t1, n_pts)
+            tmp_df = pd.DataFrame(index=np.arange(times.size))
+            tmp_df['t'] = times
+            for coord in coords:
+                tmp_df[coord] = splev(times, tck[coord], der=0)
+                tmp_df['v_'+coord] = splev(times, tck[coord], der=1)
+                if k > 2:
+                    if corrected_k > 2:
+                        tmp_df['a_'+coord] = splev(times, tck[coord], der=2)
+                    else:
+                        tmp_df['a_'+coord] = times * np.nan
+
+            interpolated[label] = tmp_df
+        interpolated = pd.concat(interpolated)
+        interpolated.index.names = 'label', 't_stamp'
+        interpolated = interpolated.swaplevel('label', 't_stamp')
+        return Trajectories(interpolated)
+
 # Register the trajectories for storing in HDFStore
 # as a regular DataFrame
 pytables._TYPE_MAP[Trajectories] = 'frame'
+
+
+
+def _spline_rep(df, coords=('x', 'y', 'z'), s=0, k=3):
+    time = df.t
+    tcks = {}
+    for coord in coords:
+        tcks[coord] = splrep(time, df[coord].values, s=s, k=k)
+    return pd.DataFrame.from_dict(tcks)
+
