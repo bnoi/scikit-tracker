@@ -7,12 +7,12 @@ with matplotlib
 '''
 
 def plot_3coords(trajs, coords=('x', 'y', 'z'),
-                        text=True, fig=None, **kwargs):
+                 text=True, fig=None, **kwargs):
     '''
     Soon to be deprecated, use `plot_stacked_coords` instead
     '''
     return plot_stacked_coords(trajs, coords=coords,
-                        text=text, fig=fig, **kwargs)
+                               text=text, fig=fig, **kwargs)
 
 
 def plot_stacked_coords(trajs, coords=('x', 'y', 'z'),
@@ -43,7 +43,7 @@ def plot_stacked_coords(trajs, coords=('x', 'y', 'z'),
     else:
         axes = fig.get_axes()
 
-    for coord, ax in zip(axes, coords):
+    for coord, ax in zip(coords, axes):
         trajs.show('t', coord, ax=ax, **kwargs)
         ax.set_ylabel('{} coordinate'.format(coord))
         ax.set_title('')
