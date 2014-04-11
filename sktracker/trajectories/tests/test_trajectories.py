@@ -2,6 +2,8 @@ from nose.tools import assert_raises
 from nose.tools import assert_dict_equal
 from numpy.testing import assert_array_equal
 from numpy.testing import assert_array_almost_equal
+from numpy.testing import assert_almost_equal
+
 
 import numpy as np
 import tempfile
@@ -87,3 +89,15 @@ def get_mean_dist():
                           1.97505829, 1.93212297, 1.30778342])
 
     assert_array_almost_equal(true_dist, mean_dist.values.flatten())
+
+
+def test_interpolate():
+
+    trajs = Trajectories(data.with_gaps_df())
+    trajs.set_index('true_label', inplace=True, append=True)
+    trajs.reset_index(level='label', drop=True, inplace=True)
+    trajs.index.set_names(['t_stamp', 'label'], inplace=True)
+    interpo = trajs.time_interpolate(time_step=0.1, s=1)
+    dts = interpo.get_segments()[0].t.diff().dropna()
+    ## All time points should be equaly spaced
+    assert_almost_equal(dts.min(), dts.max())
