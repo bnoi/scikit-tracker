@@ -2,6 +2,7 @@ import logging
 import os
 import xml.etree.cElementTree as et
 
+from collections import UserDict
 import numpy as np
 import pandas as pd
 
@@ -48,15 +49,17 @@ class ObjectsIO():
             self.store_path = os.path.join(base_dir, store_path)
             self.image_path = os.path.join(base_dir, metadata['FileName'])
 
-        self.metadata = metadata
+        self.metadata = OIOMetadata(metadata, self)
 
-    @property
-    def metadata(self):
-        return self.__getitem__('metadata')
+    @classmethod
+    def from_stackio(cls, stackio):
+        """Loads metadata from :class:`sktracker.io.stackio`
 
-    @metadata.setter
-    def metadata(self, value):
-        self.__setitem__('metadata', value)
+        Parameters
+        ----------
+        objectsio : :class:`sktracker.io.ObjectsIO`
+        """
+        return cls(metadata=stackio.metadata)
 
     def __getitem__(self, name):
         """Get an object from HDF5 file.
@@ -89,7 +92,7 @@ class ObjectsIO():
         with pd.get_store(self.store_path) as store:
             if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
                 store[name] = obj
-            elif isinstance(obj, dict):
+            elif isinstance(obj, dict) or isinstance(obj, UserDict):
                 store[name] = _serialize(obj)
 
     def __delitem__(self, name):
@@ -193,3 +196,17 @@ class ObjectsIO():
 def _serialize(attr):
     ''' Creates a pandas series from a dictionnary'''
     return pd.Series(list(attr.values()), index=attr.keys())
+
+class OIOMetadata(UserDict):
+    '''
+    A subclass of UserDict with a modified `__setitem__`, such that
+    any modification to the metadata is copied to the `h5` file
+    '''
+    def __init__(self, metadata_dict, objectsio):
+        self.objectsio = objectsio
+        super().__init__(metadata_dict)
+
+    def __setitem__(self, key, value):
+
+        self.data[key] = value
+        self.objectsio['metadata'] = self.data
