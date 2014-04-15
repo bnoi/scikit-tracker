@@ -201,6 +201,7 @@ class Trajectories(pd.DataFrame):
         --------
         >>> from sktracker import data
         >>> from sktracker.tracker.solver import ByFrameSolver
+        >>> import matplotlib.pylab as plt
         >>> true_trajs = data.brownian_trajectories_generator(p_disapear=0.1)
         >>> solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=2)
         >>> trajs = solver.track(progress_bar=False)
@@ -295,7 +296,7 @@ class Trajectories(pd.DataFrame):
         Notes
         -----
         The `s` and `k` arguments are passed to `scipy.interpolate.splrep`, see this
-             function definition for more details
+             function documentation for more details
         If a segment is too short to be interpolated with the passed order `k`, the order
              will be automatically diminished
         Segments with only one point will be returned as is
@@ -304,6 +305,7 @@ class Trajectories(pd.DataFrame):
         """
         interpolated = {}
         if time_step is None:
+            self.sort('t', inplace=True)
             dts = self.t.diff().dropna().unique()
             time_step = dts[dts != 0].min()
 
