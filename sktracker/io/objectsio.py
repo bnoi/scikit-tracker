@@ -2,6 +2,7 @@ import logging
 import os
 import xml.etree.cElementTree as et
 
+from collections import UserDict
 import numpy as np
 import pandas as pd
 
@@ -33,30 +34,36 @@ class ObjectsIO():
                  store_path=None,
                  base_dir=None):
 
-        validate_metadata(metadata)
-        self.base_dir = base_dir
+        if metadata is not None:
+            validate_metadata(metadata)
+            self.metadata = OIOMetadata(metadata, self)
 
         if store_path is None:
             store_name = metadata['FileName'].split(os.path.sep)[-1]
             store_name = store_name.split('.')[0] + '.h5'
             store_path = os.path.join(os.path.dirname(metadata['FileName']),
                                       store_name)
+        self.base_dir = base_dir
         if base_dir is None:
             self.store_path = store_path
-            self.image_path = metadata['FileName']
+            if metadata is None:
+                self.metadata = OIOMetadata(self['metadata'], self)
+            self.image_path = self.metadata['FileName']
         else:
             self.store_path = os.path.join(base_dir, store_path)
-            self.image_path = os.path.join(base_dir, metadata['FileName'])
+            if metadata is None:
+                self.metadata = OIOMetadata(self['metadata'], self)
+            self.image_path = os.path.join(base_dir, self.metadata['FileName'])
 
-        self.metadata = metadata
+    @classmethod
+    def from_stackio(cls, stackio):
+        """Loads metadata from :class:`sktracker.io.stackio`
 
-    @property
-    def metadata(self):
-        return self.__getitem__('metadata')
-
-    @metadata.setter
-    def metadata(self, value):
-        self.__setitem__('metadata', value)
+        Parameters
+        ----------
+        objectsio : :class:`sktracker.io.ObjectsIO`
+        """
+        return cls(metadata=stackio.metadata)
 
     def __getitem__(self, name):
         """Get an object from HDF5 file.
@@ -89,7 +96,7 @@ class ObjectsIO():
         with pd.get_store(self.store_path) as store:
             if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
                 store[name] = obj
-            elif isinstance(obj, dict):
+            elif isinstance(obj, dict) or isinstance(obj, UserDict):
                 store[name] = _serialize(obj)
 
     def __delitem__(self, name):
@@ -193,3 +200,17 @@ class ObjectsIO():
 def _serialize(attr):
     ''' Creates a pandas series from a dictionnary'''
     return pd.Series(list(attr.values()), index=attr.keys())
+
+class OIOMetadata(UserDict):
+    '''
+    A subclass of UserDict with a modified `__setitem__`, such that
+    any modification to the metadata is copied to the `h5` file
+    '''
+    def __init__(self, metadata_dict, objectsio):
+        self.objectsio = objectsio
+        super().__init__(metadata_dict)
+
+    def __setitem__(self, key, value):
+
+        self.data[key] = value
+        self.objectsio['metadata'] = self.data

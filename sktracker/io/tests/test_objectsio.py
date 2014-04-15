@@ -31,7 +31,14 @@ def test_objectsio():
     oio["detected"] = peaks
 
     assert (oio.keys() == ['/detected', '/metadata']) and (oio["detected"].shape == (28, 6))
+def test_oio_metadata():
 
+    store_path = data.sample_h5_temp()
+    oio = ObjectsIO.from_h5(store_path, base_dir=tempfile.gettempdir())
+    oio.metadata['test'] = 0
+    assert 'test' in oio.metadata.keys()
+    reloaded = ObjectsIO.from_h5(store_path, base_dir=tempfile.gettempdir())
+    assert 'test' in reloaded.metadata.keys()
 
 def test_from_h5():
 
