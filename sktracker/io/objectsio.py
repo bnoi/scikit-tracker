@@ -34,22 +34,26 @@ class ObjectsIO():
                  store_path=None,
                  base_dir=None):
 
-        validate_metadata(metadata)
-        self.base_dir = base_dir
+        if metadata is not None:
+            validate_metadata(metadata)
+            self.metadata = OIOMetadata(metadata, self)
 
         if store_path is None:
             store_name = metadata['FileName'].split(os.path.sep)[-1]
             store_name = store_name.split('.')[0] + '.h5'
             store_path = os.path.join(os.path.dirname(metadata['FileName']),
                                       store_name)
+        self.base_dir = base_dir
         if base_dir is None:
             self.store_path = store_path
-            self.image_path = metadata['FileName']
+            if metadata is None:
+                self.metadata = OIOMetadata(self['metadata'], self)
+            self.image_path = self.metadata['FileName']
         else:
             self.store_path = os.path.join(base_dir, store_path)
-            self.image_path = os.path.join(base_dir, metadata['FileName'])
-
-        self.metadata = OIOMetadata(metadata, self)
+            if metadata is None:
+                self.metadata = OIOMetadata(self['metadata'], self)
+            self.image_path = os.path.join(base_dir, self.metadata['FileName'])
 
     @classmethod
     def from_stackio(cls, stackio):
