@@ -36,7 +36,6 @@ class ObjectsIO():
 
         if metadata is not None:
             validate_metadata(metadata)
-            self.metadata = OIOMetadata(metadata, self)
 
         if store_path is None:
             store_name = metadata['FileName'].split(os.path.sep)[-1]
@@ -48,11 +47,15 @@ class ObjectsIO():
             self.store_path = store_path
             if metadata is None:
                 self.metadata = OIOMetadata(self['metadata'], self)
+            else:
+                self.metadata = OIOMetadata(metadata, self)
             self.image_path = self.metadata['FileName']
         else:
             self.store_path = os.path.join(base_dir, store_path)
             if metadata is None:
                 self.metadata = OIOMetadata(self['metadata'], self)
+            else:
+                self.metadata = OIOMetadata(metadata, self)
             self.image_path = os.path.join(base_dir, self.metadata['FileName'])
 
     @classmethod
@@ -61,7 +64,7 @@ class ObjectsIO():
 
         Parameters
         ----------
-        objectsio : :class:`sktracker.io.ObjectsIO`
+        stackio : :class:`sktracker.io.StackIO`
         """
         return cls(metadata=stackio.metadata)
 
