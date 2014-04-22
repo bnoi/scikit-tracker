@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 __all__ = []
 
 
-class StackIO:
+class StackIO(object):
     """StackIO is designed to deal with Input/Output images
     It can retrieve all kind of metadata with various methods. It also allows fast and
     efficient way to get image data (in memory or via an iterator.

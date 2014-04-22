@@ -28,7 +28,7 @@ from . import validate_metadata
 __all__ = []
 
 
-class ObjectsIO():
+class ObjectsIO(object):
     """
     Manipulate and pass along data issued from detected
     objects.
@@ -218,14 +218,14 @@ def _serialize(attr):
     ''' Creates a pandas series from a dictionnary'''
     return pd.Series(list(attr.values()), index=attr.keys())
 
-class OIOMetadata(UserDict):
+class OIOMetadata(object, UserDict):
     '''
     A subclass of UserDict with a modified `__setitem__`, such that
     any modification to the metadata is copied to the `h5` file
     '''
     def __init__(self, metadata_dict, objectsio):
         self.objectsio = objectsio
-        super().__init__(metadata_dict)
+        super(OIOMetadata, self).__init__(metadata_dict)
 
     def __setitem__(self, key, value):
 

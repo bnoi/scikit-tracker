@@ -93,7 +93,7 @@ def peak_detector(data_iterator,
         # module such as numpy (only needed on linux)
         if os.name == 'posix':
             subprocess.call("taskset -p 0xff %d" % os.getpid(),
-                            shell=True, stdout=subprocess.DEVNULL)
+                            shell=True)#, stdout=subprocess.DEVNULL) ## Py2.7 compat
 
         def init_worker():
             import signal

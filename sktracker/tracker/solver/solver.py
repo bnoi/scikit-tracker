@@ -13,7 +13,7 @@ from ...trajectories import Trajectories
 __all__ = []
 
 
-class AbstractSolver:
+class AbstractSolver(object):
     """
 
     Parameters

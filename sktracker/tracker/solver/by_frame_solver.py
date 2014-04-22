@@ -32,7 +32,7 @@ class ByFrameSolver(AbstractSolver):
     """
     def __init__(self, trajs, cost_functions, coords=['x', 'y', 'z']):
 
-        super().__init__(trajs)
+        super(self.__class__, self).__init__(trajs)
 
         self.t_in = 0
         self.t_out = 0

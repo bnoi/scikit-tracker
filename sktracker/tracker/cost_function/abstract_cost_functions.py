@@ -14,7 +14,7 @@ import pandas as pd
 __all__ = []
 
 
-class AbstractCostFunction:
+class AbstractCostFunction(object):
     """Abstract class
 
     Parameters

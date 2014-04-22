@@ -20,7 +20,7 @@ class AbstractGapCloseCostFunction(AbstractCostFunction):
     def __init__(self, context, parameters):
         """
         """
-        super().__init__(context=context, parameters=parameters)
+        super(AbstractGapCloseCostFunction, self).__init__(context=context, parameters=parameters)
 
     def check_idxs_length(self):
         """Check wether idxs_in and idxs_out have the same length.

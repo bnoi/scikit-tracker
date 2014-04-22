@@ -41,7 +41,7 @@ class DiagonalCostFunction(AbstractCostFunction):
         """
         """
 
-        super().__init__(context=context, parameters=parameters)
+        super(self.__class__, self).__init__(context=context, parameters=parameters)
         _ = self.check_context('cost', float)
 
     def _build(self):

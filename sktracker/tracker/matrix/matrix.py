@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 __all__ = []
 
 
-class CostMatrix:
+class CostMatrix(object):
     """This class represents the cost matrix which will be given to LAPJV solver.
     Cost matrix is built from matrices blocks.
 

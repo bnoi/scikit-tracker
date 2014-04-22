@@ -36,7 +36,7 @@ class GapCloseSolver(AbstractSolver):
     def __init__(self, trajs, cost_functions,
                  maximum_gap, coords=['x', 'y', 'z']):
 
-        super().__init__(trajs)
+        super(self.__class__, self).__init__(trajs)
 
         self.coords = coords
 

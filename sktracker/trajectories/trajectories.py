@@ -50,7 +50,7 @@ class Trajectories(pd.DataFrame):
         if not isinstance(trajs, pd.DataFrame):
             raise TypeError("The constructor argument `trajs` "
                             "must be a pandas.DataFrame instance")
-        super().__init__(trajs)
+        super(Trajectories, self).__init__(trajs)
 
     @property
     def t_stamps(self):
@@ -99,7 +99,7 @@ class Trajectories(pd.DataFrame):
         """
         """
 
-        trajs = super().copy()
+        trajs = super(self.__class__, self).copy()
         return Trajectories(trajs)
 
     def check_trajs_df_structure(self, index=None, columns=None):

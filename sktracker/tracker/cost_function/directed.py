@@ -63,7 +63,7 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
                        'coords': ['x', 'y', 'z']}
         _parameters.update(parameters)
 
-        super().__init__(context={}, parameters=_parameters)
+        super(self.__class__, self).__init__(context={}, parameters=_parameters)
 
     def _build(self):
         """
