@@ -12,7 +12,7 @@ import xml.etree.cElementTree as et
 if sys.version_info > (3, 0):
     from collections import UserDict
 else:
-    import UserDict
+    from UserDict import UserDict
 
 import numpy as np
 import pandas as pd
