@@ -1,12 +1,9 @@
-
 # -*- coding: utf-8 -*-
-
 
 from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
-
 
 import io
 import logging
@@ -164,7 +161,9 @@ class OMEModel():
                 md['TimeIncrement'] = float(np.diff(t.values).mean())
 
         # Find distance between slices
-        if 'PhysicalSizeZ' not in md.keys() and self.planes and 'PositionZ' in self.planes[0].attrib.keys():
+        if ('PhysicalSizeZ' not in md.keys()
+            and self.planes
+            and 'PositionZ' in self.planes[0].attrib.keys()):
             pl = self.df_planes(['PositionZ'])
             z = pl.xs(0, level="TheC")['PositionZ'].groupby(level='TheT')
             z = z.apply(lambda x: np.diff(x.values).mean())
@@ -186,6 +185,7 @@ class OMEModel():
         et = ElementTree.ElementTree(self.root)
         et.write(f, encoding='unicode', xml_declaration=True,
                  default_namespace=None)
+
         output = f.getvalue()
         f.close()
 

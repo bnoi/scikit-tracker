@@ -218,7 +218,7 @@ def _serialize(attr):
     ''' Creates a pandas series from a dictionnary'''
     return pd.Series(list(attr.values()), index=attr.keys())
 
-class OIOMetadata(object, UserDict):
+class OIOMetadata(UserDict):
     '''
     A subclass of UserDict with a modified `__setitem__`, such that
     any modification to the metadata is copied to the `h5` file
