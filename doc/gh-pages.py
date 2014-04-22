@@ -1,3 +1,10 @@
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 """Script to commit the doc build outputs into the github-pages repo.
 
 In practice, you should use either actual clean tags from a current build or

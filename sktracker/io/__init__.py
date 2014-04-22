@@ -1,3 +1,10 @@
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 """:mod:`sktracker.io` module is designed to easly and quickly open Tiff files and
 to be able to parse and import any kind of metadata.
 

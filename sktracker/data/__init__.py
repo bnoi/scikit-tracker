@@ -1,3 +1,10 @@
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 """Test dataset and fake auto generated trajectories.
 
 When data function end with _temp. The file is being copied to a temporary
