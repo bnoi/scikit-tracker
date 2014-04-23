@@ -1,6 +1,4 @@
-
 # -*- coding: utf-8 -*-
-
 
 from __future__ import unicode_literals
 from __future__ import division
@@ -54,7 +52,6 @@ def test_stackio_from_objectsio():
                      'SizeZ': 23,
                      'SizeY': 512,
                      'SizeX': 512}
-
     guessed_metadata = st.metadata
 
     assert guessed_metadata == true_metadata

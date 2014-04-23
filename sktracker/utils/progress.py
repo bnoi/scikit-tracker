@@ -71,7 +71,7 @@ def print_progress(progress, message=None, out=None):
     bar += "]"
 
     if message:
-        bar += " " + str(message)
+        bar = " ".join([bar, message])
 
     # Write progress bar
     bar_str = "\r%d%% " % (progress) + bar
