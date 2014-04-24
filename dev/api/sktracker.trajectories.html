@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.2.dev-rf96481f docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.2.dev-rfa5dfee docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-rf96481f docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-rfa5dfee docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.utils package" href="sktracker.utils.html"/>
         <link rel="prev" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/> 
@@ -434,6 +434,7 @@ following group_args parameters.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker.tracker.solver</span> <span class="kn">import</span> <span class="n">ByFrameSolver</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">true_trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">brownian_trajectories_generator</span><span class="p">(</span><span class="n">p_disapear</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">ByFrameSolver</span><span class="o">.</span><span class="n">for_brownian_motion</span><span class="p">(</span><span class="n">true_trajs</span><span class="p">,</span> <span class="n">max_speed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trajs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">track</span><span class="p">(</span><span class="n">progress_bar</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -506,7 +507,7 @@ plus the computed speeds (first order derivative) and accelarations
 <p class="rubric">Notes</p>
 <dl class="docutils">
 <dt>The <cite>s</cite> and <cite>k</cite> arguments are passed to <cite>scipy.interpolate.splrep</cite>, see this</dt>
-<dd>function definition for more details</dd>
+<dd>function documentation for more details</dd>
 <dt>If a segment is too short to be interpolated with the passed order <cite>k</cite>, the order</dt>
 <dd>will be automatically diminished</dd>
 </dl>
@@ -515,7 +516,6 @@ plus the computed speeds (first order derivative) and accelarations
 
 </dd></dl>
 
-<p>)</p>
 </div>
 </div>
 
@@ -557,7 +557,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-rf96481f',
+            VERSION:'0.2.dev-rfa5dfee',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
