@@ -39,7 +39,7 @@ before_install:
     - conda install --yes pip
     - conda install --yes cython
     - conda install --yes matplotlib
-    - conda install --yes wheel
+    - pip install wheel
     - pip install coverage
 
 install:
