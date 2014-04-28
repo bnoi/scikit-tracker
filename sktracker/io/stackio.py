@@ -147,8 +147,9 @@ class StackIO(object):
                 channel_index = 0
 
         # Get only one single channel
-        channel_position = self.metadata['DimensionOrder'].index('C')
-        arr = np.take(arr, channel_index, axis=channel_position)
+        if 'C' in self.metadata['DimensionOrder']:
+            channel_position = self.metadata['DimensionOrder'].index('C')
+            arr = np.take(arr, channel_index, axis=channel_position)
 
         # Define data iterator
         def it():
