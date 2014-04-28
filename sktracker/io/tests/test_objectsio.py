@@ -38,8 +38,7 @@ def test_objectsio():
     oio = ObjectsIO(st.metadata, store_path="test.h5", base_dir=tempfile.gettempdir())
     oio["detected"] = peaks
     keys_ok = (oio.keys() == ['detected', 'metadata'] or oio.keys() == ['/detected', '/metadata'])
-    print(oio.keys())
-    print(oio["detected"].shape)
+
     assert keys_ok and (oio["detected"].shape == (28, 6))
 
 
@@ -64,3 +63,7 @@ def test_from_trackmate_xml():
     xml_fname = data.trackmate_xml_temp()
     oio = ObjectsIO.from_trackmate_xml(xml_fname)
     assert oio['trajs'].shape == (91, 6)
+
+if __name__ == '__main__':
+    import nose
+    nose.main()

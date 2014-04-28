@@ -1,6 +1,4 @@
-
 # -*- coding: utf-8 -*-
-
 
 from __future__ import unicode_literals
 from __future__ import division
@@ -9,7 +7,8 @@ from __future__ import print_function
 
 
 import logging
-import sys, os
+import sys
+import os
 import xml.etree.cElementTree as et
 
 if sys.version_info[0] > 2:
@@ -227,6 +226,7 @@ class OIOMetadata(UserDict):
     def __init__(self, metadata_dict, objectsio):
         self.objectsio = objectsio
         UserDict.__init__(self, metadata_dict)
+        self.objectsio['metadata'] = self.data
 
     def __setitem__(self, key, value):
 
