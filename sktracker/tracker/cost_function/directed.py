@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import numpy as np
 import pandas as pd
 
@@ -53,7 +63,7 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
                        'coords': ['x', 'y', 'z']}
         _parameters.update(parameters)
 
-        super().__init__(context={}, parameters=_parameters)
+        super(self.__class__, self).__init__(context={}, parameters=_parameters)
 
     def _build(self):
         """

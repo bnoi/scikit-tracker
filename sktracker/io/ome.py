@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+import sys
 import io
 import logging
 import uuid
@@ -5,6 +13,9 @@ from xml.etree import cElementTree as ElementTree
 
 import numpy as np
 import pandas as pd
+
+import tempfile
+
 
 log = logging.getLogger(__name__)
 
@@ -154,7 +165,9 @@ class OMEModel():
                 md['TimeIncrement'] = float(np.diff(t.values).mean())
 
         # Find distance between slices
-        if 'PhysicalSizeZ' not in md.keys() and self.planes and 'PositionZ' in self.planes[0].attrib.keys():
+        if ('PhysicalSizeZ' not in md.keys()
+            and self.planes
+            and 'PositionZ' in self.planes[0].attrib.keys()):
             pl = self.df_planes(['PositionZ'])
             z = pl.xs(0, level="TheC")['PositionZ'].groupby(level='TheT')
             z = z.apply(lambda x: np.diff(x.values).mean())
@@ -172,15 +185,23 @@ class OMEModel():
             OME XML as string
 
         """
-        f = io.StringIO()
+
+
         et = ElementTree.ElementTree(self.root)
-        et.write(f, encoding='unicode', xml_declaration=True,
-                 default_namespace=None)
-        output = f.getvalue()
+        if sys.version_info[0] < 3:
+            f = tempfile.NamedTemporaryFile()
+            et.write(f, encoding='utf-8', xml_declaration=True,
+                     default_namespace=None)
+            f.seek(0)
+            output = ''.join(f.readlines())
+        else:
+            f = io.StringIO()
+            et.write(f, encoding='unicode', xml_declaration=True,
+                     default_namespace=None)
+            output = f.getvalue()
         f.close()
 
         output = output.replace('<ns0:OME', '<ns0:OME xmlns="%s"' % self.ns)
-
         return output
 
     def set_xy_size(self, size_x, size_y):

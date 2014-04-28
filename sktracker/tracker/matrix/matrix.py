@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import logging
 import numpy as np
 
@@ -8,7 +18,7 @@ log = logging.getLogger(__name__)
 __all__ = []
 
 
-class CostMatrix:
+class CostMatrix(object):
     """This class represents the cost matrix which will be given to LAPJV solver.
     Cost matrix is built from matrices blocks.
 

@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import os
 import logging
 import subprocess
@@ -83,7 +93,7 @@ def peak_detector(data_iterator,
         # module such as numpy (only needed on linux)
         if os.name == 'posix':
             subprocess.call("taskset -p 0xff %d" % os.getpid(),
-                            shell=True, stdout=subprocess.DEVNULL)
+                            shell=True)#, stdout=subprocess.DEVNULL) ## Py2.7 compat
 
         def init_worker():
             import signal
@@ -340,7 +350,8 @@ def glrt_detection(image, r0, w_s, threshold):  # pragma: no cover
 
     hmap = []
     for i, j in np.ndindex((w - w_s, h - w_s)):
-        h = hypothesis_map(image[i: i + w_s, j: j + w_s],
+        tmp = image[int(i): int(i + w_s), int(j): int(j + w_s)]
+        h = hypothesis_map(tmp,
                            g_patch,
                            g_squaresum)
         hmap.append(h)

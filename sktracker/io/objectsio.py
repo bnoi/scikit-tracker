@@ -1,8 +1,21 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import logging
+import sys
 import os
 import xml.etree.cElementTree as et
 
-from collections import UserDict
+if sys.version_info[0] > 2:
+    from collections import UserDict
+else:
+    from UserDict import UserDict
+
 import numpy as np
 import pandas as pd
 
@@ -14,7 +27,7 @@ from . import validate_metadata
 __all__ = []
 
 
-class ObjectsIO():
+class ObjectsIO(object):
     """
     Manipulate and pass along data issued from detected
     objects.
@@ -86,7 +99,7 @@ class ObjectsIO():
             return obj
 
     def __setitem__(self, name, obj):
-        """Add an object to HDF5 file.
+        """Adds an object to HDF5 file.
 
         Parameters
         ----------
@@ -204,6 +217,7 @@ def _serialize(attr):
     ''' Creates a pandas series from a dictionnary'''
     return pd.Series(list(attr.values()), index=attr.keys())
 
+
 class OIOMetadata(UserDict):
     '''
     A subclass of UserDict with a modified `__setitem__`, such that
@@ -211,7 +225,8 @@ class OIOMetadata(UserDict):
     '''
     def __init__(self, metadata_dict, objectsio):
         self.objectsio = objectsio
-        super().__init__(metadata_dict)
+        UserDict.__init__(self, metadata_dict)
+        self.objectsio['metadata'] = self.data
 
     def __setitem__(self, key, value):
 

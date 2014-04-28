@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 """Test dataset and fake auto generated trajectories.
 
 When data function end with _temp. The file is being copied to a temporary
@@ -8,6 +18,7 @@ import os
 import tempfile
 import shutil
 import pandas as pd
+import sys
 
 from ..io.utils import load_img_list
 
@@ -95,6 +106,8 @@ def metadata_json():
 def sample_h5():
     """
     """
+    if sys.version_info[0] < 3:
+        return os.path.join(data_path, "sample_py2.h5")
     return os.path.join(data_path, "sample.h5")
 
 
@@ -102,7 +115,7 @@ def sample_h5_temp():
     """
     """
     d = tempfile.gettempdir()
-    f_ori = os.path.join(data_path, "sample.h5")
+    f_ori = sample_h5()
     f_dest = os.path.join(d, "sample.h5")
     shutil.copy(f_ori, f_dest)
     return f_dest
@@ -111,7 +124,8 @@ def sample_h5_temp():
 def brownian_trajs_df():
     """
     """
-    with pd.get_store(os.path.join(data_path, "brownian_trajectories.h5")) as store:
+    store_path = os.path.join(data_path, "brownian_trajectories.h5")
+    with pd.get_store(store_path) as store:
         trajs = store['trajs']
     return trajs
 

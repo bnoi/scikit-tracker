@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import sys
 
 __all__ = []
@@ -61,7 +71,7 @@ def print_progress(progress, message=None, out=None):
     bar += "]"
 
     if message:
-        bar += " " + str(message)
+        bar = " ".join([bar, message])
 
     # Write progress bar
     bar_str = "\r%d%% " % (progress) + bar
