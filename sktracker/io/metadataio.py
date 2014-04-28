@@ -38,11 +38,16 @@ def get_metadata(filename, json_discovery=False, base_dir=None):
 
     """
     md = {}
+    md["FileName"] = filename
+
+    abs_filename = None
 
     if base_dir:
-        tf = TiffFile(os.path.join(base_dir, filename))
+        abs_filename = os.path.join(base_dir, filename)
     else:
-        tf = TiffFile(filename)
+        abs_filename = filename
+
+    tf = TiffFile(abs_filename)
 
     axes = tf.series[0]['axes']
     shape = tf.series[0]['shape']
@@ -69,10 +74,8 @@ def get_metadata(filename, json_discovery=False, base_dir=None):
         # Informations can be found here: tf.micromanager_metadata
 
     if json_discovery:
-        json_metadata = _get_from_metadata_json(filename)
+        json_metadata = _get_from_metadata_json(abs_filename)
         md.update(json_metadata)
-
-    md["FileName"] = filename
 
     return md
 
