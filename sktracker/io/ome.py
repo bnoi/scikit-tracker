@@ -137,6 +137,13 @@ class OMEModel():
             md['DimensionOrder'] = self.pixels.attrib["DimensionOrder"]
             md['DimensionOrder'] = list(reversed(md['DimensionOrder']))
 
+            for dim_label in md['DimensionOrder']:
+                label = "Size" + dim_label
+                try:
+                    md[label] = int(self.pixels.attrib[label])
+                except:
+                    md[label] = 1
+
         if 'DimensionOrder' in md.keys():
             shape = []
             for d in md['DimensionOrder']:

@@ -47,7 +47,7 @@ class StackIO(object):
         self.base_dir = base_dir
         if image_path_list:
             image_path = image_path_list[0]
-            
+
         if metadata is not None:
             self.metadata = metadata
         else:
@@ -58,7 +58,7 @@ class StackIO(object):
                                           + tuple(self.metadata['Shape']))
                 self.metadata['DimensionOrder'] = 'T'+''.join(self.metadata['DimensionOrder'])
         self._image_path_list = image_path_list
-        
+
     @property
     def image_path_list(self):
         if not self._image_path_list:
@@ -95,7 +95,7 @@ class StackIO(object):
         tf : :class:`sktracker.io.TiffFile`
         """
 
-        tf = TiffFile(self.image_path)
+        tf = TiffFile(self.image_path, multifile=True)
         return tf
 
     def get_tif_from_list(self, index=0):
