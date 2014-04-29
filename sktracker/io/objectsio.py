@@ -118,7 +118,8 @@ class ObjectsIO(object):
             new_store = store.copy(fname)
 
         if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
-            new_store.put(name, obj, format='f')
+            # new_store.put(name, obj, format='t')
+            new_store[name] = obj
         elif isinstance(obj, dict) or isinstance(obj, UserDict):
             new_store[name] = _serialize(obj)
 
