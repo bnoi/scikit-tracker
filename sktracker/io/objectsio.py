@@ -10,6 +10,8 @@ import logging
 import sys
 import os
 import xml.etree.cElementTree as et
+import tempfile
+import shutil
 
 if sys.version_info[0] > 2:
     from collections import UserDict
@@ -99,7 +101,8 @@ class ObjectsIO(object):
             return obj
 
     def __setitem__(self, name, obj):
-        """Adds an object to HDF5 file.
+        """Adds an object to HDF5 file. See https://github.com/pydata/pandas/issues/2132 for the
+        reason a new store is created.
 
         Parameters
         ----------
@@ -109,11 +112,19 @@ class ObjectsIO(object):
             Name of the object. Will be used when reading HDF5 file
 
         """
+        _, fname = tempfile.mkstemp()
+
         with pd.get_store(self.store_path) as store:
-            if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
-                store[name] = obj
-            elif isinstance(obj, dict) or isinstance(obj, UserDict):
-                store[name] = _serialize(obj)
+            new_store = store.copy(fname)
+
+        if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
+            new_store[name] = obj
+        elif isinstance(obj, dict) or isinstance(obj, UserDict):
+            new_store[name] = _serialize(obj)
+
+        new_store.close()
+
+        shutil.copy(fname, self.store_path)
 
     def __delitem__(self, name):
         """
