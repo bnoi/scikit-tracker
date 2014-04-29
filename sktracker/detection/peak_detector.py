@@ -119,7 +119,7 @@ def peak_detector(data_iterator,
             results = map(find_gaussian_peaks, arguments)
 
         all_peaks = []
-        print("ppppp")
+
         # Get unordered results and log progress
         for i, (pos, peaks) in enumerate(results):
 
