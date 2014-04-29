@@ -74,6 +74,8 @@ def peak_detector(data_iterator,
     trajs : :class:`pd.DataFrame`
     """
 
+    log.info('Initializing peak detection')
+
     _parameters = DEFAULT_PARAMETERS.copy()
     _parameters.update(parameters)
     parameters = _parameters
@@ -93,16 +95,16 @@ def peak_detector(data_iterator,
         # module such as numpy (only needed on linux)
         if os.name == 'posix':
             subprocess.call("taskset -p 0xff %d" % os.getpid(),
-                            shell=True)#, stdout=subprocess.DEVNULL) ## Py2.7 compat
+                            shell=True)  # stdout=subprocess.DEVNULL) ## Py2.7 compat
 
         def init_worker():
             import signal
             signal.signal(signal.SIGINT, signal.SIG_IGN)
 
         ncore = multiprocessing.cpu_count() + 1
-        log.info('Parallel mode enabled: %i cores will be used to process %i stacks' %
-                 (ncore, n_stack))
         pool = multiprocessing.Pool(processes=ncore, initializer=init_worker)
+
+    print('kkk')
 
     # Build arguments list
     arguments = zip(data_iterator,
@@ -117,7 +119,7 @@ def peak_detector(data_iterator,
             results = map(find_gaussian_peaks, arguments)
 
         all_peaks = []
-
+        print("ppppp")
         # Get unordered results and log progress
         for i, (pos, peaks) in enumerate(results):
 
@@ -160,6 +162,8 @@ def peak_detector(data_iterator,
 
     if not peaks_df:
         return pd.DataFrame([])
+
+    log.info('Terminating peak detection')
 
     peaks_df = pd.DataFrame(peaks_df, columns=['x', 'y', 'w', 'I'], dtype='float')
     peaks_df.index = pd.MultiIndex.from_tuples(index, names=['t_stamp'])
