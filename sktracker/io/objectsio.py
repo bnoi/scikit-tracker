@@ -47,10 +47,11 @@ class ObjectsIO(object):
 
     def __init__(self, metadata=None,
                  store_path=None,
-                 base_dir=None):
+                 base_dir=None,
+                 minimum_metadata_keys=[]):
 
         if metadata is not None:
-            validate_metadata(metadata)
+            validate_metadata(metadata, keys=minimum_metadata_keys)
 
         if store_path is None:
             store_name = metadata['FileName'].split(os.path.sep)[-1]
@@ -143,7 +144,7 @@ class ObjectsIO(object):
         return objs
 
     @classmethod
-    def from_h5(cls, store_path, base_dir=None):
+    def from_h5(cls, store_path, base_dir=None, minimum_metadata_keys=[]):
         """Load ObjectsIO from HDF5 file.
 
         Parameters
@@ -164,11 +165,11 @@ class ObjectsIO(object):
             metadata_serie = store['metadata']
 
         metadata = metadata_serie.to_dict()
-        validate_metadata(metadata)
 
         return cls(metadata=metadata,
                    store_path=store_path,
-                   base_dir=base_dir)
+                   base_dir=base_dir,
+                   minimum_metadata_keys=minimum_metadata_keys)
 
     @classmethod
     def from_trackmate_xml(cls, trackmate_xml_path):
