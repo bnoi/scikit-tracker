@@ -118,7 +118,7 @@ class ObjectsIO(object):
             new_store = store.copy(fname)
 
         if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
-            new_store[name] = obj
+            new_store.append(name, obj)
         elif isinstance(obj, dict) or isinstance(obj, UserDict):
             new_store[name] = _serialize(obj)
 
@@ -226,7 +226,7 @@ class ObjectsIO(object):
 
 def _serialize(attr):
     ''' Creates a pandas series from a dictionnary'''
-    return pd.Series(list(attr.values()), index=attr.keys())
+    return pd.Series(attr)
 
 
 class OIOMetadata(UserDict):
