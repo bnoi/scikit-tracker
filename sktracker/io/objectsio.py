@@ -9,7 +9,6 @@ from __future__ import print_function
 import logging
 import sys
 import os
-import xml.etree.cElementTree as et
 import tempfile
 import shutil
 
@@ -18,12 +17,10 @@ if sys.version_info[0] > 2:
 else:
     from UserDict import UserDict
 
-import numpy as np
 import pandas as pd
 
 log = logging.getLogger(__name__)
 
-from . import StackIO
 from . import validate_metadata
 
 __all__ = []
