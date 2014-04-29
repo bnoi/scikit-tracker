@@ -172,7 +172,7 @@ class ObjectsIO(object):
                    minimum_metadata_keys=minimum_metadata_keys)
 
     @classmethod
-    def from_trackmate_xml(cls, trackmate_xml_path):
+    def from_trackmate_xml(cls, trackmate_xml_path, minimum_metadata_keys=[]):
         """Load ObjectsIO from TrackMate XML.
 
         Parameters
@@ -194,7 +194,8 @@ class ObjectsIO(object):
             metadata = {}
             metadata['FileName'] = trackmate_xml_path
 
-        oio = cls(metadata=metadata, base_dir=folder)
+        oio = cls(metadata=metadata, base_dir=folder,
+                  minimum_metadata_keys=minimum_metadata_keys)
 
         # Get detected spots from XML file
         objects = []
