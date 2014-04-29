@@ -58,12 +58,6 @@ def test_from_h5():
     oio = ObjectsIO.from_h5(store_path, base_dir=tempfile.gettempdir())
     assert validate_metadata(oio.metadata)
 
-
-def test_from_trackmate_xml():
-    xml_fname = data.trackmate_xml_temp()
-    oio = ObjectsIO.from_trackmate_xml(xml_fname)
-    assert oio['trajs'].shape == (91, 6)
-
 if __name__ == '__main__':
     import nose
     nose.main()
