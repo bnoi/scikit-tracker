@@ -176,11 +176,16 @@ def peak_detector(data_iterator,
     peaks_df['t_stamp'] = peaks_df['t'].copy()
     peaks_df.set_index(['t_stamp', 'label'], inplace=True)
 
-    peaks_df['x'] *= metadata["PhysicalSizeX"]
-    peaks_df['y'] *= metadata["PhysicalSizeY"]
-    peaks_df['z'] *= metadata["PhysicalSizeZ"]
-    peaks_df['w'] *= metadata["PhysicalSizeX"]
-    peaks_df['t'] *= metadata["TimeIncrement"]
+    if "PhysicalSizeX" in metadata.keys():
+        peaks_df['x'] *= metadata["PhysicalSizeX"]
+    if "PhysicalSizeY" in metadata.keys():
+        peaks_df['y'] *= metadata["PhysicalSizeY"]
+    if "PhysicalSizeZ" in metadata.keys():
+        peaks_df['z'] *= metadata["PhysicalSizeZ"]
+    if "PhysicalSizeX" in metadata.keys():
+        peaks_df['w'] *= metadata["PhysicalSizeX"]
+    if "TimeIncrement" in metadata.keys():
+        peaks_df['t'] *= metadata["TimeIncrement"]
 
     return peaks_df
 
