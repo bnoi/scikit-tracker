@@ -110,7 +110,7 @@ class StackIO(object):
         tf = TiffFile(self.image_path_list[index])
         return tf
 
-    def image_iterator(self, position=-2, channel_index=0, memmap=False):
+    def image_iterator(self, position=-2, channel_index=0, z_projection=False, memmap=False):
         """Iterate over image T and Z dimensions. A channel has to be
         choosen and will be excluded from the iterator.
 
@@ -150,6 +150,13 @@ class StackIO(object):
         if 'C' in self.metadata['DimensionOrder']:
             channel_position = self.metadata['DimensionOrder'].index('C')
             arr = np.take(arr, channel_index, axis=channel_position)
+
+        if z_projection:
+            if 'Z' in self.metadata['DimensionOrder']:
+                z_position = self.metadata['DimensionOrder'].index('Z')
+                arr = arr.max(axis=z_position)
+            else:
+                log.warning("No Z detected. Can't perform Z projection")
 
         # Define data iterator
         def it():
