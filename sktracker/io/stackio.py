@@ -146,15 +146,19 @@ class StackIO(object):
                 log.warning("Metadata does not contain Channels key. channel_index is set to 0.")
                 channel_index = 0
 
+        current_dimension_order = list(self.metadata['DimensionOrder'])
+
         # Get only one single channel
-        if 'C' in self.metadata['DimensionOrder']:
-            channel_position = self.metadata['DimensionOrder'].index('C')
+        if 'C' in current_dimension_order:
+            channel_position = current_dimension_order.index('C')
             arr = np.take(arr, channel_index, axis=channel_position)
+            current_dimension_order.remove('C')
 
         if z_projection:
-            if 'Z' in self.metadata['DimensionOrder']:
-                z_position = self.metadata['DimensionOrder'].index('Z')
+            if 'Z' in current_dimension_order:
+                z_position = current_dimension_order.index('Z')
                 arr = arr.max(axis=z_position)
+                current_dimension_order.remove('Z')
             else:
                 log.warning("No Z detected. Can't perform Z projection")
 
