@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 ''' lapjv.py - Jonker-Volgenant algorithm for linear assignment problem.
 
 This is an implementation of the Jonker-Volgenant algorithm for solving

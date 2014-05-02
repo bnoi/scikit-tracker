@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import os
 import logging
 
@@ -11,7 +21,7 @@ log = logging.getLogger(__name__)
 __all__ = []
 
 
-class StackIO:
+class StackIO(object):
     """StackIO is designed to deal with Input/Output images
     It can retrieve all kind of metadata with various methods. It also allows fast and
     efficient way to get image data (in memory or via an iterator.
@@ -89,7 +99,7 @@ class StackIO:
         tf : :class:`sktracker.io.TiffFile`
         """
 
-        tf = TiffFile(self.image_path)
+        tf = TiffFile(self.image_path, multifile=True)
         return tf
 
     def get_tif_from_list(self, index=0):
@@ -104,7 +114,7 @@ class StackIO:
         tf = TiffFile(self.image_path_list[index])
         return tf
 
-    def image_iterator(self, position=-2, channel_index=0, memmap=False):
+    def image_iterator(self, position=-2, channel_index=0, z_projection=False, memmap=False):
         """Iterate over image T and Z dimensions. A channel has to be
         choosen and will be excluded from the iterator.
 
@@ -140,9 +150,21 @@ class StackIO:
                 log.warning("Metadata does not contain Channels key. channel_index is set to 0.")
                 channel_index = 0
 
+        current_dimension_order = list(self.metadata['DimensionOrder'])
+
         # Get only one single channel
-        channel_position = self.metadata['DimensionOrder'].index('C')
-        arr = np.take(arr, channel_index, axis=channel_position)
+        if 'C' in current_dimension_order:
+            channel_position = current_dimension_order.index('C')
+            arr = np.take(arr, channel_index, axis=channel_position)
+            current_dimension_order.remove('C')
+
+        if z_projection:
+            if 'Z' in current_dimension_order:
+                z_position = current_dimension_order.index('Z')
+                arr = arr.max(axis=z_position)
+                current_dimension_order.remove('Z')
+            else:
+                log.warning("No Z detected. Can't perform Z projection")
 
         # Define data iterator
         def it():

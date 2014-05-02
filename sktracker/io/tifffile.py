@@ -2181,7 +2181,7 @@ def _replace_by(module_function, package=None, warn=True):
     return decorate
 
 
-@_replace_by('_tifffile.decodepackbits', package="sktracker.io")
+@_replace_by('_tifffile.decodepackbits', package="sktracker.io", warn=False)
 def decodepackbits(encoded):
     """Decompress PackBits encoded byte string.
 
@@ -2207,7 +2207,7 @@ def decodepackbits(encoded):
     return b''.join(result) if sys.version[0] == '2' else bytes(result)
 
 
-@_replace_by('_tifffile.decodelzw', package="sktracker.io")
+@_replace_by('_tifffile.decodelzw', package="sktracker.io", warn=False)
 def decodelzw(encoded):
     """Decompress LZW (Lempel-Ziv-Welch) encoded TIFF strip (byte string).
 
@@ -2294,7 +2294,7 @@ def decodelzw(encoded):
     return b''.join(result)
 
 
-@_replace_by('_tifffile.unpackints', package="sktracker.io")
+@_replace_by('_tifffile.unpackints', package="sktracker.io", warn=False)
 def unpackints(data, dtype, itemsize, runlen=0):
     """Decompress byte string to array of integers of any bit size <= 32.
 

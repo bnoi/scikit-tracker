@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import os
 import logging
 import subprocess
@@ -64,6 +74,8 @@ def peak_detector(data_iterator,
     trajs : :class:`pd.DataFrame`
     """
 
+    log.info('Initializing peak detection')
+
     _parameters = DEFAULT_PARAMETERS.copy()
     _parameters.update(parameters)
     parameters = _parameters
@@ -83,15 +95,13 @@ def peak_detector(data_iterator,
         # module such as numpy (only needed on linux)
         if os.name == 'posix':
             subprocess.call("taskset -p 0xff %d" % os.getpid(),
-                            shell=True, stdout=subprocess.DEVNULL)
+                            shell=True)  # stdout=subprocess.DEVNULL) ## Py2.7 compat
 
         def init_worker():
             import signal
             signal.signal(signal.SIGINT, signal.SIG_IGN)
 
         ncore = multiprocessing.cpu_count() + 1
-        log.info('Parallel mode enabled: %i cores will be used to process %i stacks' %
-                 (ncore, n_stack))
         pool = multiprocessing.Pool(processes=ncore, initializer=init_worker)
 
     # Build arguments list
@@ -151,6 +161,8 @@ def peak_detector(data_iterator,
     if not peaks_df:
         return pd.DataFrame([])
 
+    log.info('Terminating peak detection')
+
     peaks_df = pd.DataFrame(peaks_df, columns=['x', 'y', 'w', 'I'], dtype='float')
     peaks_df.index = pd.MultiIndex.from_tuples(index, names=['t_stamp'])
 
@@ -164,11 +176,16 @@ def peak_detector(data_iterator,
     peaks_df['t_stamp'] = peaks_df['t'].copy()
     peaks_df.set_index(['t_stamp', 'label'], inplace=True)
 
-    peaks_df['x'] *= metadata["PhysicalSizeX"]
-    peaks_df['y'] *= metadata["PhysicalSizeY"]
-    peaks_df['z'] *= metadata["PhysicalSizeZ"]
-    peaks_df['w'] *= metadata["PhysicalSizeX"]
-    peaks_df['t'] *= metadata["TimeIncrement"]
+    if "PhysicalSizeX" in metadata.keys():
+        peaks_df['x'] *= metadata["PhysicalSizeX"]
+    if "PhysicalSizeY" in metadata.keys():
+        peaks_df['y'] *= metadata["PhysicalSizeY"]
+    if "PhysicalSizeZ" in metadata.keys():
+        peaks_df['z'] *= metadata["PhysicalSizeZ"]
+    if "PhysicalSizeX" in metadata.keys():
+        peaks_df['w'] *= metadata["PhysicalSizeX"]
+    if "TimeIncrement" in metadata.keys():
+        peaks_df['t'] *= metadata["TimeIncrement"]
 
     return peaks_df
 
@@ -340,7 +357,8 @@ def glrt_detection(image, r0, w_s, threshold):  # pragma: no cover
 
     hmap = []
     for i, j in np.ndindex((w - w_s, h - w_s)):
-        h = hypothesis_map(image[i: i + w_s, j: j + w_s],
+        tmp = image[int(i): int(i + w_s), int(j): int(j + w_s)]
+        h = hypothesis_map(tmp,
                            g_patch,
                            g_squaresum)
         hmap.append(h)

@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 from .version import __version__
 
 from . import data
@@ -21,28 +31,32 @@ def setup_log():  # pragma: no cover
 
     import logging
 
-    from .utils import color
-    from .utils import in_ipython
-
-    if in_ipython():
-        logformat = '%(asctime)s' + ':'
-        logformat += '%(levelname)s' + ':'
-        logformat += '%(name)s' + ':'
-        # logformat += '%(funcName)s' + ': '
-        logformat += ' %(message)s'
-    else:
-        logformat = color('%(asctime)s', 'BLUE') + ':'
-        logformat += color('%(levelname)s', 'RED') + ':'
-        logformat += color('%(name)s', 'YELLOW') + ':'
-        # logformat += color('%(funcName)s', 'GREEN') + ': '
-        logformat += color(' %(message)s', 'ENDC')
+    from .utils.color_system import color
+    from .utils.ipython import in_ipython
 
     logger = logging.getLogger(__name__)
-    handler = logging.StreamHandler()
-    formatter = logging.Formatter(logformat, "%Y-%m-%d %H:%M:%S")
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
-    logger.propagate = False
+
+    if not getattr(logger, 'handler_set', None):
+
+        if in_ipython():
+            logformat = '%(asctime)s' + ':'
+            logformat += '%(levelname)s' + ':'
+            logformat += '%(name)s' + ':'
+            # logformat += '%(funcName)s' + ': '
+            logformat += ' %(message)s'
+        else:
+            logformat = color('%(asctime)s', 'BLUE') + ':'
+            logformat += color('%(levelname)s', 'RED') + ':'
+            logformat += color('%(name)s', 'YELLOW') + ':'
+            # logformat += color('%(funcName)s', 'GREEN') + ': '
+            logformat += color(' %(message)s', 'ENDC')
+
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter(logformat, "%Y-%m-%d %H:%M:%S")
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.propagate = False
+        logger.handler_set = True
 
 
 def set_log_level(loglevel):

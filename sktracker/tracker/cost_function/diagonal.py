@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import numpy as np
 from . import AbstractCostFunction
 
@@ -31,7 +41,7 @@ class DiagonalCostFunction(AbstractCostFunction):
         """
         """
 
-        super().__init__(context=context, parameters=parameters)
+        super(self.__class__, self).__init__(context=context, parameters=parameters)
         _ = self.check_context('cost', float)
 
     def _build(self):

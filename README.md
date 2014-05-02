@@ -61,6 +61,3 @@ Or by cloning this repo and using setup.py:
 ## Licence
 
 See [LICENSE](LICENSE).
-
-
-

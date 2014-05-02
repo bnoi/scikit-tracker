@@ -17,7 +17,9 @@ build:
 	python setup.py build_ext --inplace
 
 clean:
-	find . -name "*.so" -o -name "*.pyc" -o -name "*.pyx.md5" | xargs rm -f
+	find . -name "*.so" -exec rm -rf {} \;
+	find . -name "*.pyc" -exec rm -rf {} \;
+	find . -depth -name "__pycache__" -type d -exec rm -rf '{}' \;
 	rm -rf build/ dist/ scikit_tracker.egg-info/
 
 test:

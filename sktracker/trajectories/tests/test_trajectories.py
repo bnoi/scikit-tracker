@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 from nose.tools import assert_raises
 from nose.tools import assert_dict_equal
 from numpy.testing import assert_array_equal

@@ -1,20 +1,32 @@
-import logging
-import os
-import xml.etree.cElementTree as et
+# -*- coding: utf-8 -*-
 
-from collections import UserDict
-import numpy as np
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
+import logging
+import sys
+import os
+import tempfile
+import shutil
+
+if sys.version_info[0] > 2:
+    from collections import UserDict
+else:
+    from UserDict import UserDict
+
 import pandas as pd
 
 log = logging.getLogger(__name__)
 
-from . import StackIO
 from . import validate_metadata
 
 __all__ = []
 
 
-class ObjectsIO():
+class ObjectsIO(object):
     """
     Manipulate and pass along data issued from detected
     objects.
@@ -32,10 +44,11 @@ class ObjectsIO():
 
     def __init__(self, metadata=None,
                  store_path=None,
-                 base_dir=None):
+                 base_dir=None,
+                 minimum_metadata_keys=[]):
 
         if metadata is not None:
-            validate_metadata(metadata)
+            validate_metadata(metadata, keys=minimum_metadata_keys)
 
         if store_path is None:
             store_name = metadata['FileName'].split(os.path.sep)[-1]
@@ -86,7 +99,8 @@ class ObjectsIO():
             return obj
 
     def __setitem__(self, name, obj):
-        """Add an object to HDF5 file.
+        """Adds an object to HDF5 file. See https://github.com/pydata/pandas/issues/2132 for the
+        reason a new store is created.
 
         Parameters
         ----------
@@ -96,11 +110,20 @@ class ObjectsIO():
             Name of the object. Will be used when reading HDF5 file
 
         """
+        _, fname = tempfile.mkstemp()
+
         with pd.get_store(self.store_path) as store:
-            if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
-                store[name] = obj
-            elif isinstance(obj, dict) or isinstance(obj, UserDict):
-                store[name] = _serialize(obj)
+            new_store = store.copy(fname)
+
+        if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
+            # new_store.put(name, obj, format='t')
+            new_store[name] = obj
+        elif isinstance(obj, dict) or isinstance(obj, UserDict):
+            new_store[name] = _serialize(obj)
+
+        new_store.close()
+
+        shutil.copy(fname, self.store_path)
 
     def __delitem__(self, name):
         """
@@ -118,7 +141,7 @@ class ObjectsIO():
         return objs
 
     @classmethod
-    def from_h5(cls, store_path, base_dir=None):
+    def from_h5(cls, store_path, base_dir=None, minimum_metadata_keys=[]):
         """Load ObjectsIO from HDF5 file.
 
         Parameters
@@ -139,70 +162,17 @@ class ObjectsIO():
             metadata_serie = store['metadata']
 
         metadata = metadata_serie.to_dict()
-        validate_metadata(metadata)
 
         return cls(metadata=metadata,
                    store_path=store_path,
-                   base_dir=base_dir)
-
-    @classmethod
-    def from_trackmate_xml(cls, trackmate_xml_path):
-        """Load ObjectsIO from TrackMate XML.
-
-        Parameters
-        ----------
-        trackmate_xml_path : str
-            TrackMate XML file path.
-        """
-
-        root = et.fromstring(open(trackmate_xml_path).read())
-        image_data = root.find('Settings').find('ImageData')
-
-        filename = image_data.get('filename')
-        folder = image_data.get('folder')
-
-        if os.path.isfile(os.path.join(folder, filename)):
-            st = StackIO(filename, base_dir=folder)
-            metadata = st.metadata
-        else:
-            metadata = {}
-            metadata['FileName'] = trackmate_xml_path
-
-        oio = cls(metadata=metadata, base_dir=folder)
-
-        # Get detected spots from XML file
-        objects = []
-        object_labels = [('t_stamp', 'FRAME'),
-                         ('t', 'POSITION_T'),
-                         ('x', 'POSITION_X'),
-                         ('y', 'POSITION_Y'),
-                         ('z', 'POSITION_Z'),
-                         ('I', 'MEAN_INTENSITY'),
-                         ('w', 'ESTIMATED_DIAMETER')]
-
-        spots = root.find('Model').find('AllSpots')
-        for frame in spots.findall('SpotsInFrame'):
-            for spot in frame.findall('Spot'):
-
-                single_object = []
-                for label, trackmate_label in object_labels:
-                    single_object.append(spot.get(trackmate_label))
-
-                objects.append(single_object)
-
-        trajs = pd.DataFrame(objects, columns=[label[0] for label in object_labels])
-        trajs['label'] = np.arange(trajs.shape[0])
-        trajs['t_stamp'] = trajs['t_stamp'].values.astype(np.float)
-        trajs.set_index(['t_stamp', 'label'], inplace=True)
-        trajs = trajs.astype(np.float)
-
-        oio['trajs'] = trajs
-        return oio
+                   base_dir=base_dir,
+                   minimum_metadata_keys=minimum_metadata_keys)
 
 
 def _serialize(attr):
     ''' Creates a pandas series from a dictionnary'''
-    return pd.Series(list(attr.values()), index=attr.keys())
+    return pd.Series(attr)
+
 
 class OIOMetadata(UserDict):
     '''
@@ -211,7 +181,8 @@ class OIOMetadata(UserDict):
     '''
     def __init__(self, metadata_dict, objectsio):
         self.objectsio = objectsio
-        super().__init__(metadata_dict)
+        UserDict.__init__(self, metadata_dict)
+        self.objectsio['metadata'] = self.data
 
     def __setitem__(self, key, value):
 

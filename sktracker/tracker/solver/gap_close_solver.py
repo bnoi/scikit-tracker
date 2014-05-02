@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import numpy as np
 import logging
 
@@ -26,7 +36,7 @@ class GapCloseSolver(AbstractSolver):
     def __init__(self, trajs, cost_functions,
                  maximum_gap, coords=['x', 'y', 'z']):
 
-        super().__init__(trajs)
+        super(self.__class__, self).__init__(trajs)
 
         self.coords = coords
 

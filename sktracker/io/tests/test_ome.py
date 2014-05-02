@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 from nose import with_setup
 
 from sktracker import data
@@ -35,9 +45,11 @@ def test_ome_df_planes():
 def test_ome_get_metadata():
     m = OMEModel(xml_str)
     metadata = m.get_metadata()
-    real_metadata = {'Shape': (2, 43, 10, 512, 512),
+    real_metadata = {'SizeX': 512, 'SizeY': 512, 'SizeZ': 10, 'SizeT': 43,
                      'DimensionOrder': ['C', 'T', 'Z', 'Y', 'X'],
-                     'AcquisitionDate': '2013-01-15T17:02:48'}
+                     'Shape': (2, 43, 10, 512, 512), 'AcquisitionDate': '2013-01-15T17:02:48',
+                     'SizeC': 2}
+    print(metadata)
     assert metadata == real_metadata
 
 

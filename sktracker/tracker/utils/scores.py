@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import numpy as np
 
 __all__ = []
@@ -38,7 +48,7 @@ def get_scores_on_trajectories(trajs, coords=['x', 'y', 'z']):
             h = h.reset_index(level='label')
             h = h.reindex_like(p)
 
-            h.dropna(inplace=True)
+            h = h.dropna()
 
             score = ((h - p)[['x', 'y', 'z']].sum(axis=1) ** 2).mean()
             scores[np.int(new_label), np.int(true_label)] = score

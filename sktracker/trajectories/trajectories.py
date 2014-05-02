@@ -1,3 +1,13 @@
+
+# -*- coding: utf-8 -*-
+
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
 import numpy as np
 import pandas as pd
 from pandas.io import pytables
@@ -40,7 +50,7 @@ class Trajectories(pd.DataFrame):
         if not isinstance(trajs, pd.DataFrame):
             raise TypeError("The constructor argument `trajs` "
                             "must be a pandas.DataFrame instance")
-        super().__init__(trajs)
+        super(Trajectories, self).__init__(trajs)
 
     @property
     def t_stamps(self):
@@ -89,7 +99,7 @@ class Trajectories(pd.DataFrame):
         """
         """
 
-        trajs = super().copy()
+        trajs = super(self.__class__, self).copy()
         return Trajectories(trajs)
 
     def check_trajs_df_structure(self, index=None, columns=None):
@@ -254,9 +264,8 @@ class Trajectories(pd.DataFrame):
             clrs[label] = ccycle[label % num_colors]
         return clrs
 
-
     def time_interpolate(self, time_step=None,
-                         coords=('x', 'y', 'z'), s=0, k=3):
+                         coords=['x', 'y', 'z'], s=0, k=3):
         """
         Interpolates each segment of the trajectories along time
         using `scipy.interpolate.splrep`
@@ -289,7 +298,7 @@ class Trajectories(pd.DataFrame):
         Returns
         -------
         interpolated : a :class:`Trajectories` instance
-           The interpolated values with column names identical to `ccords`
+           The interpolated values with column names identical to `coords`
            plus the computed speeds (first order derivative) and accelarations
            (second order derivative) if `k` > 2
 
@@ -311,13 +320,13 @@ class Trajectories(pd.DataFrame):
 
         for label, segment in self.iter_segments:
             if segment.shape[0] < 2:
-                interpolated[label] = segment[coords+'t']
+                interpolated[label] = segment[coords + ['t']]
             corrected_k = k
             while segment.shape[0] <= corrected_k:
                 corrected_k -= 1
             tck = _spline_rep(segment, coords, s=s, k=corrected_k)
             t0, t1 = segment.t.iloc[0], segment.t.iloc[-1]
-            t_span =  t1 - t0
+            t_span = t1 - t0
             n_pts = np.floor(t_span / time_step) + 1
             times = np.linspace(t0, t1, n_pts)
             tmp_df = pd.DataFrame(index=np.arange(times.size))
