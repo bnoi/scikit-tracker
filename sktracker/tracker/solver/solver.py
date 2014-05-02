@@ -55,4 +55,4 @@ class AbstractSolver(object):
             as the new label index
 
         """
-        self.trajs.relabel(self, new_labels=new_labels)
+        self.trajs.relabel(new_labels=new_labels)
