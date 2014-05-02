@@ -55,17 +55,4 @@ class AbstractSolver(object):
             as the new label index
 
         """
-        if new_labels is not None:
-            self.trajs['new_label'] = new_labels
-
-        try:
-            self.trajs.set_index('new_label', append=True, inplace=True)
-        except KeyError:
-            raise('''Column "new_label" was not found in `trajs` and none
-                      was provided''')
-
-        self.trajs.reset_index(level='label', drop=True, inplace=True)
-        self.trajs.index.set_names(['t_stamp', 'label'], inplace=True)
-        self.trajs.sortlevel('label', inplace=True)
-        self.trajs.sortlevel('t_stamp', inplace=True)
-        self.trajs.relabel_fromzero('label', inplace=True)
+        self.trajs.relabel(self, new_labels=new_labels)
