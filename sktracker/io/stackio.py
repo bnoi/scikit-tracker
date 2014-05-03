@@ -50,13 +50,17 @@ class StackIO(object):
 
         if metadata is not None:
             self.metadata = metadata
+            if image_path is not None:
+                self.metadata['FileName'] = image_path
         else:
-            self.metadata = get_metadata(image_path, json_discovery, base_dir=self.base_dir)
+            self.metadata = get_metadata(image_path, json_discovery,
+                                         base_dir=self.base_dir)
         if image_path_list:
-                self.metadata['SizeT'] = len(image_path_list),
-                self.metadata['Shape'] = ((len(image_path_list),)
-                                          + tuple(self.metadata['Shape']))
-                self.metadata['DimensionOrder'] = 'T'+''.join(self.metadata['DimensionOrder'])
+                self.metadata['SizeT'] = len(image_path_list)
+                if self.metadata['DimensionOrder'][0] != 'T':
+                    self.metadata['Shape'] = ((len(image_path_list),)
+                                              + tuple(self.metadata['Shape']))
+                    self.metadata['DimensionOrder'] = 'T'+''.join(self.metadata['DimensionOrder'])
         self._image_path_list = image_path_list
 
     @property

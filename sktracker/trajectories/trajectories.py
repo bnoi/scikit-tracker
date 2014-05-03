@@ -346,6 +346,33 @@ class Trajectories(pd.DataFrame):
         interpolated = interpolated.swaplevel('label', 't_stamp')
         return Trajectories(interpolated)
 
+    def relabel(self, new_labels=None):
+        """
+        Sets the trajectory index `label` to new values.
+
+        Parameters
+        ----------
+        new_labels: :class:`numpy.ndarray` or None, default None
+            The new label. If it is not provided, the function wil look for
+            will look for a column named "new_label" in `trajs` and use this
+            as the new label index
+
+        """
+        if new_labels is not None:
+            self['new_label'] = new_labels
+
+        try:
+            self.set_index('new_label', append=True, inplace=True)
+        except KeyError:
+            raise('''Column "new_label" was not found in `trajs` and none
+                      was provided''')
+
+        self.reset_index(level='label', drop=True, inplace=True)
+        self.index.set_names(['t_stamp', 'label'], inplace=True)
+        self.sortlevel('label', inplace=True)
+        self.sortlevel('t_stamp', inplace=True)
+        self.relabel_fromzero('label', inplace=True)
+
 # Register the trajectories for storing in HDFStore
 # as a regular DataFrame
 pytables._TYPE_MAP[Trajectories] = 'frame'

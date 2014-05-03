@@ -102,6 +102,18 @@ def metadata_json():
 
 # HDF5 files
 
+def nuclei_h5():
+    return os.path.join(data_path, "nuclei.h5")
+
+def nuclei_h5_temp():
+    """
+    """
+    d = tempfile.gettempdir()
+    f_ori = os.path.join(data_path, "nuclei.h5")
+    f_dest = os.path.join(d, "nuclei.h5")
+    shutil.copy(f_ori, f_dest)
+    return f_dest
+
 
 def sample_h5():
     """

@@ -1,0 +1,12 @@
+Shape,"(512, 512, 23, 5)"
+SizeT,5
+FileName,sample.ome.tif
+Type,unint16
+TimeIncrement,3.0
+PysicalSizeX,0.43
+PysicalSizeY,0.43
+DimensionOrder,TZYX
+SizeZ,23
+SizeX,512
+SizeY,512
+PysicalSizeZ,1.5
