@@ -45,7 +45,8 @@ class ObjectsIO(object):
     def __init__(self, metadata=None,
                  store_path=None,
                  base_dir=None,
-                 minimum_metadata_keys=[]):
+                 minimum_metadata_keys=[],
+                 clean_store=True):
 
         if metadata is not None:
             validate_metadata(metadata, keys=minimum_metadata_keys)
@@ -70,6 +71,9 @@ class ObjectsIO(object):
             else:
                 self.metadata = OIOMetadata(metadata, self)
             self.image_path = os.path.join(base_dir, self.metadata['FileName'])
+
+        if clean_store:
+            self.clean_store_file()
 
     @classmethod
     def from_stackio(cls, stackio):
@@ -98,9 +102,21 @@ class ObjectsIO(object):
         else:
             return obj
 
+    def clean_store_file(self):
+        """Remove duplicate data. See https://github.com/pydata/pandas/issues/2132.
+        """
+        _, fname = tempfile.mkstemp()
+
+        with pd.get_store(self.store_path) as store:
+            new_store = store.copy(fname)
+
+        new_store.close()
+
+        shutil.copy(fname, self.store_path)
+        os.remove(fname)
+
     def __setitem__(self, name, obj):
-        """Adds an object to HDF5 file. See https://github.com/pydata/pandas/issues/2132 for the
-        reason a new store is created.
+        """Adds an object to HDF5 file.
 
         Parameters
         ----------
@@ -110,20 +126,12 @@ class ObjectsIO(object):
             Name of the object. Will be used when reading HDF5 file
 
         """
-        _, fname = tempfile.mkstemp()
 
         with pd.get_store(self.store_path) as store:
-            new_store = store.copy(fname)
-
-        if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
-            # new_store.put(name, obj, format='t')
-            new_store[name] = obj
-        elif isinstance(obj, dict) or isinstance(obj, UserDict):
-            new_store[name] = _serialize(obj)
-
-        new_store.close()
-
-        shutil.copy(fname, self.store_path)
+            if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
+                store[name] = obj
+            elif isinstance(obj, dict) or isinstance(obj, UserDict):
+                store[name] = _serialize(obj)
 
     def __delitem__(self, name):
         """
