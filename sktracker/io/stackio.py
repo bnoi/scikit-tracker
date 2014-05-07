@@ -93,7 +93,7 @@ class StackIO(object):
 
         return cls(image_path=objectsio.image_path, metadata=objectsio.metadata)
 
-    def get_tif(self):
+    def get_tif(self, multifile=True):
         """Get TiffFile instance.
 
         Returns
@@ -101,7 +101,7 @@ class StackIO(object):
         tf : :class:`sktracker.io.TiffFile`
         """
 
-        tf = TiffFile(self.image_path, multifile=True)
+        tf = TiffFile(self.image_path, multifile=multifile)
         return tf
 
     def get_tif_from_list(self, index=0):
@@ -142,8 +142,13 @@ class StackIO(object):
         A Python iterator over the image array.
         """
 
-        tf = self.get_tif()
-        arr = tf.asarray(memmap=memmap)
+        try:
+            tf = self.get_tif(multifile=True)
+            arr = tf.asarray(memmap=memmap)
+        except ValueError:
+            log.warning("Failed to open TiffFile with multifile option. Use fallback method.")
+            tf = self.get_tif(multifile=False)
+            arr = tf.asarray(memmap=memmap).reshape(self.metadata['Shape'])
 
         if isinstance(channel_index, str):
             if 'Channels' in self.metadata.keys():
