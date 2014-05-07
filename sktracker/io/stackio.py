@@ -55,6 +55,8 @@ class StackIO(object):
         else:
             self.metadata = get_metadata(image_path, json_discovery,
                                          base_dir=self.base_dir)
+            print('Getting metadata from TIFF file')
+
         if image_path_list:
                 self.metadata['SizeT'] = len(image_path_list)
                 if self.metadata['DimensionOrder'][0] != 'T':

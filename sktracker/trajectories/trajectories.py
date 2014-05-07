@@ -154,7 +154,7 @@ class Trajectories(pd.DataFrame):
         trajs.reset_index(level, drop=True, inplace=True)
         names = list(self.index.names)
         names[names.index('new_label')] = level
-        trajs.index.set_names(names, inplace=True)
+        trajs.index.set_names(names, inplace=inplace)
         return trajs
 
     def get_mean_distances(self, group_args={'by': 'true_label'},
@@ -346,14 +346,14 @@ class Trajectories(pd.DataFrame):
         interpolated = interpolated.swaplevel('label', 't_stamp')
         return Trajectories(interpolated)
 
-    def relabel(self, new_labels=None):
+    def relabel(self, new_labels=None, inplace=True):
         """
         Sets the trajectory index `label` to new values.
 
         Parameters
         ----------
         new_labels: :class:`numpy.ndarray` or None, default None
-            The new label. If it is not provided, the function wil look for
+            The new label. If it is not provided, the function
             will look for a column named "new_label" in `trajs` and use this
             as the new label index
 
@@ -361,17 +361,18 @@ class Trajectories(pd.DataFrame):
         if new_labels is not None:
             self['new_label'] = new_labels
 
-        try:
+        try :
             self.set_index('new_label', append=True, inplace=True)
         except KeyError:
-            raise('''Column "new_label" was not found in `trajs` and none
-                      was provided''')
+            err = ('''Column "new_label" was not found in `trajs` and none'''
+                   ''' was provided''')
+            raise KeyError(err)
 
         self.reset_index(level='label', drop=True, inplace=True)
         self.index.set_names(['t_stamp', 'label'], inplace=True)
         self.sortlevel('label', inplace=True)
         self.sortlevel('t_stamp', inplace=True)
-        self.relabel_fromzero('label', inplace=True)
+        self.relabel_fromzero('label', inplace=inplace)
 
 # Register the trajectories for storing in HDFStore
 # as a regular DataFrame
