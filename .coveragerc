@@ -1,5 +1,6 @@
 [run]
 omit =
     */sktracker/io/tifffile.py
+    */sktracker/utils/transformations.py
     */sktracker/data/*
     */sktracker/version.py
