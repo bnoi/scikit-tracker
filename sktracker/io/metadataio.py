@@ -65,7 +65,7 @@ def get_metadata(filename, json_discovery=False, base_dir=None):
                 md["Size" + dim_label] = 1
 
     if tf.is_ome:
-        xml_metadata = tf[0].tags['image_description'].value.decode()
+        xml_metadata = tf[0].tags['image_description'].value.decode(errors='ignore')
         ome = OMEModel(xml_metadata)
         md.update(ome.get_metadata())
 
