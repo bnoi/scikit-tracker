@@ -61,9 +61,10 @@ class GapCloseSolver(AbstractSolver):
         guessed_cost = float(max_speed ** 2)
 
         diag_context = {'cost': guessed_cost}
-        diag_params  = {'link_percentile': link_percentile}
+        diag_params = {'link_percentile': link_percentile, 'coords': coords}
 
-        link_cost_func = BrownianGapCloseCostFunction(parameters={'max_speed': max_speed})
+        link_cost_func = BrownianGapCloseCostFunction(parameters={'max_speed': max_speed,
+                                                                  'coords': coords})
         birth_cost_func = DiagonalCostFunction(context=diag_context,
                                                parameters=diag_params)
         death_cost_func = DiagonalCostFunction(context=diag_context,
