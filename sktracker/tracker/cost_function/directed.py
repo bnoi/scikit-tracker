@@ -10,10 +10,10 @@ from __future__ import print_function
 
 import numpy as np
 import pandas as pd
+import scipy as sp
 
 from scipy import interpolate
 
-from ...trajectories import Trajectories
 from . import AbstractCostFunction
 
 __all__ = ["BasicDirectedLinkCostFunction"]
@@ -54,7 +54,7 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
 
     """
 
-    def __init__(self, parameters):
+    def __init__(self, parameters, context={}):
 
         _parameters = {'max_speed': 1.,
                        'past_traj_time': 1,
@@ -63,7 +63,7 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
                        'coords': ['x', 'y', 'z']}
         _parameters.update(parameters)
 
-        super(self.__class__, self).__init__(context={}, parameters=_parameters)
+        super(self.__class__, self).__init__(context=context, parameters=_parameters)
 
     def _build(self):
         """
@@ -84,18 +84,29 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
         # Chech vectors
         self.check_columns([pos_in, pos_out], list(coords) + ['t'])
 
-        dt = pos_out['t'].iloc[0] - pos_in['t'].iloc[0]
-
-        # Build matrix
-
-        t_in = pos_in.t.unique()[0]
-        # t_out = pos_out.t.unique()[0]
+        t_in = pos_in['t'].iloc[0]
+        t_out = pos_out['t'].iloc[0]
+        dt = t_out - t_in
 
         # Select trajectory from (current_time - past_traj_time) and current_time
         last_past_time = t_in - (past_traj_time)
         past_trajs = trajs[(trajs.t <= t_in) & (trajs.t > last_past_time)]
         past_trajs_grouped = past_trajs.groupby(level='label').groups
         past_trajs_grouped
+
+        n_t_past_trajs = past_trajs.index.get_level_values('t_stamp').unique().shape[0]
+        if n_t_past_trajs < 3:
+            # Not enough timepoints
+            # Fallback to only distance
+            distances = sp.spatial.distance.cdist(pos_in[coords].astype(np.float),
+                                                  pos_out[coords].astype(np.float),
+                                                  metric='euclidean')
+
+            distances /= np.abs(dt)
+            distances[distances > max_speed] = np.nan
+            distances = distances ** 2
+
+            return distances
 
         # Compute past trajectories vector
         vecs_speed_in = {}
@@ -143,9 +154,12 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
                     score = np.nan
                 else:
                     score = np.dot(vec_speed_in, vec_speed_out)
-                    score /= np.linalg.norm(vec_speed_in)
+                    score /= np.linalg.norm(vec_speed_in) * np.linalg.norm(vec_speed_out)
+                    score = np.rad2deg(np.arccos(score))
+                    if score > 90:
+                        score = 180 - score
+                    score *= current_speed
 
                 distances[i, j] = score
 
-        #distances -= distances.min()
         return distances

@@ -67,9 +67,10 @@ class ByFrameSolver(AbstractSolver):
         """
         guessed_cost = np.float(max_speed ** 2) * penalty
         diag_context = {'cost': guessed_cost}
-        diag_params = {'penalty': penalty}
+        diag_params = {'penalty': penalty, 'coords': coords}
 
-        link_cost_func = BrownianLinkCostFunction(parameters={'max_speed': max_speed})
+        link_cost_func = BrownianLinkCostFunction(parameters={'max_speed': max_speed,
+                                                              'coords': coords})
         birth_cost_func = DiagonalCostFunction(context=diag_context,
                                                parameters=diag_params)
         death_cost_func = DiagonalCostFunction(context=diag_context,
