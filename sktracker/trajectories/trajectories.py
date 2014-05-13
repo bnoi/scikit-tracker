@@ -10,9 +10,10 @@ from __future__ import print_function
 
 import numpy as np
 import pandas as pd
+import scipy as sp
+
 from pandas.io import pytables
 from scipy.interpolate import splev, splrep
-
 
 
 __all__ = []
@@ -361,7 +362,7 @@ class Trajectories(pd.DataFrame):
         if new_labels is not None:
             self['new_label'] = new_labels
 
-        try :
+        try:
             self.set_index('new_label', append=True, inplace=True)
         except KeyError:
             err = ('''Column "new_label" was not found in `trajs` and none'''
@@ -373,6 +374,23 @@ class Trajectories(pd.DataFrame):
         self.sortlevel('label', inplace=True)
         self.sortlevel('t_stamp', inplace=True)
         self.relabel_fromzero('label', inplace=inplace)
+
+    def all_speeds(self, coords=['x', 'y', 'z']):
+        """
+        Get all speeds in trajectories between each t_stamp.
+        """
+        t_stamp = self.index.get_level_values('t_stamp').unique()
+        speeds = []
+
+        for t1, t2 in zip(t_stamp[:-1], t_stamp[1:]):
+            p1 = self.loc[t1]
+            p2 = self.loc[t2]
+            dt = p2['t'].unique()[0] - p1['t'].unique()[0]
+
+            d = sp.spatial.distance.cdist(p1.loc[:, coords], p2.loc[:, coords]).flatten()
+            speeds += (d / dt).tolist()
+
+        return np.array(speeds)
 
 # Register the trajectories for storing in HDFStore
 # as a regular DataFrame
