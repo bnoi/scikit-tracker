@@ -238,6 +238,9 @@ class ByFrameSolver(AbstractSolver):
             # self.trajs.loc[self.t_out, 'new_label'].iloc[idx_out] = new_label
 
     def _update_max_assign_cost(self, cost):
+        """
+        """
+
         if cost > self.max_assigned_cost:
             self.max_assigned_cost = cost
             new_b_cost = self.max_assigned_cost * self.birth_cf.parameters['penalty']

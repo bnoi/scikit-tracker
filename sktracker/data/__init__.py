@@ -42,6 +42,7 @@ __all__ = ['directed_trajectories_generator',
            'sample_h5',
            'sample_h5_temp',
            'brownian_trajs_df',
+           'directed_motion_trajs_df',
            'trackmate_xml_temp',
            'trackmate_xml',
            'with_gaps_df']
@@ -100,10 +101,11 @@ def metadata_json():
     """
     return os.path.join(data_path, "metadata.json")
 
-# HDF5 files
 
+# HDF5 files
 def nuclei_h5():
     return os.path.join(data_path, "nuclei.h5")
+
 
 def nuclei_h5_temp():
     """
@@ -141,12 +143,23 @@ def brownian_trajs_df():
         trajs = store['trajs']
     return trajs
 
+
+def directed_motion_trajs_df():
+    """
+    """
+    store_path = os.path.join(data_path, "directed_motion_trajectories.h5")
+    with pd.get_store(store_path) as store:
+        trajs = store['trajs']
+    return trajs
+
+
 def with_gaps_df():
     """
     """
     with pd.get_store(os.path.join(data_path, "with_gaps.h5")) as store:
         trajs = store['trajs']
     return trajs
+
 
 # XML files
 def trackmate_xml():
