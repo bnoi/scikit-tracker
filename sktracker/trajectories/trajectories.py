@@ -80,6 +80,26 @@ class Trajectories(pd.DataFrame):
         return {key: segment for key, segment
                 in self.iter_segments}
 
+    def remove_segments(self, segments_idx, inplace=True):
+        """Remove segments from trajectories.
+
+        Parameters
+        ----------
+        segments_idx : list
+            List of label to remove
+        """
+        return self.drop(segments_idx, level='label', inplace=inplace)
+
+    def get_longest_segments(self, n):
+        """Get the n th longest segments label indexes.
+
+        Parameters
+        ----------
+        n : int
+        """
+        idxs = self.segment_idxs
+        return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[:-n]).keys()
+
     def reverse(self):
         """Reverse trajectories.
 
@@ -104,7 +124,7 @@ class Trajectories(pd.DataFrame):
         return Trajectories(trajs)
 
     def check_trajs_df_structure(self, index=None, columns=None):
-        """Check wether trajcetories contains a specified structure.
+        """Check wether trajectories contains a specified structure.
 
         Parameters
         ----------
