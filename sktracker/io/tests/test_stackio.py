@@ -5,9 +5,6 @@ from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
 
-
-from nose.tools import assert_raises
-
 from sktracker import data
 from sktracker.io import StackIO
 from sktracker.io import ObjectsIO
@@ -36,6 +33,7 @@ def test_stackio_from_tif_file():
 
     assert guessed_metadata == true_metadata
 
+
 def test_stackio_from_objectsio():
     oio = ObjectsIO.from_h5(data.sample_h5_temp())
     st = StackIO.from_objectsio(oio)
@@ -56,6 +54,7 @@ def test_stackio_from_objectsio():
 
     assert guessed_metadata == true_metadata
 
+
 def test_stackio_image_iterator():
     fname = data.CZT_peaks()
     st = StackIO(fname, json_discovery=False)
@@ -66,6 +65,7 @@ def test_stackio_image_iterator():
     for a in iterator():
         assert a.shape == arr[-2:]
 
+
 def test_load_img_list():
     stack_list_dir = data.stack_list_dir()
     file_list = load_img_list(stack_list_dir)
@@ -73,6 +73,7 @@ def test_load_img_list():
     assert len(file_list) == len(file_names)
     for path, name in zip(file_list, file_names):
         assert path.endswith(name)
+
 
 def test_stackio_list_iterator():
 
@@ -96,6 +97,7 @@ def test_stackio_list_iterator():
     for n, stack in enumerate(stack_iter()):
         assert stack.shape == (5, 172, 165)
     assert n == 3
+
 
 def test_stackio_get_tif_from_list():
     images_list = data.stack_list()
