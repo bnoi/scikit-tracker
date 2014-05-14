@@ -10,7 +10,6 @@ from __future__ import print_function
 
 import numpy as np
 import pandas as pd
-import scipy as sp
 
 from scipy import interpolate
 
@@ -23,8 +22,8 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
     """This class generates cost matrices for directed motion
     trajectories.
 
-    The cost between two position is given by the square of their
-    distance
+    The score for each situations is given by the cosine similarity between a guessed trajectory
+    vector and the vector made by two points.
 
     Attributes
     ----------
@@ -94,20 +93,6 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
         past_trajs_grouped = past_trajs.groupby(level='label').groups
         past_trajs_grouped
 
-        n_t_past_trajs = past_trajs.index.get_level_values('t_stamp').unique().shape[0]
-        if n_t_past_trajs < 3:
-            # Not enough timepoints
-            # Fallback to only distance
-            distances = sp.spatial.distance.cdist(pos_in[coords].astype(np.float),
-                                                  pos_out[coords].astype(np.float),
-                                                  metric='euclidean')
-
-            distances /= np.abs(dt)
-            distances[distances > max_speed] = np.nan
-            distances = distances ** 2
-
-            return distances
-
         # Compute past trajectories vector
         vecs_speed_in = {}
 
@@ -119,7 +104,7 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
 
                 if past_traj.shape[0] < 4:
                     # Not enough timepoint to interpolate
-                    vec_speed_in[coord] = 0
+                    vec_speed_in[coord] = np.nan
                 else:
                     # Compute the derivative using B-Spline interpolation at time point = t_in
                     tck = interpolate.splrep(past_traj.t.values,
@@ -147,18 +132,16 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
                 r_out = pos_out.loc[idx_out]
 
                 vec_speed_out = (r_out[coords] - r_in[coords]) / np.abs(dt)
-
                 current_speed = np.linalg.norm(vec_speed_out)
 
-                if current_speed > max_speed:
+                if np.isnan(vec_speed_in).all():
+                    score = current_speed
+                elif current_speed > max_speed:
                     score = np.nan
                 else:
                     score = np.dot(vec_speed_in, vec_speed_out)
                     score /= np.linalg.norm(vec_speed_in) * np.linalg.norm(vec_speed_out)
-                    score = np.rad2deg(np.arccos(score))
-                    if score > 90:
-                        score = 180 - score
-                    score *= current_speed
+                    score *= -1
 
                 distances[i, j] = score
 
