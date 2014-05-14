@@ -141,10 +141,8 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
                 else:
                     score = np.dot(vec_speed_in, vec_speed_out)
                     score /= np.linalg.norm(vec_speed_in) * np.linalg.norm(vec_speed_out)
-                    score += 1
-                    score *= -1
-                    print(score)
-                    score *= 10
+                    score = ((score * -1) + 1) * 10 / 2
+                    score = score
 
                 distances[i, j] = score
 
