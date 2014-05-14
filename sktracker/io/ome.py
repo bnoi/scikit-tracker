@@ -48,6 +48,7 @@ class OMEModel():
             self.ns = NAMESPACE_2013
             self.img = self.root.find("{%s}Image" % self.ns)
 
+        self.pixels = None
         if not self.img:
             log.critical('OME XML does not contain Image tag.')
         else:
@@ -60,40 +61,6 @@ class OMEModel():
         except:
             log.error('OME model does not contain Plane tag')
             self.planes = None
-
-    def df_planes(self, sup_cols=[]):
-        """Get OME Plane tags as `pd.DataFrame`.
-
-        Parameters
-        ----------
-        sup_cols: list
-            Supplementaries columns to retrieve
-
-        Returns
-        -------
-        df_planes: :class:`pd.DataFrame`
-            Contains OME XML Plane informations
-
-        """
-        if self.planes:
-            cols = ["TheC", "TheT", "TheZ"]
-            cols += sup_cols
-
-            def get_values(x):
-                ret = []
-                for tag in cols:
-                    if tag in x.attrib.keys():
-                        ret.append(x.attrib[tag])
-                return ret
-
-            values = list(map(get_values, self.planes))
-            df_planes = pd.DataFrame(values, columns=cols).astype('float')
-            df_planes = df_planes.set_index(["TheT", "TheC", "TheZ"])
-
-            return df_planes
-
-        else:
-            return None
 
     def get_metadata(self):
         """Retrieve global metadata from OME.
@@ -173,8 +140,7 @@ class OMEModel():
 
         # Find distance between slices
         if ('PhysicalSizeZ' not in md.keys()
-            and self.planes
-            and 'PositionZ' in self.planes[0].attrib.keys()):
+           and self.planes and 'PositionZ' in self.planes[0].attrib.keys()):
             pl = self.df_planes(['PositionZ'])
             z = pl.xs(0, level="TheC")['PositionZ'].groupby(level='TheT')
             z = z.apply(lambda x: np.diff(x.values).mean())
@@ -192,7 +158,6 @@ class OMEModel():
             OME XML as string
 
         """
-
 
         et = ElementTree.ElementTree(self.root)
         if sys.version_info[0] < 3:
@@ -279,7 +244,7 @@ class OMEModel():
 
         return res
 
-    def set_name(self, new_name): # pragma: no cover
+    def set_name(self, new_name):
         """Set first Image tag name.
 
         Parameters
@@ -291,7 +256,7 @@ class OMEModel():
 
         self.img.attrib['Name'] = new_name
 
-    def set_filename(self, new_file_name): # pragma: no cover
+    def set_filename(self, new_file_name):
         """Set new filename for each TiffData
 
         Notes
@@ -312,15 +277,15 @@ class OMEModel():
             uuid_tag.attrib['FileName'] = new_file_name
             uuid_tag.text = "urn:uuid:" + str(uuid_value)
 
-    def set_size_t(self): # pragma: no cover
+    def set_size_t(self):
         """Set correct size for T dimensions in Plane according to Plane tag.
         """
 
-        size_t = int(self.pixels.findall("{%s}Plane" % self.ns)[-1].attrib['TheT']) + 1
+        if len(self.planes) > 0:
+            size_t = int(self.planes[-1].attrib['TheT']) + 1
+            self.pixels.attrib["SizeT"] = str(size_t)
 
-        self.pixels.attrib["SizeT"] = str(size_t)
-
-    def uniform_ifd(self): # pragma: no cover
+    def uniform_ifd(self):
         """OME with more than one Tiff file has to be converted before save them
         in a single Tiff file to make correct IFD in TiffData tags.
 
