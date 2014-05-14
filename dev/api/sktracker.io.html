@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.io package &mdash; sktracker 0.2.dev-rfa5dfee docs</title>
+  <title>sktracker.io package &mdash; sktracker 0.2.dev-r64fdd1c docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-rfa5dfee docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r64fdd1c docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="prev" title="sktracker.detection package" href="sktracker.detection.html"/> 
@@ -261,15 +261,32 @@ Microscopy Environment consortium respectively.</p>
 </div>
 </div>
 </div>
+<div class="section" id="module-sktracker.io.trackmate">
+<span id="sktracker-io-trackmate-module"></span><h2>sktracker.io.trackmate module<a class="headerlink" href="#module-sktracker.io.trackmate" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="sktracker.io.trackmate.trackmate_peak_import">
+<tt class="descclassname">sktracker.io.trackmate.</tt><tt class="descname">trackmate_peak_import</tt><big>(</big><em>trackmate_xml_path</em><big>)</big><a class="headerlink" href="#sktracker.io.trackmate.trackmate_peak_import" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import detected peaks with TrackMate Fiji plugin.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trackmate_xml_path</strong> : str</p>
+<blockquote class="last">
+<div><p>TrackMate XML file path.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <div class="section" id="module-sktracker.io.utils">
 <span id="sktracker-io-utils-module"></span><h2>sktracker.io.utils module<a class="headerlink" href="#module-sktracker.io.utils" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-sktracker.io">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.io" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="#module-sktracker.io" title="sktracker.io"><tt class="xref py py-mod docutils literal"><span class="pre">sktracker.io</span></tt></a> module is designed to easly and quickly open Tiff files and
-to be able to parse and import any kind of metadata.</p>
-<p>Finally, an OME module is provided to read and write OME xml metadata. See
-<a class="reference external" href="https://www.openmicroscopy.org/site/support/ome-model/">https://www.openmicroscopy.org/site/support/ome-model/</a> for details.</p>
 <dl class="function">
 <dt id="sktracker.io.get_metadata">
 <tt class="descclassname">sktracker.io.</tt><tt class="descname">get_metadata</tt><big>(</big><em>filename</em>, <em>json_discovery=False</em>, <em>base_dir=None</em><big>)</big><a class="headerlink" href="#sktracker.io.get_metadata" title="Permalink to this definition">¶</a></dt>
@@ -929,7 +946,7 @@ efficient way to get image data (in memory or via an iterator.</p>
 
 <dl class="method">
 <dt id="sktracker.io.StackIO.get_tif">
-<tt class="descname">get_tif</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.StackIO.get_tif" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_tif</tt><big>(</big><em>multifile=True</em><big>)</big><a class="headerlink" href="#sktracker.io.StackIO.get_tif" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get TiffFile instance.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -957,7 +974,7 @@ efficient way to get image data (in memory or via an iterator.</p>
 
 <dl class="method">
 <dt id="sktracker.io.StackIO.image_iterator">
-<tt class="descname">image_iterator</tt><big>(</big><em>position=-2</em>, <em>channel_index=0</em>, <em>memmap=False</em><big>)</big><a class="headerlink" href="#sktracker.io.StackIO.image_iterator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">image_iterator</tt><big>(</big><em>position=-2</em>, <em>channel_index=0</em>, <em>z_projection=False</em>, <em>memmap=False</em><big>)</big><a class="headerlink" href="#sktracker.io.StackIO.image_iterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iterate over image T and Z dimensions. A channel has to be
 choosen and will be excluded from the iterator.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1032,7 +1049,7 @@ image.</p>
 
 <dl class="class">
 <dt id="sktracker.io.ObjectsIO">
-<em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">ObjectsIO</tt><big>(</big><em>metadata=None</em>, <em>store_path=None</em>, <em>base_dir=None</em><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">ObjectsIO</tt><big>(</big><em>metadata=None</em>, <em>store_path=None</em>, <em>base_dir=None</em>, <em>minimum_metadata_keys=</em>, <span class="optional">[</span><span class="optional">]</span><em>clean_store=True</em><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Manipulate and pass along data issued from detected
 objects.</p>
@@ -1056,9 +1073,15 @@ objects.</p>
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="sktracker.io.ObjectsIO.clean_store_file">
+<tt class="descname">clean_store_file</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO.clean_store_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove duplicate data. See <a class="reference external" href="https://github.com/pydata/pandas/issues/2132">https://github.com/pydata/pandas/issues/2132</a>.</p>
+</dd></dl>
+
 <dl class="classmethod">
 <dt id="sktracker.io.ObjectsIO.from_h5">
-<em class="property">classmethod </em><tt class="descname">from_h5</tt><big>(</big><em>store_path</em>, <em>base_dir=None</em><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO.from_h5" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">from_h5</tt><big>(</big><em>store_path</em>, <em>base_dir=None</em>, <em>minimum_metadata_keys=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO.from_h5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load ObjectsIO from HDF5 file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1087,24 +1110,6 @@ objects.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stackio</strong> : <a class="reference internal" href="#sktracker.io.StackIO" title="sktracker.io.StackIO"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.io.StackIO</span></tt></a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="sktracker.io.ObjectsIO.from_trackmate_xml">
-<em class="property">classmethod </em><tt class="descname">from_trackmate_xml</tt><big>(</big><em>trackmate_xml_path</em><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO.from_trackmate_xml" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load ObjectsIO from TrackMate XML.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trackmate_xml_path</strong> : str</p>
-<blockquote class="last">
-<div><p>TrackMate XML file path.</p>
-</div></blockquote>
-</td>
 </tr>
 </tbody>
 </table>
@@ -1159,7 +1164,7 @@ objects.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-rfa5dfee',
+            VERSION:'0.2.dev-r64fdd1c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

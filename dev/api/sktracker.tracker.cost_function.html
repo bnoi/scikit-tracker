@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.cost_function package &mdash; sktracker 0.2.dev-rfa5dfee docs</title>
+  <title>sktracker.tracker.cost_function package &mdash; sktracker 0.2.dev-r64fdd1c docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-rfa5dfee docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r64fdd1c docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="next" title="sktracker.tracker.lapjv package" href="sktracker.tracker.lapjv.html"/>
         <link rel="prev" title="sktracker.tracker package" href="sktracker.tracker.html"/> 
@@ -218,12 +218,12 @@ distance</p>
 <span id="sktracker-tracker-cost-function-directed-module"></span><h2>sktracker.tracker.cost_function.directed module<a class="headerlink" href="#module-sktracker.tracker.cost_function.directed" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sktracker.tracker.cost_function.directed.BasicDirectedLinkCostFunction">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.cost_function.directed.</tt><tt class="descname">BasicDirectedLinkCostFunction</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.directed.BasicDirectedLinkCostFunction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sktracker.tracker.cost_function.directed.</tt><tt class="descname">BasicDirectedLinkCostFunction</tt><big>(</big><em>parameters</em>, <em>context={}</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.directed.BasicDirectedLinkCostFunction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.cost_function.abstract_cost_functions.AbstractCostFunction</span></tt></p>
 <p>This class generates cost matrices for directed motion
 trajectories.</p>
-<p>The cost between two position is given by the square of their
-distance</p>
+<p>The score for each situations is given by the cosine similarity between a guessed trajectory
+vector and the vector made by two points.</p>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -365,7 +365,7 @@ verification returned by self.build.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-rfa5dfee',
+            VERSION:'0.2.dev-r64fdd1c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.solver package &mdash; sktracker 0.2.dev-rfa5dfee docs</title>
+  <title>sktracker.tracker.solver package &mdash; sktracker 0.2.dev-r64fdd1c docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-rfa5dfee docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r64fdd1c docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="next" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/>
         <link rel="prev" title="sktracker.tracker.matrix package" href="sktracker.tracker.matrix.html"/> 
@@ -253,6 +253,39 @@ as the new label index</p>
 </table>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="sktracker.tracker.solver.ByFrameSolver.for_directed_motion">
+<em class="property">classmethod </em><tt class="descname">for_directed_motion</tt><big>(</big><em>trajs, max_speed, penalty=1.05, past_traj_time=10, smooth_factor=0, interpolation_order=1, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.for_directed_motion" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
+<p><strong>max_speed</strong> : float</p>
+<blockquote>
+<div><p>Max objects velocity</p>
+</div></blockquote>
+<p><strong>penalty</strong> : float</p>
+<p><strong>past_traj_time</strong> : float</p>
+<blockquote>
+<div><p>Time during which the tracker can make a gap close. Above this time all gap
+close event will discarded.</p>
+</div></blockquote>
+<p><strong>smooth_factor</strong> : float</p>
+<blockquote>
+<div><p>Smoothing condition used in <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.splrep.html#scipy.interpolate.splrep" title="(in SciPy v0.14.0)"><tt class="xref py py-func docutils literal"><span class="pre">scipy.interpolate.splrep()</span></tt></a></p>
+</div></blockquote>
+<p><strong>interpolation_order</strong> : int</p>
+<blockquote>
+<div><p>The order of the spline fit. See <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.splrep.html#scipy.interpolate.splrep" title="(in SciPy v0.14.0)"><tt class="xref py py-func docutils literal"><span class="pre">scipy.interpolate.splrep()</span></tt></a></p>
+</div></blockquote>
+<p class="last"><strong>coords</strong> : list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="sktracker.tracker.solver.ByFrameSolver.one_frame">
 <tt class="descname">one_frame</tt><big>(</big><em>t_in</em>, <em>t_out</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.one_frame" title="Permalink to this definition">¶</a></dt>
@@ -304,7 +337,7 @@ as the new label index</p>
 
 <dl class="class">
 <dt id="sktracker.tracker.solver.GapCloseSolver">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.solver.</tt><tt class="descname">GapCloseSolver</tt><big>(</big><em>trajs, cost_functions, maximum_gap, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sktracker.tracker.solver.</tt><tt class="descname">GapCloseSolver</tt><big>(</big><em>trajs, cost_functions, maximum_gap, use_t_stamp=True, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.solver.solver.AbstractSolver</span></tt></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -328,7 +361,7 @@ as the new label index</p>
 
 <dl class="classmethod">
 <dt id="sktracker.tracker.solver.GapCloseSolver.for_brownian_motion">
-<em class="property">classmethod </em><tt class="descname">for_brownian_motion</tt><big>(</big><em>trajs, max_speed, maximum_gap, link_percentile=90, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver.for_brownian_motion" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">for_brownian_motion</tt><big>(</big><em>trajs, max_speed, maximum_gap, link_percentile=90, use_t_stamp=True, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver.for_brownian_motion" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -379,7 +412,7 @@ as the new label index</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-rfa5dfee',
+            VERSION:'0.2.dev-r64fdd1c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.2.dev-rfa5dfee docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.2.dev-r64fdd1c docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-rfa5dfee docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-r64fdd1c docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.utils package" href="sktracker.utils.html"/>
         <link rel="prev" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/> 
@@ -284,6 +284,12 @@ the trajectories (not implemented right now)</p>
 </tbody>
 </table>
 <dl class="method">
+<dt id="sktracker.trajectories.Trajectories.all_speeds">
+<tt class="descname">all_speeds</tt><big>(</big><em>coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.all_speeds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all speeds in trajectories between each t_stamp.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sktracker.trajectories.Trajectories.check_trajs_df_structure">
 <tt class="descname">check_trajs_df_structure</tt><big>(</big><em>index=None</em>, <em>columns=None</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.check_trajs_df_structure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check wether trajcetories contains a specified structure.</p>
@@ -369,6 +375,26 @@ following group_args parameters.</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="sktracker.trajectories.Trajectories.relabel">
+<tt class="descname">relabel</tt><big>(</big><em>new_labels=None</em>, <em>inplace=True</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.relabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the trajectory index <cite>label</cite> to new values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_labels: :class:`numpy.ndarray` or None, default None</strong></p>
+<blockquote class="last">
+<div><p>The new label. If it is not provided, the function
+will look for a column named &#8220;new_label&#8221; in <cite>trajs</cite> and use this
+as the new label index</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="sktracker.trajectories.Trajectories.relabel_fromzero">
 <tt class="descname">relabel_fromzero</tt><big>(</big><em>level</em>, <em>inplace=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.relabel_fromzero" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
@@ -452,7 +478,7 @@ following group_args parameters.</p>
 
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.time_interpolate">
-<tt class="descname">time_interpolate</tt><big>(</big><em>time_step=None</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>s=0</em>, <em>k=3</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.time_interpolate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">time_interpolate</tt><big>(</big><em>time_step=None, coords=['x', 'y', 'z'], s=0, k=3</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.time_interpolate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interpolates each segment of the trajectories along time
 using <cite>scipy.interpolate.splrep</cite></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -496,7 +522,7 @@ Even order splines should be avoided especially with small s values.
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>interpolated</strong> : a <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">Trajectories</span></tt></a> instance</p>
 <blockquote class="last">
-<div><p>The interpolated values with column names identical to <cite>ccords</cite>
+<div><p>The interpolated values with column names identical to <cite>coords</cite>
 plus the computed speeds (first order derivative) and accelarations
 (second order derivative) if <cite>k</cite> &gt; 2</p>
 </div></blockquote>
@@ -557,7 +583,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-rfa5dfee',
+            VERSION:'0.2.dev-r64fdd1c',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
