@@ -98,7 +98,7 @@ class Trajectories(pd.DataFrame):
         n : int
         """
         idxs = self.segment_idxs
-        return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[:-n]).keys()
+        return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[-n:]).keys()
 
     def reverse(self):
         """Reverse trajectories.
@@ -248,17 +248,16 @@ class Trajectories(pd.DataFrame):
         colors = self.get_colors()
         gp = self.groupby(**groupby_args).groups
 
-        ### Set default kwargs if they are not provided
-        ### Unfortunately you can't pass somthing as '-o'
-        ### as a single linestyle kwarg
+        # Set default kwargs if they are not provided
+        # Unfortunately you can't pass somthing as '-o'
+        # as a single linestyle kwarg
 
         if ((kwargs.get('ls') is None)
            and (kwargs.get('linestyle') is None)):
             kwargs['ls'] = '-'
         if kwargs.get('marker') is None:
             kwargs['marker'] = 'o'
-        if ((kwargs.get('c') is None)
-            and (kwargs.get('color') is None)):
+        if ((kwargs.get('c') is None) and (kwargs.get('color') is None)):
             auto_color = True
         else:
             auto_color = False

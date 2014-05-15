@@ -90,7 +90,8 @@ class GapCloseSolver(AbstractSolver):
                 [self.birth_cf.mat, None]]
 
     def track(self):
-
+        """
+        """
         idxs_in, idxs_out = self._get_candidates()
 
         self.link_cf.context['trajs'] = self.trajs
@@ -100,7 +101,7 @@ class GapCloseSolver(AbstractSolver):
         self.death_cf.context['objects'] = self.trajs.labels
 
         if not len(idxs_in):
-            log.info('No gap needs closing here...')
+            log.info('No gap needs closing here')
             return self.trajs
 
         old_labels = self.trajs.index.get_level_values('label').values
@@ -128,9 +129,11 @@ class GapCloseSolver(AbstractSolver):
 
         self.link_cf.get_block()
         link_costs = np.ma.masked_invalid(self.link_cf.mat).compressed()
+
         if not link_costs.shape[0]:
             log.info('No suitable gap to fill')
             return self.trajs
+
         cost_b = np.percentile(link_costs, link_percentile_b)
         cost_d = np.percentile(link_costs, link_percentile_d)
 
@@ -142,6 +145,7 @@ class GapCloseSolver(AbstractSolver):
         self.cm = CostMatrix(self.blocks_structure)
         self.cm.solve()
         self.assign()
+
         return self.trajs
 
     def _get_candidates(self):
@@ -205,6 +209,7 @@ class GapCloseSolver(AbstractSolver):
         last_in_link = row_shapes[0]
         last_out_link = col_shapes[0]
 
+        n = 0
         for idx_out, idx_in in enumerate(self.cm.out_links[:last_out_link]):
             if idx_in >= last_in_link:
                 # no merge
@@ -213,9 +218,11 @@ class GapCloseSolver(AbstractSolver):
                 # do merge
                 new_label = unique_new[idx_in]
                 unique_new[idx_out] = new_label
+                n += 1
 
         for old, new in zip(unique_old, unique_new):
             new_labels[old_labels == old] = new
 
+        log.info("{} gap close event processed".format(n))
         self.relabel_trajs(new_labels)
         return self.trajs
