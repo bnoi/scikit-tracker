@@ -320,10 +320,12 @@ class Trajectories(pd.DataFrame):
 
         for label, segment in self.iter_segments:
             if segment.shape[0] < 2:
-                interpolated[label] = segment[coords + ['t']]
+                #interpolated[label] = segment[coords + ['t']]
+                continue
             corrected_k = k
             while segment.shape[0] <= corrected_k:
-                corrected_k -= 1
+                corrected_k -= 2
+
             tck = _spline_rep(segment, coords, s=s, k=corrected_k)
             t0, t1 = segment.t.iloc[0], segment.t.iloc[-1]
             t_span = t1 - t0
