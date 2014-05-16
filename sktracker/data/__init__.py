@@ -103,13 +103,14 @@ def metadata_json():
 # HDF5 files
 
 def nuclei_h5():
-    return os.path.join(data_path, "nuclei.h5")
+    stk_list = stack_list_dir()
+    return os.path.join(data_path, stk_list, "Stack-1.h5")
 
 def nuclei_h5_temp():
     """
     """
     d = tempfile.gettempdir()
-    f_ori = os.path.join(data_path, "nuclei.h5")
+    f_ori = nuclei_h5()
     f_dest = os.path.join(d, "nuclei.h5")
     shutil.copy(f_ori, f_dest)
     return f_dest
