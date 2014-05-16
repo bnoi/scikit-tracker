@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 
@@ -46,12 +45,10 @@ class Trajectories(pd.DataFrame):
     trajs : :class:`pandas.DataFrame`
 
     """
-    def __init__(self, trajs):
-
-        if not isinstance(trajs, pd.DataFrame):
-            raise TypeError("The constructor argument `trajs` "
-                            "must be a pandas.DataFrame instance")
-        super(Trajectories, self).__init__(trajs)
+    def __init__(self, *args, **kwargs):
+        """
+        """
+        super(Trajectories, self).__init__(*args, **kwargs)
 
     @property
     def t_stamps(self):
@@ -100,6 +97,16 @@ class Trajectories(pd.DataFrame):
         idxs = self.segment_idxs
         return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[-n:]).keys()
 
+    def get_shortest_segments(self, n):
+        """Get the n th shortest segments label indexes.
+
+        Parameters
+        ----------
+        n : int
+        """
+        idxs = self.segment_idxs
+        return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[:n]).keys()
+
     def reverse(self):
         """Reverse trajectories.
 
@@ -123,6 +130,46 @@ class Trajectories(pd.DataFrame):
         trajs = super(self.__class__, self).copy()
         return Trajectories(trajs)
 
+    def merge_label_safe(self, traj, id=None):
+        """Merge traj to self trajectories taking care to not mix labels between them.
+        
+        Parameters
+        ----------
+        traj : :class:`pandas.DataFrame`
+        """
+
+        traj = traj.reset_index()
+        self = self.reset_index()
+
+        self_label = set(self['label'])
+        traj_label = set(traj['label'])
+
+        same_labels = self_label.intersection(traj_label)
+
+        if same_labels:
+            new_label_start = max(traj_label.union(self_label)) + 1
+            new_labels = np.arange(new_label_start, new_label_start + len(same_labels))
+            self['label'] = self['label'].replace(list(same_labels), new_labels)
+            
+        if id:
+            self['id'] = id[0]
+            traj['id'] = id[1]
+
+        new_trajs = pd.concat([self, traj])
+
+        # Relabel from zero
+        old_lbls = new_trajs['label']
+        nu_lbls = old_lbls.astype(np.uint16).copy()
+        for n, uv in enumerate(old_lbls.unique()):
+            nu_lbls[old_lbls == uv] = n
+            
+        new_trajs['label'] = nu_lbls
+
+        new_trajs.set_index(['t_stamp', 'label'], inplace=True)
+        new_trajs.sort_index(inplace=True)
+
+        return new_trajs
+        
     def check_trajs_df_structure(self, index=None, columns=None):
         """Check wether trajectories contains a specified structure.
 
