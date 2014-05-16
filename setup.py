@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
         packages=find_packages(),
         package_data={
-            '': ['data/*.h5', 'data/*.xml', 'data/*.tif', 'data/stack_list/*.tif'],
+            '': ['data/*.h5', 'data/*.xml', 'data/*.tif', 'data/stack_list/*.tif', 'data/stack_list/*.h5'],
         },
 
         tests_require='nose',
