@@ -30,4 +30,4 @@ from .objectsio import ObjectsIO
 
 __all__ = ['get_metadata', 'OMEModel', 'imsave', 'imread', 'imshow',
            'TiffFile', 'TiffSequence', 'StackIO', 'validate_metadata',
-           'ObjectsIO']
+           'ObjectsIO', 'trackmate']

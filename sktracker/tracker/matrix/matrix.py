@@ -26,7 +26,6 @@ class CostMatrix(object):
     ----------
     blocks : 2D list of :class:`numpy.ndarray` or None
         Each array value is a block or None (filled with np.nan).
-
     """
 
     def __init__(self, blocks):
@@ -160,8 +159,10 @@ class CostMatrix(object):
         for i, j in zip(ii, jj):
             if np.isnan(self.mat[i:, j:]).all():
                 break
+
         # Copy the upper left block and transpose
         lrb = self.mat[:i, :j].T.copy()
+
         # Give a value higher than the max value
         lrb[np.isfinite(lrb)] = self.get_masked().max() * 1.1
 

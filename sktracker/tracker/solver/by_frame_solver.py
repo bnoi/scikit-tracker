@@ -16,6 +16,7 @@ from ..matrix import CostMatrix
 from ..cost_function import AbstractCostFunction
 from ..cost_function.brownian import BrownianLinkCostFunction
 from ..cost_function.diagonal import DiagonalCostFunction
+from ..cost_function.directed import BasicDirectedLinkCostFunction
 
 from . import AbstractSolver
 
@@ -54,7 +55,10 @@ class ByFrameSolver(AbstractSolver):
         self.max_assigned_cost = self.death_cf.context['cost']
 
     @classmethod
-    def for_brownian_motion(cls, trajs, max_speed, penalty=1.05,
+    def for_brownian_motion(cls,
+                            trajs,
+                            max_speed,
+                            penalty=1.05,
                             coords=['x', 'y', 'z']):
         """
 
@@ -67,9 +71,62 @@ class ByFrameSolver(AbstractSolver):
         """
         guessed_cost = np.float(max_speed ** 2) * penalty
         diag_context = {'cost': guessed_cost}
-        diag_params = {'penalty': penalty}
+        diag_params = {'penalty': penalty, 'coords': coords}
 
-        link_cost_func = BrownianLinkCostFunction(parameters={'max_speed': max_speed})
+        link_cost_func = BrownianLinkCostFunction(parameters={'max_speed': max_speed,
+                                                              'coords': coords})
+        birth_cost_func = DiagonalCostFunction(context=diag_context,
+                                               parameters=diag_params)
+        death_cost_func = DiagonalCostFunction(context=diag_context,
+                                               parameters=diag_params)
+
+        cost_functions = {'link': link_cost_func,
+                          'birth': birth_cost_func,
+                          'death': death_cost_func}
+
+        return cls(trajs, cost_functions, coords=coords)
+
+    @classmethod
+    def for_directed_motion(cls,
+                            trajs,
+                            max_speed,
+                            penalty=1.05,
+                            past_traj_time=10,
+                            smooth_factor=0,
+                            interpolation_order=1,
+                            coords=['x', 'y', 'z']):
+        """
+
+        Parameters
+        ----------
+        trajs : :class:`pandas.DataFrame`
+        max_speed : float
+            Max objects velocity
+        penalty : float
+        past_traj_time : float
+            Time during which the tracker can make a gap close. Above this time all gap
+            close event will discarded.
+        smooth_factor : float
+            Smoothing condition used in :func:`scipy.interpolate.splrep`
+        interpolation_order : int
+            The order of the spline fit. See :func:`scipy.interpolate.splrep`
+        coords : list
+        """
+
+        parameters = {'max_speed': max_speed,
+                      'past_traj_time': past_traj_time,
+                      'smooth_factor': smooth_factor,
+                      'interpolation_order': interpolation_order,
+                      'coords': coords}
+
+        guessed_cost = 20 * penalty
+        diag_context = {'cost': guessed_cost}
+        diag_params = {'penalty': penalty}
+        link_context = {'trajs': trajs}
+
+        link_cost_func = BasicDirectedLinkCostFunction(parameters=parameters,
+                                                       context=link_context)
+
         birth_cost_func = DiagonalCostFunction(context=diag_context,
                                                parameters=diag_params)
         death_cost_func = DiagonalCostFunction(context=diag_context,
@@ -181,6 +238,9 @@ class ByFrameSolver(AbstractSolver):
             # self.trajs.loc[self.t_out, 'new_label'].iloc[idx_out] = new_label
 
     def _update_max_assign_cost(self, cost):
+        """
+        """
+
         if cost > self.max_assigned_cost:
             self.max_assigned_cost = cost
             new_b_cost = self.max_assigned_cost * self.birth_cf.parameters['penalty']

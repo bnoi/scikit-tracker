@@ -30,8 +30,12 @@ class GapCloseSolver(AbstractSolver):
     trajs : :class:`pandas.DataFrame`
     cost_functions : list of list
     """
-    def __init__(self, trajs, cost_functions,
-                 maximum_gap, coords=['x', 'y', 'z']):
+    def __init__(self,
+                 trajs,
+                 cost_functions,
+                 maximum_gap,
+                 use_t_stamp=True,
+                 coords=['x', 'y', 'z']):
 
         super(self.__class__, self).__init__(trajs)
 
@@ -50,10 +54,14 @@ class GapCloseSolver(AbstractSolver):
         self.check_cost_function_type(self.death_cf, AbstractCostFunction)
 
         self.maximum_gap = maximum_gap
+        self.use_t_stamp = use_t_stamp
 
     @classmethod
-    def for_brownian_motion(cls, trajs, max_speed, maximum_gap,
+    def for_brownian_motion(cls, trajs,
+                            max_speed,
+                            maximum_gap,
                             link_percentile=90,
+                            use_t_stamp=True,
                             coords=['x', 'y', 'z']):
         """
         """
@@ -61,9 +69,10 @@ class GapCloseSolver(AbstractSolver):
         guessed_cost = float(max_speed ** 2)
 
         diag_context = {'cost': guessed_cost}
-        diag_params  = {'link_percentile': link_percentile}
+        diag_params = {'link_percentile': link_percentile, 'coords': coords}
 
-        link_cost_func = BrownianGapCloseCostFunction(parameters={'max_speed': max_speed})
+        link_cost_func = BrownianGapCloseCostFunction(parameters={'max_speed': max_speed,
+                                                                  'coords': coords})
         birth_cost_func = DiagonalCostFunction(context=diag_context,
                                                parameters=diag_params)
         death_cost_func = DiagonalCostFunction(context=diag_context,
@@ -73,7 +82,7 @@ class GapCloseSolver(AbstractSolver):
                           'birth': birth_cost_func,
                           'death': death_cost_func}
         log.info('Initiating gap close')
-        return cls(trajs, cost_functions, maximum_gap, coords=coords)
+        return cls(trajs, cost_functions, maximum_gap, use_t_stamp=use_t_stamp, coords=coords)
 
     @property
     def blocks_structure(self):
@@ -81,7 +90,8 @@ class GapCloseSolver(AbstractSolver):
                 [self.birth_cf.mat, None]]
 
     def track(self):
-
+        """
+        """
         idxs_in, idxs_out = self._get_candidates()
 
         self.link_cf.context['trajs'] = self.trajs
@@ -91,7 +101,7 @@ class GapCloseSolver(AbstractSolver):
         self.death_cf.context['objects'] = self.trajs.labels
 
         if not len(idxs_in):
-            log.info('No gap needs closing here...')
+            log.info('No gap needs closing here')
             return self.trajs
 
         old_labels = self.trajs.index.get_level_values('label').values
@@ -119,9 +129,11 @@ class GapCloseSolver(AbstractSolver):
 
         self.link_cf.get_block()
         link_costs = np.ma.masked_invalid(self.link_cf.mat).compressed()
+
         if not link_costs.shape[0]:
             log.info('No suitable gap to fill')
             return self.trajs
+
         cost_b = np.percentile(link_costs, link_percentile_b)
         cost_d = np.percentile(link_costs, link_percentile_d)
 
@@ -133,34 +145,56 @@ class GapCloseSolver(AbstractSolver):
         self.cm = CostMatrix(self.blocks_structure)
         self.cm.solve()
         self.assign()
+
         return self.trajs
 
     def _get_candidates(self):
         """
-
         """
         max_gap = self.maximum_gap
         labels = self.trajs.labels
-        bounds = np.array([(idxs[0][0], idxs[-1][0]) for idxs
-                           in self.trajs.segment_idxs.values()])
+
+        bounds = []
+        for idxs in self.trajs.segment_idxs.values():
+            if self.use_t_stamp:
+                bound = (idxs[0][0], idxs[-1][0])
+            else:
+                bound = (self.trajs.loc[idxs[0], 't'], self.trajs.loc[idxs[-1], 't'])
+            bounds.append(bound)
+        bounds = np.array(bounds)
+
         start_times = bounds[:, 0]
         stop_times = bounds[:, 1]
         ss_in, ss_out = np.meshgrid(labels, labels)
+
         gaps_size = start_times[ss_out] - stop_times[ss_in]
-        matches = np.argwhere((gaps_size > 0) * (gaps_size < max_gap))
+
+        matches = np.argwhere((gaps_size > 0) * (gaps_size <= max_gap))
+
         if not matches.shape[0]:
             return [], []
+
         matches_in = matches[:, 1]
         matches_out = matches[:, 0]
+
+        # Rewrite start and stop times array
+        # to use index t-stamp instead of t
+        if not self.use_t_stamp:
+            start_times = [self.trajs[self.trajs['t'] == t].index.values[0][0] for t in start_times]
+            stop_times = [self.trajs[self.trajs['t'] == t].index.values[0][0] for t in stop_times]
+            start_times = np.array(start_times, dtype='int')
+            stop_times = np.array(stop_times, dtype='int')
 
         in_idxs = [(in_time, in_lbl) for (in_time, in_lbl)
                    in zip(stop_times[matches_in],
                           self.trajs.labels[matches_in])]
         # pos_in = self.trajs.loc[in_idxs]
+
         out_idxs = [(out_time, out_lbl) for (out_time, out_lbl)
                     in zip(start_times[matches_out],
                            self.trajs.labels[matches_out])]
         # pos_out = self.trajs.loc[out_idxs]
+
         return in_idxs, out_idxs
 
     def assign(self):
@@ -175,6 +209,7 @@ class GapCloseSolver(AbstractSolver):
         last_in_link = row_shapes[0]
         last_out_link = col_shapes[0]
 
+        n = 0
         for idx_out, idx_in in enumerate(self.cm.out_links[:last_out_link]):
             if idx_in >= last_in_link:
                 # no merge
@@ -183,9 +218,11 @@ class GapCloseSolver(AbstractSolver):
                 # do merge
                 new_label = unique_new[idx_in]
                 unique_new[idx_out] = new_label
+                n += 1
 
         for old, new in zip(unique_old, unique_new):
             new_labels[old_labels == old] = new
 
+        log.info("{} gap close event processed".format(n))
         self.relabel_trajs(new_labels)
         return self.trajs

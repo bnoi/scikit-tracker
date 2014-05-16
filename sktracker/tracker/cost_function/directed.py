@@ -13,7 +13,6 @@ import pandas as pd
 
 from scipy import interpolate
 
-from ...trajectories import Trajectories
 from . import AbstractCostFunction
 
 __all__ = ["BasicDirectedLinkCostFunction"]
@@ -23,8 +22,8 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
     """This class generates cost matrices for directed motion
     trajectories.
 
-    The cost between two position is given by the square of their
-    distance
+    The score for each situations is given by the cosine similarity between a guessed trajectory
+    vector and the vector made by two points.
 
     Attributes
     ----------
@@ -54,7 +53,7 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
 
     """
 
-    def __init__(self, parameters):
+    def __init__(self, parameters, context={}):
 
         _parameters = {'max_speed': 1.,
                        'past_traj_time': 1,
@@ -63,7 +62,7 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
                        'coords': ['x', 'y', 'z']}
         _parameters.update(parameters)
 
-        super(self.__class__, self).__init__(context={}, parameters=_parameters)
+        super(self.__class__, self).__init__(context=context, parameters=_parameters)
 
     def _build(self):
         """
@@ -84,12 +83,9 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
         # Chech vectors
         self.check_columns([pos_in, pos_out], list(coords) + ['t'])
 
-        dt = pos_out['t'].iloc[0] - pos_in['t'].iloc[0]
-
-        # Build matrix
-
-        t_in = pos_in.t.unique()[0]
-        # t_out = pos_out.t.unique()[0]
+        t_in = pos_in['t'].iloc[0]
+        t_out = pos_out['t'].iloc[0]
+        dt = t_out - t_in
 
         # Select trajectory from (current_time - past_traj_time) and current_time
         last_past_time = t_in - (past_traj_time)
@@ -108,7 +104,7 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
 
                 if past_traj.shape[0] < 4:
                     # Not enough timepoint to interpolate
-                    vec_speed_in[coord] = 0
+                    vec_speed_in[coord] = np.nan
                 else:
                     # Compute the derivative using B-Spline interpolation at time point = t_in
                     tck = interpolate.splrep(past_traj.t.values,
@@ -136,16 +132,18 @@ class BasicDirectedLinkCostFunction(AbstractCostFunction):
                 r_out = pos_out.loc[idx_out]
 
                 vec_speed_out = (r_out[coords] - r_in[coords]) / np.abs(dt)
-
                 current_speed = np.linalg.norm(vec_speed_out)
 
-                if current_speed > max_speed:
+                if np.isnan(vec_speed_in).all():
+                    score = current_speed
+                elif current_speed > max_speed:
                     score = np.nan
                 else:
                     score = np.dot(vec_speed_in, vec_speed_out)
-                    score /= np.linalg.norm(vec_speed_in)
+                    score /= np.linalg.norm(vec_speed_in) * np.linalg.norm(vec_speed_out)
+                    score = ((score * -1) + 1) * 10 / 2
+                    score = score
 
                 distances[i, j] = score
 
-        #distances -= distances.min()
         return distances

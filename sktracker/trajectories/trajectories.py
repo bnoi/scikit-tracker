@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 
@@ -10,9 +9,10 @@ from __future__ import print_function
 
 import numpy as np
 import pandas as pd
+import scipy as sp
+
 from pandas.io import pytables
 from scipy.interpolate import splev, splrep
-
 
 
 __all__ = []
@@ -45,12 +45,10 @@ class Trajectories(pd.DataFrame):
     trajs : :class:`pandas.DataFrame`
 
     """
-    def __init__(self, trajs):
-
-        if not isinstance(trajs, pd.DataFrame):
-            raise TypeError("The constructor argument `trajs` "
-                            "must be a pandas.DataFrame instance")
-        super(Trajectories, self).__init__(trajs)
+    def __init__(self, *args, **kwargs):
+        """
+        """
+        super(Trajectories, self).__init__(*args, **kwargs)
 
     @property
     def t_stamps(self):
@@ -79,6 +77,36 @@ class Trajectories(pd.DataFrame):
         return {key: segment for key, segment
                 in self.iter_segments}
 
+    def remove_segments(self, segments_idx, inplace=True):
+        """Remove segments from trajectories.
+
+        Parameters
+        ----------
+        segments_idx : list
+            List of label to remove
+        """
+        return self.drop(segments_idx, level='label', inplace=inplace)
+
+    def get_longest_segments(self, n):
+        """Get the n th longest segments label indexes.
+
+        Parameters
+        ----------
+        n : int
+        """
+        idxs = self.segment_idxs
+        return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[-n:]).keys()
+
+    def get_shortest_segments(self, n):
+        """Get the n th shortest segments label indexes.
+
+        Parameters
+        ----------
+        n : int
+        """
+        idxs = self.segment_idxs
+        return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[:n]).keys()
+
     def reverse(self):
         """Reverse trajectories.
 
@@ -102,8 +130,48 @@ class Trajectories(pd.DataFrame):
         trajs = super(self.__class__, self).copy()
         return Trajectories(trajs)
 
+    def merge_label_safe(self, traj, id=None):
+        """Merge traj to self trajectories taking care to not mix labels between them.
+        
+        Parameters
+        ----------
+        traj : :class:`pandas.DataFrame`
+        """
+
+        traj = traj.reset_index()
+        self = self.reset_index()
+
+        self_label = set(self['label'])
+        traj_label = set(traj['label'])
+
+        same_labels = self_label.intersection(traj_label)
+
+        if same_labels:
+            new_label_start = max(traj_label.union(self_label)) + 1
+            new_labels = np.arange(new_label_start, new_label_start + len(same_labels))
+            self['label'] = self['label'].replace(list(same_labels), new_labels)
+            
+        if id:
+            self['id'] = id[0]
+            traj['id'] = id[1]
+
+        new_trajs = pd.concat([self, traj])
+
+        # Relabel from zero
+        old_lbls = new_trajs['label']
+        nu_lbls = old_lbls.astype(np.uint16).copy()
+        for n, uv in enumerate(old_lbls.unique()):
+            nu_lbls[old_lbls == uv] = n
+            
+        new_trajs['label'] = nu_lbls
+
+        new_trajs.set_index(['t_stamp', 'label'], inplace=True)
+        new_trajs.sort_index(inplace=True)
+
+        return new_trajs
+        
     def check_trajs_df_structure(self, index=None, columns=None):
-        """Check wether trajcetories contains a specified structure.
+        """Check wether trajectories contains a specified structure.
 
         Parameters
         ----------
@@ -227,17 +295,16 @@ class Trajectories(pd.DataFrame):
         colors = self.get_colors()
         gp = self.groupby(**groupby_args).groups
 
-        ### Set default kwargs if they are not provided
-        ### Unfortunately you can't pass somthing as '-o'
-        ### as a single linestyle kwarg
+        # Set default kwargs if they are not provided
+        # Unfortunately you can't pass somthing as '-o'
+        # as a single linestyle kwarg
 
         if ((kwargs.get('ls') is None)
            and (kwargs.get('linestyle') is None)):
             kwargs['ls'] = '-'
         if kwargs.get('marker') is None:
             kwargs['marker'] = 'o'
-        if ((kwargs.get('c') is None)
-            and (kwargs.get('color') is None)):
+        if ((kwargs.get('c') is None) and (kwargs.get('color') is None)):
             auto_color = True
         else:
             auto_color = False
@@ -363,7 +430,7 @@ class Trajectories(pd.DataFrame):
         if new_labels is not None:
             self['new_label'] = new_labels
 
-        try :
+        try:
             self.set_index('new_label', append=True, inplace=True)
         except KeyError:
             err = ('''Column "new_label" was not found in `trajs` and none'''
@@ -375,6 +442,23 @@ class Trajectories(pd.DataFrame):
         self.sortlevel('label', inplace=True)
         self.sortlevel('t_stamp', inplace=True)
         self.relabel_fromzero('label', inplace=inplace)
+
+    def all_speeds(self, coords=['x', 'y', 'z']):
+        """
+        Get all speeds in trajectories between each t_stamp.
+        """
+        t_stamp = self.index.get_level_values('t_stamp').unique()
+        speeds = []
+
+        for t1, t2 in zip(t_stamp[:-1], t_stamp[1:]):
+            p1 = self.loc[t1]
+            p2 = self.loc[t2]
+            dt = p2['t'].unique()[0] - p1['t'].unique()[0]
+
+            d = sp.spatial.distance.cdist(p1.loc[:, coords], p2.loc[:, coords]).flatten()
+            speeds += (d / dt).tolist()
+
+        return np.array(speeds)
 
 # Register the trajectories for storing in HDFStore
 # as a regular DataFrame
