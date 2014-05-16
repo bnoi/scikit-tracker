@@ -23,11 +23,6 @@ from sktracker import data
 from sktracker.trajectories import Trajectories
 
 
-def test_constructor_fail():
-
-    assert_raises(TypeError, Trajectories, "hello")
-
-
 def test_attributes():
 
     trajs = data.brownian_trajs_df()
