@@ -3,46 +3,45 @@
 
 language: python
 python:
-  - "2.7"
-  - "3.3"
-  - "3.4"
+    - "2.7"
+    - "3.3"
+    - "3.4"
 
 virtualenv:
     system_site_packages: false
 
-before_install:
-  - sudo apt-get install tk-dev
-
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-      # This saves us some downloading for this version
-      wget http://repo.continuum.io/miniconda/Miniconda-3.4.2-Linux-x86_64.sh -O miniconda.sh;
-    else
-      wget http://repo.continuum.io/miniconda/Miniconda3-3.4.2-Linux-x86_64.sh -O miniconda.sh;
-    fi
-
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update conda
-  # Useful for debugging any issues with conda
-  - conda info -a
-
-  - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION
-  - source activate test-environment
-
-  - conda update --yes conda
-  - conda install --yes numpy scipy pandas pytables
-  - conda install --yes scikit-learn scikit-image
-  - conda install --yes nose
-  - conda install --yes sphinx
-  - conda install --yes pip
-  - conda install --yes cython
-  - conda install --yes matplotlib
-  - pip install wheel
-  - pip install coverage
-
 install:
+    - sudo apt-get install tk-dev
+
+    - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+    -   # This saves us some downloading for this version
+    -   wget http://repo.continuum.io/miniconda/Miniconda-3.4.2-Linux-x86_64.sh -O miniconda.sh;
+    - else
+    -   wget http://repo.continuum.io/miniconda/Miniconda3-3.4.2-Linux-x86_64.sh -O miniconda.sh;
+    - fi
+
+    - bash miniconda.sh -b -p $HOME/miniconda
+    - export PATH="$HOME/miniconda/bin:$PATH"
+    - hash -r
+    - conda config --set always_yes yes --set changeps1 no
+    - conda update conda
+    # Useful for debugging any issues with conda
+    - conda info -a
+
+    - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION
+    - source activate test-environment
+
+    - conda update --yes conda
+    - conda install --yes numpy scipy pandas pytables
+    - conda install --yes scikit-learn scikit-image
+    - conda install --yes nose
+    - conda install --yes sphinx
+    - conda install --yes pip
+    - conda install --yes cython
+    - conda install --yes matplotlib
+    - pip install wheel
+    - pip install coverage
+
     - python setup.py build_ext --inplace
     - python setup.py install
     - python setup.py bdist_wheel
