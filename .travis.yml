@@ -2,17 +2,10 @@
 # http://lint.travis-ci.org/
 
 language: python
-
-matrix:
-    include:
-        - python: 2.7
-          env:
-            - PYTHON=python
-            - PYVER=2.x
-        - python: 3.3
-          env:
-            - PYTHON=python3
-            - PYVER=3.x
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
 
 virtualenv:
     system_site_packages: false
@@ -20,17 +13,24 @@ virtualenv:
 before_install:
     - sudo apt-get install tk-dev
 
-    - if [[ $PYVER == '2.x' ]]; then
-    -   wget http://repo.continuum.io/miniconda/Miniconda-3.3.0-Linux-x86_64.sh -O miniconda.sh
-    -   export PATH=/home/travis/miniconda/bin:$PATH
-    - fi
-    - if [[ $PYVER == '3.x' ]]; then
-    -   wget http://repo.continuum.io/miniconda/Miniconda3-3.0.0-Linux-x86_64.sh -O miniconda.sh
-    -   export PATH=/home/travis/miniconda3/bin:$PATH
-    - fi
+    - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+      # This saves us some downloading for this version
+      wget http://repo.continuum.io/miniconda/Miniconda-3.4.2-Linux-x86_64.sh -O miniconda.sh;
+    else
+      wget http://repo.continuum.io/miniconda/Miniconda3-3.4.2-Linux-x86_64.sh -O miniconda.sh;
+    fi
 
-    - chmod +x miniconda.sh
-    - ./miniconda.sh -b
+    - bash miniconda.sh -b -p $HOME/miniconda
+    - export PATH="$HOME/miniconda/bin:$PATH"
+    - hash -r
+    - conda config --set always_yes yes --set changeps1 no
+    - conda update conda
+    # Useful for debugging any issues with conda
+    - conda info -a
+
+    - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION
+    - source activate test-environment
+
     - conda update --yes conda
     - conda install --yes numpy scipy pandas pytables
     - conda install --yes scikit-learn scikit-image
