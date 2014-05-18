@@ -13,10 +13,10 @@ matrix:
           env:
             - PYTHON=python3
             - PYVER=3.3
-        - python: 3.4
-          env:
-            - PYTHON=python3
-            - PYVER=3.4
+        # - python: 3.4
+        #   env:
+        #     - PYTHON=python3
+        #     - PYVER=3.4
 
 virtualenv:
     system_site_packages: false
@@ -45,8 +45,7 @@ install:
     - source activate test-environment
 
     - conda install --yes numpy scipy pandas pytables
-    - pip install scikit-learn
-    - conda install --yes scikit-image
+    - conda install --yes scikit-image scikit-learn
     - conda install --yes nose
     - conda install --yes sphinx
     - conda install --yes pip
