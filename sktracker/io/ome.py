@@ -149,6 +149,40 @@ class OMEModel():
 
         return md
 
+    def df_planes(self, sup_cols=[]):
+        """Get OME Plane tags as `pd.DataFrame`.
+
+        Parameters
+        ----------
+        sup_cols: list
+            Supplementaries columns to retrieve
+
+        Returns
+        -------
+        df_planes: :class:`pd.DataFrame`
+            Contains OME XML Plane informations
+
+        """
+        if self.planes:
+            cols = ["TheC", "TheT", "TheZ"]
+            cols += sup_cols
+
+            def get_values(x):
+                ret = []
+                for tag in cols:
+                    if tag in x.attrib.keys():
+                        ret.append(x.attrib[tag])
+                return ret
+
+            values = list(map(get_values, self.planes))
+            df_planes = pd.DataFrame(values, columns=cols).astype('float')
+            df_planes = df_planes.set_index(["TheT", "TheC", "TheZ"])
+
+            return df_planes
+
+        else:
+            return None
+
     def tostring(self):
         """Write in memory OME XML to string.
 
