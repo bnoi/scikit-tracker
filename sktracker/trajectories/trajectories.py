@@ -50,6 +50,15 @@ class Trajectories(pd.DataFrame):
         """
         super(Trajectories, self).__init__(*args, **kwargs)
 
+    @classmethod
+    def empty_trajs(cls, columns=['x', 'y', 'z']):
+        empty_index = pd.MultiIndex.from_arrays(np.empty((2, 0)),
+                                                names=['t_stamp', 'label'])
+        empty_trajs = pd.DataFrame(np.empty((0, len(columns))),
+                                   index=empty_index,
+                                   columns=columns)
+        return cls(empty_trajs)
+
     @property
     def t_stamps(self):
         return self.index.get_level_values('t_stamp').unique()
@@ -132,7 +141,7 @@ class Trajectories(pd.DataFrame):
 
     def merge_label_safe(self, traj, id=None):
         """Merge traj to self trajectories taking care to not mix labels between them.
-        
+
         Parameters
         ----------
         traj : :class:`pandas.DataFrame`
@@ -150,7 +159,7 @@ class Trajectories(pd.DataFrame):
             new_label_start = max(traj_label.union(self_label)) + 1
             new_labels = np.arange(new_label_start, new_label_start + len(same_labels))
             self['label'] = self['label'].replace(list(same_labels), new_labels)
-            
+
         if id:
             self['id'] = id[0]
             traj['id'] = id[1]
@@ -162,14 +171,14 @@ class Trajectories(pd.DataFrame):
         nu_lbls = old_lbls.astype(np.uint16).copy()
         for n, uv in enumerate(old_lbls.unique()):
             nu_lbls[old_lbls == uv] = n
-            
+
         new_trajs['label'] = nu_lbls
 
         new_trajs.set_index(['t_stamp', 'label'], inplace=True)
         new_trajs.sort_index(inplace=True)
 
         return new_trajs
-        
+
     def check_trajs_df_structure(self, index=None, columns=None):
         """Check wether trajectories contains a specified structure.
 

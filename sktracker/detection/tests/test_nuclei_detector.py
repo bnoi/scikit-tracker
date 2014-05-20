@@ -78,7 +78,7 @@ def test_nuclei_detector_none():
 
     parameters = {'segment_method': 'naive',
                   'correction': 1.,
-                  'min_z_size': 100.}
+                  'min_z_size': 100}
 
     cell_positions = nuclei_detector(stack_iter(),
                                      metadata=metadata,

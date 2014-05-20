@@ -66,6 +66,10 @@ def test_copy():
 
     assert isinstance(trajs.copy(), Trajectories)
 
+def test_empty():
+    empty = Trajectories.empty_trajs(columns=['x', 'y'])
+    assert empty.shape == (0, 2)
+    assert empty.empty is True
 
 def test_reverse():
     trajs = data.brownian_trajs_df()
@@ -106,7 +110,6 @@ def test_interpolate():
     dts = interpo.get_segments()[0].t.diff().dropna()
     # All time points should be equaly spaced
     assert_almost_equal(dts.min(), dts.max())
-
 
 def test_all_speeds():
 
