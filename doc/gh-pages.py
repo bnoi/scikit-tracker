@@ -72,6 +72,7 @@ def init_repo(path):
 
 if __name__ == '__main__':
 
+    sys.path.append('..')
     import sktracker
     version = sktracker.__version__
 
