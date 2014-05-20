@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.2.dev-r64fdd1c docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.2.dev-6e0f2ca docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.2.dev-r64fdd1c docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.2.dev-6e0f2ca docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.utils package" href="sktracker.utils.html"/>
         <link rel="prev" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/> 
@@ -140,108 +140,8 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-sktracker.trajectories.draw">
-<span id="sktracker-trajectories-draw-module"></span><h2>sktracker.trajectories.draw module<a class="headerlink" href="#module-sktracker.trajectories.draw" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.trajectories.draw.plot_3coords">
-<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">plot_3coords</tt><big>(</big><em>trajs</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>text=True</em>, <em>fig=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.plot_3coords" title="Permalink to this definition">¶</a></dt>
-<dd><p>Soon to be deprecated, use <cite>plot_stacked_coords</cite> instead</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.draw.plot_stacked_coords">
-<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">plot_stacked_coords</tt><big>(</big><em>trajs</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>text=False</em>, <em>fig=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.plot_stacked_coords" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plots stacked graphs with each of the coordinates given in the
-<cite>coords</cite> argument plotted against time.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs: a :class:`Trajectories` instance</strong></p>
-<p><strong>coords: a tuple, default (&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;)</strong></p>
-<blockquote>
-<div><p>the coordinates (<cite>trajs</cite> column names) to be ploted</p>
-</div></blockquote>
-<p><strong>text: bool, default False</strong></p>
-<blockquote>
-<div><p>if True, will append each trajectory segment&#8217;s label
-at the extremities on the upper most plot</p>
-</div></blockquote>
-<p><strong>fig: a matplotlib `Figure`, default `None`</strong></p>
-<blockquote>
-<div><p>the figure on which to plot</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">axes: a list of <tt class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></tt></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.draw.show_4panels">
-<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">show_4panels</tt><big>(</big><em>trajs</em>, <em>label</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>axes=None</em>, <em>ax_3d=None</em>, <em>scatter_kw={}</em>, <em>line_kw={}</em>, <em>interpolate=False</em>, <em>interp_kw={}</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.show_4panels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plots the segment of trajectories <cite>trajs</cite> with label <cite>label</cite> on four panels
-organized in two cols by two rows like so:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>y|     y|</dt>
-<dd><dl class="first last docutils">
-<dt><a href="#id1"><span class="problematic" id="id2">|</span></a>___   <a href="#id3"><span class="problematic" id="id4">|</span></a>___</dt>
-<dd>x      z</dd>
-</dl>
-</dd>
-<dt>z|     z| y</dt>
-<dd><dl class="first last docutils">
-<dt><a href="#id5"><span class="problematic" id="id6">|</span></a>___   <a href="#id7"><span class="problematic" id="id8">|</span></a>/__</dt>
-<dd>x      x</dd>
-</dl>
-</dd>
-</dl>
-</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs: a :class:`Trajectories` instance</strong></p>
-<p><strong>label: int</strong></p>
-<blockquote>
-<div><p>the label of the trajectories&#8217;s segment to plot</p>
-</div></blockquote>
-<p><strong>coords: a tuple of column names</strong></p>
-<blockquote>
-<div><p>default to (&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;), the coordinates to plot</p>
-</div></blockquote>
-<p><strong>axes: the axes to plot on</strong></p>
-<p><strong>ax_3d: the 3D ax on the lower right corner</strong></p>
-<p><strong>scatter_kw: dict</strong></p>
-<blockquote>
-<div><p>keyword arguments passed to the <cite>plt.scatter</cite> function</p>
-</div></blockquote>
-<p><strong>line_kw: dict</strong></p>
-<blockquote>
-<div><p>keyword arguments passed to the <cite>plt.plot</cite> function</p>
-</div></blockquote>
-<p><strong>interpolate: bool</strong></p>
-<blockquote>
-<div><p>if True, will plot the line as an interpolation of
-the trajectories (not implemented right now)</p>
-</div></blockquote>
-<p><strong>interp_kw: dict</strong></p>
-<blockquote>
-<div><p>keyword arguments for the interpolation</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">axes, ax3d: the 2D and 3D axes</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+<div class="section" id="sktracker-trajectories-draw-module">
+<h2>sktracker.trajectories.draw module<a class="headerlink" href="#sktracker-trajectories-draw-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-sktracker.trajectories.trajectories">
 <span id="sktracker-trajectories-trajectories-module"></span><h2>sktracker.trajectories.trajectories module<a class="headerlink" href="#module-sktracker.trajectories.trajectories" title="Permalink to this headline">¶</a></h2>
@@ -250,7 +150,7 @@ the trajectories (not implemented right now)</p>
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.trajectories" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sktracker.trajectories.Trajectories">
-<em class="property">class </em><tt class="descclassname">sktracker.trajectories.</tt><tt class="descname">Trajectories</tt><big>(</big><em>trajs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sktracker.trajectories.</tt><tt class="descname">Trajectories</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">pandas.core.frame.DataFrame</span></tt></p>
 <p>This class is a subclass of the class <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 <p>It is mainly here to provide utility attributes and syntactic shugar.</p>
@@ -292,7 +192,7 @@ the trajectories (not implemented right now)</p>
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.check_trajs_df_structure">
 <tt class="descname">check_trajs_df_structure</tt><big>(</big><em>index=None</em>, <em>columns=None</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.check_trajs_df_structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check wether trajcetories contains a specified structure.</p>
+<dd><p>Check wether trajectories contains a specified structure.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -319,10 +219,29 @@ the trajectories (not implemented right now)</p>
 <tt class="descname">copy</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.copy" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="classmethod">
+<dt id="sktracker.trajectories.Trajectories.empty_trajs">
+<em class="property">classmethod </em><tt class="descname">empty_trajs</tt><big>(</big><em>columns=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.empty_trajs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.get_colors">
 <tt class="descname">get_colors</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_colors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.get_longest_segments">
+<tt class="descname">get_longest_segments</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_longest_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the n th longest segments label indexes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> : int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.get_mean_distances">
@@ -364,6 +283,20 @@ following group_args parameters.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.get_shortest_segments">
+<tt class="descname">get_shortest_segments</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_shortest_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the n th shortest segments label indexes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> : int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="sktracker.trajectories.Trajectories.iter_segments">
 <tt class="descname">iter_segments</tt><a class="headerlink" href="#sktracker.trajectories.Trajectories.iter_segments" title="Permalink to this definition">¶</a></dt>
@@ -373,6 +306,20 @@ following group_args parameters.</p>
 <dt id="sktracker.trajectories.Trajectories.labels">
 <tt class="descname">labels</tt><a class="headerlink" href="#sktracker.trajectories.Trajectories.labels" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.merge_label_safe">
+<tt class="descname">merge_label_safe</tt><big>(</big><em>traj</em>, <em>id=None</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.merge_label_safe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge traj to self trajectories taking care to not mix labels between them.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>traj</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.relabel">
@@ -406,6 +353,24 @@ as the new label index</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">trajs</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.remove_segments">
+<tt class="descname">remove_segments</tt><big>(</big><em>segments_idx</em>, <em>inplace=True</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.remove_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove segments from trajectories.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>segments_idx</strong> : list</p>
+<blockquote class="last">
+<div><p>List of label to remove</p>
+</div></blockquote>
 </td>
 </tr>
 </tbody>
@@ -458,16 +423,15 @@ as the new label index</p>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker.tracker.solver</span> <span class="kn">import</span> <span class="n">ByFrameSolver</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">true_trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">brownian_trajectories_generator</span><span class="p">(</span><span class="n">p_disapear</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">ByFrameSolver</span><span class="o">.</span><span class="n">for_brownian_motion</span><span class="p">(</span><span class="n">true_trajs</span><span class="p">,</span> <span class="n">max_speed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">trajs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">track</span><span class="p">(</span><span class="n">progress_bar</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span> <span class="o">=</span> <span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="n">groupby_args</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&quot;label&quot;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span> <span class="o">=</span> <span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="n">groupby_args</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;by&#39;</span><span class="p">:</span> <span class="s">&quot;true_label&quot;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
-</pre></div>
+<div class="highlight-python"><pre>&gt;&gt;&gt; from sktracker import data
+&gt;&gt;&gt; from sktracker.tracker.solver import ByFrameSolver
+&gt;&gt;&gt; import matplotlib.pylab as plt
+&gt;&gt;&gt; true_trajs = data.brownian_trajectories_generator(p_disapear=0.1)
+&gt;&gt;&gt; solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=2)
+&gt;&gt;&gt; trajs = solver.track(progress_bar=False)
+&gt;&gt;&gt; fig, (ax1, ax2) = plt.subplots(nrows=2)
+&gt;&gt;&gt; ax1 = trajs.show(xaxis=&#x27;t&#x27;, yaxis=&#x27;x&#x27;, groupby_args={&#x27;level&#x27;: &quot;label&quot;}, ax=ax1)
+&gt;&gt;&gt; ax2 = trajs.show(xaxis=&#x27;t&#x27;, yaxis=&#x27;x&#x27;, groupby_args={&#x27;by&#x27;: &quot;true_label&quot;}, ax=ax2)</pre>
 </div>
 </dd></dl>
 
@@ -551,7 +515,7 @@ plus the computed speeds (first order derivative) and accelarations
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.utils.html" class="btn btn-neutral float-right" title="sktracker.utils package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.utils.html" class="btn btn-neutral float-right" title="sktracker.utils package">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="sktracker.tracker.utils.html" class="btn btn-neutral" title="sktracker.tracker.utils package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -583,7 +547,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.dev-r64fdd1c',
+            VERSION:'0.2.dev-6e0f2ca',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
