@@ -62,7 +62,7 @@ def nuclei_detector(data_iterator,
 
     Returns
     -------
-    trajs : :class:`pd.DataFrame`
+    trajs : :class:`Trajectories`
     '''
 
     _parameters = DEFAULT_PARAMETERS.copy()
@@ -87,7 +87,7 @@ def nuclei_detector(data_iterator,
             raw_cell_positions[i] = result['positions']
     if not len(raw_cell_positions):
         log.warning('No cell detected anywhere')
-        return pd.DataFrame([])
+        return Trajectories.empty_trajs(['x', 'y', 'z', 'w', 'I'])
     nuclei_positions = pd.concat(
         raw_cell_positions,
         keys=raw_cell_positions.keys(),
