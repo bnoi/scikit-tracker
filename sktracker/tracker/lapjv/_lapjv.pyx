@@ -323,7 +323,8 @@ def augment(
         int n_ready
         int *p_i_base     = <int *>(ii.data)
         int *p_j_base     = <int *>(jj.data)
-        int *p_j, *p_j2
+        int *p_j
+        int *p_j2
         int *p_idx_base   = <int *>(idx.data)
         int *p_count_base = <int *>(count.data)
         int *p_x_base     = <int *>(x.data)

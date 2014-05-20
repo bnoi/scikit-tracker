@@ -8,32 +8,44 @@ matrix:
         - python: 2.7
           env:
             - PYTHON=python
-            - PYVER=2.x
+            - PYVER=2.7
         - python: 3.3
           env:
             - PYTHON=python3
-            - PYVER=3.x
+            - PYVER=3.3
+        # - python: 3.4
+        #   env:
+        #     - PYTHON=python3
+        #     - PYVER=3.4
 
 virtualenv:
     system_site_packages: false
 
-before_install:
+install:
     - sudo apt-get install tk-dev
 
-    - if [[ $PYVER == '2.x' ]]; then
-    -   wget http://repo.continuum.io/miniconda/Miniconda-3.3.0-Linux-x86_64.sh -O miniconda.sh
-    -   export PATH=/home/travis/miniconda/bin:$PATH
+    - if [[ $PYVER == '2.7' ]]; then
+    -    wget http://repo.continuum.io/miniconda/Miniconda-3.4.2-Linux-x86_64.sh -O miniconda.sh;
     - fi
-    - if [[ $PYVER == '3.x' ]]; then
-    -   wget http://repo.continuum.io/miniconda/Miniconda3-3.0.0-Linux-x86_64.sh -O miniconda.sh
-    -   export PATH=/home/travis/miniconda3/bin:$PATH
+    - if [[ $PYVER == '3.3' ]]; then
+    -   wget http://repo.continuum.io/miniconda/Miniconda3-3.4.2-Linux-x86_64.sh -O miniconda.sh;
+    - fi
+    - if [[ $PYVER == '3.4' ]]; then
+    -   wget http://repo.continuum.io/miniconda/Miniconda3-3.4.2-Linux-x86_64.sh -O miniconda.sh;
     - fi
 
-    - chmod +x miniconda.sh
-    - ./miniconda.sh -b
-    - conda update --yes conda
+    - bash miniconda.sh -b -p $HOME/miniconda
+    - export PATH="$HOME/miniconda/bin:$PATH"
+    - hash -r
+    - conda config --set always_yes yes --set changeps1 no
+    - conda update conda
+    - conda info -a
+
+    - conda create -n test-environment python=$TRAVIS_PYTHON_VERSION
+    - source activate test-environment
+
     - conda install --yes numpy scipy pandas pytables
-    - conda install --yes scikit-learn scikit-image
+    - conda install --yes scikit-image scikit-learn
     - conda install --yes nose
     - conda install --yes sphinx
     - conda install --yes pip
@@ -42,7 +54,6 @@ before_install:
     - pip install wheel
     - pip install coverage
 
-install:
     - python setup.py build_ext --inplace
     - python setup.py install
     - python setup.py bdist_wheel
