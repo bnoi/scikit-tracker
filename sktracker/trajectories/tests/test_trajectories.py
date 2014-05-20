@@ -68,6 +68,7 @@ def test_copy():
 
 def test_empty():
     empty = Trajectories.empty_trajs(columns=['x', 'y'])
+
     assert empty.shape == (0, 2)
     assert empty.empty is True
 
@@ -76,7 +77,6 @@ def test_reverse():
     trajs = Trajectories(trajs)
 
     assert trajs.reverse().shape == (25, 5)
-
 
 def test_write_hdf():
 
