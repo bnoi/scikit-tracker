@@ -2,16 +2,20 @@
 
 help:
 	@echo "Please use make <target> where <target> is one of"
-	@echo "    init           : init and pull all submodules"
-	@echo "    build          : build extensions (not needed yet)"
-	@echo "    clean          : clean current repository"
-	@echo "    test           : run tests"
-	@echo "    coverage       : run tests and check code coverage"
-	@echo "    doc            : build dev documentation"
-	@echo "    push_doc       : push dev documentation to http://bnoi.github.io/scikit-tracker/dev/"
+	@echo "    init_submodule   : init and pull all submodules"
+	@echo "    update_submodule : update all submodules"
+	@echo "    build            : build extensions (not needed yet)"
+	@echo "    clean            : clean current repository"
+	@echo "    test             : run tests"
+	@echo "    coverage         : run tests and check code coverage"
+	@echo "    doc              : build dev documentation"
+	@echo "    push_doc         : push dev documentation to http://bnoi.github.io/scikit-tracker/dev/"
 
-init:
-	git submodule update --init
+init_submodule:
+	git submodule update --init --recursive
+
+update_submodule:
+	git submodule foreach git pull
 
 build:
 	python setup.py build_ext --inplace

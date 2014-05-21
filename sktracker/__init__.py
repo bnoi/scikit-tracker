@@ -8,25 +8,6 @@ from __future__ import absolute_import
 from __future__ import print_function
 
 
-from .version import __version__
-
-from . import data
-from . import detection
-from . import io
-from . import trajectories
-from . import tracker
-from . import utils
-
-__all__ = ['__version__',
-           'set_log_level',
-           'data',
-           'io',
-           'trajectories',
-           'detection',
-           'tracker',
-           'utils']
-
-
 def setup_log():  # pragma: no cover
 
     import logging
@@ -77,4 +58,22 @@ def set_log_level(loglevel):
     logger.setLevel(numeric_level)
 
 setup_log()
-set_log_level('ERROR')
+set_log_level('INFO')
+
+from .version import __version__
+
+from . import data
+from . import detection
+from . import io
+from . import trajectories
+from . import tracker
+from . import utils
+
+__all__ = ['__version__',
+           'set_log_level',
+           'data',
+           'io',
+           'trajectories',
+           'detection',
+           'tracker',
+           'utils']

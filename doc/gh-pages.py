@@ -72,6 +72,7 @@ def init_repo(path):
 
 if __name__ == '__main__':
 
+    sys.path.append('..')
     import sktracker
     version = sktracker.__version__
 
@@ -99,7 +100,10 @@ if __name__ == '__main__':
     try:
         cd(pages_dir)
         status = sh2('git status | head -1').decode("utf-8")
-        branch = re.match('\# On branch (.*)$', status).group(1)
+        try:
+            branch = re.match('\# On branch (.*)$', status).group(1)
+        except:
+            branch = re.match('Sur la branche (.*)$', status).group(1)
         if branch != 'gh-pages':
             e = 'On %r, git branch is %r, MUST be "gh-pages"' % (pages_dir,
                                                                  branch)
