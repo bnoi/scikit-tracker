@@ -53,8 +53,13 @@ def nuclei_detector(data_iterator,
     Parameters
     ----------
     data_iterator : Python iterator over dataset
+        this iterator should yield one z-stack
+        (corresponding to a single time point) at each
+        iterations
     metadata: dict
+        the metadata for the detection.
     parameters : dict
+        the parameters for the detection
     parallel : bool
     verbose : bool
     mapper : bool
@@ -93,9 +98,10 @@ def nuclei_detector(data_iterator,
         keys=raw_cell_positions.keys(),
         names=('t_stamp', 'label'))
 
-    real_times = nuclei_positions.index.get_level_values('t_stamp').astype(np.float)
-    real_times *= metadata['TimeIncrement']
+    real_times = nuclei_positions.index.get_level_values(
+        't_stamp') * metadata['TimeIncrement']
     nuclei_positions['t'] = real_times
+    nuclei_positions['t'] = nuclei_positions['t'].astype(np.float)
     nuclei_positions['x'] *=  metadata['PhysicalSizeX']
     nuclei_positions['y'] *=  metadata['PhysicalSizeY']
     nuclei_positions['z'] *=  metadata['PhysicalSizeZ']
@@ -120,7 +126,7 @@ def detect_one_stack(args, full_output=False):
             return output
         else:
             return {}
-    if z_stack.shape[0] == 1:
+    if z_stack.shape[0] == 1: ## Only one z plane
         positions = all_props.copy()
         positions.index = pd.Index(range(all_props.shape[0]))
         if full_output:
