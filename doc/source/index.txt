@@ -48,7 +48,7 @@ Several algorithms are featured and it is planned to add others:
 
 .. warning::
 
-    **scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. We hope to provide soon a 0.2 release with main features working and stable.
+    **scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. However recent 0.2 release provide some basics features.
 
 Table of content
 ----------------
