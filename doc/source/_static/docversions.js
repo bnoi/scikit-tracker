@@ -1,4 +1,4 @@
-var versions = ['stable', 'dev', '0.1'];
+var versions = ['stable', 'dev', '0.1', '0.2'];
 
 function insert_version_links() {
     for (i = 0; i < versions.length; i++){

@@ -99,11 +99,8 @@ if __name__ == '__main__':
 
     try:
         cd(pages_dir)
-        status = sh2('git status | head -1').decode("utf-8")
-        try:
-            branch = re.match('\# On branch (.*)$', status).group(1)
-        except:
-            branch = re.match('Sur la branche (.*)$', status).group(1)
+        branch = sh2('git rev-parse --abbrev-ref HEAD').decode("utf-8")
+
         if branch != 'gh-pages':
             e = 'On %r, git branch is %r, MUST be "gh-pages"' % (pages_dir,
                                                                  branch)
@@ -113,6 +110,10 @@ if __name__ == '__main__':
         if 'dev' not in tag:
             sh('rm -f stable')
             sh('ln -s %s stable' % tag)
+
+            static_dir = "_static"
+            shutil.rmtree(static_dir, ignore_errors=True)
+            shutil.copytree(os.path.join('..', html_dir, static_dir), static_dir)
 
         sh('git add . --all')
         sh2('git commit -am "Updated doc release: {}" --allow-empty'.format(version))

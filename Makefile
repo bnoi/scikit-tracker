@@ -1,4 +1,4 @@
-.PHONY: help init build clean test coverage doc push_doc
+.PHONY: help init_submodule update_submodule build clean test coverage doc push_doc
 
 help:
 	@echo "Please use make <target> where <target> is one of"
@@ -36,6 +36,5 @@ doc:
 	cd doc/ && make clean && make api && make html
 
 push_doc:
-	cd doc/ && make clean && make api && make html
 	cd doc/ && python gh-pages.py
 	cd doc/gh-pages/ && git push origin gh-pages && cd ../../
