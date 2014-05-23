@@ -47,30 +47,31 @@ def setup():
     metadata = stack_io.metadata
     stack_iter = stack_io.list_iterator()
 
-
 @with_setup(setup)
 def test_nuclei_detector_naive():
 
     parameters = {'segment_method': 'naive',
-                  'correction': 0.2,
+                  'correction': 0.1,
+                  'nuc_distance':2.,
                   'min_z_size': 0.}
 
     cell_positions = nuclei_detector(stack_iter(),
                                      metadata=metadata,
                                      parameters=parameters)
-    assert cell_positions.shape == (18, 6)
-
+    assert cell_positions.shape == (11, 6)
 
 @with_setup(setup)
 def test_nuclei_detector_otsu():
+
     parameters = {'segment_method': 'otsu',
-                  'correction': 1.,
+                  'correction': 0.7,
+                  'nuc_distance': 2.,
                   'min_z_size': 0.}
 
     cell_positions = nuclei_detector(stack_iter(),
                                      metadata=metadata,
                                      parameters=parameters)
-    assert cell_positions.shape == (12, 6)
+    assert cell_positions.shape == (9, 6)
 
 
 @with_setup(setup)

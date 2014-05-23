@@ -36,7 +36,8 @@ DEFAULT_PARAMETERS = {'segment_method': 'otsu',
                       'min_radius': 2.,
                       'max_radius': 8.,
                       'num_cells': 8,
-                      'min_z_size': 4.
+                      'nuc_distance':6,
+                      'min_z_size': 4
                       }
 
 
@@ -77,6 +78,7 @@ def nuclei_detector(data_iterator,
     parameters['min_z_size'] = parameters['min_z_size'] / metadata['PhysicalSizeZ']
     parameters['min_radius'] /= metadata['PhysicalSizeX']
     parameters['max_radius'] /= metadata['PhysicalSizeX']
+    parameters['nuc_distance'] /= metadata['PhysicalSizeX']
 
     arguments = zip(data_iterator, itertools.repeat(parameters))
     if parallel and mapper is not None:
@@ -193,17 +195,17 @@ def label_stack(z_stack, parameters):
 def label_from_thresh(frame, thresh, parameters):
 
     smooth = parameters['smooth']
-    min_radius = parameters['min_radius']
+    min_distance = np.int(parameters['nuc_distance'])
     image = rank.median(frame.copy(), disk(smooth))
     image = rank.enhance_contrast(image, disk(smooth))
     im_max = image.max()
     if im_max < thresh:
         return np.zeros(image.shape, dtype=np.int32)
     else:
-        image = frame > thresh
+        image = image > thresh
         distance = ndimage.distance_transform_edt(image)
         local_maxi = peak_local_max(distance,
-                                    min_distance=np.int(min_radius),
+                                    min_distance=min_distance,
                                     indices=False, labels=image)
         markers = ndimage.label(local_maxi)[0]
         return watershed(-distance, markers, mask=image)
@@ -245,8 +247,7 @@ def get_regionprops(labeled_stack, z_stack, parameters):
 def cluster_regions(all_props, parameters):
 
     radius = parameters['max_radius']
-    num_cells = parameters['num_cells']
-    n_clusters = min(num_cells, all_props.shape[0])
+    n_clusters = all_props.shape[0]
     if not n_clusters:
         return None
     if n_clusters == 1:
