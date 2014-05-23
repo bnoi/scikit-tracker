@@ -1,0 +1,253 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sktracker.tracker.utils package &mdash; sktracker 0.2 docs</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="sktracker 0.2 docs" href="../index.html"/>
+        <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
+        <link rel="next" title="sktracker.trajectories package" href="sktracker.trajectories.html"/>
+        <link rel="prev" title="sktracker.tracker.solver package" href="sktracker.tracker.solver.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> scikit-tracker</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../new.html">What&#8217;s new</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.2.html">scikit-tracker v0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.1.html">scikit-tracker v0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial : getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">sktracker package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker.version">sktracker.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contribute to development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">scikit-tracker</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="sktracker.html">sktracker package</a> &raquo;</li>
+      
+          <li><a href="sktracker.tracker.html">sktracker.tracker package</a> &raquo;</li>
+      
+    <li>sktracker.tracker.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/sktracker.tracker.utils.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="sktracker-tracker-utils-package">
+<h1>sktracker.tracker.utils package<a class="headerlink" href="#sktracker-tracker-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.utils.scores">
+<span id="sktracker-tracker-utils-scores-module"></span><h2>sktracker.tracker.utils.scores module<a class="headerlink" href="#module-sktracker.tracker.utils.scores" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="sktracker.tracker.utils.get_scores_on_trajectories">
+<tt class="descclassname">sktracker.tracker.utils.</tt><tt class="descname">get_scores_on_trajectories</tt><big>(</big><em>trajs, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.utils.get_scores_on_trajectories" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.13.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">pandas.MultiIndex</span></tt> need to contain &#8216;t_stamp&#8217; and &#8216;label&#8217; and columns need to have
+at least &#8216;true_label&#8217;</p>
+</div></blockquote>
+<p><strong>coords</strong> : list</p>
+<blockquote>
+<div><p>Features on which process scoring.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>min_chi_square</strong> : float</p>
+<p><strong>conserved_trajectories_number</strong> : float</p>
+<blockquote>
+<div><p>Between 0 and 1.</p>
+</div></blockquote>
+<p><strong>scores</strong> : <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.8)"><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></a></p>
+<blockquote class="last">
+<div><p>Chi square matrix.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sktracker.trajectories.html" class="btn btn-neutral float-right" title="sktracker.trajectories package">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sktracker.tracker.solver.html" class="btn btn-neutral" title="sktracker.tracker.solver package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

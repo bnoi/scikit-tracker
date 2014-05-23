@@ -1,0 +1,477 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sktracker.utils package &mdash; sktracker 0.2 docs</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="sktracker 0.2 docs" href="../index.html"/>
+        <link rel="up" title="sktracker package" href="sktracker.html"/>
+        <link rel="next" title="Contribute to development" href="../contribute.html"/>
+        <link rel="prev" title="sktracker.trajectories package" href="sktracker.trajectories.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> scikit-tracker</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../new.html">What&#8217;s new</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.2.html">scikit-tracker v0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.1.html">scikit-tracker v0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial : getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">sktracker package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker.version">sktracker.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contribute to development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">scikit-tracker</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="sktracker.html">sktracker package</a> &raquo;</li>
+      
+    <li>sktracker.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/sktracker.utils.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="sktracker-utils-package">
+<h1>sktracker.utils package<a class="headerlink" href="#sktracker-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.utils.color_system">
+<span id="sktracker-utils-color-system-module"></span><h2>sktracker.utils.color_system module<a class="headerlink" href="#module-sktracker.utils.color_system" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.utils.ipython">
+<span id="sktracker-utils-ipython-module"></span><h2>sktracker.utils.ipython module<a class="headerlink" href="#module-sktracker.utils.ipython" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.utils.progress">
+<span id="sktracker-utils-progress-module"></span><h2>sktracker.utils.progress module<a class="headerlink" href="#module-sktracker.utils.progress" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.utils.transformations">
+<span id="sktracker-utils-transformations-module"></span><h2>sktracker.utils.transformations module<a class="headerlink" href="#module-sktracker.utils.transformations" title="Permalink to this headline">¶</a></h2>
+<p>Homogeneous Transformation Matrices and Quaternions.</p>
+<p>A library for calculating 4x4 matrices for translating, rotating, reflecting,
+scaling, shearing, projecting, orthogonalizing, and superimposing arrays of
+3D homogeneous coordinates as well as for converting between rotation matrices,
+Euler angles, and quaternions. Also includes an Arcball control object and
+functions to decompose transformation matrices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body"><a class="reference external" href="http://www.lfd.uci.edu/~gohlke/">Christoph Gohlke</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Organization:</th><td class="field-body">Laboratory for Fluorescence Dynamics, University of California, Irvine</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">2013.06.29</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://www.python.org">CPython 2.7 or 3.3</a></li>
+<li><a class="reference external" href="http://www.numpy.org">Numpy 1.7</a></li>
+<li><a class="reference external" href="http://www.lfd.uci.edu/~gohlke/">Transformations.c 2013.01.18</a>
+(recommended for speedup of some functions)</li>
+</ul>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<p>The API is not stable yet and is expected to change between revisions.</p>
+<p>This Python code is not optimized for speed. Refer to the transformations.c
+module for a faster implementation of some functions.</p>
+<p>Documentation in HTML format can be generated with epydoc.</p>
+<p>Matrices (M) can be inverted using numpy.linalg.inv(M), be concatenated using
+numpy.dot(M0, M1), or transform homogeneous coordinate arrays (v) using
+numpy.dot(M, v) for shape (4, *) column vectors, respectively
+numpy.dot(v, M.T) for shape (*, 4) row vectors (&#8220;array of points&#8221;).</p>
+<p>This module follows the &#8220;column vectors on the right&#8221; and &#8220;row major storage&#8221;
+(C contiguous) conventions. The translation components are in the right column
+of the transformation matrix, i.e. M[:3, 3].
+The transpose of the transformation matrices may have to be used to interface
+with other graphics systems, e.g. with OpenGL&#8217;s glMultMatrixd(). See also [16].</p>
+<p>Calculations are carried out with numpy.float64 precision.</p>
+<p>Vector, point, quaternion, and matrix function arguments are expected to be
+&#8220;array like&#8221;, i.e. tuple, list, or numpy arrays.</p>
+<p>Return types are numpy arrays unless specified otherwise.</p>
+<p>Angles are in radians unless specified otherwise.</p>
+<p>Quaternions w+ix+jy+kz are represented as [w, x, y, z].</p>
+<p>A triple of Euler angles can be applied/interpreted in 24 ways, which can
+be specified using a 4 character string or encoded 4-tuple:</p>
+<blockquote>
+<div><p><em>Axes 4-string</em>: e.g. &#8216;sxyz&#8217; or &#8216;ryxy&#8217;</p>
+<ul class="simple">
+<li>first character : rotations are applied to &#8216;s&#8217;tatic or &#8216;r&#8217;otating frame</li>
+<li>remaining characters : successive rotation axis &#8216;x&#8217;, &#8216;y&#8217;, or &#8216;z&#8217;</li>
+</ul>
+<p><em>Axes 4-tuple</em>: e.g. (0, 0, 0, 0) or (1, 1, 1, 1)</p>
+<ul class="simple">
+<li>inner axis: code of axis (&#8216;x&#8217;:0, &#8216;y&#8217;:1, &#8216;z&#8217;:2) of rightmost matrix.</li>
+<li>parity : even (0) if inner axis &#8216;x&#8217; is followed by &#8216;y&#8217;, &#8216;y&#8217; is followed
+by &#8216;z&#8217;, or &#8216;z&#8217; is followed by &#8216;x&#8217;. Otherwise odd (1).</li>
+<li>repetition : first and last axis are same (1) or different (0).</li>
+<li>frame : rotations are applied to static (0) or rotating (1) frame.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Matrices and transformations. Ronald Goldman.
+In &#8220;Graphics Gems I&#8221;, pp 472-475. Morgan Kaufmann, 1990.</li>
+<li>More matrices and transformations: shear and pseudo-perspective.
+Ronald Goldman. In &#8220;Graphics Gems II&#8221;, pp 320-323. Morgan Kaufmann, 1991.</li>
+<li>Decomposing a matrix into simple transformations. Spencer Thomas.
+In &#8220;Graphics Gems II&#8221;, pp 320-323. Morgan Kaufmann, 1991.</li>
+<li>Recovering the data from the transformation matrix. Ronald Goldman.
+In &#8220;Graphics Gems II&#8221;, pp 324-331. Morgan Kaufmann, 1991.</li>
+<li>Euler angle conversion. Ken Shoemake.
+In &#8220;Graphics Gems IV&#8221;, pp 222-229. Morgan Kaufmann, 1994.</li>
+<li>Arcball rotation control. Ken Shoemake.
+In &#8220;Graphics Gems IV&#8221;, pp 175-192. Morgan Kaufmann, 1994.</li>
+<li>Representing attitude: Euler angles, unit quaternions, and rotation
+vectors. James Diebel. 2006.</li>
+<li>A discussion of the solution for the best rotation to relate two sets
+of vectors. W Kabsch. Acta Cryst. 1978. A34, 827-828.</li>
+<li>Closed-form solution of absolute orientation using unit quaternions.
+BKP Horn. J Opt Soc Am A. 1987. 4(4):629-642.</li>
+<li>Quaternions. Ken Shoemake.
+<a class="reference external" href="http://www.sfu.ca/~jwa3/cmpt461/files/quatut.pdf">http://www.sfu.ca/~jwa3/cmpt461/files/quatut.pdf</a></li>
+<li>From quaternion to matrix and back. JMP van Waveren. 2005.
+<a class="reference external" href="http://www.intel.com/cd/ids/developer/asmo-na/eng/293748.htm">http://www.intel.com/cd/ids/developer/asmo-na/eng/293748.htm</a></li>
+<li>Uniform random rotations. Ken Shoemake.
+In &#8220;Graphics Gems III&#8221;, pp 124-132. Morgan Kaufmann, 1992.</li>
+<li>Quaternion in molecular modeling. CFF Karney.
+J Mol Graph Mod, 25(5):595-604</li>
+<li>New method for extracting the quaternion from a rotation matrix.
+Itzhack Y Bar-Itzhack, J Guid Contr Dynam. 2000. 23(6): 1085-1087.</li>
+<li>Multiple View Geometry in Computer Vision. Hartley and Zissermann.
+Cambridge University Press; 2nd Ed. 2004. Chapter 4, Algorithm 4.7, p 130.</li>
+<li>Column Vectors vs. Row Vectors.
+<a class="reference external" href="http://steve.hollasch.net/cgindex/math/matrix/column-vec.html">http://steve.hollasch.net/cgindex/math/matrix/column-vec.html</a></li>
+</ol>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.123</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.234</span><span class="p">,</span> <span class="mf">2.345</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">origin</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">,</span> <span class="n">yaxis</span><span class="p">,</span> <span class="n">zaxis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">identity_matrix</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Rx</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ry</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">yaxis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Rz</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">zaxis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">concatenate_matrices</span><span class="p">(</span><span class="n">Rx</span><span class="p">,</span> <span class="n">Ry</span><span class="p">,</span> <span class="n">Rz</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">euler</span> <span class="o">=</span> <span class="n">euler_from_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s">&#39;rxyz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">([</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">],</span> <span class="n">euler</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Re</span> <span class="o">=</span> <span class="n">euler_matrix</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="s">&#39;rxyz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Re</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">al</span><span class="p">,</span> <span class="n">be</span><span class="p">,</span> <span class="n">ga</span> <span class="o">=</span> <span class="n">euler_from_matrix</span><span class="p">(</span><span class="n">Re</span><span class="p">,</span> <span class="s">&#39;rxyz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">Re</span><span class="p">,</span> <span class="n">euler_matrix</span><span class="p">(</span><span class="n">al</span><span class="p">,</span> <span class="n">be</span><span class="p">,</span> <span class="n">ga</span><span class="p">,</span> <span class="s">&#39;rxyz&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span> <span class="o">=</span> <span class="n">quaternion_about_axis</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qy</span> <span class="o">=</span> <span class="n">quaternion_about_axis</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">yaxis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qz</span> <span class="o">=</span> <span class="n">quaternion_about_axis</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">zaxis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">quaternion_multiply</span><span class="p">(</span><span class="n">qx</span><span class="p">,</span> <span class="n">qy</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">quaternion_multiply</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">qz</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Rq</span> <span class="o">=</span> <span class="n">quaternion_matrix</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Rq</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">scale_matrix</span><span class="p">(</span><span class="mf">1.23</span><span class="p">,</span> <span class="n">origin</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">translation_matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">shear_matrix</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">zaxis</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">random_rotation_matrix</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">concatenate_matrices</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scale</span><span class="p">,</span> <span class="n">shear</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">persp</span> <span class="o">=</span> <span class="n">decompose_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="mf">1.23</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">shear</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">beta</span><span class="p">),</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">euler_matrix</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="s">&#39;sxyz&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">angles</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M1</span> <span class="o">=</span> <span class="n">compose_matrix</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">shear</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">persp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">random_vector</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">random_vector</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">angle_between_vectors</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span><span class="p">),</span> <span class="n">vector_product</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">unit_vector</span><span class="p">(</span><span class="n">v1</span><span class="p">),</span> <span class="n">unit_vector</span><span class="p">(</span><span class="n">v2</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="module-sktracker.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="sktracker.utils.print_progress">
+<tt class="descclassname">sktracker.utils.</tt><tt class="descname">print_progress</tt><big>(</big><em>progress</em>, <em>message=None</em>, <em>out=None</em><big>)</big><a class="headerlink" href="#sktracker.utils.print_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a progress bar filled with a variable value. print_progress
+also works under IPython notebook.</p>
+<p>Set <cite>progress</cite> to -1 to remove the progress bar.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>progress: int</strong></p>
+<blockquote>
+<div><p>Variable value use to fill the progress bar. Should be between 0
+and 100.</p>
+</div></blockquote>
+<p><strong>out: OutStream</strong></p>
+<blockquote>
+<div><p>Where to stream progress bar. None will redirect output to <cite>sys.stdout</cite>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None. Display the progress bar.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker.utils</span> <span class="kn">import</span> <span class="n">print_progress</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span>    <span class="n">print_progress</span><span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+<span class="go">100% [=================================================&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">print_progress</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.utils.color">
+<tt class="descclassname">sktracker.utils.</tt><tt class="descname">color</tt><big>(</big><em>astr</em>, <em>color='ENDC'</em><big>)</big><a class="headerlink" href="#sktracker.utils.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Colorized string variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>astr: string</strong></p>
+<blockquote>
+<div><p>String to colorize.</p>
+</div></blockquote>
+<p><strong>color: string</strong></p>
+<blockquote>
+<div><p>Which color to use (ENDC means &#8220;reset color&#8221;):</p>
+<p>&#8216;ENDC&#8217;, &#8216;BOLD&#8217;, &#8216;UNDERLINE&#8217;, &#8216;BLINK&#8217;, &#8216;INVERT&#8217;, &#8216;CONCEALD&#8217;, &#8216;STRIKE&#8217;, &#8216;GREY30&#8217;,
+&#8216;GREY40&#8217;, &#8216;GREY65&#8217;, &#8216;GREY70&#8217;, &#8216;GREY20_BG&#8217;, &#8216;GREY33_BG&#8217;, &#8216;GREY80_BG&#8217;,
+&#8216;GREY93_BG&#8217;, &#8216;DARK_RED&#8217;, &#8216;RED&#8217;, &#8216;RED_BG&#8217;, &#8216;LIGHT_RED_BG&#8217;, &#8216;DARK_YELLOW&#8217;,
+&#8216;YELLOW&#8217;, &#8216;YELLOW_BG&#8217;, &#8216;LIGHT_YELLOW_BG&#8217;, &#8216;DARK_BLUE&#8217;, &#8216;BLUE&#8217;, &#8216;BLUE_BG&#8217;,
+&#8216;LIGHT_BLUE_BG&#8217;, &#8216;DARK_MAGENTA&#8217;, &#8216;PURPLE&#8217;, &#8216;MAGENTA_BG&#8217;, &#8216;LIGHT_PURPLE_BG&#8217;,
+&#8216;DARK_CYAN&#8217;, &#8216;AUQA&#8217;, &#8216;CYAN_BG&#8217;, &#8216;LIGHT_AUQA_BG&#8217;, &#8216;DARK_GREEN&#8217;, &#8216;GREEN&#8217;,
+&#8216;GREEN_BG&#8217;, &#8216;LIGHT_GREEN_BG&#8217;, &#8216;BLACK&#8217;</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String with colored terminal code.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker.utils</span> <span class="kn">import</span> <span class="n">color</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">color</span><span class="p">(</span><span class="s">&quot;I am a RED string&quot;</span><span class="p">,</span> <span class="s">&quot;RED&quot;</span><span class="p">))</span>
+<span class="go">I am a RED string</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="c"># Displayed in red in a terminal</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.utils.in_ipython">
+<tt class="descclassname">sktracker.utils.</tt><tt class="descname">in_ipython</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.utils.in_ipython" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if current python process is an IPython process or not.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True wether current process is IPython, False in the other case.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../contribute.html" class="btn btn-neutral float-right" title="Contribute to development">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sktracker.trajectories.html" class="btn btn-neutral" title="sktracker.trajectories package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

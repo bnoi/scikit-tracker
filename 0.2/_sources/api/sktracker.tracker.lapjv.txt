@@ -1,0 +1,22 @@
+sktracker.tracker.lapjv package
+===============================
+
+Submodules
+----------
+
+sktracker.tracker.lapjv.lapjv module
+------------------------------------
+
+.. automodule:: sktracker.tracker.lapjv.lapjv
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.tracker.lapjv
+    :members:
+    :undoc-members:
+    :show-inheritance:

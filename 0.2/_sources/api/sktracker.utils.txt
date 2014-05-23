@@ -1,0 +1,46 @@
+sktracker.utils package
+=======================
+
+Submodules
+----------
+
+sktracker.utils.color_system module
+-----------------------------------
+
+.. automodule:: sktracker.utils.color_system
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.utils.ipython module
+------------------------------
+
+.. automodule:: sktracker.utils.ipython
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.utils.progress module
+-------------------------------
+
+.. automodule:: sktracker.utils.progress
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.utils.transformations module
+--------------------------------------
+
+.. automodule:: sktracker.utils.transformations
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:

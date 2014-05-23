@@ -1,0 +1,248 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sktracker.tracker.lapjv package &mdash; sktracker 0.2 docs</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="sktracker 0.2 docs" href="../index.html"/>
+        <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
+        <link rel="next" title="sktracker.tracker.matrix package" href="sktracker.tracker.matrix.html"/>
+        <link rel="prev" title="sktracker.tracker.cost_function package" href="sktracker.tracker.cost_function.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> scikit-tracker</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../new.html">What&#8217;s new</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.2.html">scikit-tracker v0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.1.html">scikit-tracker v0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial : getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">sktracker package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker.version">sktracker.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contribute to development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">scikit-tracker</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="sktracker.html">sktracker package</a> &raquo;</li>
+      
+          <li><a href="sktracker.tracker.html">sktracker.tracker package</a> &raquo;</li>
+      
+    <li>sktracker.tracker.lapjv package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/sktracker.tracker.lapjv.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="sktracker-tracker-lapjv-package">
+<h1>sktracker.tracker.lapjv package<a class="headerlink" href="#sktracker-tracker-lapjv-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.lapjv.lapjv">
+<span id="sktracker-tracker-lapjv-lapjv-module"></span><h2>sktracker.tracker.lapjv.lapjv module<a class="headerlink" href="#module-sktracker.tracker.lapjv.lapjv" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-sktracker.tracker.lapjv">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.lapjv" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="sktracker.tracker.lapjv.lapjv">
+<tt class="descclassname">sktracker.tracker.lapjv.</tt><tt class="descname">lapjv</tt><big>(</big><em>i</em>, <em>j</em>, <em>costs</em>, <em>wants_dual_variables=False</em>, <em>augmenting_row_reductions=2</em>, <em>use_slow=False</em><big>)</big><a class="headerlink" href="#sktracker.tracker.lapjv.lapjv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sparse linear assignment solution using Jonker-Volgenant algorithm</p>
+<dl class="docutils">
+<dt>i,j - similarly-sized vectors that pair the object at index i[n] with</dt>
+<dd>the object at index j[n]</dd>
+<dt>costs - a vector of similar size to i and j that is the cost of pairing</dt>
+<dd>i[n] with j[n].</dd>
+<dt>wants_dual_variables - the dual problem reduces the costs using two</dt>
+<dd>vectors, u[i] and v[j] where the solution is the maximum value of
+np.sum(u) + np.sum(v) where cost[i,j] - u[i] - v[j] &gt;=  0.
+Set wants_dual_variables to True to have u and v returned in
+addition to the assignments.</dd>
+<dt>augmenting_row_reductions - the authors suggest that augmenting</dt>
+<dd>row reduction be performed twice to optimize the u and v
+before the augmenting stage. The caller can choose a
+different number of reductions by supplying a different
+value here.</dd>
+<dt>use_slow: Bool, default False:</dt>
+<dd>use the pure python implementation, useful for debugging purpose</dd>
+</dl>
+<p>All costs not appearing in i,j are taken as infinite. Each i in the range,
+0 to max(i) must appear at least once and similarly for j.</p>
+<p>returns (x, y), the pairs of assignments that represent the solution
+or (x, y, u, v) if the dual variables are requested.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sktracker.tracker.matrix.html" class="btn btn-neutral float-right" title="sktracker.tracker.matrix package">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sktracker.tracker.cost_function.html" class="btn btn-neutral" title="sktracker.tracker.cost_function package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

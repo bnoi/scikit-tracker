@@ -1,0 +1,34 @@
+sktracker package
+=================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    sktracker.data
+    sktracker.detection
+    sktracker.io
+    sktracker.tracker
+    sktracker.trajectories
+    sktracker.utils
+
+Submodules
+----------
+
+sktracker.version module
+------------------------
+
+.. automodule:: sktracker.version
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker
+    :members:
+    :undoc-members:
+    :show-inheritance:

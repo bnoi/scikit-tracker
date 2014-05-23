@@ -1,0 +1,21 @@
+sktracker.tracker package
+=========================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    sktracker.tracker.cost_function
+    sktracker.tracker.lapjv
+    sktracker.tracker.matrix
+    sktracker.tracker.solver
+    sktracker.tracker.utils
+
+Module contents
+---------------
+
+.. automodule:: sktracker.tracker
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,1065 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Index &mdash; sktracker 0.2 docs</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="sktracker 0.2 docs" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> scikit-tracker</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="new.html">What&#8217;s new</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release/release_0.2.html">scikit-tracker v0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release/release_0.1.html">scikit-tracker v0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial : getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/sktracker.html">sktracker package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#module-sktracker.version">sktracker.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#module-sktracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute to development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">scikit-tracker</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li></li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.AbstractCostFunction">AbstractCostFunction (class in sktracker.tracker.cost_function)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction">AbstractGapCloseCostFunction (class in sktracker.tracker.cost_function.gap_close)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.AbstractSolver">AbstractSolver (class in sktracker.tracker.solver)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.all_speeds">all_speeds() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.asarray">asarray() (sktracker.io.TiffFile method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffSequence.asarray">(sktracker.io.TiffSequence method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.ByFrameSolver.assign">assign() (sktracker.tracker.solver.ByFrameSolver method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.GapCloseSolver.assign">(sktracker.tracker.solver.GapCloseSolver method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.directed.BasicDirectedLinkCostFunction">BasicDirectedLinkCostFunction (class in sktracker.tracker.cost_function.directed)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.ByFrameSolver.blocks_structure">blocks_structure (sktracker.tracker.solver.ByFrameSolver attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.GapCloseSolver.blocks_structure">(sktracker.tracker.solver.GapCloseSolver attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.brownian_trajectories_generator">brownian_trajectories_generator() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.brownian_trajs_df">brownian_trajs_df() (in module sktracker.data)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.brownian.BrownianGapCloseCostFunction">BrownianGapCloseCostFunction (class in sktracker.tracker.cost_function.brownian)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.brownian.BrownianLinkCostFunction">BrownianLinkCostFunction (class in sktracker.tracker.cost_function.brownian)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.ByFrameSolver">ByFrameSolver (class in sktracker.tracker.solver)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.detection.html#sktracker.detection.cell_boundaries_detector">cell_boundaries_detector() (in module sktracker.detection)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.AbstractCostFunction.check_columns">check_columns() (sktracker.tracker.cost_function.AbstractCostFunction method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.AbstractCostFunction.check_context">check_context() (sktracker.tracker.cost_function.AbstractCostFunction method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.AbstractSolver.check_cost_function_type">check_cost_function_type() (sktracker.tracker.solver.AbstractSolver method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction.check_idxs_length">check_idxs_length() (sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.check_trajs_df_structure">check_trajs_df_structure() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.ObjectsIO.clean_store_file">clean_store_file() (sktracker.io.ObjectsIO method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.close">close() (sktracker.io.TiffFile method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffSequence.close">(sktracker.io.TiffSequence method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/sktracker.utils.html#sktracker.utils.color">color() (in module sktracker.utils)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.copy">copy() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.matrix.html#sktracker.tracker.matrix.CostMatrix">CostMatrix (class in sktracker.tracker.matrix)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.CZT_peaks">CZT_peaks() (in module sktracker.data)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.df_planes">df_planes() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.diagonal.DiagonalCostFunction">DiagonalCostFunction (class in sktracker.tracker.cost_function.diagonal)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.directed_motion_trajs_df">directed_motion_trajs_df() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.directed_trajectories_generator">directed_trajectories_generator() (in module sktracker.data)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.empty_trajs">empty_trajs() (sktracker.trajectories.Trajectories class method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.ByFrameSolver.for_brownian_motion">for_brownian_motion() (sktracker.tracker.solver.ByFrameSolver class method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.GapCloseSolver.for_brownian_motion">(sktracker.tracker.solver.GapCloseSolver class method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.ByFrameSolver.for_directed_motion">for_directed_motion() (sktracker.tracker.solver.ByFrameSolver class method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.ObjectsIO.from_h5">from_h5() (sktracker.io.ObjectsIO class method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.from_objectsio">from_objectsio() (sktracker.io.StackIO class method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.ObjectsIO.from_stackio">from_stackio() (sktracker.io.ObjectsIO class method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.fstat">fstat (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.GapCloseSolver">GapCloseSolver (class in sktracker.tracker.solver)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#sktracker.tracker.cost_function.AbstractCostFunction.get_block">get_block() (sktracker.tracker.cost_function.AbstractCostFunction method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.get_colors">get_colors() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.matrix.html#sktracker.tracker.matrix.CostMatrix.get_flat">get_flat() (sktracker.tracker.matrix.CostMatrix method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.get_longest_segments">get_longest_segments() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.matrix.html#sktracker.tracker.matrix.CostMatrix.get_masked">get_masked() (sktracker.tracker.matrix.CostMatrix method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.get_mean_distances">get_mean_distances() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.get_metadata">get_metadata() (in module sktracker.io)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.get_metadata">(sktracker.io.OMEModel method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.get_physical_size">get_physical_size() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.utils.html#sktracker.tracker.utils.get_scores_on_trajectories">get_scores_on_trajectories() (in module sktracker.tracker.utils)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.get_segments">get_segments() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.matrix.html#sktracker.tracker.matrix.CostMatrix.get_shapes">get_shapes() (sktracker.tracker.matrix.CostMatrix method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.get_shortest_segments">get_shortest_segments() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.get_tif">get_tif() (sktracker.io.StackIO method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.get_tif_from_list">get_tif_from_list() (sktracker.io.StackIO method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.image_iterator">image_iterator() (sktracker.io.StackIO method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.image_path">image_path (sktracker.io.StackIO attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.image_path_list">image_path_list (sktracker.io.StackIO attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.imread">imread() (in module sktracker.io)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.imsave">imsave() (in module sktracker.io)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.imshow">imshow() (in module sktracker.io)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.utils.html#sktracker.utils.in_ipython">in_ipython() (in module sktracker.utils)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_bigtiff">is_bigtiff (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_fluoview">is_fluoview (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_imagej">is_imagej (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_lsm">is_lsm (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_mdgel">is_mdgel (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_mediacy">is_mediacy (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_micromanager">is_micromanager (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_nih">is_nih (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_ome">is_ome (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_palette">is_palette (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_rgb">is_rgb (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.is_stk">is_stk (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.iter_segments">iter_segments (sktracker.trajectories.Trajectories attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.ObjectsIO.keys">keys() (sktracker.io.ObjectsIO method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.labels">labels (sktracker.trajectories.Trajectories attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.lapjv.html#sktracker.tracker.lapjv.lapjv">lapjv() (in module sktracker.tracker.lapjv)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO.list_iterator">list_iterator() (sktracker.io.StackIO method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.merge_label_safe">merge_label_safe() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.metadata_json">metadata_json() (in module sktracker.data)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.detection.html#sktracker.detection.nuclei_detector">nuclei_detector() (in module sktracker.detection)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.ObjectsIO">ObjectsIO (class in sktracker.io)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel">OMEModel (class in sktracker.io)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.ByFrameSolver.one_frame">one_frame() (sktracker.tracker.solver.ByFrameSolver method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.detection.html#sktracker.detection.peak_detector">peak_detector() (in module sktracker.detection)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.ByFrameSolver.pos_in">pos_in (sktracker.tracker.solver.ByFrameSolver attribute)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.ByFrameSolver.pos_out">pos_out (sktracker.tracker.solver.ByFrameSolver attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.utils.html#sktracker.utils.print_progress">print_progress() (in module sktracker.utils)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.relabel">relabel() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.relabel_fromzero">relabel_fromzero() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.AbstractSolver.relabel_trajs">relabel_trajs() (sktracker.tracker.solver.AbstractSolver method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.remove_segments">remove_segments() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.reverse">reverse() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.sample_h5">sample_h5() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.sample_h5_temp">sample_h5_temp() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.sample_ome">sample_ome() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.segment_idxs">segment_idxs (sktracker.trajectories.Trajectories attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile.series">series (sktracker.io.TiffFile attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.set_filename">set_filename() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.html#sktracker.set_log_level">set_log_level() (in module sktracker)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.set_name">set_name() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.set_physical_size">set_physical_size() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.set_size_t">set_size_t() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.set_xy_size">set_xy_size() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.set_z_size">set_z_size() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.show">show() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.html#module-sktracker">sktracker (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#module-sktracker.data">sktracker.data (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#module-sktracker.data.trajectories_generator">sktracker.data.trajectories_generator (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.detection.html#module-sktracker.detection">sktracker.detection (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.detection.html#module-sktracker.detection.cell_boundaries_detector">sktracker.detection.cell_boundaries_detector (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.detection.html#module-sktracker.detection.nuclei_detector">sktracker.detection.nuclei_detector (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.detection.html#module-sktracker.detection.peak_detector">sktracker.detection.peak_detector (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io">sktracker.io (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.metadataio">sktracker.io.metadataio (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.objectsio">sktracker.io.objectsio (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.ome">sktracker.io.ome (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.stackio">sktracker.io.stackio (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.tifffile">sktracker.io.tifffile (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.trackmate">sktracker.io.trackmate (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#module-sktracker.io.utils">sktracker.io.utils (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.html#module-sktracker.tracker">sktracker.tracker (module)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function">sktracker.tracker.cost_function (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.abstract_cost_functions">sktracker.tracker.cost_function.abstract_cost_functions (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.brownian">sktracker.tracker.cost_function.brownian (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.diagonal">sktracker.tracker.cost_function.diagonal (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.directed">sktracker.tracker.cost_function.directed (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.gap_close">sktracker.tracker.cost_function.gap_close (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.lapjv.html#module-sktracker.tracker.lapjv">sktracker.tracker.lapjv (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.lapjv.html#module-sktracker.tracker.lapjv.lapjv">sktracker.tracker.lapjv.lapjv (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.matrix.html#module-sktracker.tracker.matrix">sktracker.tracker.matrix (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.matrix.html#module-sktracker.tracker.matrix.matrix">sktracker.tracker.matrix.matrix (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#module-sktracker.tracker.solver">sktracker.tracker.solver (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#module-sktracker.tracker.solver.by_frame_solver">sktracker.tracker.solver.by_frame_solver (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#module-sktracker.tracker.solver.gap_close_solver">sktracker.tracker.solver.gap_close_solver (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#module-sktracker.tracker.solver.solver">sktracker.tracker.solver.solver (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.utils.html#module-sktracker.tracker.utils">sktracker.tracker.utils (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.utils.html#module-sktracker.tracker.utils.scores">sktracker.tracker.utils.scores (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#module-sktracker.trajectories">sktracker.trajectories (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#module-sktracker.trajectories.trajectories">sktracker.trajectories.trajectories (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.utils.html#module-sktracker.utils">sktracker.utils (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.utils.html#module-sktracker.utils.color_system">sktracker.utils.color_system (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.utils.html#module-sktracker.utils.ipython">sktracker.utils.ipython (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.utils.html#module-sktracker.utils.progress">sktracker.utils.progress (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.utils.html#module-sktracker.utils.transformations">sktracker.utils.transformations (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.html#module-sktracker.version">sktracker.version (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.matrix.html#sktracker.tracker.matrix.CostMatrix.solve">solve() (sktracker.tracker.matrix.CostMatrix method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.stack_list">stack_list() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.stack_list_dir">stack_list_dir() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.StackIO">StackIO (class in sktracker.io)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.t_stamps">t_stamps (sktracker.trajectories.Trajectories attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.TC_BF_cells">TC_BF_cells() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffFile">TiffFile (class in sktracker.io)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.TiffSequence">TiffSequence (class in sktracker.io)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories.time_interpolate">time_interpolate() (sktracker.trajectories.Trajectories method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.tostring">tostring() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.ByFrameSolver.track">track() (sktracker.tracker.solver.ByFrameSolver method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/sktracker.tracker.solver.html#sktracker.tracker.solver.GapCloseSolver.track">(sktracker.tracker.solver.GapCloseSolver method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.trackmate.trackmate_peak_import">trackmate_peak_import() (in module sktracker.io.trackmate)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.trackmate_xml">trackmate_xml() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.trackmate_xml_temp">trackmate_xml_temp() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.trajectories.html#sktracker.trajectories.Trajectories">Trajectories (class in sktracker.trajectories)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.tubhiswt_4D">tubhiswt_4D() (in module sktracker.data)</a>
+  </dt>
+
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.TZ_nucleus">TZ_nucleus() (in module sktracker.data)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.OMEModel.uniform_ifd">uniform_ifd() (sktracker.io.OMEModel method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.io.html#sktracker.io.validate_metadata">validate_metadata() (in module sktracker.io)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.tracker.matrix.html#sktracker.tracker.matrix.CostMatrix.view">view() (sktracker.tracker.matrix.CostMatrix method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/sktracker.data.html#sktracker.data.with_gaps_df">with_gaps_df() (in module sktracker.data)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

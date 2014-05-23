@@ -1,0 +1,398 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Scikit-tracker’s documentation &mdash; sktracker 0.2 docs</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="sktracker 0.2 docs" href="#"/>
+        <link rel="next" title="What’s new" href="new.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="#" class="fa fa-home"> scikit-tracker</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="new.html">What&#8217;s new</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release/release_0.2.html">scikit-tracker v0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release/release_0.1.html">scikit-tracker v0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial : getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/sktracker.html">sktracker package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#module-sktracker.version">sktracker.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#module-sktracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute to development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">scikit-tracker</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>Scikit-tracker&#8217;s documentation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="scikit-tracker-s-documentation">
+<h1>Scikit-tracker&#8217;s documentation<a class="headerlink" href="#scikit-tracker-s-documentation" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><strong>Version</strong> : 0.2 (2014-05-23)</li>
+<li><strong>Source code</strong> : <a class="reference external" href="https://github.com/bnoi/scikit-tracker">https://github.com/bnoi/scikit-tracker</a></li>
+<li><strong>Issues, ideas and discussions</strong> : <a class="reference external" href="https://github.com/bnoi/scikit-tracker/issues">https://github.com/bnoi/scikit-tracker/issues</a></li>
+</ul>
+<p><strong>scikit-tracker</strong> aims to be a robust Python library to work with cell
+biology microscopy images. <a class="reference external" href="https://www.openmicroscopy.org/site/support/ome-model/ome-tiff/">OME XML and OME Tiff</a> are supported to
+handle input/output to the lib. The two main goals of the library is to
+implement <strong>detection</strong> and <strong>tracking</strong> algorithms relevant to analyse
+biological microscopy dataset.</p>
+<p>Several algorithms are featured and it is planned to add others:</p>
+<ul class="simple">
+<li><strong>Gaussian peak detection</strong> by deflation loop : <a class="reference external" href="http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1233.html">Segré et al. Nature
+Methods (2008)</a></li>
+<li><strong>Cell boundary detection</strong> with bright field depth fitting : <a class="reference external" href="http://www.pnas.org/content/early/2013/07/10/1301428110">Julou, T., PNAS, (2013)</a></li>
+<li><strong>Cell nucleus segmentation</strong> : by Guillaume Gay</li>
+<li><strong>Lap Tracker</strong>, a robust single-particle tracking : <a class="reference external" href="http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html">K. Jaqaman and G.
+Danuser, Nature Methods, 2008</a>. The version implemented in
+<strong>scikit-tracker</strong> is a slightly modified version from the original
+to allow easy, flexible and yet powerfull parameters adjustements
+with custom cost function.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>scikit-tracker</strong> and <tt class="docutils literal"><span class="pre">sktracker</span></tt> refer to the same thing. However <strong>scikit-tracker</strong> may be used more as a project name while <tt class="docutils literal"><span class="pre">sktracker</span></tt> as a Python module.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>scikit-tracker</strong> is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. We hope to provide soon a 0.2 release with main features working and stable.</p>
+</div>
+<div class="section" id="table-of-content">
+<h2>Table of content<a class="headerlink" href="#table-of-content" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="new.html">What&#8217;s new</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release/release_0.2.html">scikit-tracker v0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release/release_0.1.html">scikit-tracker v0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installation-from-source-github-repo">Installation from source (Github repo)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html#one-command-line">One command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#clone-and-install">Clone and install</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial : getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#gaussian-peak-detection">Gaussian peak detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#purpose">Purpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#principle">Principle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-boundary-detection">Cell boundary detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id1">Purpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id2">Principle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id3">Purpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id4">Principle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#lap-tracker">Lap Tracker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id5">Purpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id6">Principle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/sktracker.html">sktracker package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/sktracker.data.html">sktracker.data package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.data.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.data.html#module-sktracker.data.trajectories_generator">sktracker.data.trajectories_generator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.data.html#module-sktracker.data">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/sktracker.detection.html">sktracker.detection package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.detection.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.detection.html#module-sktracker.detection.cell_boundaries_detector">sktracker.detection.cell_boundaries_detector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.detection.html#module-sktracker.detection.nuclei_detector">sktracker.detection.nuclei_detector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.detection.html#module-sktracker.detection.peak_detector">sktracker.detection.peak_detector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.detection.html#module-sktracker.detection">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/sktracker.io.html">sktracker.io package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.metadataio">sktracker.io.metadataio module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.objectsio">sktracker.io.objectsio module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.ome">sktracker.io.ome module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.stackio">sktracker.io.stackio module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.tifffile">sktracker.io.tifffile module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.io.html#requirements">Requirements</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.io.html#notes">Notes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.io.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.io.html#references">References</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.io.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.trackmate">sktracker.io.trackmate module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io.utils">sktracker.io.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.io.html#module-sktracker.io">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/sktracker.tracker.html">sktracker.tracker package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.tracker.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.tracker.cost_function.html">sktracker.tracker.cost_function package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.cost_function.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.abstract_cost_functions">sktracker.tracker.cost_function.abstract_cost_functions module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.brownian">sktracker.tracker.cost_function.brownian module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.diagonal">sktracker.tracker.cost_function.diagonal module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.directed">sktracker.tracker.cost_function.directed module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.cost_function.html#module-sktracker.tracker.cost_function.gap_close">sktracker.tracker.cost_function.gap_close module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.cost_function.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.tracker.lapjv.html">sktracker.tracker.lapjv package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.lapjv.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.lapjv.html#module-sktracker.tracker.lapjv.lapjv">sktracker.tracker.lapjv.lapjv module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.lapjv.html#module-sktracker.tracker.lapjv">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.tracker.matrix.html">sktracker.tracker.matrix package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.matrix.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.matrix.html#module-sktracker.tracker.matrix.matrix">sktracker.tracker.matrix.matrix module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.matrix.html#module-sktracker.tracker.matrix">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.tracker.solver.html">sktracker.tracker.solver package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.solver.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.solver.html#module-sktracker.tracker.solver.by_frame_solver">sktracker.tracker.solver.by_frame_solver module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.solver.html#module-sktracker.tracker.solver.gap_close_solver">sktracker.tracker.solver.gap_close_solver module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.solver.html#module-sktracker.tracker.solver.solver">sktracker.tracker.solver.solver module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.solver.html#module-sktracker.tracker.solver">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.tracker.utils.html">sktracker.tracker.utils package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.utils.html#module-sktracker.tracker.utils.scores">sktracker.tracker.utils.scores module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/sktracker.tracker.utils.html#module-sktracker.tracker.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.tracker.html#module-sktracker.tracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/sktracker.trajectories.html">sktracker.trajectories package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.trajectories.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.trajectories.html#sktracker-trajectories-draw-module">sktracker.trajectories.draw module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.trajectories.html#module-sktracker.trajectories.trajectories">sktracker.trajectories.trajectories module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.trajectories.html#module-sktracker.trajectories">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/sktracker.utils.html">sktracker.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.utils.html#module-sktracker.utils.color_system">sktracker.utils.color_system module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.utils.html#module-sktracker.utils.ipython">sktracker.utils.ipython module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.utils.html#module-sktracker.utils.progress">sktracker.utils.progress module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.utils.html#module-sktracker.utils.transformations">sktracker.utils.transformations module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.utils.html#requirements">Requirements</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.utils.html#notes">Notes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.utils.html#references">References</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/sktracker.utils.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="api/sktracker.utils.html#module-sktracker.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#module-sktracker.version">sktracker.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sktracker.html#module-sktracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute to development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="new.html" class="btn btn-neutral float-right" title="What’s new">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

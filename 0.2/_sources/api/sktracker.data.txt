@@ -1,0 +1,22 @@
+sktracker.data package
+======================
+
+Submodules
+----------
+
+sktracker.data.trajectories_generator module
+--------------------------------------------
+
+.. automodule:: sktracker.data.trajectories_generator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.data
+    :members:
+    :undoc-members:
+    :show-inheritance:

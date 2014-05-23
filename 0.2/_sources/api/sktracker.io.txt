@@ -1,0 +1,70 @@
+sktracker.io package
+====================
+
+Submodules
+----------
+
+sktracker.io.metadataio module
+------------------------------
+
+.. automodule:: sktracker.io.metadataio
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.io.objectsio module
+-----------------------------
+
+.. automodule:: sktracker.io.objectsio
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.io.ome module
+-----------------------
+
+.. automodule:: sktracker.io.ome
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.io.stackio module
+---------------------------
+
+.. automodule:: sktracker.io.stackio
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.io.tifffile module
+----------------------------
+
+.. automodule:: sktracker.io.tifffile
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.io.trackmate module
+-----------------------------
+
+.. automodule:: sktracker.io.trackmate
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.io.utils module
+-------------------------
+
+.. automodule:: sktracker.io.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.io
+    :members:
+    :undoc-members:
+    :show-inheritance:

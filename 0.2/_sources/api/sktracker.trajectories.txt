@@ -1,0 +1,30 @@
+sktracker.trajectories package
+==============================
+
+Submodules
+----------
+
+sktracker.trajectories.draw module
+----------------------------------
+
+.. automodule:: sktracker.trajectories.draw
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.trajectories.trajectories module
+------------------------------------------
+
+.. automodule:: sktracker.trajectories.trajectories
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.trajectories
+    :members:
+    :undoc-members:
+    :show-inheritance:

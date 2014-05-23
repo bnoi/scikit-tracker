@@ -1,0 +1,8 @@
+What's new
+==========
+
+.. toctree::
+    :maxdepth: 2
+
+    release/release_0.2.txt
+    release/release_0.1.txt
