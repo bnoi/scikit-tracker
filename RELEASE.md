@@ -16,8 +16,9 @@
 - Check doc is ok lcoally and then push doc : `make push_doc`
 
 - Add the version number as a tag in git : `git tag v0.X.0`
-
 - Push the new meta-data to github : `git push --tags origin master`
+
+- Create release on Github so zenodo can create and update DOI
 
 - Publish on PyPi :
 
