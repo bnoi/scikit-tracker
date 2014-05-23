@@ -27,6 +27,8 @@
    python setup.py sdist upload
 ```
 
-- Increase the version number in `setup.py`, set to `dev`.
-
+- Increase the version number in `sktracker/version.py` and `dev` suffix.
 - Update the development docs for the new version `0.X-dev` just like above
+- Push the new dev doc
+
+- Go drink a beer, you deserved it :-)
