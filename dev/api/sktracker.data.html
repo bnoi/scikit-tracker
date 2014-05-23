@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.data package &mdash; sktracker 0.3.dev-43c710f docs</title>
+  <title>sktracker.data package &mdash; sktracker 0.3.dev-29494b8 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-43c710f docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-29494b8 docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.detection package" href="sktracker.detection.html"/>
         <link rel="prev" title="sktracker package" href="sktracker.html"/> 
@@ -192,29 +192,28 @@ object labels.</p>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">trajectories_generator</span><span class="p">(</span><span class="n">n_part</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-<span class="go">                                        noise=1e-10, p_disapear=1e-10,</span>
-<span class="go">                                        sampling=10, seed=0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
-<span class="go">                          x         y         z  true_label   t</span>
-<span class="go">    t_stamp label</span>
-<span class="go">    0       0      0.616882  0.902349  0.521563           4   0</span>
-<span class="go">            1      0.153268  0.963879  0.641001           0   0</span>
-<span class="go">            2      0.697661  0.765814  0.952269           2   0</span>
-<span class="go">            3      0.133093  0.616393  0.119415           3   0</span>
-<span class="go">            4      0.580687  0.054081  0.465635           1   0</span>
-<span class="go">    1       0      0.120437  0.639993  0.129516           3   1</span>
-<span class="go">            1      0.712195  0.785034  0.962370           2   1</span>
-<span class="go">            2      0.625566  0.870682  0.531664           4   1</span>
-<span class="go">            3      0.577739  0.043900  0.475736           1   1</span>
-<span class="go">            4      0.135332  0.976875  0.651102           0   1</span>
-<span class="go">    2       0      0.633960  0.839042  0.541765           4   2</span>
-<span class="go">            1      0.107496  0.663800  0.139617           3   2</span>
-<span class="go">            2      0.726992  0.804561  0.972471           2   2</span>
-<span class="go">            3      0.117182  0.990282  0.661203           0   2</span>
-<span class="go">            4      0.575109  0.033273  0.485837           1   2</span>
-<span class="go">    ...</span>
-</pre></div>
+<div class="highlight-python"><pre>&gt;&gt;&gt; trajs = data.trajectories_generator(n_part=5, n_times=100,
+                                        noise=1e-10, p_disapear=1e-10,
+                                        sampling=10, seed=0)
+&gt;&gt;&gt; print(trajs)
+                          x         y         z  true_label   t
+    t_stamp label
+    0       0      0.616882  0.902349  0.521563           4   0
+            1      0.153268  0.963879  0.641001           0   0
+            2      0.697661  0.765814  0.952269           2   0
+            3      0.133093  0.616393  0.119415           3   0
+            4      0.580687  0.054081  0.465635           1   0
+    1       0      0.120437  0.639993  0.129516           3   1
+            1      0.712195  0.785034  0.962370           2   1
+            2      0.625566  0.870682  0.531664           4   1
+            3      0.577739  0.043900  0.475736           1   1
+            4      0.135332  0.976875  0.651102           0   1
+    2       0      0.633960  0.839042  0.541765           4   2
+            1      0.107496  0.663800  0.139617           3   2
+            2      0.726992  0.804561  0.972471           2   2
+            3      0.117182  0.990282  0.661203           0   2
+            4      0.575109  0.033273  0.485837           1   2
+    ...</pre>
 </div>
 </dd></dl>
 
@@ -382,7 +381,7 @@ object labels.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-43c710f',
+            VERSION:'0.3.dev-29494b8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

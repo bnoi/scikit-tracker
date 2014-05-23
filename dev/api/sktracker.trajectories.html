@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-43c710f docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-29494b8 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-43c710f docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-29494b8 docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.utils package" href="sktracker.utils.html"/>
         <link rel="prev" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/> 
@@ -424,16 +424,15 @@ as the new label index</p>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker.tracker.solver</span> <span class="kn">import</span> <span class="n">ByFrameSolver</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">true_trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">brownian_trajectories_generator</span><span class="p">(</span><span class="n">p_disapear</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">ByFrameSolver</span><span class="o">.</span><span class="n">for_brownian_motion</span><span class="p">(</span><span class="n">true_trajs</span><span class="p">,</span> <span class="n">max_speed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">trajs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">track</span><span class="p">(</span><span class="n">progress_bar</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span> <span class="o">=</span> <span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="n">groupby_args</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&quot;label&quot;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span> <span class="o">=</span> <span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="n">groupby_args</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;by&#39;</span><span class="p">:</span> <span class="s">&quot;true_label&quot;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
-</pre></div>
+<div class="highlight-python"><pre>&gt;&gt;&gt; from sktracker import data
+&gt;&gt;&gt; from sktracker.tracker.solver import ByFrameSolver
+&gt;&gt;&gt; import matplotlib.pylab as plt
+&gt;&gt;&gt; true_trajs = data.brownian_trajectories_generator(p_disapear=0.1)
+&gt;&gt;&gt; solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=2)
+&gt;&gt;&gt; trajs = solver.track(progress_bar=False)
+&gt;&gt;&gt; fig, (ax1, ax2) = plt.subplots(nrows=2)
+&gt;&gt;&gt; ax1 = trajs.show(xaxis=&#x27;t&#x27;, yaxis=&#x27;x&#x27;, groupby_args={&#x27;level&#x27;: &quot;label&quot;}, ax=ax1)
+&gt;&gt;&gt; ax2 = trajs.show(xaxis=&#x27;t&#x27;, yaxis=&#x27;x&#x27;, groupby_args={&#x27;by&#x27;: &quot;true_label&quot;}, ax=ax2)</pre>
 </div>
 </dd></dl>
 
@@ -549,7 +548,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-43c710f',
+            VERSION:'0.3.dev-29494b8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
