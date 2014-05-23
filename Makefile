@@ -30,7 +30,7 @@ test:
 	nosetests sktracker -v --logging-clear-handlers
 
 coverage:
-	nosetests sktracker --with-coverage --cover-package=sktracker -v
+	nosetests sktracker --with-coverage --cover-package=sktracker -v --logging-clear-handlers
 
 doc:
 	cd doc/ && make clean && make api && make html
