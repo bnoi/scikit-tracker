@@ -27,7 +27,7 @@ clean:
 	rm -rf build/ dist/ scikit_tracker.egg-info/
 
 test:
-	nosetests sktracker -v
+	nosetests sktracker -v --logging-clear-handlers
 
 coverage:
 	nosetests sktracker --with-coverage --cover-package=sktracker -v
