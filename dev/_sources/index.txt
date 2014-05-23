@@ -1,6 +1,18 @@
 Scikit-tracker's documentation
 ==============================
 
+.. raw:: html
+
+   <p style="height:22px">
+     <a href="https://travis-ci.org/bnoi/scikit-tracker" >
+       <img src="https://travis-ci.org/bnoi/scikit-tracker.png?branch=master"/>
+     </a>
+     <a href="http://dx.doi.org/10.5281/zenodo.10067" >
+       <img src="https://zenodo.org/badge/4163/bnoi/scikit-tracker.png"/>
+     </a>
+   </p>
+
+
 - **Version** : |version| |rev_date|
 - **Source code** : https://github.com/bnoi/scikit-tracker
 - **Issues, ideas and discussions** : https://github.com/bnoi/scikit-tracker/issues
