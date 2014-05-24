@@ -196,7 +196,7 @@ def label_from_thresh(frame, thresh, parameters):
 
     smooth = parameters['smooth']
     min_distance = np.int(parameters['nuc_distance'])
-    image = rank.median(frame.copy(), disk(smooth))
+    image = rank.median(frame, disk(smooth))
     image = rank.enhance_contrast(image, disk(smooth))
     im_max = image.max()
     if im_max < thresh:
@@ -205,7 +205,8 @@ def label_from_thresh(frame, thresh, parameters):
         image = image > thresh
         distance = ndimage.distance_transform_edt(image)
         local_maxi = peak_local_max(distance,
-                                    min_distance=min_distance,
+                                    footprint=disk(min_distance),
+                                    #min_distance=min_distance,
                                     indices=False, labels=image)
         markers = ndimage.label(local_maxi)[0]
         return watershed(-distance, markers, mask=image)
