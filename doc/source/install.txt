@@ -6,7 +6,7 @@ Dependencies
 
 ``sktracker`` depends on the following packages :
 
-- python >= 3.3 (ask if you need support for python 2.7)
+- Python >= 2.7 and >= 3.3
 - numpy >= 1.8
 - scipy >= 0.12
 - pandas >= 0.13
@@ -25,12 +25,6 @@ Dependencies
 
 From PyPI
 ---------
-
-.. code-block:: sh
-
-  $ easy_install -U scikit-tracker
-
-or
 
 .. code-block:: sh
 

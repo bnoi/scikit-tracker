@@ -28,7 +28,7 @@ Current stable version is v0.2.
 
 ## Dependencies
 
-- Python >= 3.3
+- Python >= 2.7 and >= 3.3
 - numpy >= 1.8
 - scipy >= 0.12
 - pandas >= 0.13
