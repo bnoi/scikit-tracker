@@ -7,11 +7,10 @@ Scikit-tracker's documentation
      <a href="https://travis-ci.org/bnoi/scikit-tracker" >
        <img src="https://travis-ci.org/bnoi/scikit-tracker.png?branch=master"/>
      </a>
-     <a href="http://dx.doi.org/10.5281/zenodo.10067" >
-       <img src="https://zenodo.org/badge/4163/bnoi/scikit-tracker.png"/>
+     <a href="http://dx.doi.org/10.5281/zenodo.10078" >
+       <img src="https://zenodo.org/badge/doi/10.5281/zenodo.10078.png"/>
      </a>
    </p>
-
 
 - **Version** : |version| |rev_date|
 - **Source code** : https://github.com/bnoi/scikit-tracker
