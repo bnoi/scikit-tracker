@@ -278,10 +278,12 @@ def image_deflation(image, peaks, w_s):  # pragma: no cover
         low_x = int(xc - w_s // 2)
         low_y = int(yc - w_s // 2)
 
-        params = xc_rel, yc_rel, width, I, 0
-        deflated_peak = gauss_continuous(params, w_s)
-        d_image[low_x:low_x + w_s,
-                low_y:low_y + w_s] -= deflated_peak.reshape((w_s, w_s))
+        if low_x > 0 and low_y > 0:
+            params = xc_rel, yc_rel, width, I, 0
+            deflated_peak = gauss_continuous(params, w_s)
+            d_image[low_x:low_x + w_s,
+                    low_y:low_y + w_s] -= deflated_peak.reshape((w_s, w_s))
+
     return d_image
 
 
