@@ -79,7 +79,7 @@ if __name__ == '__main__':
     if "dev" in version:
         tag = "dev"
     else:
-        tag = version
+        tag = version[:3]
 
     startdir = os.getcwd()
     if not os.path.exists(pages_dir):
