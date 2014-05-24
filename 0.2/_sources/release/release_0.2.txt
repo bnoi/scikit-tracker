@@ -16,3 +16,5 @@ Both algorithms are parallelized.
 - fill gaps in tracked trajectories with :class:`sktracker.tracker.solver.GapCloseSolver`
 
 We hope to provide you some code examples in the documentation soon.
+
+*scikit-tracker* has released a v0.2.1 due to a bug preventing users to install from pip.
