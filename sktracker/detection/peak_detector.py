@@ -82,7 +82,7 @@ def peak_detector(data_iterator,
     log.info('Initializing peak detection')
 
     _parameters = DEFAULT_PARAMETERS.copy()
-    _parameters.update(parameters)
+    _parameters.update(parameters.copy())
     parameters = _parameters
 
     # Scale parameters in pixels
