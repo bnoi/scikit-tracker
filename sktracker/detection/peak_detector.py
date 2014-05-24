@@ -170,7 +170,7 @@ def peak_detector(data_iterator,
 
     log.info('Terminating peak detection')
 
-    peaks_df = pd.DataFrame(peaks_df, columns=['x', 'y', 'w', 'I'], dtype='float')
+    peaks_df = pd.DataFrame(peaks_df, columns=['y', 'x', 'w', 'I'], dtype='float')
     peaks_df.index = pd.MultiIndex.from_tuples(index, names=['t_stamp'])
 
     t_stamp = peaks_df.index.get_level_values('t_stamp').values
