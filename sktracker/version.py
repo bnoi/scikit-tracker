@@ -12,7 +12,7 @@ import subprocess
 
 __all__ = ["__version__"]
 
-version = '0.2.dev'
+version = '0.3.dev'
 
 if 'dev' in version:
     try:

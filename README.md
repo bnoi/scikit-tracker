@@ -1,6 +1,8 @@
 # Objects detection and robust tracking for cell biology
 
 [![Build Status](https://travis-ci.org/bnoi/scikit-tracker.png?branch=master)](https://travis-ci.org/bnoi/scikit-tracker)
+[![scikit-tracker DOI](https://zenodo.org/badge/4163/bnoi/scikit-tracker.png)](http://dx.doi.org/10.5281/zenodo.10067)
+
 
 **scikit-tracker** aims to be a robust Python library to work with cell biology microscopy images. [OME XML and OME Tiff](https://www.openmicroscopy.org/site/support/ome-model/ome-tiff/) are supported to handle input/output to the lib. The two main goals of the library is to implement **detection** and **tracking** algorithms relevant to analyse biological microscopy dataset.
 
@@ -16,11 +18,13 @@ Several algorithms are featured and it is planned to add others:
 
 ## Warning
 
-**scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. We hope to provide soon a 0.2 release with main features working and stable.
+**scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. However recent 0.2 release provide some basics features.
 
 ## Documentation
 
-- Stable version : http://bnoi.github.io/scikit-tracker/stable  (currently obsolete, check dev documentation instead)
+Current stable version is v0.2.
+
+- Stable version : http://bnoi.github.io/scikit-tracker/stable
 - Dev version : http://bnoi.github.io/scikit-tracker/dev
 
 ## Dependencies

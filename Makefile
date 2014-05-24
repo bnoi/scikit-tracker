@@ -1,4 +1,4 @@
-.PHONY: help init build clean test coverage doc push_doc
+.PHONY: help init_submodule update_submodule build clean test coverage doc push_doc
 
 help:
 	@echo "Please use make <target> where <target> is one of"
@@ -27,15 +27,14 @@ clean:
 	rm -rf build/ dist/ scikit_tracker.egg-info/
 
 test:
-	nosetests sktracker -v
+	nosetests sktracker -v --logging-clear-handlers
 
 coverage:
-	nosetests sktracker --with-coverage --cover-package=sktracker -v
+	nosetests sktracker --with-coverage --cover-package=sktracker -v --logging-clear-handlers
 
 doc:
 	cd doc/ && make clean && make api && make html
 
 push_doc:
-	cd doc/ && make clean && make api && make html
 	cd doc/ && python gh-pages.py
 	cd doc/gh-pages/ && git push origin gh-pages && cd ../../

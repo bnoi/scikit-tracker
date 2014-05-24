@@ -77,8 +77,7 @@ if __name__ == "__main__":
         version=VERSION,
 
         classifiers=[
-            'Development Status :: 2 - Pre-Alpha',
-            'Environment :: Console',
+            'Development Status :: 4 - Beta',
             'Intended Audience :: Developers',
             'Intended Audience :: Science/Research',
             'License :: OSI Approved :: BSD License',
@@ -86,8 +85,7 @@ if __name__ == "__main__":
             'Programming Language :: Python :: 3',
             'Topic :: Scientific/Engineering',
             'Operating System :: Microsoft :: Windows',
-            'Operating System :: POSIX',
-            'Operating System :: Unix',
+            'Operating System :: POSIX :: Linux',
             'Operating System :: MacOS',
         ],
 

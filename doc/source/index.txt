@@ -1,6 +1,18 @@
 Scikit-tracker's documentation
 ==============================
 
+.. raw:: html
+
+   <p style="height:22px">
+     <a href="https://travis-ci.org/bnoi/scikit-tracker" >
+       <img src="https://travis-ci.org/bnoi/scikit-tracker.png?branch=master"/>
+     </a>
+     <a href="http://dx.doi.org/10.5281/zenodo.10067" >
+       <img src="https://zenodo.org/badge/4163/bnoi/scikit-tracker.png"/>
+     </a>
+   </p>
+
+
 - **Version** : |version| |rev_date|
 - **Source code** : https://github.com/bnoi/scikit-tracker
 - **Issues, ideas and discussions** : https://github.com/bnoi/scikit-tracker/issues
@@ -36,7 +48,7 @@ Several algorithms are featured and it is planned to add others:
 
 .. warning::
 
-    **scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. We hope to provide soon a 0.2 release with main features working and stable.
+    **scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. However recent 0.2 release provide some basics features.
 
 Table of content
 ----------------

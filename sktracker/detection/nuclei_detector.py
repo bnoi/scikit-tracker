@@ -23,7 +23,6 @@ from skimage.morphology import disk, watershed
 from skimage.feature import peak_local_max
 from skimage.measure import regionprops
 
-from ..io import ObjectsIO
 from ..trajectories import Trajectories
 
 log = logging.getLogger(__name__)
@@ -36,7 +35,7 @@ DEFAULT_PARAMETERS = {'segment_method': 'otsu',
                       'min_radius': 2.,
                       'max_radius': 8.,
                       'num_cells': 8,
-                      'nuc_distance':6,
+                      'nuc_distance': 6,
                       'min_z_size': 4
                       }
 
@@ -104,10 +103,10 @@ def nuclei_detector(data_iterator,
         't_stamp') * metadata['TimeIncrement']
     nuclei_positions['t'] = real_times
     nuclei_positions['t'] = nuclei_positions['t'].astype(np.float)
-    nuclei_positions['x'] *=  metadata['PhysicalSizeX']
-    nuclei_positions['y'] *=  metadata['PhysicalSizeY']
-    nuclei_positions['z'] *=  metadata['PhysicalSizeZ']
-    nuclei_positions['w'] *=  metadata['PhysicalSizeX']
+    nuclei_positions['x'] *= metadata['PhysicalSizeX']
+    nuclei_positions['y'] *= metadata['PhysicalSizeY']
+    nuclei_positions['z'] *= metadata['PhysicalSizeZ']
+    nuclei_positions['w'] *= metadata['PhysicalSizeX']
     return Trajectories(nuclei_positions)
 
 
@@ -128,7 +127,7 @@ def detect_one_stack(args, full_output=False):
             return output
         else:
             return {}
-    if z_stack.shape[0] == 1: ## Only one z plane
+    if z_stack.shape[0] == 1:  # Only one z plane
         positions = all_props.copy()
         positions.index = pd.Index(range(all_props.shape[0]))
         if full_output:
@@ -152,7 +151,7 @@ def detect_one_stack(args, full_output=False):
                   'agregated_props': agregated_props,
                   'labeled_stack': labeled_stack}
     else:
-        output = {'positions': positions,}
+        output = {'positions': positions}
     return output
 
 
@@ -228,11 +227,11 @@ def get_regionprops(labeled_stack, z_stack, parameters):
     columns = ('x', 'y', 'z', 'I', 'w')
     indices = []
     for z, frame in enumerate(labeled_stack):
-        f_prop = regionprops(frame.astype(np.int),# properties,
+        f_prop = regionprops(frame.astype(np.int),  # properties,
                              intensity_image=z_stack[z])
         for d in f_prop:
             radius = (d.area / np.pi)**0.5
-            if (min_radius  < radius < max_radius):
+            if (min_radius < radius < max_radius):
                 all_props.append([d.centroid[0],
                                   d.centroid[1],
                                   z, d.mean_intensity * d.area,

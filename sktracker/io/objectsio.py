@@ -22,6 +22,8 @@ import pandas as pd
 log = logging.getLogger(__name__)
 
 from . import validate_metadata
+from ..utils.dict import sanitize_dict
+from ..utils.dict import guess_number_dict
 
 __all__ = []
 
@@ -98,12 +100,14 @@ class ObjectsIO(object):
             obj = store[name]
 
         if isinstance(obj, pd.Series):
-            return obj.to_dict()
-        else:
-            return obj
+            obj = obj.to_dict()
+            obj = guess_number_dict(obj)
+
+        return obj
 
     def clean_store_file(self):
-        """Remove duplicate data. See https://github.com/pydata/pandas/issues/2132.
+        """Remove duplicate data.
+        See https://github.com/pydata/pandas/issues/2132.
         """
         _, fname = tempfile.mkstemp()
 
@@ -131,7 +135,8 @@ class ObjectsIO(object):
             if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
                 store[name] = obj
             elif isinstance(obj, dict) or isinstance(obj, UserDict):
-                store[name] = _serialize(obj)
+                obj = sanitize_dict(obj)
+                store[name] = pd.Series(obj)
 
     def __delitem__(self, name):
         """
@@ -175,11 +180,6 @@ class ObjectsIO(object):
                    store_path=store_path,
                    base_dir=base_dir,
                    minimum_metadata_keys=minimum_metadata_keys)
-
-
-def _serialize(attr):
-    ''' Creates a pandas series from a dictionnary'''
-    return pd.Series(attr)
 
 
 class OIOMetadata(UserDict):

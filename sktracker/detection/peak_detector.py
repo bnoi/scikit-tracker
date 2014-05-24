@@ -14,6 +14,11 @@ import subprocess
 import multiprocessing
 import itertools
 
+try:
+    from subprocess import DEVNULL  # py3k
+except ImportError:
+    DEVNULL = open(os.devnull, 'wb')
+
 from scipy.optimize import leastsq
 from skimage import feature
 
@@ -95,7 +100,9 @@ def peak_detector(data_iterator,
         # module such as numpy (only needed on linux)
         if os.name == 'posix':
             subprocess.call("taskset -p 0xff %d" % os.getpid(),
-                            shell=True)  # stdout=subprocess.DEVNULL) ## Py2.7 compat
+                            shell=True,
+                            stdout=DEVNULL,
+                            stderr=DEVNULL)
 
         def init_worker():
             import signal
