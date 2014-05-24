@@ -59,7 +59,7 @@ def test_nuclei_detector_naive():
     cell_positions = nuclei_detector(stack_iter(),
                                      metadata=metadata,
                                      parameters=parameters)
-    assert cell_positions.shape == (12, 6)
+    assert cell_positions.shape == (11, 6)
 
 
 @with_setup(setup)
