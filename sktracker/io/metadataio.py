@@ -8,6 +8,7 @@ from __future__ import print_function
 
 import os
 import json
+import ast
 import logging
 from collections import OrderedDict
 
@@ -18,6 +19,22 @@ from . import OMEModel
 
 __all__ = []
 
+METADATA_TYPE = {'SizeT': int,
+                 'SizeZ': int,
+                 'SizeC': int,
+                 'SizeY': int,
+                 'SizeX': int,
+                 'SizeI': int,
+                 'PhysicalSizeX': float,
+                 'PhysicalSizeY': float,
+                 'PhysicalSizeZ': float,
+                 'TimeIncrement': float,
+                 'Shape': (list, tuple),
+                 'DimensionOrder': (list, tuple, str),
+                 'Channels': (list, tuple),
+                 'AcquisitionDate': str,
+                 'unique_id': str,
+                 'FileName': str}
 
 class OIOMetadata(OrderedDict):
     '''
@@ -28,11 +45,29 @@ class OIOMetadata(OrderedDict):
         self.objectsio = objectsio
         OrderedDict.__init__(self, metadata_dict)
         self.objectsio['metadata'] = self
+        self._check_data_type()
 
     def __setitem__(self, key, value):
 
         OrderedDict.__setitem__(self, key, value)
         self.objectsio['metadata'] = self
+
+    def _check_data_type(self):
+        """"Check for basic data type. If data type does not match then try to catch.
+        """
+
+        for k, v in METADATA_TYPE.items():
+            if k in self.keys():
+                if not isinstance(self[k], v):
+                    try:
+                        if type(v).__name__ in ['list', 'tuple']:
+                            self[k] = ast.literal_eval(self[k])
+                        else:
+                            self[k] = v(self[k])
+                    except:
+                        msg = "Metadata contains wrong data type '{}'' has type {}, should be {}"
+                        raise ValueError(msg.format(k, type(self[k]), v))
+
 
 
 def get_metadata(filename, json_discovery=False, base_dir=None):

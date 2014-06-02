@@ -1,4 +1,6 @@
-__all__ = ["sanitize_dict", "guess_number_dict"]
+import ast
+
+__all__ = ["sanitize_dict", "guess_values_type"]
 
 
 def sanitize_dict(obj):
@@ -16,8 +18,8 @@ def sanitize_dict(obj):
     return new_obj
 
 
-def guess_number_dict(obj):
-    """Try to convert dict values in int and float when possible.
+def guess_values_type(obj):
+    """Try to convert dict values in various data type when possible.
 
     Parameters
     ----------
@@ -27,14 +29,16 @@ def guess_number_dict(obj):
     ------
     new_obj : dict
     """
+
+    casters = [ast.literal_eval, int, float]
+
     new_obj = {}
     for k, v in obj.items():
-        try:
-            _tmp = int(v)
-        except:
+        _tmp = v
+        for caster in casters:
             try:
-                _tmp = float(v)
+                _tmp = caster(v)
             except:
-                _tmp = v
+                pass
         new_obj[k] = _tmp
     return new_obj

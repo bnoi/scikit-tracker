@@ -19,7 +19,7 @@ log = logging.getLogger(__name__)
 from . import validate_metadata
 from .metadataio import OIOMetadata
 from ..utils.dict import sanitize_dict
-from ..utils.dict import guess_number_dict
+from ..utils.dict import guess_values_type
 
 __all__ = []
 
@@ -97,7 +97,7 @@ class ObjectsIO(object):
 
         if isinstance(obj, pd.Series):
             obj = obj.to_dict()
-            obj = guess_number_dict(obj)
+            obj = guess_values_type(obj)
 
         return obj
 
@@ -130,7 +130,7 @@ class ObjectsIO(object):
         with pd.get_store(self.store_path) as store:
             if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
                 store[name] = obj
-            elif isinstance(obj, dict) or isinstance(obj, UserDict):
+            elif isinstance(obj, dict) or isinstance(obj, OrderedDict):
                 obj = sanitize_dict(obj)
                 store[name] = pd.Series(obj)
 
