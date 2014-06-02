@@ -12,16 +12,12 @@ import os
 import tempfile
 import shutil
 
-if sys.version_info[0] > 2:
-    from collections import UserDict
-else:
-    from UserDict import UserDict
-
 import pandas as pd
 
 log = logging.getLogger(__name__)
 
 from . import validate_metadata
+from .metadataio import OIOMetadata
 from ..utils.dict import sanitize_dict
 from ..utils.dict import guess_number_dict
 
@@ -182,17 +178,3 @@ class ObjectsIO(object):
                    minimum_metadata_keys=minimum_metadata_keys)
 
 
-class OIOMetadata(UserDict):
-    '''
-    A subclass of UserDict with a modified `__setitem__`, such that
-    any modification to the metadata is copied to the `h5` file
-    '''
-    def __init__(self, metadata_dict, objectsio):
-        self.objectsio = objectsio
-        UserDict.__init__(self, metadata_dict)
-        self.objectsio['metadata'] = self.data
-
-    def __setitem__(self, key, value):
-
-        self.data[key] = value
-        self.objectsio['metadata'] = self.data

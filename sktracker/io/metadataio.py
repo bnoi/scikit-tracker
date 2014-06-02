@@ -1,6 +1,4 @@
-
 # -*- coding: utf-8 -*-
-
 
 from __future__ import unicode_literals
 from __future__ import division
@@ -11,6 +9,7 @@ from __future__ import print_function
 import os
 import json
 import logging
+from collections import OrderedDict
 
 log = logging.getLogger(__name__)
 
@@ -18,6 +17,22 @@ from . import TiffFile
 from . import OMEModel
 
 __all__ = []
+
+
+class OIOMetadata(OrderedDict):
+    '''
+    A subclass of OrderedDict with a modified `__setitem__`, such that
+    any modification to the metadata is copied to the `h5` file
+    '''
+    def __init__(self, metadata_dict, objectsio):
+        self.objectsio = objectsio
+        OrderedDict.__init__(self, metadata_dict)
+        self.objectsio['metadata'] = self
+
+    def __setitem__(self, key, value):
+
+        OrderedDict.__setitem__(self, key, value)
+        self.objectsio['metadata'] = self
 
 
 def get_metadata(filename, json_discovery=False, base_dir=None):
