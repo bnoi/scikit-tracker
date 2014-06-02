@@ -448,8 +448,8 @@ class Trajectories(pd.DataFrame):
 
         self.reset_index(level='label', drop=True, inplace=True)
         self.index.set_names(['t_stamp', 'label'], inplace=True)
-        self.sortlevel('label', inplace=True)
-        self.sortlevel('t_stamp', inplace=True)
+        self.sort_index(inplace=True)
+        # self.sortlevel('t_stamp', inplace=True)
         self.relabel_fromzero('label', inplace=inplace)
 
     def all_speeds(self, coords=['x', 'y', 'z']):
