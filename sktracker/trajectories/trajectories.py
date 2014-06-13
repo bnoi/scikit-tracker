@@ -469,6 +469,33 @@ class Trajectories(pd.DataFrame):
 
         return np.array(speeds)
 
+    def scale(self, factors, coords=['x', 'y', 'z'], inplace=False):
+        '''Multiplies the columns given in coords by the values given in factors.
+        The `factors` and `columns` must have the same length
+
+        Parameters
+        ----------
+        factors : sequence of floats
+            Values by which each colum will be multiplied
+        columns : sequence of column indices, default ['x', 'y', 'z']
+            Name of the columns to be scaled by factors
+        inplace : bool, optional, default False
+            If True, modifies the trajectories inplace, else returns a copy
+
+        Returns
+        -------
+
+        The original trajectories scaled or a copy
+        '''
+
+        if len(factors) != len(coords):
+            raise ValueError('''Arguments factors and coords must be of same length''')
+        trajs = self if inplace else self.copy()
+        for factor, coord in zip(factors, coords):
+            trajs[coord] = trajs[coord] * factor
+        return trajs
+
+
 # Register the trajectories for storing in HDFStore
 # as a regular DataFrame
 pytables._TYPE_MAP[Trajectories] = 'frame'

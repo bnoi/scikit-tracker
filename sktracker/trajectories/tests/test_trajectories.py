@@ -144,3 +144,17 @@ def test_all_speeds():
                  35.15221208,   1.75205306,  36.63872024,  27.19684534]
 
     assert_almost_equal(speeds, real_speeds)
+
+
+def test_scale():
+
+    trajs = data.brownian_trajs_df()
+    trajs = Trajectories(trajs)
+    scaled = trajs.scale(factors=[2., 2., 2.],
+                         coords=['x', 'y', 'z'], inplace=False)
+    assert_array_almost_equal(scaled[['x', 'y', 'z']] / 2., trajs[['x', 'y', 'z']])
+    trajs = trajs.scale(factors=[2., 2., 2.],
+                         coords=['x', 'y', 'z'], inplace=True)
+    assert_array_almost_equal(scaled[['x', 'y', 'z']], trajs[['x', 'y', 'z']])
+
+    assert_raises(ValueError, trajs.scale, factors=[2., 2., 2.], coords=['x', 'y'], inplace=False)
