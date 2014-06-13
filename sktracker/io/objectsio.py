@@ -37,7 +37,9 @@ class ObjectsIO(object):
         Path to HDF5 file where metadata and objects are stored.
     base_dir : str
         Root directory (join to find `store_path`)
-
+    clean_store : bool
+        If True, remove duplicated data in the HDFStore file
+        (see https://github.com/pydata/pandas/issues/2132.)
     """
 
     def __init__(self, metadata=None,
