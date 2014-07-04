@@ -11,7 +11,7 @@ from numpy.testing import assert_array_almost_equal
 from numpy.testing import assert_almost_equal
 
 
-from sktracker.trajectories.measures import continuous_theta, get_polar_coords, radial_speed
+from sktracker.trajectories.measures.rotation import continuous_theta, get_polar_coords, radial_speed
 from sktracker.trajectories import Trajectories
 from sktracker import data
 
