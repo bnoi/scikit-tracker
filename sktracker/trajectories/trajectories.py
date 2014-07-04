@@ -10,9 +10,13 @@ from __future__ import print_function
 import numpy as np
 import pandas as pd
 import scipy as sp
+import warnings
 
 from pandas.io import pytables
 from scipy.interpolate import splev, splrep
+
+import logging
+log = logging.getLogger(__name__)
 
 
 __all__ = []
@@ -340,8 +344,8 @@ class Trajectories(pd.DataFrame):
             clrs[label] = ccycle[label % num_colors]
         return clrs
 
-    def time_interpolate(self, sampling=1,
-                         coords=['x', 'y', 'z'], s=0, k=3):
+    def time_interpolate(self, sampling=1, s=0, k=3,time_step=None,
+                         coords=['x', 'y', 'z']):
         """
         Interpolates each segment of the trajectories along time
         using `scipy.interpolate.splrep`
@@ -389,10 +393,22 @@ class Trajectories(pd.DataFrame):
 
 
         """
+        if sampling is None and time_step is not None:
+            log.warning(''' The `time_step` argument is deprecated (too fuzzy)'''
+                        '''Use the `sampling` argument instead ''')
+            dts = self.get_segments()[0].t.diff().dropna()
+            dt = np.unique(dts)[0]
+            if time_step > dt:
+                raise NotImplementedError('''Subsampling is not supported, '''
+                                          '''give a time_step bigger than the original''')
+            sampling = np.int(dt/time_step)
+            log.warning('''sampling was set to {} ({}/{})'''
+                        .format(sampling, dt, time_step))
         interpolated = self.groupby(level='label').apply(_segment_interpolate_,
                                                          sampling=sampling, s=s, k=k,
                                                          coords=coords)
-        interpolated = interpolated.swaplevel('t_stamp', 'label').sortlevel('label').sortlevel('t_stamp')
+        interpolated = interpolated.swaplevel(
+            't_stamp', 'label').sortlevel('label').sortlevel('t_stamp')
         return Trajectories(interpolated)
 
     def relabel(self, new_labels=None, inplace=True):

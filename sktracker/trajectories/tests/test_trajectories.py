@@ -106,8 +106,13 @@ def test_interpolate():
     trajs.set_index('true_label', inplace=True, append=True)
     trajs.reset_index(level='label', drop=True, inplace=True)
     trajs.index.set_names(['t_stamp', 'label'], inplace=True)
-    interpo = trajs.time_interpolate(time_step=0.1, s=1)
-    dts = interpo.get_segments()[0].t.diff().dropna()
+    interpolated = trajs.time_interpolate(sampling=3, time_step=0.1, s=1)
+    # t_stamps_in = interpolated.index.get_level_values('t_stamp')
+    # indexer = t_stamps_in % 2 == 0
+    # interpolated.loc[indexer].shape, trajs.shape
+    # indexer = interpolated.t_stamps % 3 == 0
+    # assert interpolated.loc[indexer].shape[0] == trajs.shape[0]
+    dts = interpolated.get_segments()[0].t.diff().dropna()
     # All time points should be equaly spaced
     assert_almost_equal(dts.min(), dts.max())
 

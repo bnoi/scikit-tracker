@@ -83,7 +83,7 @@ def get_polar_coords(trajs, get_dtheta=False,
                                          rho_coord:rhos})
     polar_trajs.set_index(trajs.index)
     if not periodic:
-        polar_trajs = polar_trajs.groupby(level='label').apply(continous_theta_,
+        polar_trajs = polar_trajs.groupby(level='label').apply(continuous_theta_,
                                                                theta_coord, get_dtheta)
     elif get_dtheta:
         polar_trajs['d'+theta_coord] = polar_trajs.groupby(level='label').apply(periodic_dtheta_,
@@ -96,7 +96,7 @@ def get_polar_coords(trajs, get_dtheta=False,
 
 
 ### segment method
-def continous_theta_(segment, coord='theta', get_dtheta=True):
+def continuous_theta_(segment, coord='theta', get_dtheta=True):
 
     out = _continuous_theta(segment[coord].values,
                             return_dtheta=get_dtheta)
