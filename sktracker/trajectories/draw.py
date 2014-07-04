@@ -6,6 +6,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 '''
 This module provide utility function to represent the trajectories
@@ -127,16 +128,20 @@ def show_4panels(trajs, label, coords=('x', 'y', 'z'),
         line_kw['c'] = colors[label]
 
     if axes is None:
-        fig, axes = plt.subplots(2, 2, sharex='col',
-                                 sharey='row', figsize=(6, 6))
-        axes[1, 1].axis('off')
-        try:
-            ax_3d = fig.add_subplot(224, projection='3d')
-        except:
-            ax_3d = None
+
+        fig = plt.figure(figsize=(6, 6))
+        ax2 = fig.add_subplot(222, aspect='equal')
+        ax3 = fig.add_subplot(223, aspect='equal')
+        ax1 = fig.add_subplot(221, sharey=ax2, sharex=ax3)
+
+        ax_3d = fig.add_subplot(224, projection='3d')
+        axes = np.array([[ax1, ax2], [ax3, ax_3d]])
+        ax_3d.set_aspect('equal')
 
     for ax in axes.ravel():
         ax.set_aspect('equal')
+        ax.grid()
+
     axes[0, 0].scatter(segment[u].values,
                        segment[v].values, **scatter_kw)
     axes[0, 1].scatter(segment[w].values,

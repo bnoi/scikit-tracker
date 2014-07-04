@@ -374,9 +374,9 @@ class Trajectories(pd.DataFrame):
         Returns
         -------
         interpolated : a :class:`Trajectories` instance
-           The interpolated values with column names identical to `coords`
+           The interpolated values, with identical index as input and column names given by `coords`
            plus the computed speeds (first order derivative) and accelarations
-           (second order derivative) if `k` > 2
+           (second order derivative) if `k` > 2,
 
         Notes
         -----
@@ -388,7 +388,7 @@ class Trajectories(pd.DataFrame):
 
 
         """
-        interpolated = {}
+        interpolated_ = {}
         if time_step is None:
             self.sort('t', inplace=True)
             dts = self.t.diff().dropna().unique()
@@ -396,7 +396,7 @@ class Trajectories(pd.DataFrame):
 
         for label, segment in self.iter_segments:
             if segment.shape[0] < 2:
-                #interpolated[label] = segment[coords + ['t']]
+                #interpolated_[label] = segment[coords + ['t']]
                 continue
             corrected_k = k
             while segment.shape[0] <= corrected_k:
@@ -418,10 +418,11 @@ class Trajectories(pd.DataFrame):
                     else:
                         tmp_df['a_'+coord] = times * np.nan
 
-            interpolated[label] = tmp_df
-        interpolated = pd.concat(interpolated)
-        interpolated.index.names = 'label', 't_stamp'
-        interpolated = interpolated.swaplevel('label', 't_stamp')
+            interpolated_[label] = tmp_df
+        interpolated_ = pd.concat(interpolated_)
+        interpolated = pd.DataFrame(columns=interpolated_.columns,
+                                    index=self.index)
+        interpolated.loc[interpolated_.index] = interpolated_
         return Trajectories(interpolated)
 
     def relabel(self, new_labels=None, inplace=True):
