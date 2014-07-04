@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
 def do_pca(trajs,
            pca=None,
            coords=['x', 'y', 'z'],
-           suffix='_pca',
+           suffix='',
            append=False, return_pca=False):
     '''
     Performs a principal component analysis on the input coordinates
