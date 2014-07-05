@@ -82,19 +82,20 @@ def get_polar_coords(trajs, get_dtheta=False,
     polar_trajs = pd.DataFrame.from_dict({theta_coord:thetas,
                                          rho_coord:rhos})
     polar_trajs.set_index(trajs.index, inplace=True)
+    polar_trajs['t'] = trajs.t
     if not periodic:
         polar_trajs = polar_trajs.groupby(level='label').apply(continuous_theta_,
                                                                theta_coord, get_dtheta)
     elif get_dtheta:
-        polar_trajs['d'+theta_coord] = polar_trajs.groupby(
+        polar_trajs = polar_trajs.groupby(
             level='label').apply(periodic_dtheta_,
                                  theta_coord)
+
     if append:
         for coord in polar_trajs.columns:
             trajs[coord] = polar_trajs[coord]
-            return trajs
+        return trajs
     return polar_trajs
-
 
 ### segment method
 def continuous_theta_(segment, coord='theta', get_dtheta=True):
@@ -102,17 +103,20 @@ def continuous_theta_(segment, coord='theta', get_dtheta=True):
     out = _continuous_theta(segment[coord].values,
                             return_dtheta=get_dtheta)
     if get_dtheta:
-        thetas, dthetas = out
-        segment['d'+coord] = 0
-        segment['d'+coord].iloc[1:] = dthetas
+        thetas, dthetas_ = out
+        dthetas = np.zeros_like(thetas)
+        dthetas[1:] = dthetas_
+        segment['d'+coord] = dthetas
         segment[coord] = thetas
     else:
-        thetas = out
-        segment[coord] = thetas
+        segment[coord] = out
     return segment
 
 def periodic_dtheta_(segment, coord='theta'):
-    return _periodic_dtheta(segment[coord].values)
+    dtheta_ = np.zeros_like(segment[coord].values).ravel()
+    dtheta_[1:] = _periodic_dtheta(segment[coord].values)
+    segment['d'+coord] = dtheta_
+    return segment
 
 
 ### array methods
