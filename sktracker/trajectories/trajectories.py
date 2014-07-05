@@ -10,10 +10,9 @@ from __future__ import print_function
 import numpy as np
 import pandas as pd
 import scipy as sp
-import warnings
 
 from pandas.io import pytables
-from scipy.interpolate import splev, splrep
+from .measures.transformation import time_interpolate as time_interpolate_
 
 import logging
 log = logging.getLogger(__name__)
@@ -336,12 +335,13 @@ class Trajectories(pd.DataFrame):
         return ax
 
     def get_colors(self):
+        '''Returns a dictionary of `label : color` pairs for each segment
+        '''
         import matplotlib.pyplot as plt
         ccycle = plt.rcParams['axes.color_cycle']
         num_colors = len(ccycle)
-        clrs = {}
-        for label in self.labels:
-            clrs[label] = ccycle[label % num_colors]
+        clrs = {label: ccycle[label % num_colors]
+                for label in self.labels}
         return clrs
 
     def time_interpolate(self, sampling=1, s=0, k=3,time_step=None,
@@ -404,11 +404,7 @@ class Trajectories(pd.DataFrame):
             sampling = np.int(dt/time_step)
             log.warning('''sampling was set to {} ({}/{})'''
                         .format(sampling, dt, time_step))
-        interpolated = self.groupby(level='label').apply(_segment_interpolate_,
-                                                         sampling=sampling, s=s, k=k,
-                                                         coords=coords)
-        interpolated = interpolated.swaplevel(
-            't_stamp', 'label').sortlevel('label').sortlevel('t_stamp')
+        interpolated = Trajectories(time_interpolate_(self, sampling, s, k, coords))
         return Trajectories(interpolated)
 
     def relabel(self, new_labels=None, inplace=True):
@@ -486,44 +482,3 @@ class Trajectories(pd.DataFrame):
 # Register the trajectories for storing in HDFStore
 # as a regular DataFrame
 pytables._TYPE_MAP[Trajectories] = 'frame'
-
-
-def _segment_interpolate_(segment, sampling, s=0, k=3,
-                         coords=['x', 'y', 'z']):
-
-    if segment.shape[0] < 2:
-        #interpolated_[label] = segment[coords + ['t']]
-        pass
-
-    corrected_k = k
-    while segment.shape[0] <= corrected_k:
-        corrected_k -= 2
-
-    tck = _spline_rep(segment, coords, s=s, k=corrected_k)
-    t_stamps_in = segment.index.get_level_values('t_stamp').values
-    t_stamp0, t_stamp1 = t_stamps_in[0], t_stamps_in[-1]
-    t0, t1 = segment.t.iloc[0], segment.t.iloc[-1]
-    t_stamps = np.arange(t_stamp0*sampling,
-                         t_stamp1*sampling+1, dtype=np.int)
-    times = np.linspace(t0, t1, t_stamps.size)
-    t_stamps = pd.Index(t_stamps, dtype=np.int, name='t_stamp')
-    tmp_df = pd.DataFrame(index=t_stamps)
-    tmp_df['t'] = times
-
-    for coord in coords:
-        tmp_df[coord] = splev(times, tck[coord], der=0)
-        tmp_df['v_'+coord] = splev(times, tck[coord], der=1)
-        if k > 2:
-            if corrected_k > 2:
-                tmp_df['a_'+coord] = splev(times, tck[coord], der=2)
-            else:
-                tmp_df['a_'+coord] = times * np.nan
-    return tmp_df
-
-def _spline_rep(df, coords=('x', 'y', 'z'), s=0, k=3):
-    time = df.t
-    tcks = {}
-    for coord in coords:
-        tcks[coord] = splrep(time, df[coord].values, s=s, k=k)
-    return pd.DataFrame.from_dict(tcks)
-

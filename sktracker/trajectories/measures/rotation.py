@@ -81,13 +81,14 @@ def get_polar_coords(trajs, get_dtheta=False,
     rhos = np.hypot(trajs[y_coord], trajs[x_coord])
     polar_trajs = pd.DataFrame.from_dict({theta_coord:thetas,
                                          rho_coord:rhos})
-    polar_trajs.set_index(trajs.index)
+    polar_trajs.set_index(trajs.index, inplace=True)
     if not periodic:
         polar_trajs = polar_trajs.groupby(level='label').apply(continuous_theta_,
                                                                theta_coord, get_dtheta)
     elif get_dtheta:
-        polar_trajs['d'+theta_coord] = polar_trajs.groupby(level='label').apply(periodic_dtheta_,
-                                                                                theta_coord)
+        polar_trajs['d'+theta_coord] = polar_trajs.groupby(
+            level='label').apply(periodic_dtheta_,
+                                 theta_coord)
     if append:
         for coord in polar_trajs.columns:
             trajs[coord] = polar_trajs[coord]
