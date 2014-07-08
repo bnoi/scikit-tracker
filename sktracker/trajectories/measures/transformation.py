@@ -1,0 +1,184 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
+
+import numpy as np
+import pandas as pd
+from sklearn.decomposition import PCA
+from scipy.interpolate import splev, splrep
+
+#from ..trajectories import Trajectories
+
+import logging
+log = logging.getLogger(__name__)
+
+def do_pca(trajs,
+           pca=None,
+           coords=['x', 'y', 'z'],
+           suffix='_pca',
+           append=False, return_pca=False):
+    '''
+    Performs a principal component analysis on the input coordinates
+    suffix is only applied when appending
+    '''
+    if pca is None:
+        pca = PCA()
+    if not np.all(np.isfinite(trajs[coords])):
+        log.warning('''Droping non finite values before performing PCA''')
+
+    rotated_ = pd.DataFrame(pca.fit_transform(trajs[coords].dropna()))
+    rotated_.set_index(trajs[coords].dropna().index, inplace=True)
+    rotated = pd.DataFrame(columns=coords,
+                           index=trajs.index)
+    rotated.loc[rotated_.index] = rotated_
+    rotated['t'] = trajs.t
+
+    if append:
+        for pca_coord in [c + suffix for c in coords]:
+            trajs[pca_coord] = rotated[pca_coord]
+        if return_pca:
+            return trajs, pca
+        else:
+            return trajs
+    if return_pca:
+        return rotated, pca
+    else:
+        return rotated
+
+def _grouped_pca(trajs, pca, coords, group_kw):
+    return trajs.groupby(**group_kw).apply(
+        lambda df: pca.fit_transform(df[coords].dropna()),
+        coords)
+
+def time_interpolate(trajs, sampling=1,
+                     s=0, k=3,
+                     coords=['x', 'y', 'z']):
+    """
+    Interpolates each segment of the trajectories along time
+    using `scipy.interpolate.splrep`
+
+    Parameters
+    ----------
+    sampling : int,
+        Must be higher or equal than 1, will add `sampling - 1` extra points
+        between two consecutive original data point. Sub-sampling is not supported.
+    coords : tuple of column names, default `('x', 'y', 'z')`
+       the coordinates to interpolate.
+     s : float
+        A smoothing condition. The amount of smoothness is determined by
+        satisfying the conditions: sum((w * (y - g))**2,axis=0) <= s where g(x)
+        is the smoothed interpolation of (x,y). The user can use s to control
+        the tradeoff between closeness and smoothness of fit. Larger s means
+        more smoothing while smaller values of s indicate less smoothing.
+        Recommended values of s depend on the weights, w. If the weights
+        represent the inverse of the standard-deviation of y, then a good s
+        value should be found in the range (m-sqrt(2*m),m+sqrt(2*m)) where m is
+        the number of datapoints in x, y, and w. default : s=m-sqrt(2*m) if
+        weights are supplied. s = 0.0 (interpolating) if no weights are
+        supplied.
+    k : int
+       The order of the spline fit. It is recommended to use cubic splines.
+       Even order splines should be avoided especially with small s values.
+       1 <= k <= 5
+
+    Returns
+    -------
+    interpolated : a :class:`pandas.Dataframe` instance
+       The interpolated values, with column names given by `coords`
+       plus the computed speeds (first order derivative) and accelarations
+       (second order derivative) if `k` > 2
+
+    Notes
+    -----
+    The returned DataFrame is NOT indexed like the input (in particular for `t_stamp`).
+    It is also NOT casted to a Trajectories instance
+
+    The `s` and `k` arguments are passed to `scipy.interpolate.splrep`, see this
+         function documentation for more details
+    If a segment is too short to be interpolated with the passed order `k`, the order
+         will be automatically diminished
+    Segments with only one point will be returned as is
+
+
+    """
+    interpolated = trajs.groupby(level='label').apply(_segment_interpolate_,
+                                                      sampling=sampling, s=s, k=k,
+                                                      coords=coords)
+    interpolated = interpolated.swaplevel(
+        't_stamp', 'label').sortlevel(['label', 't_stamp'])
+    return interpolated
+
+
+def _segment_interpolate_(segment, sampling, s=0, k=3,
+                         coords=['x', 'y', 'z']):
+
+    if segment.shape[0] < 2:
+        #interpolated_[label] = segment[coords + ['t']]
+        pass
+
+    corrected_k = k
+    while segment.shape[0] <= corrected_k:
+        corrected_k -= 2
+
+    tck = _spline_rep(segment, coords, s=s, k=corrected_k)
+    t_stamps_in = segment.index.get_level_values('t_stamp').values
+    t_stamp0, t_stamp1 = t_stamps_in[0], t_stamps_in[-1]
+    t0, t1 = segment.t.iloc[0], segment.t.iloc[-1]
+    t_stamps = np.arange(t_stamp0*sampling,
+                         t_stamp1*sampling+1, dtype=np.int)
+    times = np.linspace(t0, t1, t_stamps.size)
+    t_stamps = pd.Index(t_stamps, dtype=np.int, name='t_stamp')
+    tmp_df = pd.DataFrame(index=t_stamps)
+    tmp_df['t'] = times
+
+    for coord in coords:
+        tmp_df[coord] = splev(times, tck[coord], der=0)
+        tmp_df['v_'+coord] = splev(times, tck[coord], der=1)
+        if k > 2:
+            if corrected_k > 2:
+                tmp_df['a_'+coord] = splev(times, tck[coord], der=2)
+            else:
+                tmp_df['a_'+coord] = times * np.nan
+    return tmp_df
+
+def _spline_rep(df, coords=('x', 'y', 'z'), s=0, k=3):
+    time = df.t
+    tcks = {}
+    for coord in coords:
+        tcks[coord] = splrep(time, df[coord].values, s=s, k=k)
+    return pd.DataFrame.from_dict(tcks)
+
+def back_proj_interp(interpolated, orig, sampling):
+    ''' back_proj_interp(interpolated, trajs, 3).iloc[0].x - trajs.iloc[0].x = 0
+    '''
+    back_t_stamps = orig.index.get_level_values('t_stamp')
+    back_labels = orig.index.get_level_values('label')
+
+    back_index = pd.MultiIndex.from_arrays([back_t_stamps,
+                                            back_labels], names=['t_stamp', 'label'])
+    interp_index = pd.MultiIndex.from_arrays([back_t_stamps*sampling,
+                                              back_labels], names=['t_stamp', 'label'])
+    back_projected_ = interpolated.loc[interp_index]
+    back_index = pd.MultiIndex.from_arrays([back_t_stamps, back_labels],
+                                           names=['t_stamp', 'label'])
+    back_projected = back_projected_.set_index(back_index)
+    return back_projected
+
+def back_proj_pca(rotated, pca, coords):
+
+    back_projected_ = pca.inverse_transform(rotated[coords])
+
+    back_t_stamps = rotated.index.get_level_values('t_stamp')
+    back_labels = rotated.index.get_level_values('label')
+    back_index = pd.MultiIndex.from_arrays([back_t_stamps, back_labels],
+                                           names=['t_stamp', 'label'])
+    back_projected = pd.DataFrame(back_projected_, index=back_index, columns=coords)
+    for col in set(rotated.columns) - set(back_projected.columns):
+        back_projected[col] = rotated[col]
+    return back_projected
+
+
