@@ -15,7 +15,8 @@ def trajs_measure(method, *args, **kwargs):
     def new_method(*args, **kwargs):
         trajs  =  args[0]
         measure_ =  method(*args, **kwargs)
-        measure = pd.DataFrame.from_dict({method.__name__: measure_, 't': trajs.t})
+        measure = pd.DataFrame.from_dict({method.__name__: measure_.values.ravel(),
+                                          't': trajs.t})
         measure.index = trajs.index
         return measure
 

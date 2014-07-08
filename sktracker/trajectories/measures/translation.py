@@ -10,7 +10,8 @@ import numpy as np
 import pandas as pd
 
 from ..trajectories import Trajectories
-from .measure_decorators import trajs_measure, segment_measure, sliding_measure, p2p_measure
+from .measure_decorators import (trajs_measure, segment_measure,
+                                 sliding_measure, p2p_measure)
 
 
 import logging
@@ -24,6 +25,8 @@ def by_segments(trajs, group_keys=False, **kwargs):
 ####
 
 
+
+
 '''
 Trajectory methods
 ------------------
@@ -31,13 +34,15 @@ Trajectory methods
 # Point to point methods
 @p2p_measure
 def p2p_cum_dir(trajs, t_stamp0, t_stamp1,
-                coord='x', append=False):
+                coords=['x', 'y', 'z'],
+                append=False):
     '''
     '''
+    if not 'cum_disp' in trajs.columns:
+        trajs['cum_disp'] = cum_disp(trajs)['cum_disp']
     shifted = by_segments(trajs).apply(p2p_dif_, t_stamp0, t_stamp1,
-                                       [coord, 'cum_disp'])
-    print(shifted)
-    measure = shifted[coord] / shifted['cum_disp']
+                                       [coords[0], 'cum_disp'])
+    measure = shifted[coords[0]] / shifted['cum_disp']
     return measure
 
 @p2p_measure
@@ -55,6 +60,9 @@ def p2p_directionality(trajs, t_stamp0, t_stamp1,
 def p2p_processivity(trajs, t_stamp0, t_stamp1,
                      signed=True,
                      coords=['x', 'y', 'z']):
+
+    if not 'cum_disp' in trajs.columns:
+        trajs['cum_disp'] = cum_disp(trajs, coords)['cum_disp']
 
     shifted = by_segments(trajs).apply(p2p_dif_, t_stamp0, t_stamp1,
                                        coords+['cum_disp'])
@@ -92,6 +100,9 @@ def sld_processivity(trajs, window, signed=True,
                      coords=['x', 'y', 'z']):
     '''
     '''
+    if not 'cum_disp' in trajs.columns:
+        trajs['cum_disp'] = cum_disp(trajs, coords)['cum_disp']
+
     shifted = by_segments(trajs).apply(shifted_dif_, window,
                                        coords+['cum_disp'])
     if signed:
@@ -102,10 +113,13 @@ def sld_processivity(trajs, window, signed=True,
     return measure
 
 @trajs_measure
-def sld_cum_dir(trajs, window, shifted=None, coords=['x']):
+def sld_cum_dir(trajs, window, shifted=None, coords=['x', 'y', 'z']):
     '''
     Window is expressed in t_stamps
     '''
+    if not 'cum_disp' in trajs.columns:
+        trajs['cum_disp'] = cum_disp(trajs, coords)['cum_disp']
+
     if shifted is None:
         shifted = by_segments(trajs).apply(shifted_dif_, window,
                                            [coords[0], 'cum_disp'])
@@ -124,7 +138,7 @@ def get_MSD(trajs):
 
 
 #### Segment pseudo methods
-@segment_measure
+#@segment_measure
 def shifted_dif_(segment, shift, coords):
     '''
     '''
@@ -132,7 +146,7 @@ def shifted_dif_(segment, shift, coords):
     right_shift = np.ceil(shift/2).astype(np.int)
     return segment[coords].shift(left_shift) - segment[coords].shift(right_shift)
 
-@segment_measure
+#@segment_measure
 def p2p_dif_(segment, t_stamp0, t_stamp1, coords):
     '''
     Computes the difference of coordinates coords between t_stamp1 and t_stamp0
@@ -144,7 +158,7 @@ def p2p_dif_(segment, t_stamp0, t_stamp1, coords):
         diff = segment[coords].loc[t_stamp1] - segment[coords].loc[t_stamp0]
     return diff
 
-@segment_measure
+#@segment_measure
 def cumulative_displacement_(segment, coords):
     '''Computes the cumulated displacement of the segment given by
 
@@ -164,7 +178,7 @@ def cumulative_displacement_(segment, coords):
     #segment['fwd_frac'] = (segment[x] - segment[x].iloc[0]) / segment['disp']
     return displacement
 
-@segment_measure
+#@segment_measure
 def compute_MSD_(segment, dts, coords=['x', 'y', 'z']):
     '''Computes the mean square displacement of the segment given by
 
