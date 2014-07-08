@@ -11,6 +11,7 @@ import logging
 log = logging.getLogger(__name__)
 
 from .trajectories import Trajectories
+
 try:
     from . import draw
     __all__ = ['Trajectories', 'draw']
