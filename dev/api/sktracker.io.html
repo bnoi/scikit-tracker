@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.io package &mdash; sktracker 0.3.dev-ff4a608 docs</title>
+  <title>sktracker.io package &mdash; sktracker 0.3.dev-581d53d docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-ff4a608 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-581d53d docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="prev" title="sktracker.detection package" href="sktracker.detection.html"/> 
@@ -150,6 +150,53 @@
 <div class="section" id="module-sktracker.io.ome">
 <span id="sktracker-io-ome-module"></span><h2>sktracker.io.ome module<a class="headerlink" href="#module-sktracker.io.ome" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="module-sktracker.io.read_roi">
+<span id="sktracker-io-read-roi-module"></span><h2>sktracker.io.read_roi module<a class="headerlink" href="#module-sktracker.io.read_roi" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="sktracker.io.read_roi.read_roi">
+<tt class="descclassname">sktracker.io.read_roi.</tt><tt class="descname">read_roi</tt><big>(</big><em>roi_path</em><big>)</big><a class="headerlink" href="#sktracker.io.read_roi.read_roi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read ROI files .zip or .roi generated with ImageJ.
+Specifications and code is largely inspired from:
+<a class="reference external" href="http://rsb.info.nih.gov/ij/developer/source/ij/io/RoiDecoder.java.html">http://rsb.info.nih.gov/ij/developer/source/ij/io/RoiDecoder.java.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>roi_path</strong> : string</p>
+<blockquote>
+<div><p>Path to ROI file (can be either .zip or .roi)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>rois</strong> : dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Some format specifications are not implemented. See RoiDecoder.java for details.</li>
+<li>Most of &#8220;normal&#8221; ROI file should work.</li>
+<li>Code has not been yet strongly tested.</li>
+<li>Feel free to hack it and send me modifications.</li>
+<li>Star me on gist to show me wether this script has been usefull to you !</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zip_file</span> <span class="o">=</span> <span class="s">&quot;roi_objects.zip&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi_zip</span><span class="p">(</span><span class="n">zip_file</span><span class="p">))</span>
+<span class="go">{&#39;1454-0095-0083&#39;: {&#39;y&#39;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], &#39;x&#39;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 73, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;1454-0095-0083&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}, &#39;0714-0092-0090&#39;: {&#39;y&#39;: [4, 16, 24, 37, 53, 71, 93, 117, 131, 149, 180, 179, 168, 148, 137, 114, 89, 62, 48, 47, 32, 18, 8], &#39;x&#39;: [52, 27, 19, 19, 22, 35, 50, 51, 60, 84, 130, 148, 161, 160, 154, 153, 144, 127, 108, 100, 81, 72, 68], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 36, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;0714-0092-0090&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}, &#39;0014-0089-0092&#39;: {&#39;y&#39;: [1, 13, 21, 34, 50, 68, 90, 114, 128, 146, 177, 176, 165, 145, 134, 111, 86, 59, 45, 44, 29, 15, 5], &#39;x&#39;: [54, 29, 21, 21, 24, 37, 52, 53, 62, 86, 132, 150, 163, 162, 156, 155, 146, 129, 110, 102, 83, 74, 70], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 1, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;0014-0089-0092&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roi_file</span> <span class="o">=</span> <span class="s">&quot;roi_object.roi&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi</span><span class="p">(</span><span class="n">roi_file</span><span class="p">))</span>
+<span class="go">{&#39;example2&#39;: {&#39;y&#39;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], &#39;x&#39;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 73, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;example2&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="module-sktracker.io.stackio">
 <span id="sktracker-io-stackio-module"></span><h2>sktracker.io.stackio module<a class="headerlink" href="#module-sktracker.io.stackio" title="Permalink to this headline">¶</a></h2>
 </div>
@@ -237,26 +284,28 @@ Microscopy Environment consortium respectively.</p>
 </div>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>&gt;&gt;&gt; data = numpy.random.rand(301, 219)
-&gt;&gt;&gt; imsave(&#x27;temp.tif&#x27;, data)
-&gt;&gt;&gt; image = imread(&#x27;temp.tif&#x27;)
-&gt;&gt;&gt; assert numpy.all(image == data)</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">301</span><span class="p">,</span> <span class="mi">219</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;temp.tif&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#39;temp.tif&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">image</span> <span class="o">==</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="highlight-python"><pre>&gt;&gt;&gt; tif = TiffFile(&#x27;test.tif&#x27;)
-&gt;&gt;&gt; images = tif.asarray()
-&gt;&gt;&gt; image0 = tif[0].asarray()
-&gt;&gt;&gt; for page in tif:
-...     for tag in page.tags.values():
-...         t = tag.name, tag.value
-...     image = page.asarray()
-...     if page.is_rgb: pass
-...     if page.is_palette:
-...         t = page.color_map
-...     if page.is_stk:
-...         t = page.mm_uic_tags.number_planes
-...     if page.is_lsm:
-...         t = page.cz_lsm_info
-&gt;&gt;&gt; tif.close()</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tif</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="p">(</span><span class="s">&#39;test.tif&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">images</span> <span class="o">=</span> <span class="n">tif</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image0</span> <span class="o">=</span> <span class="n">tif</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">tif</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">page</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">tag</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">tag</span><span class="o">.</span><span class="n">value</span>
+<span class="gp">... </span>    <span class="n">image</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">is_rgb</span><span class="p">:</span> <span class="k">pass</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">is_palette</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">color_map</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">is_stk</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">mm_uic_tags</span><span class="o">.</span><span class="n">number_planes</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">is_lsm</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">t</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">cz_lsm_info</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tif</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -621,12 +670,14 @@ One of B, s, H, I, 2I, b, h, i, f, d, Q, or q.</p>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><pre>&gt;&gt;&gt; data = numpy.ones((2, 5, 3, 301, 219), &#x27;float32&#x27;) * 0.5
-&gt;&gt;&gt; imsave(&#x27;temp.tif&#x27;, data, compress=6)</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">301</span><span class="p">,</span> <span class="mi">219</span><span class="p">),</span> <span class="s">&#39;float32&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;temp.tif&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="highlight-python"><pre>&gt;&gt;&gt; data = numpy.ones((5, 301, 219, 3), &#x27;uint8&#x27;) + 127
-&gt;&gt;&gt; value = u&#x27;{&quot;shape&quot;: %s}&#x27; % str(list(data.shape))
-&gt;&gt;&gt; imsave(&#x27;temp.tif&#x27;, data, extratags=[(270, &#x27;s&#x27;, 0, value, True)])</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">301</span><span class="p">,</span> <span class="mi">219</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s">&#39;uint8&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">127</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="s">u&#39;{&quot;shape&quot;: </span><span class="si">%s</span><span class="s">}&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;temp.tif&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">extratags</span><span class="o">=</span><span class="p">[(</span><span class="mi">270</span><span class="p">,</span> <span class="s">&#39;s&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="bp">True</span><span class="p">)])</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -665,12 +716,13 @@ file names.</p>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><pre>&gt;&gt;&gt; im = imread(&#x27;test.tif&#x27;, 0)
-&gt;&gt;&gt; im.shape
-(256, 256, 4)
-&gt;&gt;&gt; ims = imread([&#x27;test.tif&#x27;, &#x27;test.tif&#x27;])
-&gt;&gt;&gt; ims.shape
-(2, 256, 256, 4)</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#39;test.tif&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(256, 256, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span> <span class="o">=</span> <span class="n">imread</span><span class="p">([</span><span class="s">&#39;test.tif&#39;</span><span class="p">,</span> <span class="s">&#39;test.tif&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 256, 256, 4)</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -726,13 +778,14 @@ Requires pyplot already imported <tt class="docutils literal"><span class="pre">
 <p>TiffFile instances must be closed using the close method, which is
 automatically called when using the &#8216;with&#8217; statement.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><pre>&gt;&gt;&gt; tif = TiffFile(&#x27;test.tif&#x27;)
-... try:
-...     images = tif.asarray()
-... except Exception as e:
-...     print(e)
-... finally:
-...     tif.close()</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tif</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="p">(</span><span class="s">&#39;test.tif&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">images</span> <span class="o">=</span> <span class="n">tif</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">finally</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">tif</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
 </div>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
@@ -880,10 +933,11 @@ automatically called when using the &#8216;with&#8217; statement.</p>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Sequence of image files.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><pre>&gt;&gt;&gt; ims = TiffSequence(&quot;test.oif.files/*.tif&quot;)
-&gt;&gt;&gt; ims = ims.asarray()
-&gt;&gt;&gt; ims.shape
-(2, 100, 256, 256)</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span> <span class="o">=</span> <span class="n">TiffSequence</span><span class="p">(</span><span class="s">&quot;test.oif.files/*.tif&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span> <span class="o">=</span> <span class="n">ims</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 100, 256, 256)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="sktracker.io.TiffSequence.asarray">
@@ -1060,8 +1114,13 @@ objects.</p>
 <div><p>Path to HDF5 file where metadata and objects are stored.</p>
 </div></blockquote>
 <p><strong>base_dir</strong> : str</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Root directory (join to find <cite>store_path</cite>)</p>
+</div></blockquote>
+<p><strong>clean_store</strong> : bool</p>
+<blockquote class="last">
+<div><p>If True, remove duplicated data in the HDFStore file
+(see <a class="reference external" href="https://github.com/pydata/pandas/issues/2132">https://github.com/pydata/pandas/issues/2132</a>.)</p>
 </div></blockquote>
 </td>
 </tr>
@@ -1118,6 +1177,51 @@ See <a class="reference external" href="https://github.com/pydata/pandas/issues/
 
 </dd></dl>
 
+<dl class="function">
+<dt id="sktracker.io.read_roi">
+<tt class="descclassname">sktracker.io.</tt><tt class="descname">read_roi</tt><big>(</big><em>roi_path</em><big>)</big><a class="headerlink" href="#sktracker.io.read_roi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read ROI files .zip or .roi generated with ImageJ.
+Specifications and code is largely inspired from:
+<a class="reference external" href="http://rsb.info.nih.gov/ij/developer/source/ij/io/RoiDecoder.java.html">http://rsb.info.nih.gov/ij/developer/source/ij/io/RoiDecoder.java.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>roi_path</strong> : string</p>
+<blockquote>
+<div><p>Path to ROI file (can be either .zip or .roi)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>rois</strong> : dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Some format specifications are not implemented. See RoiDecoder.java for details.</li>
+<li>Most of &#8220;normal&#8221; ROI file should work.</li>
+<li>Code has not been yet strongly tested.</li>
+<li>Feel free to hack it and send me modifications.</li>
+<li>Star me on gist to show me wether this script has been usefull to you !</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zip_file</span> <span class="o">=</span> <span class="s">&quot;roi_objects.zip&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi_zip</span><span class="p">(</span><span class="n">zip_file</span><span class="p">))</span>
+<span class="go">{&#39;1454-0095-0083&#39;: {&#39;y&#39;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], &#39;x&#39;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 73, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;1454-0095-0083&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}, &#39;0714-0092-0090&#39;: {&#39;y&#39;: [4, 16, 24, 37, 53, 71, 93, 117, 131, 149, 180, 179, 168, 148, 137, 114, 89, 62, 48, 47, 32, 18, 8], &#39;x&#39;: [52, 27, 19, 19, 22, 35, 50, 51, 60, 84, 130, 148, 161, 160, 154, 153, 144, 127, 108, 100, 81, 72, 68], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 36, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;0714-0092-0090&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}, &#39;0014-0089-0092&#39;: {&#39;y&#39;: [1, 13, 21, 34, 50, 68, 90, 114, 128, 146, 177, 176, 165, 145, 134, 111, 86, 59, 45, 44, 29, 15, 5], &#39;x&#39;: [54, 29, 21, 21, 24, 37, 52, 53, 62, 86, 132, 150, 163, 162, 156, 155, 146, 129, 110, 102, 83, 74, 70], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 1, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;0014-0089-0092&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roi_file</span> <span class="o">=</span> <span class="s">&quot;roi_object.roi&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi</span><span class="p">(</span><span class="n">roi_file</span><span class="p">))</span>
+<span class="go">{&#39;example2&#39;: {&#39;y&#39;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], &#39;x&#39;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 73, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;example2&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>)</p>
 </div>
 </div>
 
@@ -1159,7 +1263,7 @@ See <a class="reference external" href="https://github.com/pydata/pandas/issues/
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-ff4a608',
+            VERSION:'0.3.dev-581d53d',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

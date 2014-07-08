@@ -1,6 +1,13 @@
 sktracker.trajectories package
 ==============================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    sktracker.trajectories.measures
+
 Submodules
 ----------
 

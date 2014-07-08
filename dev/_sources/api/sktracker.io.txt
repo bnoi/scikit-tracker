@@ -28,6 +28,14 @@ sktracker.io.ome module
     :undoc-members:
     :show-inheritance:
 
+sktracker.io.read_roi module
+----------------------------
+
+.. automodule:: sktracker.io.read_roi
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 sktracker.io.stackio module
 ---------------------------
 

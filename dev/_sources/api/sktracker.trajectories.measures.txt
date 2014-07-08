@@ -1,0 +1,46 @@
+sktracker.trajectories.measures package
+=======================================
+
+Submodules
+----------
+
+sktracker.trajectories.measures.measure_decorators module
+---------------------------------------------------------
+
+.. automodule:: sktracker.trajectories.measures.measure_decorators
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.trajectories.measures.rotation module
+-----------------------------------------------
+
+.. automodule:: sktracker.trajectories.measures.rotation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.trajectories.measures.transformation module
+-----------------------------------------------------
+
+.. automodule:: sktracker.trajectories.measures.transformation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.trajectories.measures.translation module
+--------------------------------------------------
+
+.. automodule:: sktracker.trajectories.measures.translation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.trajectories.measures
+    :members:
+    :undoc-members:
+    :show-inheritance:
