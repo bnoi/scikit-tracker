@@ -9,12 +9,14 @@ import pandas as pd
 from functools import wraps
 
 
+
+
 def trajs_measure(method, *args, **kwargs):
 
     @wraps(method)
     def new_method(*args, **kwargs):
         trajs  =  args[0]
-        measure_ =  method(*args, **kwargs)
+        measure_ =  method(*args, **kwargs).sortlevel(['t_stamp', 'label'])
         measure = pd.DataFrame.from_dict({method.__name__: measure_.values.ravel(),
                                           't': trajs.t})
         measure.index = trajs.index

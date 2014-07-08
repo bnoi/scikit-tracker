@@ -8,7 +8,6 @@ from numpy.testing import assert_array_almost_equal
 from numpy.testing import assert_almost_equal
 
 
-
 def linear_trajs():
 
     data = np.array([np.linspace(0, 30, 61),
@@ -16,11 +15,14 @@ def linear_trajs():
                      np.zeros(61),
                      np.linspace(0, 120, 61)])
 
-    index = pd.MultiIndex.from_tuples([(t, 0) for t in range(61)],
+    index = pd.MultiIndex.from_tuples([(t, i)  for i in range(2) for t in range(61)],
                                       names=('t_stamp', 'label'))
 
-    trajs = Trajectories(data.T, index=index, columns=['x', 'y', 'z', 't'])
-    return trajs
+    trajs = pd.DataFrame(
+        np.vstack([data.T, data.T]),
+        index=index,
+        columns=['x', 'y', 'z', 't']).sortlevel(['t_stamp', 'label'])
+    return Trajectories(trajs)
 
 def test_cum_disp():
 
@@ -50,22 +52,17 @@ def test_p2p_processivity():
 def test_sld_dir():
     trajs = linear_trajs()
     sld_dir = translation.sld_dir(trajs, window=4).dropna()
-    assert sld_dir.shape[0] == trajs.shape[0] - 4
-
     assert(np.all(sld_dir['sld_dir'] == 1))
 
 def test_sld_processivity():
     trajs = linear_trajs()
     sld_processivity = translation.sld_processivity(trajs, window=4).dropna()
-    assert sld_processivity.shape[0] == trajs.shape[0] - 4
 
     assert(np.all(sld_processivity['sld_processivity'] == 1))
 
 def test_sld_cum_dir():
     trajs = linear_trajs()
     sld_cum_dir = translation.sld_cum_dir(trajs, window=4).dropna()
-    assert sld_cum_dir.shape[0] == trajs.shape[0] - 4
-
     assert(np.all(sld_cum_dir['sld_cum_dir'] == 1))
 
 def test_get_MSD():

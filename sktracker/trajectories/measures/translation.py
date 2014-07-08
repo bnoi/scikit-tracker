@@ -132,8 +132,9 @@ def get_MSD(trajs):
     Compute the mean square displacement for each segment.
     '''
     dts = trajs.t_stamps - trajs.t_stamps[0]
-    MSD = by_segments(trajs).apply(compute_MSD_, dts)
-    MSD['dts'] = dts
+    MSD = by_segments(trajs, group_keys=True).apply(compute_MSD_, dts)
+    MSD = MSD.sortlevel(['Dt_stamp', 'label']).swaplevel('Dt_stamp', 'label')
+    MSD['Dt'] = trajs.t.values - trajs.t.iloc[0]
     return MSD
 
 
