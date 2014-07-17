@@ -36,7 +36,20 @@ Trajectory methods
 def p2p_cum_dir(trajs, t_stamp0, t_stamp1,
                 coords=['x', 'y', 'z'],
                 append=False):
-    '''
+    '''Computes the ratio between the net displacement and the
+    cumulated displacement between t_stamp0 and t_stamp1 over coords
+
+    call signature:
+      p2p_cum_dir(trajs, t_stamp0, t_stamp1,
+                  coords=['x', 'y', 'z'],
+                  append=False)
+
+    Paramters
+    ---------
+
+    Returns
+    -------
+
     '''
     if not 'cum_disp' in trajs.columns:
         trajs['cum_disp'] = cum_disp(trajs)['cum_disp']
@@ -113,16 +126,15 @@ def sld_processivity(trajs, window, signed=True,
     return measure
 
 @trajs_measure
-def sld_cum_dir(trajs, window, shifted=None, coords=['x', 'y', 'z']):
+def sld_cum_dir(trajs, window, coords=['x', 'y', 'z']):
     '''
     Window is expressed in t_stamps
     '''
     if not 'cum_disp' in trajs.columns:
         trajs['cum_disp'] = cum_disp(trajs, coords)['cum_disp']
 
-    if shifted is None:
-        shifted = by_segments(trajs).apply(shifted_dif_, window,
-                                           [coords[0], 'cum_disp'])
+    shifted = by_segments(trajs).apply(shifted_dif_, window,
+                                       [coords[0], 'cum_disp'])
     measure = shifted[coords[0]] / shifted['cum_disp']
     return measure
 

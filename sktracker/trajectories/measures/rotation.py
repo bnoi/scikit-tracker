@@ -18,7 +18,7 @@ def radial_speed(trajs, in_coords=['rho', 'theta'],
                  from_polar=True,
                  smooth=0,
                  append=False,
-                 out_coords=['v_rad', 'v_orad'] ):
+                 out_coords=['v_rad', 'v_orad', 'v_theta'] ):
     if not from_polar:
         polar = get_polar_coords(trajs, get_dtheta=False,
                                  in_coords=in_coords,
@@ -30,13 +30,16 @@ def radial_speed(trajs, in_coords=['rho', 'theta'],
     polar = Trajectories(polar)
     polar['t'] = trajs['t']
     intp_polar = polar.time_interpolate(coords=['rho', 'theta'], s=smooth, k=3)
-    radial_speed_c, ortho_rad_speed_c = out_coords
+    radial_speed_c, ortho_rad_speed_c, angular_speed_c = out_coords
     radial_speed = intp_polar['v_rho']
     ortho_rad_speed = intp_polar['rho'] * intp_polar['v_theta']
+    angular_speed = intp_polar['v_theta']
     speeds = pd.DataFrame.from_dict({radial_speed_c: radial_speed,
-                                     ortho_rad_speed_c: ortho_rad_speed})
+                                     ortho_rad_speed_c: ortho_rad_speed,
+                                     angular_speed_c: angular_speed})
     speeds.set_index(intp_polar.index)
     speeds = speeds.loc[trajs.index]
+    speeds['t'] = trajs.t
     if append:
         for coord in speeds.columns:
             trajs[coord] = speeds[coord]
@@ -90,12 +93,37 @@ def get_polar_coords(trajs, get_dtheta=False,
         polar_trajs = polar_trajs.groupby(
             level='label').apply(periodic_dtheta_,
                                  theta_coord)
-
+    polar_trajs = polar_trajs.sortlevel(['t_stamp', 'label'])
     if append:
         for coord in polar_trajs.columns:
             trajs[coord] = polar_trajs[coord]
         return trajs
     return polar_trajs
+
+def get_spherical_coords(trajs, get_dtheta=False,
+                         in_coords=['x', 'y', 'z'],
+                         out_coords=['r', 'theta', 'phi'],
+                         periodic=False,
+                         append=False):
+
+    x, y, z = in_coords
+    r, theta, phi = out_coords
+    thetas = np.arctan2(trajs[y], trajs[x])
+    rs = np.linalg.norm(trajs[in_coords], axis=1)
+    phis = np.arccos(trajs[z]/rs)
+    spherical_trajs = pd.DataFrame.from_dict({r: rs,
+                                              theta: thetas,
+                                              phi: phis})
+
+    if not periodic:
+        spherical_trajs = spherical_trajs.groupby(
+            level='label').apply(continuous_theta_,
+                                 theta, get_dtheta=get_dtheta)
+        spherical_trajs = spherical_trajs.groupby(
+            level='label').apply(continuous_theta_,
+                                 phi, get_dtheta=get_dtheta)
+
+    return spherical_trajs.sortlevel(['t_stamp', 'label'])
 
 ### segment method
 def continuous_theta_(segment, coord='theta', get_dtheta=True):

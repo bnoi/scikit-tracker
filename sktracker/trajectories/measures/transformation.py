@@ -116,15 +116,11 @@ def time_interpolate(trajs, sampling=1,
 def _segment_interpolate_(segment, sampling, s=0, k=3,
                          coords=['x', 'y', 'z']):
 
-    if segment.shape[0] < 2:
-        #interpolated_[label] = segment[coords + ['t']]
-        pass
 
     corrected_k = k
     while segment.shape[0] <= corrected_k:
         corrected_k -= 2
 
-    tck = _spline_rep(segment, coords, s=s, k=corrected_k)
     t_stamps_in = segment.index.get_level_values('t_stamp').values
     t_stamp0, t_stamp1 = t_stamps_in[0], t_stamps_in[-1]
     t0, t1 = segment.t.iloc[0], segment.t.iloc[-1]
@@ -134,6 +130,15 @@ def _segment_interpolate_(segment, sampling, s=0, k=3,
     t_stamps = pd.Index(t_stamps, dtype=np.int, name='t_stamp')
     tmp_df = pd.DataFrame(index=t_stamps)
     tmp_df['t'] = times
+    if segment.shape[0] < 2:
+        for coord in coords:
+            tmp_df[coord] = segment[coord].values
+            tmp_df['v_'+coord] = np.nan
+            tmp_df['a_'+coord] = np.nan
+        return tmp_df
+        #pass
+
+    tck = _spline_rep(segment, coords, s=s, k=corrected_k)
 
     for coord in coords:
         tmp_df[coord] = splev(times, tck[coord], der=0)

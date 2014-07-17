@@ -8,19 +8,15 @@ from __future__ import print_function
 import pandas as pd
 from functools import wraps
 
-
-
-
 def trajs_measure(method, *args, **kwargs):
-
     @wraps(method)
     def new_method(*args, **kwargs):
         trajs  =  args[0]
         measure_ =  method(*args, **kwargs).sortlevel(['t_stamp', 'label'])
         measure = pd.DataFrame.from_dict({method.__name__: measure_.values.ravel(),
                                           't': trajs.t})
-        measure.index = trajs.index
-        return measure
+        measure.set_index(trajs.index)
+        return measure.sortlevel(['t_stamp', 'label'])
 
     return new_method
 
