@@ -36,6 +36,14 @@ sktracker.utils.progress module
     :undoc-members:
     :show-inheritance:
 
+sktracker.utils.sort module
+---------------------------
+
+.. automodule:: sktracker.utils.sort
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 sktracker.utils.transformations module
 --------------------------------------
 
