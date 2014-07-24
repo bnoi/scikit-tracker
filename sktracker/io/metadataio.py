@@ -63,7 +63,8 @@ class OIOMetadata(OrderedDict):
                         if type(v).__name__ in ['list', 'tuple']:
                             self[k] = ast.literal_eval(self[k])
                         else:
-                            self[k] = v(self[k])
+                            if v.__name__ is 'int':
+                                self[k] = v(float(np.round(self[k])))
                     except:
                         msg = "Metadata contains wrong data type '{}'' has type {}, should be {}"
                         raise ValueError(msg.format(k, type(self[k]), v))
