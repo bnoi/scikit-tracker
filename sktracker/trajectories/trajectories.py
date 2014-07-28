@@ -542,7 +542,7 @@ class Trajectories(pd.DataFrame):
 
                     if reference is None:
                         ref = (p1 + p2) / 2
-                        vec = (ref - p1).values[0]
+                        vec = (p1 - ref).values[0]
                     else:
                         ref = [p1, p2][reference]
                         vec = (((p1 + p2) / 2) - ref).values[0]
@@ -567,6 +567,9 @@ class Trajectories(pd.DataFrame):
 
         if progress:
             print_progress(-1)
+
+        if np.abs(trajs.x_proj).mean() < np.abs(trajs.y_proj).mean():
+            trajs.loc[:,['x_proj', 'y_proj']] = trajs.loc[:,['y_proj', 'x_proj']].values
 
         if not inplace:
             return trajs
