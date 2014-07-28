@@ -81,6 +81,9 @@ class BrownianLinkCostFunction(AbstractCostFunction):
         # Chech vectors
         self.check_columns([pos_in, pos_out], list(coords) + ['t'])
 
+        if pos_out.empty or pos_in.empty:
+           return pd.DataFrame([])
+
         dt = pos_out['t'].iloc[0] - pos_in['t'].iloc[0]
 
         # Build matrix block
