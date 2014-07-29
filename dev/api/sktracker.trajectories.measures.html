@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories.measures package &mdash; sktracker 0.3.dev-f9abce9 docs</title>
+  <title>sktracker.trajectories.measures package &mdash; sktracker 0.3.dev-c35604d docs</title>
   
 
   
@@ -31,9 +31,9 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-f9abce9 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-c35604d docs" href="../index.html"/>
         <link rel="up" title="sktracker.trajectories package" href="sktracker.trajectories.html"/>
-        <link rel="next" title="sktracker.utils package" href="sktracker.utils.html"/>
+        <link rel="next" title="sktracker.ui package" href="sktracker.ui.html"/>
         <link rel="prev" title="sktracker.trajectories package" href="sktracker.trajectories.html"/> 
 
   
@@ -283,6 +283,27 @@ It is also NOT casted to a Trajectories instance</p>
 <p>Segments with only one point will be returned as is</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="sktracker.trajectories.measures.transformation.transformations_matrix">
+<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">transformations_matrix</tt><big>(</big><em>center</em>, <em>vec</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.transformations_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build transformation matrix:
+- translation : from (0, 0) to a point (center)
+- rotation : following angle between (1, 0) and vec</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>center</strong> : list or np.ndarray</p>
+<p><strong>vec</strong> : list or np.ndarray</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The transformation matrix, np.ndarray.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="module-sktracker.trajectories.measures.translation">
 <span id="sktracker-trajectories-measures-translation-module"></span><h2>sktracker.trajectories.measures.translation module<a class="headerlink" href="#module-sktracker.trajectories.measures.translation" title="Permalink to this headline">¶</a></h2>
@@ -401,7 +422,7 @@ append=False)</dd>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.utils.html" class="btn btn-neutral float-right" title="sktracker.utils package">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.ui.html" class="btn btn-neutral float-right" title="sktracker.ui package">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="sktracker.trajectories.html" class="btn btn-neutral" title="sktracker.trajectories package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -433,7 +454,7 @@ append=False)</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-f9abce9',
+            VERSION:'0.3.dev-c35604d',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

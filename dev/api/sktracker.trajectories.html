@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-f9abce9 docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-c35604d docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-f9abce9 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-c35604d docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
         <link rel="prev" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/> 
@@ -157,8 +157,108 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="sktracker-trajectories-draw-module">
-<h2>sktracker.trajectories.draw module<a class="headerlink" href="#sktracker-trajectories-draw-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sktracker.trajectories.draw">
+<span id="sktracker-trajectories-draw-module"></span><h2>sktracker.trajectories.draw module<a class="headerlink" href="#module-sktracker.trajectories.draw" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="sktracker.trajectories.draw.plot_3coords">
+<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">plot_3coords</tt><big>(</big><em>trajs</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>text=True</em>, <em>fig=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.plot_3coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Soon to be deprecated, use <cite>plot_stacked_coords</cite> instead</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.trajectories.draw.plot_stacked_coords">
+<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">plot_stacked_coords</tt><big>(</big><em>trajs</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>text=False</em>, <em>fig=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.plot_stacked_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots stacked graphs with each of the coordinates given in the
+<cite>coords</cite> argument plotted against time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs: a :class:`Trajectories` instance</strong></p>
+<p><strong>coords: a tuple, default (&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;)</strong></p>
+<blockquote>
+<div><p>the coordinates (<cite>trajs</cite> column names) to be ploted</p>
+</div></blockquote>
+<p><strong>text: bool, default False</strong></p>
+<blockquote>
+<div><p>if True, will append each trajectory segment&#8217;s label
+at the extremities on the upper most plot</p>
+</div></blockquote>
+<p><strong>fig: a matplotlib `Figure`, default `None`</strong></p>
+<blockquote>
+<div><p>the figure on which to plot</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">axes: a list of <tt class="xref py py-class docutils literal"><span class="pre">matplotlib.axes.Axes</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.trajectories.draw.show_4panels">
+<tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">show_4panels</tt><big>(</big><em>trajs</em>, <em>label</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>axes=None</em>, <em>ax_3d=None</em>, <em>scatter_kw={}</em>, <em>line_kw={}</em>, <em>interpolate=False</em>, <em>interp_kw={}</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.show_4panels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the segment of trajectories <cite>trajs</cite> with label <cite>label</cite> on four panels
+organized in two cols by two rows like so:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>y|     y|</dt>
+<dd><dl class="first last docutils">
+<dt><a href="#id1"><span class="problematic" id="id2">|</span></a>___   <a href="#id3"><span class="problematic" id="id4">|</span></a>___</dt>
+<dd>x      z</dd>
+</dl>
+</dd>
+<dt>z|     z| y</dt>
+<dd><dl class="first last docutils">
+<dt><a href="#id5"><span class="problematic" id="id6">|</span></a>___   <a href="#id7"><span class="problematic" id="id8">|</span></a>/__</dt>
+<dd>x      x</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs: a :class:`Trajectories` instance</strong></p>
+<p><strong>label: int</strong></p>
+<blockquote>
+<div><p>the label of the trajectories&#8217;s segment to plot</p>
+</div></blockquote>
+<p><strong>coords: a tuple of column names</strong></p>
+<blockquote>
+<div><p>default to (&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;), the coordinates to plot</p>
+</div></blockquote>
+<p><strong>axes: the axes to plot on</strong></p>
+<p><strong>ax_3d: the 3D ax on the lower right corner</strong></p>
+<p><strong>scatter_kw: dict</strong></p>
+<blockquote>
+<div><p>keyword arguments passed to the <cite>plt.scatter</cite> function</p>
+</div></blockquote>
+<p><strong>line_kw: dict</strong></p>
+<blockquote>
+<div><p>keyword arguments passed to the <cite>plt.plot</cite> function</p>
+</div></blockquote>
+<p><strong>interpolate: bool</strong></p>
+<blockquote>
+<div><p>if True, will plot the line as an interpolation of
+the trajectories (not implemented right now)</p>
+</div></blockquote>
+<p><strong>interp_kw: dict</strong></p>
+<blockquote>
+<div><p>keyword arguments for the interpolation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">axes, ax3d: the 2D and 3D axes</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="module-sktracker.trajectories.trajectories">
 <span id="sktracker-trajectories-trajectories-module"></span><h2>sktracker.trajectories.trajectories module<a class="headerlink" href="#module-sktracker.trajectories.trajectories" title="Permalink to this headline">¶</a></h2>
@@ -334,6 +434,48 @@ following group_args parameters.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>traj</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.project">
+<tt class="descname">project</tt><big>(</big><em>ref_idx, coords=['x', 'y'], keep_first_time=False, reference=None, inplace=False, progress=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project each point on a line specified by two points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ref_idx</strong> : list of int (length should be 2)</p>
+<blockquote>
+<div><p>This two series of points will be used as a reference line to make projection.</p>
+</div></blockquote>
+<p><strong>coords :</strong></p>
+<blockquote>
+<div><p>Column names.</p>
+</div></blockquote>
+<p><strong>keep_first_time</strong> : bool</p>
+<blockquote>
+<div><p>By default reference line is computed for each timepoint. If you want to keep the first
+time stamp as reference line, put this parameter to True.</p>
+</div></blockquote>
+<p><strong>reference :</strong></p>
+<blockquote>
+<div><p>TODO</p>
+</div></blockquote>
+<p><strong>inplace</strong> : bool</p>
+<blockquote>
+<div><p>Add projection inplace or to a new Trajectories</p>
+</div></blockquote>
+<p><strong>progress</strong> : bool</p>
+<blockquote>
+<div><p>Show progress bar.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>Trajectories with two new columns</strong> : &#8216;x_proj&#8217;, and &#8216;y_proj&#8217;.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -596,7 +738,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-f9abce9',
+            VERSION:'0.3.dev-c35604d',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

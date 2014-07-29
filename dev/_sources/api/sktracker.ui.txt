@@ -1,0 +1,30 @@
+sktracker.ui package
+====================
+
+Submodules
+----------
+
+sktracker.ui.display_figures_widget module
+------------------------------------------
+
+.. automodule:: sktracker.ui.display_figures_widget
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+sktracker.ui.matplotlib_widget module
+-------------------------------------
+
+.. automodule:: sktracker.ui.matplotlib_widget
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: sktracker.ui
+    :members:
+    :undoc-members:
+    :show-inheritance:
