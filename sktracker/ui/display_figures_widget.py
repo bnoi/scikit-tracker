@@ -39,6 +39,7 @@ def display_figures(figure_generator):
     >>>         yield fig, str(i)
     >>>
     >>> display_figures(fig_generator())
+
     """
 
     app = QtGui.QApplication.instance()
