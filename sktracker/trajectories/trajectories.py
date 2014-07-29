@@ -305,6 +305,7 @@ class Trajectories(pd.DataFrame):
         """
 
         import matplotlib.pyplot as plt
+
         if ax is None:
             ax = plt.gca()
         colors = self.get_colors()
