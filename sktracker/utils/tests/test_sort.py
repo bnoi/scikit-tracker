@@ -9,6 +9,7 @@ from __future__ import print_function
 
 from sktracker.utils.sort import natural_keys
 
+
 def test_naturalkeys():
 
     alist = ["something1", "something12", "something17", "something2"]
