@@ -68,6 +68,7 @@ from . import io
 from . import trajectories
 from . import tracker
 from . import utils
+from . import ui
 
 __all__ = ['__version__',
            'set_log_level',
@@ -76,4 +77,5 @@ __all__ = ['__version__',
            'trajectories',
            'detection',
            'tracker',
-           'utils']
+           'utils',
+           'ui']

@@ -12,7 +12,10 @@ import pandas as pd
 import scipy as sp
 
 from pandas.io import pytables
+
 from .measures.transformation import time_interpolate as time_interpolate_
+from .measures.transformation import transformations_matrix
+from ..utils import print_progress
 
 import logging
 log = logging.getLogger(__name__)
@@ -302,6 +305,7 @@ class Trajectories(pd.DataFrame):
         """
 
         import matplotlib.pyplot as plt
+
         if ax is None:
             ax = plt.gca()
         colors = self.get_colors()
@@ -344,7 +348,7 @@ class Trajectories(pd.DataFrame):
                 for label in self.labels}
         return clrs
 
-    def time_interpolate(self, sampling=1, s=0, k=3,time_step=None,
+    def time_interpolate(self, sampling=1, s=0, k=3, time_step=None,
                          coords=['x', 'y', 'z']):
         """
         Interpolates each segment of the trajectories along time
@@ -477,6 +481,99 @@ class Trajectories(pd.DataFrame):
         for factor, coord in zip(factors, coords):
             trajs[coord] = trajs[coord] * factor
         return trajs
+
+    def project(self, ref_idx,
+                coords=['x', 'y'],
+                keep_first_time=False,
+                reference=None,
+                inplace=False,
+                progress=False):
+        """Project each point on a line specified by two points.
+
+        Parameters
+        ----------
+        ref_idx : list of int (length should be 2)
+            This two series of points will be used as a reference line to make projection.
+        coords :
+            Column names.
+        keep_first_time : bool
+            By default reference line is computed for each timepoint. If you want to keep the first
+            time stamp as reference line, put this parameter to True.
+        reference :
+            TODO
+        inplace : bool
+            Add projection inplace or to a new Trajectories
+        progress : bool
+            Show progress bar.
+
+        Returns
+        -------
+        Trajectories with two new columns : 'x_proj', and 'y_proj'.
+        """
+
+        trajs = self if inplace else self.copy()
+        trajs.sort_index(inplace=True)
+
+        # First we check if both ref_idx are present in ALL t_stamp
+        n_t = trajs.index.get_level_values('t_stamp').unique().shape[0]
+
+        if len(coords) not in (2, 3):
+            mess = "Length of coords {} is {}. Not supported number of dimensions"
+            raise ValueError(mess.format(coords, len(coords)))
+
+        trajs['x_proj'] = np.nan
+        trajs['y_proj'] = np.nan
+
+        ite = trajs.swaplevel("label", "t_stamp").groupby(level='t_stamp')
+        A = None
+        first_time = True
+        for i, (t_stamp, peaks) in enumerate(ite):
+
+            if progress:
+                print_progress(i * 100 / n_t)
+
+            p1 = peaks.loc[ref_idx[0]][coords]
+            p2 = peaks.loc[ref_idx[1]][coords]
+
+            if p1.empty or p2.empty:
+                trajs.loc[t_stamp, 'x_proj'] = np.nan
+                trajs.loc[t_stamp, 'y_proj'] = np.nan
+            else:
+                if not keep_first_time or (keep_first_time and first_time):
+
+                    if reference is None:
+                        ref = (p1 + p2) / 2
+                        vec = (p1 - ref).values[0]
+                    else:
+                        ref = [p1, p2][reference]
+                        vec = (((p1 + p2) / 2) - ref).values[0]
+
+                    ref = ref.values[0]
+                    A = transformations_matrix(ref, vec)
+                    first_time = False
+
+                # Add an extra column if coords has two dimensions
+                if len(coords) == 2:
+                    peaks_values = np.zeros((peaks[coords].shape[0],
+                                            peaks[coords].shape[1] + 1)) + 1
+                    peaks_values[:, :-1] = peaks[coords].values
+                elif len(coords) == 3:
+                    peaks_values = peaks[coords].values
+
+                # Apply the transformation matrix
+                peaks_values = np.dot(peaks_values, A)[:, :-1]
+
+                trajs.loc[t_stamp, 'x_proj'] = peaks_values[:, 0]
+                trajs.loc[t_stamp, 'y_proj'] = peaks_values[:, 1]
+
+        if progress:
+            print_progress(-1)
+
+        if np.abs(trajs.x_proj).mean() < np.abs(trajs.y_proj).mean():
+            trajs.loc[:,['x_proj', 'y_proj']] = trajs.loc[:,['y_proj', 'x_proj']].values
+
+        if not inplace:
+            return trajs
 
 
 # Register the trajectories for storing in HDFStore

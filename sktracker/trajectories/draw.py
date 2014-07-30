@@ -5,7 +5,6 @@ from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
 
-import matplotlib.pyplot as plt
 import numpy as np
 
 '''
@@ -13,6 +12,7 @@ This module provide utility function to represent the trajectories
 with matplotlib
 
 '''
+
 
 def plot_3coords(trajs, coords=('x', 'y', 'z'),
                  text=True, fig=None, **kwargs):
@@ -45,6 +45,8 @@ def plot_stacked_coords(trajs, coords=('x', 'y', 'z'),
     axes: a list of :class:`matplotlib.axes.Axes`
 
     '''
+    import matplotlib.pyplot as plt
+
     if fig is None:
         # Create a figure with 3 graphs verticaly stacked
         fig, axes = plt.subplots(len(coords), 1, sharex=True, figsize=(6, 9))
@@ -112,6 +114,8 @@ def show_4panels(trajs, label, coords=('x', 'y', 'z'),
 
     axes, ax3d: the 2D and 3D axes
     '''
+    import matplotlib.pyplot as plt
+
     u, v, w = coords
 
     segment = trajs.get_segments()[label]

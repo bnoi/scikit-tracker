@@ -1,14 +1,14 @@
-import numpy as np
-import pandas as pd
-from sktracker.trajectories import Trajectories
-from sktracker.trajectories.measures import transformation
-from sktracker import data
-
-
 from numpy.testing import assert_array_equal
 from numpy.testing import assert_array_almost_equal
 from numpy.testing import assert_almost_equal
 
+import numpy as np
+import pandas as pd
+
+from sktracker.trajectories import Trajectories
+from sktracker.trajectories.measures import transformation
+from sktracker import data
+from sktracker.trajectories.measures.transformation import transformations_matrix
 
 def test_back_proj_interp():
     trajs = Trajectories(data.with_gaps_df())
@@ -30,3 +30,20 @@ def test_back_proj_pca():
                                          append=False, return_pca=True)
     back_proj = transformation.back_proj_pca(rotated, pca, coords=['x', 'y', 'z'])
     assert_almost_equal(back_proj.iloc[0].x, trajs.iloc[0].x)
+
+
+def test_transformations_matrix():
+
+    A = transformations_matrix([0, 0], [1, 0])
+    excepted = np.array([[ -1.00000000e+00,  -1.22464680e-16,   0.00000000e+00],
+                         [  1.22464680e-16,  -1.00000000e+00,   0.00000000e+00],
+                         [  0.00000000e+00,   0.00000000e+00,   1.00000000e+00]])
+
+    assert_array_almost_equal(A, excepted)
+
+    A = transformations_matrix([3, 6], [1, 1])
+    excepted = np.array([[-0.70710678, -0.70710678,  0.        ],
+                         [ 0.70710678, -0.70710678,  0.        ],
+                         [-2.12132034,  6.36396103,  1.        ]])
+
+    assert_array_almost_equal(A, excepted)

@@ -49,10 +49,12 @@ def do_pca(trajs,
     else:
         return rotated
 
+
 def _grouped_pca(trajs, pca, coords, group_kw):
     return trajs.groupby(**group_kw).apply(
         lambda df: pca.fit_transform(df[coords].dropna()),
         coords)
+
 
 def time_interpolate(trajs, sampling=1,
                      s=0, k=3,
@@ -150,12 +152,14 @@ def _segment_interpolate_(segment, sampling, s=0, k=3,
                 tmp_df['a_'+coord] = times * np.nan
     return tmp_df
 
+
 def _spline_rep(df, coords=('x', 'y', 'z'), s=0, k=3):
     time = df.t
     tcks = {}
     for coord in coords:
         tcks[coord] = splrep(time, df[coord].values, s=s, k=k)
     return pd.DataFrame.from_dict(tcks)
+
 
 def back_proj_interp(interpolated, orig, sampling):
     ''' back_proj_interp(interpolated, trajs, 3).iloc[0].x - trajs.iloc[0].x = 0
@@ -173,6 +177,7 @@ def back_proj_interp(interpolated, orig, sampling):
     back_projected = back_projected_.set_index(back_index)
     return back_projected
 
+
 def back_proj_pca(rotated, pca, coords):
 
     back_projected_ = pca.inverse_transform(rotated[coords])
@@ -187,3 +192,41 @@ def back_proj_pca(rotated, pca, coords):
     return back_projected
 
 
+def transformations_matrix(center, vec):
+    """Build transformation matrix:
+    - translation : from (0, 0) to a point (center)
+    - rotation : following angle between (1, 0) and vec
+
+    Parameters
+    ----------
+    center : list or np.ndarray
+    vec : list or np.ndarray
+
+    Returns
+    -------
+    The transformation matrix, np.ndarray.
+    """
+
+    # Setup vectors
+    origin_vec = np.array([1, 0])
+    current_vec = vec / np.linalg.norm(vec)
+
+    # Find the rotation angle
+    cosa = np.dot(origin_vec, current_vec)
+    cosa = np.abs(cosa) * -1
+    theta = np.arccos(cosa)
+
+    # Build rotation matrix
+    R = np.array([[np.cos(theta), -np.sin(theta), 0],
+                  [np.sin(theta), np.cos(theta), 0],
+                  [0, 0, 1]], dtype="float")
+
+    # Build translation matrix
+    T = np.array([[1, 0, -center[0]],
+                  [0, 1, -center[1]],
+                  [0, 0, 1]], dtype="float")
+
+    # Make transformations from R and T in one
+    A = np.dot(T.T, R)
+
+    return A
