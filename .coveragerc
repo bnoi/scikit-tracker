@@ -2,6 +2,8 @@
 omit =
     */sktracker/io/tifffile.py
     */sktracker/utils/transformations.py
+    */sktracker/io/read_roi.py
     */sktracker/data/*
+    */sktracker/ui/*
     */sktracker/version.py
     */sktracker/trajectories/draw.py
