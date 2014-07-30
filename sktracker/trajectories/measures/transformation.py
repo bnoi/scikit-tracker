@@ -109,7 +109,7 @@ def time_interpolate(trajs, sampling=1,
                                                       sampling=sampling, s=s, k=k,
                                                       coords=coords)
     interpolated = interpolated.swaplevel(
-        't_stamp', 'label').sortlevel(['label', 't_stamp'])
+        't_stamp', 'label').sortlevel(['t_stamp', 'label'])
     return interpolated
 
 

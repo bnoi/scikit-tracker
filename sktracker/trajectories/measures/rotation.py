@@ -9,9 +9,25 @@ import numpy as np
 import pandas as pd
 from ..trajectories import Trajectories
 
+from .measure_decorators import (trajs_measure, segment_measure,
+                                 sliding_measure, p2p_measure)
+
+
 import logging
 log = logging.getLogger(__name__)
 
+
+
+def dir_shift_(segment, shift=1, coords=['v_x', 'v_y', 'v_z']):
+    dot_p = np.sum(segment[coords].shift(shift//2+1)
+                   * segment[coords].shift(-shift//2), axis=1)
+    norm = np.linalg.norm(segment[coords].shift(shift//2+1), axis=1)
+    norm_s = np.linalg.norm(segment[coords].shift(-shift//2), axis=1)
+    return np.arccos(dot_p / (norm * norm_s))
+
+@trajs_measure
+def dir_shift(trajs, shift=1, coords=['v_x', 'v_y', 'v_z']):
+    return trajs.groupby(level=['label'], group_keys=False).apply(dir_shift_, shift=shift, coords=coords)
 
 ###trajectories pseudo methods
 def radial_speed(trajs, in_coords=['rho', 'theta'],
