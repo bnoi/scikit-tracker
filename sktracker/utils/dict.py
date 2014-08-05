@@ -14,6 +14,7 @@ def sanitize_dict(obj):
     ------
     new_obj : dict with all values as str
     """
+
     new_obj = dict([(k, str(v)) for k, v in obj.items()])
     return new_obj
 
