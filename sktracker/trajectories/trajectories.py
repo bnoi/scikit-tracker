@@ -55,7 +55,7 @@ class Trajectories(pd.DataFrame):
     def __init__(self, *args, **kwargs):
         """
         """
-        super(Trajectories, self).__init__(*args, **kwargs)
+        super(self.__class__, self).__init__(*args, **kwargs)
 
     @classmethod
     def empty_trajs(cls, columns=['x', 'y', 'z']):
@@ -184,7 +184,7 @@ class Trajectories(pd.DataFrame):
 
     # Segment / spot modification methods
 
-    def remove_spots(self, spots, inplace=True):
+    def remove_spots(self, spots, inplace=False):
         """Remove spots identified by (t_stamp, label).
 
         Parameters
@@ -199,7 +199,7 @@ class Trajectories(pd.DataFrame):
 
         return self.drop(spots, inplace=inplace)
 
-    def remove_segments(self, segments_idx, inplace=True):
+    def remove_segments(self, segments_idx, inplace=False):
         """Remove segments from trajectories.
 
         Parameters
@@ -209,7 +209,7 @@ class Trajectories(pd.DataFrame):
         """
         return self.drop(segments_idx, level='label', inplace=inplace)
 
-    def merge_segments(self, labels, inplace=True):
+    def merge_segments(self, labels, inplace=False):
         """Merge segments from a list of labels. If spots have the same t_stamp, only the first spot
         for the t_stamp is keept (we may want to reconsider that behaviour later).
 
@@ -247,23 +247,97 @@ class Trajectories(pd.DataFrame):
         else:
             return trajs
 
-    # All trajectories modification methods
+    def cut_segments(self, spot, inplace=False):
+        """Cut segment. All spots with same label as `spot` and with `t_stamp` greater than
+        `spot` will have a new label.
 
-    def reverse(self):
-        """Reverse trajectories.
+        Parameters
+        ----------
+        spot : tuple
+            Must contain (t_stamp, label)
 
         Returns
         -------
-        A copy of current :class:`sktracker.trajectories.Trajectories`
+        Copy of modified trajectories or None wether inplace is True.
+        """
+
+        if inplace:
+            trajs = self
+        else:
+            trajs = self.copy()
+
+        trajs.sort_index(inplace=True)
+        t_stamp, label = spot
+        new_label = trajs.labels.max() + 1
+
+        index_names = trajs.index.names
+        trajs.reset_index(inplace=True)
+
+        trajs.loc[:, 'label'][(trajs['t_stamp'] > t_stamp) & (trajs['label'] == label)] = new_label
+        trajs.set_index(index_names, inplace=True)
+        trajs.sort_index(inplace=True)
+
+        if inplace:
+            return None
+        else:
+            return trajs
+
+    def duplicate_segments(self, label):
+        """Duplicate segment.
+
+        Parameters
+        ----------
+        label : int
+            Label index.
+
+        Returns
+        -------
+        Copy of modified :class:`sktracker.trajectories.Trajectories` or None wether inplace is
+        True.
         """
 
         trajs = self.copy()
+
+        new_label = trajs.labels.max() + 1
+        index_names = trajs.index.names
+        trajs.reset_index(inplace=True)
+
+        new_segment = trajs[trajs['label'] == label].copy()
+        new_segment.loc[:, 'label'] = new_label
+
+        trajs = pd.concat([trajs, new_segment])
+
+        trajs.set_index(index_names, inplace=True)
+        trajs.sort_index(inplace=True)
+
+        return trajs
+
+    # All trajectories modification methods
+
+    def reverse(self, time_column='t', inplace=False):
+        """Reverse trajectories time.
+
+        Returns
+        -------
+        Copy of modified :class:`sktracker.trajectories.Trajectories` or None wether inplace is
+        True.
+        """
+
+        if inplace:
+            trajs = self
+        else:
+            trajs = self.copy()
+
         trajs.reset_index(inplace=True)
         trajs['t_stamp'] = trajs['t_stamp'] * -1
-        trajs['t'] = trajs['t'] * -1
+        trajs[time_column] = trajs[time_column] * -1
         trajs.sort('t_stamp', inplace=True)
         trajs.set_index(['t_stamp', 'label'], inplace=True)
-        return trajs
+
+        if inplace:
+            return None
+        else:
+            return trajs
 
     def merge_label_safe(self, traj, id=None):  # pragma: no cover
         """See Trajectories.merge instead
@@ -279,6 +353,11 @@ class Trajectories(pd.DataFrame):
         Parameters
         ----------
         traj : :class:`pandas.DataFrame` or :class:`sktracker.trajectories.Trajectories`
+
+        Returns
+        -------
+        Copy of modified :class:`sktracker.trajectories.Trajectories` or None wether inplace is
+        True.
         """
 
         traj = traj.reset_index()
@@ -314,8 +393,7 @@ class Trajectories(pd.DataFrame):
         return new_trajs
 
     def relabel(self, new_labels=None, inplace=True):
-        """
-        Sets the trajectory index `label` to new values.
+        """Sets the trajectory index `label` to new values.
 
         Parameters
         ----------
@@ -324,22 +402,32 @@ class Trajectories(pd.DataFrame):
             will look for a column named "new_label" in `trajs` and use this
             as the new label index
 
+        Returns
+        -------
+        Copy of modified :class:`sktracker.trajectories.Trajectories` or None wether inplace is
+        True.
         """
+
+        if not inplace:
+            trajs = self.copy()
+        else:
+            trajs = self
+
         if new_labels is not None:
-            self['new_label'] = new_labels
+            trajs['new_label'] = new_labels
 
         try:
-            self.set_index('new_label', append=True, inplace=True)
+            trajs.set_index('new_label', append=True, inplace=True)
         except KeyError:
             err = ('''Column "new_label" was not found in `trajs` and none'''
                    ''' was provided''')
             raise KeyError(err)
 
-        self.reset_index(level='label', drop=True, inplace=True)
-        self.index.set_names(['t_stamp', 'label'], inplace=True)
-        self.sort_index(inplace=True)
-        # self.sortlevel('t_stamp', inplace=True)
-        self.relabel_fromzero('label', inplace=inplace)
+        trajs.reset_index(level='label', drop=True, inplace=True)
+        trajs.index.set_names(['t_stamp', 'label'], inplace=True)
+        trajs.sort_index(inplace=True)
+
+        return trajs.relabel_fromzero('label', inplace=inplace)
 
     def relabel_fromzero(self, level='label', inplace=False):
         """
@@ -350,18 +438,19 @@ class Trajectories(pd.DataFrame):
 
         Returns
         -------
-        trajs
+        Copy of modified :class:`sktracker.trajectories.Trajectories` or None wether inplace is
+        True.
         """
-
-        old_lbls = self.index.get_level_values(level)
-        nu_lbls = old_lbls.values.astype(np.uint16).copy()
-        for n, uv in enumerate(old_lbls.unique()):
-            nu_lbls[old_lbls == uv] = n
 
         if not inplace:
             trajs = self.copy()
         else:
             trajs = self
+
+        old_lbls = self.index.get_level_values(level)
+        nu_lbls = old_lbls.values.astype(np.uint16).copy()
+        for n, uv in enumerate(old_lbls.unique()):
+            nu_lbls[old_lbls == uv] = n
 
         trajs['new_label'] = nu_lbls
 
@@ -372,7 +461,10 @@ class Trajectories(pd.DataFrame):
         index_names[index_names.index('new_label')] = level
         trajs.index.set_names(['t_stamp', 'label'], inplace=True)
 
-        return trajs
+        if inplace:
+            return None
+        else:
+            return trajs
 
     def time_interpolate(self, sampling=1, s=0, k=3, time_step=None,
                          coords=['x', 'y', 'z']):
@@ -558,7 +650,7 @@ class Trajectories(pd.DataFrame):
 
     # Measures
 
-    def get_mean_distances(self, group_args={'by': 'true_label'},
+    def get_mean_distances(self, group_args={'level': 'label'},
                            coords=['x', 'y', 'z']):
         """Return the mean distances between each timepoints. Objects are grouped
         following group_args parameters.

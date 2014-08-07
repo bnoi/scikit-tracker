@@ -90,15 +90,14 @@ def test_write_hdf():
         store['trajs'] = trajs
 
 
-def get_mean_dist():
+def test_get_mean_dist():
 
     true_trajs = data.brownian_trajs_df()
 
     trajs = Trajectories(true_trajs)
     mean_dist = trajs.get_mean_distances()
 
-    true_dist = np.array([1.58959148, 1.42974187,
-                          1.97505829, 1.93212297, 1.30778342])
+    true_dist = np.array([21.71975058, 35.72098449, 31.40463335, 29.5767909, 17.89387283])
 
     assert_array_almost_equal(true_dist, mean_dist.values.flatten())
 
@@ -279,7 +278,7 @@ def test_remove_segments():
     trajs = data.brownian_trajs_df()
     trajs = Trajectories(trajs)
 
-    trajs.remove_segments(1)
+    trajs.remove_segments(1, inplace=True)
 
     assert np.all(trajs.labels == [0, 2, 3, 4])
 
@@ -296,6 +295,21 @@ def test_merge():
     assert len(trajs1.labels) + len(trajs2.labels) == len(new.labels)
 
 
+def test_relabel():
+    """
+    """
+    trajs = Trajectories(data.brownian_trajs_df())
+    trajs.columns = ['x', 'y', 'z', 'new_label', 't']
+    trajs.relabel(inplace=True)
+
+    new_values = [[1.933058243735795, -14.581064591435775, 11.603556633147544, 0.0],
+                  [-12.862215173899491, -2.8611502446443238, -2.2738941196781424, 0.0],
+                  [9.100887851132633, 2.837252570763561, 2.875753940450461, 0.0],
+                  [-9.253860446235523, 11.345550876585719, 22.118203258275745, 0.0]]
+
+    assert trajs.iloc[:4].values.tolist() == new_values
+
+
 def test_relabel_fromzero():
     """
     """
@@ -307,7 +321,7 @@ def test_relabel_fromzero():
     trajs.loc[:, 'label'][trajs['label'] == 1] = 55
     trajs.set_index(['t_stamp', 'label'], inplace=True)
 
-    relabeled = trajs.relabel_fromzero('label', inplace=True)
+    relabeled = trajs.relabel_fromzero('label', inplace=False)
     assert np.all(relabeled.labels == original_labels)
 
     trajs.reset_index(inplace=True)
@@ -355,3 +369,34 @@ def test_merge_segments():
     new_trajs = trajs.merge_segments([0, 88], inplace=False)
 
     assert_array_equal(trajs.values, new_trajs.values)
+
+
+def test_cut_segments():
+    """
+    """
+    trajs = Trajectories(data.brownian_trajs_df())
+
+    trajs.cut_segments((2, 3), inplace=True)
+
+    new_indexes = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1),
+                   (1, 2), (1, 3), (1, 4), (2, 0), (2, 1), (2, 2), (2, 3),
+                   (2, 4), (3, 0), (3, 1), (3, 2), (3, 4), (3, 5), (4, 0),
+                   (4, 1), (4, 2), (4, 4), (4, 5)]
+
+    assert trajs.index.tolist() == new_indexes
+
+
+def test_duplicate_segments():
+    """
+    """
+    trajs = Trajectories(data.brownian_trajs_df())
+
+    trajs = trajs.duplicate_segments(2)
+
+    new_indexes = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 0),
+                   (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 0), (2, 1),
+                   (2, 2), (2, 3), (2, 4), (2, 5), (3, 0), (3, 1), (3, 2),
+                   (3, 3), (3, 4), (3, 5), (4, 0), (4, 1), (4, 2), (4, 3),
+                   (4, 4), (4, 5)]
+
+    assert trajs.index.tolist() == new_indexes
