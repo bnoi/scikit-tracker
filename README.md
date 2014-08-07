@@ -32,10 +32,10 @@ Current stable version is v0.2.
 - pandas >= 0.13
 - scikit-image >= 0.9
 - scikit-learn >= 0.13
+- matplotlib >= 1.3
 
 ### Optional
 
-- matplotlib >= 1.3
 - PyQt4
 
 ### For developers

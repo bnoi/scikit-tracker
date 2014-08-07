@@ -69,6 +69,7 @@ DEPENDENCIES = ["numpy >= 1.8",
                 "pandas >= 0.13",
                 "scikit-image >= 0.9",
                 "scikit-learn >= 0.13",
+                "matplotlib >= 1.3",
                 ]
 
 if VERSION.endswith('dev'):
