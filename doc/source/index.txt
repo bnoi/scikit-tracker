@@ -37,6 +37,8 @@ Several algorithms are featured and it is planned to add others:
    to allow easy, flexible and yet powerfull parameters adjustements
    with custom cost function.
 
+**scikit-tracker** provides several intuitive graphical interfaces to semi-manually modify detected objects and trajectories (thanks to Qt4).
+
 .. note::
     **scikit-tracker** and ``sktracker`` refer to the same thing. However **scikit-tracker** may be used more as a project name while ``sktracker`` as a Python module.
 
@@ -44,10 +46,6 @@ Several algorithms are featured and it is planned to add others:
 .. _Segré et al. Nature Methods (2008): http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1233.html
 .. _K. Jaqaman and G. Danuser, Nature Methods, 2008: http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html
 .. _Julou, T., PNAS, (2013): http://www.pnas.org/content/early/2013/07/10/1301428110
-
-.. warning::
-
-    **scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. However recent 0.2 release provide some basics features.
 
 Table of content
 ----------------

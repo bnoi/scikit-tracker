@@ -15,9 +15,7 @@ Several algorithms are featured and it is planned to add others:
 
 - Lap Tracker, a robust single-particle tracking : [K. Jaqaman and G. Danuser, Nature Methods, 2008](http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html). The version implemented in **scikit-tracker** is a slightly modified version from the original to allow easy, flexible and yet powerfull parameters adjustements with custom cost function.
 
-## Warning
-
-**scikit-tracker** is in very early stage development. API is still highly instable and you should not use it in production. However any kind of contributions is welcome. However recent 0.2 release provide some basics features.
+**scikit-tracker** provides several intuitive graphical interfaces to semi-manually modify detected objects and trajectories (thanks to Qt4).
 
 ## Documentation
 
@@ -38,6 +36,7 @@ Current stable version is v0.2.
 ### Optional
 
 - matplotlib >= 1.3
+- PyQt4
 
 ### For developers
 
