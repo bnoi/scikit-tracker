@@ -184,16 +184,6 @@ class Trajectories(pd.DataFrame):
 
     # Segment / spot modification methods
 
-    def remove_segments(self, segments_idx, inplace=True):
-        """Remove segments from trajectories.
-
-        Parameters
-        ----------
-        segments_idx : list
-            List of label to remove
-        """
-        return self.drop(segments_idx, level='label', inplace=inplace)
-
     def remove_spots(self, spots, inplace=True):
         """Remove spots identified by (t_stamp, label).
 
@@ -208,6 +198,32 @@ class Trajectories(pd.DataFrame):
         """
 
         return self.drop(spots, inplace=inplace)
+
+    def remove_segments(self, segments_idx, inplace=True):
+        """Remove segments from trajectories.
+
+        Parameters
+        ----------
+        segments_idx : list
+            List of label to remove
+        """
+        return self.drop(segments_idx, level='label', inplace=inplace)
+
+    def merge_segments(self, labels, inplace=True):
+        """Merge segments from a list of labels. If spots have the same t_stamp, the mean value
+        will be added and NaN for any non number values.
+
+        Parameters
+        ----------
+        labels : list
+            Labels to merge.
+
+        Returns
+        -------
+        Copy of modified trajectories or None wether inplace is True.
+        """
+
+
 
     # All trajectories modification methods
 
@@ -303,7 +319,7 @@ class Trajectories(pd.DataFrame):
         # self.sortlevel('t_stamp', inplace=True)
         self.relabel_fromzero('label', inplace=inplace)
 
-    def relabel_fromzero(self, level, inplace=False):
+    def relabel_fromzero(self, level='label', inplace=False):
         """
         Parameters
         ----------
