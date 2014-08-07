@@ -224,3 +224,28 @@ def test_project():
                          [  7.25346979e-01,   1.77848529e-01]])
 
     assert_array_almost_equal(excepted, trajs.loc[:,['x_proj', 'y_proj']].values)
+
+def test_get_colors():
+    """
+    """
+
+    trajs = data.brownian_trajs_df()
+    trajs = Trajectories(trajs)
+
+    colors = trajs.get_colors()
+    assert colors == {0: '#FF0000', 1: '#ADFF00', 2: '#00FFA9', 3: '#0408FF', 4: '#FF00AC'}
+
+    colors = trajs.get_colors(alpha=0.5)
+    assert colors == {0: '#FF000080',
+                      1: '#ADFF0080',
+                      2: '#00FFA980',
+                      3: '#0408FF80',
+                      4: '#FF00AC80'}
+
+    colors = trajs.get_colors(rgba=True)
+    good_colors = {0: (1.0, 0.0, 0.0, 1.0),
+                   1: (0.67977809154279767, 1.0, 0.0, 1.0),
+                   2: (0.0, 1.0, 0.66360181783683614, 1.0),
+                   3: (0.015440535661123769, 0.031618928677752463, 1.0, 1.0),
+                   4: (1.0, 0.0, 0.67279469669175529, 1.0)}
+    assert colors == good_colors

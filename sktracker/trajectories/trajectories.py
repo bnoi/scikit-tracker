@@ -146,15 +146,40 @@ class Trajectories(pd.DataFrame):
         trajs = super(self.__class__, self).copy()
         return Trajectories(trajs)
 
-    def get_colors(self):
-        '''Returns a dictionary of `label : color` pairs for each segment
+    def get_colors(self, cmap="hsv", alpha=None, rgba=False):
+        '''Get color for each label.
+
+        Parameters
+        ----------
+        cmap : string
+            See http://matplotlib.org/examples/color/colormaps_reference.html for a list of
+            available colormap.
+        alpha : float
+            Between 0 and 1 to add transparency on color.
+        rgba : bool
+            If True return RGBA tuple for each color. If False return HTML color code.
+
+        Returns
+        -------
+        dict of `label : color` pairs for each segment.
         '''
         import matplotlib.pyplot as plt
-        ccycle = plt.rcParams['axes.color_cycle']
-        num_colors = len(ccycle)
-        clrs = {label: ccycle[label % num_colors]
-                for label in self.labels}
-        return clrs
+        cmap = plt.cm.get_cmap(name=cmap)
+
+        n = len(self.labels)
+        ite = zip(np.linspace(0, 0.9, n), self.labels)
+        colors = {label: cmap(i, alpha=alpha) for i, label in ite}
+
+        if not rgba:
+            def get_hex(rgba):
+                rgba = np.round(np.array(rgba) * 255).astype('int')
+                if not alpha:
+                    rgba = rgba[:3]
+                return "#" + "".join(['{:02X}'.format(a) for a in rgba])
+
+            colors = {label: get_hex(color) for label, color in colors.items()}
+
+        return colors
 
     # Segment / spot modification methods
 
@@ -207,6 +232,11 @@ class Trajectories(pd.DataFrame):
         new_trajs.sort_index(inplace=True)
 
         return new_trajs
+
+    def add_spots(self):
+        """
+        """
+        pass
 
     # All trajectories modification methods
 
