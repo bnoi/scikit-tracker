@@ -94,11 +94,11 @@ class Trajectories(pd.DataFrame):
 
     @property
     def t_stamps(self):
-        return self.index.levels[self.index.names.index('t_stamp')].values
+        return self.index.get_level_values('t_stamp').unique()
 
     @property
     def labels(self):
-        return self.index.levels[self.index.names.index('label')].values
+        return self.index.get_level_values('label').unique()
 
     @property
     def segment_idxs(self):
