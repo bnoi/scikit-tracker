@@ -210,8 +210,8 @@ class Trajectories(pd.DataFrame):
         return self.drop(segments_idx, level='label', inplace=inplace)
 
     def merge_segments(self, labels, inplace=True):
-        """Merge segments from a list of labels. If spots have the same t_stamp, the mean value
-        will be added and NaN for any non number values.
+        """Merge segments from a list of labels. If spots have the same t_stamp, only the first spot
+        for the t_stamp is keept (we may want to reconsider that behaviour later).
 
         Parameters
         ----------
@@ -223,7 +223,29 @@ class Trajectories(pd.DataFrame):
         Copy of modified trajectories or None wether inplace is True.
         """
 
+        if inplace:
+            trajs = self
+        else:
+            trajs = self.copy()
 
+        new_label = labels[0]
+
+        index_names = trajs.index.names
+        trajs.reset_index(inplace=True)
+
+        for label in labels[1:]:
+            trajs.loc[:, 'label'][trajs['label'] == label] = new_label
+
+        trajs.set_index(index_names, inplace=True)
+
+        # Remove duplicate spots from the same t_stamp
+        gps = trajs.groupby(level=['t_stamp', 'label'])
+        trajs = Trajectories(gps.apply(lambda x: x.iloc[0]))
+
+        if inplace:
+            return None
+        else:
+            return trajs
 
     # All trajectories modification methods
 

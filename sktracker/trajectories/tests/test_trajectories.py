@@ -340,3 +340,18 @@ def test_remove_spots():
                    (4, 2), (4, 3), (4, 4)]
 
     assert new_trajs.index.tolist() == new_indexes
+
+
+def test_merge_segments():
+    """
+    """
+    trajs = Trajectories(data.brownian_trajs_df())
+
+    trajs.reset_index(inplace=True)
+    trajs.loc[15, ['label']] = 88
+    trajs.loc[20, ['label']] = 88
+    trajs.set_index(['t_stamp', 'label'], inplace=True)
+
+    new_trajs = trajs.merge_segments([0, 88], inplace=False)
+
+    assert_array_equal(trajs.values, new_trajs.values)
