@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-bf42670 docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-31c5cce docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-bf42670 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-31c5cce docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
         <link rel="prev" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/> 
@@ -338,6 +338,50 @@ the trajectories (not implemented right now)</p>
 <tt class="descname">copy</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.copy" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.cut_segments">
+<tt class="descname">cut_segments</tt><big>(</big><em>spot</em>, <em>inplace=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.cut_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cut segment. All spots with same label as <cite>spot</cite> and with <cite>t_stamp</cite> greater than
+<cite>spot</cite> will have a new label.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>spot</strong> : tuple</p>
+<blockquote>
+<div><p>Must contain (t_stamp, label)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Copy of modified trajectories or None wether inplace is True.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.duplicate_segments">
+<tt class="descname">duplicate_segments</tt><big>(</big><em>label</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.duplicate_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicate segment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>label</strong> : int</p>
+<blockquote>
+<div><p>Label index.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Copy of modified <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a> or None wether inplace is</p>
+<p class="last">True.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="classmethod">
 <dt id="sktracker.trajectories.Trajectories.empty_trajs">
 <em class="property">classmethod </em><tt class="descname">empty_trajs</tt><big>(</big><em>columns=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.empty_trajs" title="Permalink to this definition">¶</a></dt>
@@ -345,8 +389,32 @@ the trajectories (not implemented right now)</p>
 
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.get_colors">
-<tt class="descname">get_colors</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_colors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary of <cite>label : color</cite> pairs for each segment</p>
+<tt class="descname">get_colors</tt><big>(</big><em>cmap='hsv'</em>, <em>alpha=None</em>, <em>rgba=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get color for each label.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>cmap</strong> : string</p>
+<blockquote>
+<div><p>See <a class="reference external" href="http://matplotlib.org/examples/color/colormaps_reference.html">http://matplotlib.org/examples/color/colormaps_reference.html</a> for a list of
+available colormap.</p>
+</div></blockquote>
+<p><strong>alpha</strong> : float</p>
+<blockquote>
+<div><p>Between 0 and 1 to add transparency on color.</p>
+</div></blockquote>
+<p><strong>rgba</strong> : bool</p>
+<blockquote>
+<div><p>If True return RGBA tuple for each color. If False return HTML color code.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>dict of `label</strong> : color` pairs for each segment.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -365,7 +433,7 @@ the trajectories (not implemented right now)</p>
 
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.get_mean_distances">
-<tt class="descname">get_mean_distances</tt><big>(</big><em>group_args={'by': 'true_label'}, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_mean_distances" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_mean_distances</tt><big>(</big><em>group_args={'level': 'label'}, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_mean_distances" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the mean distances between each timepoints. Objects are grouped
 following group_args parameters.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -428,14 +496,47 @@ following group_args parameters.</p>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.trajectories.Trajectories.merge_label_safe">
-<tt class="descname">merge_label_safe</tt><big>(</big><em>traj</em>, <em>id=None</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.merge_label_safe" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.trajectories.Trajectories.merge">
+<tt class="descname">merge</tt><big>(</big><em>traj</em>, <em>id=None</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.merge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge traj to self trajectories taking care to not mix labels between them.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>traj</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>traj</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a> or <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Copy of modified <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a> or None wether inplace is</p>
+<p class="last">True.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.merge_label_safe">
+<tt class="descname">merge_label_safe</tt><big>(</big><em>traj</em>, <em>id=None</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.merge_label_safe" title="Permalink to this definition">¶</a></dt>
+<dd><p>See Trajectories.merge instead</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.merge_segments">
+<tt class="descname">merge_segments</tt><big>(</big><em>labels</em>, <em>inplace=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.merge_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge segments from a list of labels. If spots have the same t_stamp, only the first spot
+for the t_stamp is keept (we may want to reconsider that behaviour later).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>labels</strong> : list</p>
+<blockquote>
+<div><p>Labels to merge.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Copy of modified trajectories or None wether inplace is True.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -492,11 +593,15 @@ time stamp as reference line, put this parameter to True.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_labels: :class:`numpy.ndarray` or None, default None</strong></p>
-<blockquote class="last">
+<blockquote>
 <div><p>The new label. If it is not provided, the function
 will look for a column named &#8220;new_label&#8221; in <cite>trajs</cite> and use this
 as the new label index</p>
 </div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Copy of modified <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a> or None wether inplace is</p>
+<p class="last">True.</p>
 </td>
 </tr>
 </tbody>
@@ -505,7 +610,7 @@ as the new label index</p>
 
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.relabel_fromzero">
-<tt class="descname">relabel_fromzero</tt><big>(</big><em>level</em>, <em>inplace=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.relabel_fromzero" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">relabel_fromzero</tt><big>(</big><em>level='label'</em>, <em>inplace=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.relabel_fromzero" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -514,7 +619,8 @@ as the new label index</p>
 <p><strong>inplace</strong> : bool</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">trajs</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Copy of modified <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a> or None wether inplace is</p>
+<p class="last">True.</p>
 </td>
 </tr>
 </tbody>
@@ -523,7 +629,7 @@ as the new label index</p>
 
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.remove_segments">
-<tt class="descname">remove_segments</tt><big>(</big><em>segments_idx</em>, <em>inplace=True</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.remove_segments" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">remove_segments</tt><big>(</big><em>segments_idx</em>, <em>inplace=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.remove_segments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove segments from trajectories.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -540,14 +646,37 @@ as the new label index</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sktracker.trajectories.Trajectories.reverse">
-<tt class="descname">reverse</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.reverse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reverse trajectories.</p>
+<dt id="sktracker.trajectories.Trajectories.remove_spots">
+<tt class="descname">remove_spots</tt><big>(</big><em>spots</em>, <em>inplace=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.remove_spots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove spots identified by (t_stamp, label).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A copy of current <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>spots</strong> : tuple or list of tuple</p>
+<blockquote>
+<div><p>Each tuple must contain (t_stamp, label) to remove.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Copy of modified trajectories or None wether inplace is True.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.reverse">
+<tt class="descname">reverse</tt><big>(</big><em>time_column='t'</em>, <em>inplace=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverse trajectories time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Copy of modified <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a> or None wether inplace is</p>
+<p class="last">True.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -740,7 +869,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-bf42670',
+            VERSION:'0.3.dev-31c5cce',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
