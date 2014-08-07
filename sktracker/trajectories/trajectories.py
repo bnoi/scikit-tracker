@@ -194,10 +194,20 @@ class Trajectories(pd.DataFrame):
         """
         return self.drop(segments_idx, level='label', inplace=inplace)
 
-    def add_spots(self):
+    def remove_spots(self, spots, inplace=True):
+        """Remove spots identified by (t_stamp, label).
+
+        Parameters
+        ----------
+        spots : tuple or list of tuple
+            Each tuple must contain (t_stamp, label) to remove.
+
+        Returns
+        -------
+        Copy of modified trajectories or None wether inplace is True.
         """
-        """
-        pass
+
+        return self.drop(spots, inplace=inplace)
 
     # All trajectories modification methods
 

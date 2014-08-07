@@ -316,3 +316,27 @@ def test_relabel_fromzero():
 
     relabeled = trajs.relabel_fromzero('label', inplace=False)
     assert np.all(relabeled.labels == original_labels)
+
+
+def test_remove_spots():
+    """
+    """
+
+    trajs = Trajectories(data.brownian_trajs_df())
+    new_trajs = trajs.remove_spots([(3, 2), (0, 0)], inplace=False)
+
+    new_indexes = [(0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2),
+                   (1, 3), (1, 4), (2, 0), (2, 1), (2, 2), (2, 3), (2, 4),
+                   (3, 0), (3, 1), (3, 3), (3, 4), (4, 0), (4, 1), (4, 2),
+                   (4, 3), (4, 4)]
+
+    assert new_trajs.index.tolist() == new_indexes
+
+    new_trajs = trajs.remove_spots((0, 0), inplace=False)
+
+    new_indexes = [(0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2),
+                   (1, 3), (1, 4), (2, 0), (2, 1), (2, 2), (2, 3), (2, 4),
+                   (3, 0), (3, 1), (3, 2), (3, 3), (3, 4), (4, 0), (4, 1),
+                   (4, 2), (4, 3), (4, 4)]
+
+    assert new_trajs.index.tolist() == new_indexes
