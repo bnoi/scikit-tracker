@@ -284,14 +284,14 @@ def test_remove_segments():
     assert np.all(trajs.labels == [0, 2, 3, 4])
 
 
-def test_merge_label_safe():
+def test_merge():
     """
     """
 
     trajs1 = Trajectories(data.brownian_trajs_df())
     trajs2 = Trajectories(data.brownian_trajs_df())
 
-    new = trajs1.merge_label_safe(trajs2)
+    new = trajs1.merge(trajs2)
 
     assert len(trajs1.labels) + len(trajs2.labels) == len(new.labels)
 

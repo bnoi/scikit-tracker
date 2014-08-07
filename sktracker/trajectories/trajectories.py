@@ -6,6 +6,7 @@ from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
 
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -193,12 +194,43 @@ class Trajectories(pd.DataFrame):
         """
         return self.drop(segments_idx, level='label', inplace=inplace)
 
-    def merge_label_safe(self, traj, id=None):
+    def add_spots(self):
+        """
+        """
+        pass
+
+    # All trajectories modification methods
+
+    def reverse(self):
+        """Reverse trajectories.
+
+        Returns
+        -------
+        A copy of current :class:`sktracker.trajectories.Trajectories`
+        """
+
+        trajs = self.copy()
+        trajs.reset_index(inplace=True)
+        trajs['t_stamp'] = trajs['t_stamp'] * -1
+        trajs['t'] = trajs['t'] * -1
+        trajs.sort('t_stamp', inplace=True)
+        trajs.set_index(['t_stamp', 'label'], inplace=True)
+        return trajs
+
+    def merge_label_safe(self, traj, id=None):  # pragma: no cover
+        """See Trajectories.merge instead
+        """
+        mess = "`merge_label_safe` has been renamed to `merge`."
+        warnings.warn(mess, DeprecationWarning)
+
+        return self.merge(traj, id=id)
+
+    def merge(self, traj, id=None):
         """Merge traj to self trajectories taking care to not mix labels between them.
 
         Parameters
         ----------
-        traj : :class:`pandas.DataFrame`
+        traj : :class:`pandas.DataFrame` or :class:`sktracker.trajectories.Trajectories`
         """
 
         traj = traj.reset_index()
@@ -232,29 +264,6 @@ class Trajectories(pd.DataFrame):
         new_trajs.sort_index(inplace=True)
 
         return new_trajs
-
-    def add_spots(self):
-        """
-        """
-        pass
-
-    # All trajectories modification methods
-
-    def reverse(self):
-        """Reverse trajectories.
-
-        Returns
-        -------
-        A copy of current :class:`sktracker.trajectories.Trajectories`
-        """
-
-        trajs = self.copy()
-        trajs.reset_index(inplace=True)
-        trajs['t_stamp'] = trajs['t_stamp'] * -1
-        trajs['t'] = trajs['t'] * -1
-        trajs.sort('t_stamp', inplace=True)
-        trajs.set_index(['t_stamp', 'label'], inplace=True)
-        return trajs
 
     def relabel(self, new_labels=None, inplace=True):
         """
