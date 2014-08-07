@@ -261,4 +261,58 @@ def test_get_longest_segments():
 
     assert trajs.get_longest_segments(1) == [4]
 
+
+def test_get_shortest_segments():
+    """
+    """
+
+    trajs = data.brownian_trajs_df()
+    trajs = Trajectories(trajs)
+
     assert trajs.get_shortest_segments(1) == [0]
+
+
+def test_remove_segments():
+    """
+    """
+
+    trajs = data.brownian_trajs_df()
+    trajs = Trajectories(trajs)
+
+    trajs.remove_segments(1)
+
+    assert np.all(trajs.labels == [0, 2, 3, 4])
+
+
+def test_merge_label_safe():
+    """
+    """
+
+    trajs1 = Trajectories(data.brownian_trajs_df())
+    trajs2 = Trajectories(data.brownian_trajs_df())
+
+    new = trajs1.merge_label_safe(trajs2)
+
+    assert len(trajs1.labels) + len(trajs2.labels) == len(new.labels)
+
+
+def test_relabel_fromzero():
+    """
+    """
+
+    trajs = Trajectories(data.brownian_trajs_df())
+    original_labels = trajs.labels
+
+    trajs.reset_index(inplace=True)
+    trajs.loc[:, 'label'][trajs['label'] == 1] = 55
+    trajs.set_index(['t_stamp', 'label'], inplace=True)
+
+    relabeled = trajs.relabel_fromzero('label', inplace=True)
+    assert np.all(relabeled.labels == original_labels)
+
+    trajs.reset_index(inplace=True)
+    trajs.loc[:, 'label'][trajs['label'] == 1] = 55
+    trajs.set_index(['t_stamp', 'label'], inplace=True)
+
+    relabeled = trajs.relabel_fromzero('label', inplace=False)
+    assert np.all(relabeled.labels == original_labels)

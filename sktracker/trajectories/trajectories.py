@@ -127,7 +127,7 @@ class Trajectories(pd.DataFrame):
         n : int
         """
         idxs = self.segment_idxs
-        return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[-n:]).keys()
+        return list(dict(sorted(idxs.items(), key=lambda x: len(x[1]))[-n:]).keys())
 
     def get_shortest_segments(self, n):
         """Get the n th shortest segments label indexes.
@@ -137,7 +137,7 @@ class Trajectories(pd.DataFrame):
         n : int
         """
         idxs = self.segment_idxs
-        return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[:n]).keys()
+        return list(dict(sorted(idxs.items(), key=lambda x: len(x[1]))[:n]).keys())
 
     def copy(self):
         """
@@ -307,11 +307,14 @@ class Trajectories(pd.DataFrame):
             trajs = self
 
         trajs['new_label'] = nu_lbls
+
         trajs.set_index('new_label', append=True, inplace=True)
         trajs.reset_index(level, drop=True, inplace=True)
-        names = list(self.index.names)
-        names[names.index('new_label')] = level
-        trajs.index.set_names(names, inplace=inplace)
+
+        index_names = list(trajs.index.names)
+        index_names[index_names.index('new_label')] = level
+        trajs.index.set_names(['t_stamp', 'label'], inplace=True)
+
         return trajs
 
     def time_interpolate(self, sampling=1, s=0, k=3, time_step=None,
