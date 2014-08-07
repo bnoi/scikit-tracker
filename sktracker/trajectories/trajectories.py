@@ -197,7 +197,7 @@ class Trajectories(pd.DataFrame):
         Copy of modified trajectories or None wether inplace is True.
         """
 
-        return self.drop(spots, inplace=inplace)
+        return Trajectories(self.drop(spots, inplace=inplace))
 
     def remove_segments(self, segments_idx, inplace=False):
         """Remove segments from trajectories.
@@ -207,7 +207,7 @@ class Trajectories(pd.DataFrame):
         segments_idx : list
             List of label to remove
         """
-        return self.drop(segments_idx, level='label', inplace=inplace)
+        return Trajectories(self.drop(segments_idx, level='label', inplace=inplace))
 
     def merge_segments(self, labels, inplace=False):
         """Merge segments from a list of labels. If spots have the same t_stamp, only the first spot
@@ -305,7 +305,7 @@ class Trajectories(pd.DataFrame):
         new_segment = trajs[trajs['label'] == label].copy()
         new_segment.loc[:, 'label'] = new_label
 
-        trajs = pd.concat([trajs, new_segment])
+        trajs = Trajectories(pd.concat([trajs, new_segment]))
 
         trajs.set_index(index_names, inplace=True)
         trajs.sort_index(inplace=True)
@@ -377,7 +377,7 @@ class Trajectories(pd.DataFrame):
             self['id'] = id[0]
             traj['id'] = id[1]
 
-        new_trajs = pd.concat([self, traj])
+        new_trajs = Trajectories(pd.concat([self, traj]))
 
         # Relabel from zero
         old_lbls = new_trajs['label']
