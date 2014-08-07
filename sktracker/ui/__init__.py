@@ -14,8 +14,6 @@ work with images/videos, whatever scikit-tracker data handle:-)
 
 mpl_ok = False
 try:
-    import matplotlib
-    matplotlib.use('Qt4Agg')
     from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
     from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
     mpl_ok = True

@@ -60,6 +60,10 @@ def set_log_level(loglevel):
 setup_log()
 set_log_level('INFO')
 
+# Try to load matplotlib with Qt4Agg backend first for sktracker.ui.
+from .utils.mpl_loader import load_matplotlib
+load_matplotlib(preferreds=["Qt4Agg"])
+
 from .version import __version__
 
 from . import data
