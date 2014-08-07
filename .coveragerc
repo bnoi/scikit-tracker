@@ -7,3 +7,4 @@ omit =
     */sktracker/ui/*
     */sktracker/version.py
     */sktracker/trajectories/draw.py
+    */sktracker/utils/mpl_loader.py
