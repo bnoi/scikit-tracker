@@ -65,6 +65,33 @@ class Trajectories(pd.DataFrame):
                                    columns=columns)
         return cls(empty_trajs)
 
+    def check_trajs_df_structure(self, index=None, columns=None):
+        """Check wether trajectories contains a specified structure.
+
+        Parameters
+        ----------
+        index : list
+            Index names (order is important)
+        columns : list
+            Column names (order does not matter here)
+
+        Raises
+        ------
+        ValueError in both case
+        """
+
+        error_mess = "Trajectories does not contain correct indexes : {}"
+        if index and self.index.names != index:
+            raise ValueError(error_mess.format(index))
+
+        error_mess = "Trajectories does not contain correct columns : {}"
+        if columns:
+            columns = set(columns)
+            if not columns.issubset(set(self.columns)):
+                raise ValueError(error_mess.format(columns))
+
+    # Trajs getter methods
+
     @property
     def t_stamps(self):
         return self.index.levels[self.index.names.index('t_stamp')].values
@@ -92,16 +119,6 @@ class Trajectories(pd.DataFrame):
         return {key: segment for key, segment
                 in self.iter_segments}
 
-    def remove_segments(self, segments_idx, inplace=True):
-        """Remove segments from trajectories.
-
-        Parameters
-        ----------
-        segments_idx : list
-            List of label to remove
-        """
-        return self.drop(segments_idx, level='label', inplace=inplace)
-
     def get_longest_segments(self, n):
         """Get the n th longest segments label indexes.
 
@@ -122,28 +139,34 @@ class Trajectories(pd.DataFrame):
         idxs = self.segment_idxs
         return dict(sorted(idxs.items(), key=lambda x: len(x[1]))[:n]).keys()
 
-    def reverse(self):
-        """Reverse trajectories.
-
-        Returns
-        -------
-        A copy of current :class:`sktracker.trajectories.Trajectories`
-        """
-
-        trajs = self.copy()
-        trajs.reset_index(inplace=True)
-        trajs['t_stamp'] = trajs['t_stamp'] * -1
-        trajs['t'] = trajs['t'] * -1
-        trajs.sort('t_stamp', inplace=True)
-        trajs.set_index(['t_stamp', 'label'], inplace=True)
-        return trajs
-
     def copy(self):
         """
         """
 
         trajs = super(self.__class__, self).copy()
         return Trajectories(trajs)
+
+    def get_colors(self):
+        '''Returns a dictionary of `label : color` pairs for each segment
+        '''
+        import matplotlib.pyplot as plt
+        ccycle = plt.rcParams['axes.color_cycle']
+        num_colors = len(ccycle)
+        clrs = {label: ccycle[label % num_colors]
+                for label in self.labels}
+        return clrs
+
+    # Segment / spot modification methods
+
+    def remove_segments(self, segments_idx, inplace=True):
+        """Remove segments from trajectories.
+
+        Parameters
+        ----------
+        segments_idx : list
+            List of label to remove
+        """
+        return self.drop(segments_idx, level='label', inplace=inplace)
 
     def merge_label_safe(self, traj, id=None):
         """Merge traj to self trajectories taking care to not mix labels between them.
@@ -185,30 +208,51 @@ class Trajectories(pd.DataFrame):
 
         return new_trajs
 
-    def check_trajs_df_structure(self, index=None, columns=None):
-        """Check wether trajectories contains a specified structure.
+    # All trajectories modification methods
+
+    def reverse(self):
+        """Reverse trajectories.
+
+        Returns
+        -------
+        A copy of current :class:`sktracker.trajectories.Trajectories`
+        """
+
+        trajs = self.copy()
+        trajs.reset_index(inplace=True)
+        trajs['t_stamp'] = trajs['t_stamp'] * -1
+        trajs['t'] = trajs['t'] * -1
+        trajs.sort('t_stamp', inplace=True)
+        trajs.set_index(['t_stamp', 'label'], inplace=True)
+        return trajs
+
+    def relabel(self, new_labels=None, inplace=True):
+        """
+        Sets the trajectory index `label` to new values.
 
         Parameters
         ----------
-        index : list
-            Index names (order is important)
-        columns : list
-            Column names (order does not matter here)
+        new_labels: :class:`numpy.ndarray` or None, default None
+            The new label. If it is not provided, the function
+            will look for a column named "new_label" in `trajs` and use this
+            as the new label index
 
-        Raises
-        ------
-        ValueError in both case
         """
+        if new_labels is not None:
+            self['new_label'] = new_labels
 
-        error_mess = "Trajectories does not contain correct indexes : {}"
-        if index and self.index.names != index:
-            raise ValueError(error_mess.format(index))
+        try:
+            self.set_index('new_label', append=True, inplace=True)
+        except KeyError:
+            err = ('''Column "new_label" was not found in `trajs` and none'''
+                   ''' was provided''')
+            raise KeyError(err)
 
-        error_mess = "Trajectories does not contain correct columns : {}"
-        if columns:
-            columns = set(columns)
-            if not columns.issubset(set(self.columns)):
-                raise ValueError(error_mess.format(columns))
+        self.reset_index(level='label', drop=True, inplace=True)
+        self.index.set_names(['t_stamp', 'label'], inplace=True)
+        self.sort_index(inplace=True)
+        # self.sortlevel('t_stamp', inplace=True)
+        self.relabel_fromzero('label', inplace=inplace)
 
     def relabel_fromzero(self, level, inplace=False):
         """
@@ -239,114 +283,6 @@ class Trajectories(pd.DataFrame):
         names[names.index('new_label')] = level
         trajs.index.set_names(names, inplace=inplace)
         return trajs
-
-    def get_mean_distances(self, group_args={'by': 'true_label'},
-                           coords=['x', 'y', 'z']):
-        """Return the mean distances between each timepoints. Objects are grouped
-        following group_args parameters.
-
-        Parameters
-        ----------
-        group_args : dict
-            Used to group objects with :meth:`pandas.DataFrame.groupby`.
-        coords : list
-            Column names used to compute euclidean distance.
-
-        Returns
-        -------
-        mean_dist : :class:`pandas.DataFrame`
-        """
-
-        def get_euclidean_distance(vec):
-            vec = vec.loc[:, coords].values
-            dist = (vec[:-1] - vec[1:]) ** 2
-            dist = dist.sum(axis=-1)
-            dist = np.sqrt(dist)
-            return pd.DataFrame(dist, columns=['distance'])
-
-        groups = self.groupby(**group_args)
-        distances = groups.apply(get_euclidean_distance)
-        mean_dist = distances.groupby(level=0).mean()
-
-        return mean_dist
-
-    def show(self, xaxis='t',
-             yaxis='x',
-             groupby_args={'level': "label"},
-             ax=None, **kwargs):  # pragma: no cover
-        """Show trajectories
-
-        Parameters
-        ----------
-        xaxis : str
-        yaxis : str
-        groupby : dict
-            How to group trajectories
-        ax : :class:`matplotlib.axes.Axes`
-            None will create a new one.
-        **kwargs are passed to the plot function
-
-        Returns
-        -------
-        :class:`matplotlib.axes.Axes`
-
-        Examples
-        --------
-        >>> from sktracker import data
-        >>> from sktracker.tracker.solver import ByFrameSolver
-        >>> import matplotlib.pylab as plt
-        >>> true_trajs = data.brownian_trajectories_generator(p_disapear=0.1)
-        >>> solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=2)
-        >>> trajs = solver.track(progress_bar=False)
-        >>> fig, (ax1, ax2) = plt.subplots(nrows=2)
-        >>> ax1 = trajs.show(xaxis='t', yaxis='x', groupby_args={'level': "label"}, ax=ax1)
-        >>> ax2 = trajs.show(xaxis='t', yaxis='x', groupby_args={'by': "true_label"}, ax=ax2)
-
-        """
-
-        import matplotlib.pyplot as plt
-
-        if ax is None:
-            ax = plt.gca()
-        colors = self.get_colors()
-        gp = self.groupby(**groupby_args).groups
-
-        # Set default kwargs if they are not provided
-        # Unfortunately you can't pass somthing as '-o'
-        # as a single linestyle kwarg
-
-        if ((kwargs.get('ls') is None)
-           and (kwargs.get('linestyle') is None)):
-            kwargs['ls'] = '-'
-        if kwargs.get('marker') is None:
-            kwargs['marker'] = 'o'
-        if ((kwargs.get('c') is None) and (kwargs.get('color') is None)):
-            auto_color = True
-        else:
-            auto_color = False
-
-        for k, v in gp.items():
-            traj = self.loc[v]
-            if auto_color:
-                c = colors[v[0][1]]  # that's the label
-                kwargs['color'] = c
-            ax.plot(traj[xaxis], traj[yaxis], **kwargs)
-
-        ax.set_xlabel(xaxis)
-        ax.set_ylabel(yaxis)
-        ax.set_title(str(groupby_args))
-
-        return ax
-
-    def get_colors(self):
-        '''Returns a dictionary of `label : color` pairs for each segment
-        '''
-        import matplotlib.pyplot as plt
-        ccycle = plt.rcParams['axes.color_cycle']
-        num_colors = len(ccycle)
-        clrs = {label: ccycle[label % num_colors]
-                for label in self.labels}
-        return clrs
 
     def time_interpolate(self, sampling=1, s=0, k=3, time_step=None,
                          coords=['x', 'y', 'z']):
@@ -410,51 +346,6 @@ class Trajectories(pd.DataFrame):
                         .format(sampling, dt, time_step))
         interpolated = Trajectories(time_interpolate_(self, sampling, s, k, coords))
         return Trajectories(interpolated)
-
-    def relabel(self, new_labels=None, inplace=True):
-        """
-        Sets the trajectory index `label` to new values.
-
-        Parameters
-        ----------
-        new_labels: :class:`numpy.ndarray` or None, default None
-            The new label. If it is not provided, the function
-            will look for a column named "new_label" in `trajs` and use this
-            as the new label index
-
-        """
-        if new_labels is not None:
-            self['new_label'] = new_labels
-
-        try:
-            self.set_index('new_label', append=True, inplace=True)
-        except KeyError:
-            err = ('''Column "new_label" was not found in `trajs` and none'''
-                   ''' was provided''')
-            raise KeyError(err)
-
-        self.reset_index(level='label', drop=True, inplace=True)
-        self.index.set_names(['t_stamp', 'label'], inplace=True)
-        self.sort_index(inplace=True)
-        # self.sortlevel('t_stamp', inplace=True)
-        self.relabel_fromzero('label', inplace=inplace)
-
-    def all_speeds(self, coords=['x', 'y', 'z']):
-        """
-        Get all speeds in trajectories between each t_stamp.
-        """
-        t_stamp = self.index.get_level_values('t_stamp').unique()
-        speeds = []
-
-        for t1, t2 in zip(t_stamp[:-1], t_stamp[1:]):
-            p1 = self.loc[t1]
-            p2 = self.loc[t2]
-            dt = p2['t'].unique()[0] - p1['t'].unique()[0]
-
-            d = sp.spatial.distance.cdist(p1.loc[:, coords], p2.loc[:, coords]).flatten()
-            speeds += (d / dt).tolist()
-
-        return np.array(speeds)
 
     def scale(self, factors, coords=['x', 'y', 'z'], inplace=False):
         '''Multiplies the columns given in coords by the values given in factors.
@@ -570,11 +461,128 @@ class Trajectories(pd.DataFrame):
             print_progress(-1)
 
         if np.abs(trajs.x_proj).mean() < np.abs(trajs.y_proj).mean():
-            trajs.loc[:,['x_proj', 'y_proj']] = trajs.loc[:,['y_proj', 'x_proj']].values
+            trajs.loc[:, ['x_proj', 'y_proj']] = trajs.loc[:, ['y_proj', 'x_proj']].values
 
         if not inplace:
             return trajs
 
+    # Measures
+
+    def get_mean_distances(self, group_args={'by': 'true_label'},
+                           coords=['x', 'y', 'z']):
+        """Return the mean distances between each timepoints. Objects are grouped
+        following group_args parameters.
+
+        Parameters
+        ----------
+        group_args : dict
+            Used to group objects with :meth:`pandas.DataFrame.groupby`.
+        coords : list
+            Column names used to compute euclidean distance.
+
+        Returns
+        -------
+        mean_dist : :class:`pandas.DataFrame`
+        """
+
+        def get_euclidean_distance(vec):
+            vec = vec.loc[:, coords].values
+            dist = (vec[:-1] - vec[1:]) ** 2
+            dist = dist.sum(axis=-1)
+            dist = np.sqrt(dist)
+            return pd.DataFrame(dist, columns=['distance'])
+
+        groups = self.groupby(**group_args)
+        distances = groups.apply(get_euclidean_distance)
+        mean_dist = distances.groupby(level=0).mean()
+
+        return mean_dist
+
+    def all_speeds(self, coords=['x', 'y', 'z']):
+        """Get all speeds in trajectories between each t_stamp.
+        """
+        t_stamp = self.index.get_level_values('t_stamp').unique()
+        speeds = []
+
+        for t1, t2 in zip(t_stamp[:-1], t_stamp[1:]):
+            p1 = self.loc[t1]
+            p2 = self.loc[t2]
+            dt = p2['t'].unique()[0] - p1['t'].unique()[0]
+
+            d = sp.spatial.distance.cdist(p1.loc[:, coords], p2.loc[:, coords]).flatten()
+            speeds += (d / dt).tolist()
+
+        return np.array(speeds)
+
+    # Visualization methods
+
+    def show(self, xaxis='t',
+             yaxis='x',
+             groupby_args={'level': "label"},
+             ax=None, **kwargs):  # pragma: no cover
+        """Show trajectories
+
+        Parameters
+        ----------
+        xaxis : str
+        yaxis : str
+        groupby : dict
+            How to group trajectories
+        ax : :class:`matplotlib.axes.Axes`
+            None will create a new one.
+        **kwargs are passed to the plot function
+
+        Returns
+        -------
+        :class:`matplotlib.axes.Axes`
+
+        Examples
+        --------
+        >>> from sktracker import data
+        >>> from sktracker.tracker.solver import ByFrameSolver
+        >>> import matplotlib.pylab as plt
+        >>> true_trajs = data.brownian_trajectories_generator(p_disapear=0.1)
+        >>> solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=2)
+        >>> trajs = solver.track(progress_bar=False)
+        >>> fig, (ax1, ax2) = plt.subplots(nrows=2)
+        >>> ax1 = trajs.show(xaxis='t', yaxis='x', groupby_args={'level': "label"}, ax=ax1)
+        >>> ax2 = trajs.show(xaxis='t', yaxis='x', groupby_args={'by': "true_label"}, ax=ax2)
+
+        """
+
+        import matplotlib.pyplot as plt
+
+        if ax is None:
+            ax = plt.gca()
+        colors = self.get_colors()
+        gp = self.groupby(**groupby_args).groups
+
+        # Set default kwargs if they are not provided
+        # Unfortunately you can't pass somthing as '-o'
+        # as a single linestyle kwarg
+
+        if ((kwargs.get('ls') is None)
+           and (kwargs.get('linestyle') is None)):
+            kwargs['ls'] = '-'
+        if kwargs.get('marker') is None:
+            kwargs['marker'] = 'o'
+        if ((kwargs.get('c') is None) and (kwargs.get('color') is None)):
+            auto_color = True
+        else:
+            auto_color = False
+
+        for k, v in gp.items():
+            traj = self.loc[v]
+            if auto_color:
+                c = colors[v[0][1]]  # that's the label
+                kwargs['color'] = c
+            ax.plot(traj[xaxis], traj[yaxis], **kwargs)
+
+        ax.set_xlabel(xaxis)
+        ax.set_ylabel(yaxis)
+        ax.set_title(str(groupby_args))
+
+        return ax
 
 # Register the trajectories for storing in HDFStore
 # as a regular DataFrame
