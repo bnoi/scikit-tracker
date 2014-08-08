@@ -27,13 +27,13 @@ class AbstractCostFunction(object):
         self.context = context
         self.parameters = parameters
 
-    def get_block(self):
+    def get_block(self, *args, **kwargs):
         """This method will update the values in `self.mat`. It should be overwritten for any matrix
         verification returned by self.build.
 
 
         """
-        self.mat = self._build()
+        self.mat = self._build(*args, **kwargs)
 
     def _build(self):
         """This method needs to be overwritten by subclasses

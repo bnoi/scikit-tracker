@@ -10,10 +10,11 @@ import logging
 
 log = logging.getLogger(__name__)
 
+from ...utils import print_progress
+
 from ..matrix import CostMatrix
 
 from ..cost_function import AbstractCostFunction
-
 from ..cost_function.brownian import BrownianGapCloseCostFunction
 from ..cost_function.diagonal import DiagonalCostFunction
 
@@ -39,6 +40,7 @@ class GapCloseSolver(AbstractSolver):
 
         super(self.__class__, self).__init__(trajs)
 
+        log.info('Initiating gap close solver')
         self.coords = coords
 
         self.trajs.check_trajs_df_structure(index=['t_stamp', 'label'],
@@ -81,7 +83,7 @@ class GapCloseSolver(AbstractSolver):
         cost_functions = {'link': link_cost_func,
                           'birth': birth_cost_func,
                           'death': death_cost_func}
-        log.info('Initiating gap close')
+
         return cls(trajs, cost_functions, maximum_gap, use_t_stamp=use_t_stamp, coords=coords)
 
     @property
@@ -89,10 +91,13 @@ class GapCloseSolver(AbstractSolver):
         return [[self.link_cf.mat, self.death_cf.mat],
                 [self.birth_cf.mat, None]]
 
-    def track(self):
+    def track(self, progress_bar=False, progress_bar_out=None):
         """
         """
-        idxs_in, idxs_out = self._get_candidates()
+        log.info('Initiating gap close tracking')
+
+        idxs_in, idxs_out = self._get_candidates(progress_bar=progress_bar,
+                                                 progress_bar_out=progress_bar_out)
 
         self.link_cf.context['trajs'] = self.trajs
         self.link_cf.context['idxs_in'] = idxs_in
@@ -124,10 +129,12 @@ class GapCloseSolver(AbstractSolver):
         # space and time, with all other potential assignments. Thus,
         # the alternative cost was taken as the 90th percentile.'''
 
+        log.info('Build cost functions')
+
         link_percentile_b = self.birth_cf.parameters['link_percentile']
         link_percentile_d = self.death_cf.parameters['link_percentile']
-
-        self.link_cf.get_block()
+        self.link_cf.get_block(progress_bar=progress_bar,
+                               progress_bar_out=progress_bar_out)
         link_costs = np.ma.masked_invalid(self.link_cf.mat).compressed()
 
         if not link_costs.shape[0]:
@@ -136,7 +143,6 @@ class GapCloseSolver(AbstractSolver):
 
         cost_b = np.percentile(link_costs, link_percentile_b)
         cost_d = np.percentile(link_costs, link_percentile_d)
-
         self.birth_cf.context['cost'] = cost_b
         self.birth_cf.get_block()
         self.death_cf.context['cost'] = cost_d
@@ -148,21 +154,33 @@ class GapCloseSolver(AbstractSolver):
 
         return self.trajs
 
-    def _get_candidates(self):
+    def _get_candidates(self, progress_bar=False, progress_bar_out=None):
         """
         """
+        seg_idx = self.trajs.segment_idxs
+
+        log.info('Find candidates among {} segments'.format(len(seg_idx)))
+
         max_gap = self.maximum_gap
         labels = self.trajs.labels
 
         bounds = []
-        for idxs in self.trajs.segment_idxs.values():
+        for i, idxs in enumerate(seg_idx.values()):
+
+            if progress_bar:
+                progress = i / len(seg_idx) * 100
+                print_progress(progress, out=progress_bar_out)
+
             if self.use_t_stamp:
                 bound = (idxs[0][0], idxs[-1][0])
             else:
                 bound = (self.trajs.loc[idxs[0], 't'], self.trajs.loc[idxs[-1], 't'])
             bounds.append(bound)
-        bounds = np.array(bounds)
 
+        if progress_bar:
+            print_progress(-1)
+
+        bounds = np.array(bounds)
         start_times = bounds[:, 0]
         stop_times = bounds[:, 1]
         ss_in, ss_out = np.meshgrid(labels, labels)
@@ -173,7 +191,6 @@ class GapCloseSolver(AbstractSolver):
 
         if not matches.shape[0]:
             return [], []
-
         matches_in = matches[:, 1]
         matches_out = matches[:, 0]
 
@@ -195,11 +212,15 @@ class GapCloseSolver(AbstractSolver):
                            self.trajs.labels[matches_out])]
         # pos_out = self.trajs.loc[out_idxs]
 
+        log.info("{} candidates found".format(len(in_idxs)))
+
         return in_idxs, out_idxs
 
     def assign(self):
         """
         """
+        log.info('Assigning results')
+
         row_shapes, col_shapes = self.cm.get_shapes()
         old_labels = self.trajs.index.get_level_values(level='label').values
         new_labels = old_labels.copy()

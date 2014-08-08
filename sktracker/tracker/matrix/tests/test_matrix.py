@@ -23,6 +23,7 @@ def nan_ident(size):
     mat[mat == 0] = np.nan
     return mat
 
+
 def test_get_shapes():
     blocks = np.array([[np.ones((1, 2)), np.ones((1, 3)), nan_ident(1), None],
                        [np.ones((3, 2)), None, None, nan_ident(3)],
@@ -31,6 +32,7 @@ def test_get_shapes():
 
     cm = CostMatrix(blocks)
     cm.get_shapes()
+
 
 def test_cost_matrix_mocked_mat():
 
@@ -67,7 +69,7 @@ def test_cost_matrix_with_mock_trajs():
     pos1 = trajs.ix[t1]
 
     diag_context = {'cost': 5.**2}
-    diag_params  = {'penalty': 2.}
+    diag_params = {'penalty': 2.}
 
     link_cost_func = BrownianLinkCostFunction(parameters={'max_speed': 5.})
     birth_cost_func = DiagonalCostFunction(context=diag_context,

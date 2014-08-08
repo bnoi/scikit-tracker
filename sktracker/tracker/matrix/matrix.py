@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 
@@ -29,6 +28,8 @@ class CostMatrix(object):
     """
 
     def __init__(self, blocks):
+        """
+        """
 
         if isinstance(blocks, list):
             self.blocks = np.atleast_2d(blocks)
@@ -47,7 +48,6 @@ class CostMatrix(object):
         """
 
         idxs_in, idxs_out, self.costs = self.get_flat()
-
         self.in_links, self.out_links = lapjv(idxs_in, idxs_out, self.costs)
 
     def get_masked(self):
@@ -77,6 +77,76 @@ class CostMatrix(object):
         idxs_in, idxs_out = np.where(
             np.logical_not(np.ma.getmask(masked)))
         return idxs_in, idxs_out, costs
+
+    def _fill_lrb(self):
+        """Fill the lower contiguous block of NaN values with the transposed
+        matrix of the related upper block.
+        """
+
+        # Find the lower contiguous block
+        x, y = self.get_shapes()
+        i = np.sum(x[:len(x) / 2])
+        j = np.sum(y[:len(y) / 2])
+
+        # Copy the upper left block and transpose
+        lrb = self.mat[:i, :j].T.copy()
+
+        # Give a value higher than the max value
+        lrb[np.isfinite(lrb)] = self.get_masked().max() * 1.1
+
+        self.mat[i:, j:] = lrb
+
+    def _concatenate_blocks(self):
+        """Concatenate a matrix of block to a single matrix : the cost matrix.
+        """
+
+        row_shapes, col_shapes = self.get_shapes()
+
+        nrows = row_shapes.sum()
+        ncols = col_shapes.sum()
+        self.mat = np.empty((nrows, ncols))
+        self.mat.fill(np.nan)
+
+        row_corners = row_shapes.cumsum() - row_shapes
+        col_corners = col_shapes.cumsum() - col_shapes
+
+        for i, (start_i, shape_i) in enumerate(zip(row_corners, row_shapes)):
+            for j, (start_j, shape_j) in enumerate(zip(col_corners, col_shapes)):
+                self.mat[start_i:start_i+shape_i,
+                         start_j:start_j+shape_j] = self.blocks[i, j]
+
+    def get_shapes(self):
+        """Get whole matrix blocks shape.
+
+        Returns
+        -------
+        row_shapes : 1D :class:`numpy.ndarray`
+            Row shapes.
+        col_shapes : 1D :class:`numpy.ndarray`
+            Column shapes.
+        """
+        row_shapes = np.zeros(self.blocks.shape[0])
+        col_shapes = np.zeros(self.blocks.shape[1])
+
+        for n, row in enumerate(self.blocks):
+            shapes = []
+            for block in row:
+                if isinstance(block, np.ndarray):
+                    shapes.append(block.shape[0])
+            if np.unique(shapes).size != 1:
+                raise ValueError("Blocks don't fit horizontally")
+            row_shapes[n] = shapes[0]
+
+        for n, col in enumerate(self.blocks.T):
+            shapes = []
+            for block in col:
+                if isinstance(block, np.ndarray):
+                    shapes.append(block.shape[1])
+            if np.unique(shapes).size != 1:
+                raise ValueError("Blocks don't fit vertically")
+            col_shapes[n] = shapes[0]
+
+        return row_shapes.astype(np.int), col_shapes.astype(np.int)
 
     def view(self, ax=None, colormap="gray", **kwargs):  # pragma: no cover
         """Display cost matrice on a plot.
@@ -148,74 +218,3 @@ class CostMatrix(object):
         ax.set_ylim(0, size)
 
         return ax
-
-    def _fill_lrb(self):
-        """Fill the lower contiguous block of NaN values with the transposed
-        matrix of the related upper block.
-        """
-
-        # Find the lower contiguous block of NaN values
-        ii, jj = np.where(np.isfinite(self.mat) == False)
-        for i, j in zip(ii, jj):
-            if np.isnan(self.mat[i:, j:]).all():
-                break
-
-        # Copy the upper left block and transpose
-        lrb = self.mat[:i, :j].T.copy()
-
-        # Give a value higher than the max value
-        lrb[np.isfinite(lrb)] = self.get_masked().max() * 1.1
-
-        self.mat[i:, j:] = lrb
-
-    def _concatenate_blocks(self):
-        """Concatenate a matrix of block to a single matrix : the cost matrix.
-        """
-
-        row_shapes, col_shapes = self.get_shapes()
-
-        nrows = row_shapes.sum()
-        ncols = col_shapes.sum()
-        self.mat = np.empty((nrows, ncols))
-        self.mat.fill(np.nan)
-
-        row_corners = row_shapes.cumsum() - row_shapes
-        col_corners = col_shapes.cumsum() - col_shapes
-
-        for i, (start_i, shape_i) in enumerate(zip(row_corners, row_shapes)):
-            for j, (start_j, shape_j) in enumerate(zip(col_corners, col_shapes)):
-                self.mat[start_i:start_i+shape_i,
-                         start_j:start_j+shape_j] = self.blocks[i, j]
-
-    def get_shapes(self):
-        """Get whole matrix blocks shape.
-
-        Returns
-        -------
-        row_shapes : 1D :class:`numpy.ndarray`
-            Row shapes.
-        col_shapes : 1D :class:`numpy.ndarray`
-            Column shapes.
-        """
-        row_shapes = np.zeros(self.blocks.shape[0])
-        col_shapes = np.zeros(self.blocks.shape[1])
-
-        for n, row in enumerate(self.blocks):
-            shapes = []
-            for block in row:
-                if isinstance(block, np.ndarray):
-                    shapes.append(block.shape[0])
-            if np.unique(shapes).size != 1:
-                raise ValueError("Blocks don't fit horizontally")
-            row_shapes[n] = shapes[0]
-
-        for n, col in enumerate(self.blocks.T):
-            shapes = []
-            for block in col:
-                if isinstance(block, np.ndarray):
-                    shapes.append(block.shape[1])
-            if np.unique(shapes).size != 1:
-                raise ValueError("Blocks don't fit vertically")
-            col_shapes[n] = shapes[0]
-
-        return row_shapes.astype(np.int), col_shapes.astype(np.int)

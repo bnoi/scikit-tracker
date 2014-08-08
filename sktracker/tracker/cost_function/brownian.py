@@ -13,6 +13,7 @@ import pandas as pd
 from scipy.spatial.distance import cdist, pdist
 
 from . import AbstractCostFunction
+from ...utils import print_progress
 from .gap_close import AbstractGapCloseCostFunction
 from ...trajectories import Trajectories
 
@@ -82,7 +83,7 @@ class BrownianLinkCostFunction(AbstractCostFunction):
         self.check_columns([pos_in, pos_out], list(coords) + ['t'])
 
         if pos_out.empty or pos_in.empty:
-           return pd.DataFrame([])
+            return pd.DataFrame([])
 
         dt = pos_out['t'].iloc[0] - pos_in['t'].iloc[0]
 
@@ -112,7 +113,7 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
 
         super(self.__class__, self).__init__(context={}, parameters=_parameters)
 
-    def _build(self):
+    def _build(self, progress_bar=False, progress_bar_out=None):
         """
         """
 
@@ -135,8 +136,13 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
         distances = np.empty((len(trajs.labels),
                               len(trajs.labels)))
         distances.fill(np.nan)
+        n = len(idxs_in)
+        for i, (idx_in, idx_out) in enumerate(zip(idxs_in, idxs_out)):
 
-        for idx_in, idx_out in zip(idxs_in, idxs_out):
+            if progress_bar:
+                progress = i / n * 100
+                print_progress(progress, out=progress_bar_out)
+
             pos_in = trajs.loc[idx_in]
             pos_out = trajs.loc[idx_out]
             distance = pdist(np.vstack([pos_in[coords].values,
@@ -146,6 +152,9 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
             speed = distance / np.abs(dt)
             if speed < max_speed:
                 distances[idx_in[1], idx_out[1]] = distance
+
+        if progress_bar:
+            print_progress(-1)
 
         distances = distances ** 2
         return distances
