@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.solver package &mdash; sktracker 0.3.dev-35f3698 docs</title>
+  <title>sktracker.tracker.solver package &mdash; sktracker 0.3.dev-642d87d docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-35f3698 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-642d87d docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="next" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/>
         <link rel="prev" title="sktracker.tracker.matrix package" href="sktracker.tracker.matrix.html"/> 
@@ -369,8 +369,22 @@ close event will discarded.</p>
 
 <dl class="method">
 <dt id="sktracker.tracker.solver.GapCloseSolver.track">
-<tt class="descname">track</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver.track" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<tt class="descname">track</tt><big>(</big><em>progress_bar=False</em>, <em>progress_bar_out=None</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver.track" title="Permalink to this definition">¶</a></dt>
+<dd><p>For details about link_percentile, see below from
+K. Jaqaman and G. Danuser, Nature Methods, 2008.</p>
+<blockquote>
+<div>TFA: For track segment ends and starts, the alternative cost (b and d in Fig. 1c) had to
+be comparable in magnitude to the costs of potential assignments, making the rejection
+of gap closing, merging and splitting an accessible alternative. At the same time, the
+alternative cost had to be at the higher end of the range of potential assignment costs,
+so that the algorithm did not fail to close gaps and capture merge and split events. We
+performed empirical tests of the sensitivity of tracking results to variations in the
+alternative cost. We found that in a range 80th – 100th percentile of all potential
+assignment costs the outcome of gap closing, merging and splitting varied negligibly
+(data not shown). We attribute this robustness to the fact that track initiations and
+terminations competed globally, in space and time, with all other potential assignments.
+Thus, the alternative cost was taken as the 90th percentile.</div></blockquote>
+</dd></dl>
 
 </dd></dl>
 
@@ -415,7 +429,7 @@ close event will discarded.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-35f3698',
+            VERSION:'0.3.dev-642d87d',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-35f3698 docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-642d87d docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-35f3698 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-642d87d docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
         <link rel="prev" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/> 
@@ -388,6 +388,32 @@ the trajectories (not implemented right now)</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="sktracker.trajectories.Trajectories.get_bounds">
+<tt class="descname">get_bounds</tt><big>(</big><em>column=None</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get bounds of all segments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>column</strong> : string</p>
+<blockquote>
+<div><p>By default the method will return bounds as &#8216;t_stamp&#8217;. If you want another value from
+column (&#8216;t&#8217; for example), you can put the column&#8217;s name here.</p>
+</div></blockquote>
+<p><strong>asarray</strong> : bool</p>
+<blockquote>
+<div><p>Return bounds as dict of as array wether it&#8217;s True</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">bounds as dict or ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="sktracker.trajectories.Trajectories.get_colors">
 <tt class="descname">get_colors</tt><big>(</big><em>cmap='hsv'</em>, <em>alpha=None</em>, <em>rgba=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_colors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get color for each label.</p>
@@ -719,7 +745,7 @@ The <cite>factors</cite> and <cite>columns</cite> must have the same length</p>
 
 <dl class="method">
 <dt id="sktracker.trajectories.Trajectories.show">
-<tt class="descname">show</tt><big>(</big><em>xaxis='t'</em>, <em>yaxis='x'</em>, <em>groupby_args={'level': 'label'}</em>, <em>ax=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.show" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">show</tt><big>(</big><em>xaxis='t'</em>, <em>yaxis='x'</em>, <em>groupby_args={'level': 'label'}</em>, <em>ax=None</em>, <em>legend=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.show" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show trajectories</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -869,7 +895,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-35f3698',
+            VERSION:'0.3.dev-642d87d',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

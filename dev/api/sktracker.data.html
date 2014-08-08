@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.data package &mdash; sktracker 0.3.dev-35f3698 docs</title>
+  <title>sktracker.data package &mdash; sktracker 0.3.dev-642d87d docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-35f3698 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-642d87d docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.detection package" href="sktracker.detection.html"/>
         <link rel="prev" title="sktracker package" href="sktracker.html"/> 
@@ -194,9 +194,9 @@ object labels.</p>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">trajectories_generator</span><span class="p">(</span><span class="n">n_part</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-<span class="go">                                        noise=1e-10, p_disapear=1e-10,</span>
-<span class="go">                                        sampling=10, seed=0)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">directed_trajectories_generator</span><span class="p">(</span><span class="n">n_part</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="go">                                                 noise=1e-10, p_disapear=1e-10,</span>
+<span class="go">                                                 sampling=10, seed=0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
 <span class="go">                          x         y         z  true_label   t</span>
 <span class="go">    t_stamp label</span>
@@ -384,7 +384,7 @@ object labels.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-35f3698',
+            VERSION:'0.3.dev-642d87d',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
