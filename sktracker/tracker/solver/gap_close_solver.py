@@ -91,7 +91,20 @@ class GapCloseSolver(AbstractSolver):
                 [self.birth_cf.mat, None]]
 
     def track(self, progress_bar=False, progress_bar_out=None):
-        """
+        """For details about link_percentile, see below from
+        K. Jaqaman and G. Danuser, Nature Methods, 2008.
+
+            TFA: For track segment ends and starts, the alternative cost (b and d in Fig. 1c) had to
+            be comparable in magnitude to the costs of potential assignments, making the rejection
+            of gap closing, merging and splitting an accessible alternative. At the same time, the
+            alternative cost had to be at the higher end of the range of potential assignment costs,
+            so that the algorithm did not fail to close gaps and capture merge and split events. We
+            performed empirical tests of the sensitivity of tracking results to variations in the
+            alternative cost. We found that in a range 80th – 100th percentile of all potential
+            assignment costs the outcome of gap closing, merging and splitting varied negligibly
+            (data not shown). We attribute this robustness to the fact that track initiations and
+            terminations competed globally, in space and time, with all other potential assignments.
+            Thus, the alternative cost was taken as the 90th percentile.
         """
         log.info('Initiating gap close tracking')
 
@@ -109,23 +122,6 @@ class GapCloseSolver(AbstractSolver):
 
         old_labels = self.trajs.index.get_level_values('label').values
         self.trajs['new_label'] = old_labels.astype(np.float)
-
-        # ''' TFA: For track segment ends and starts, the alternative
-        # cost (b and d in Fig. 1c) had to be comparable in magnitude
-        # to the costs of potential assignments, making the rejection
-        # of gap closing, merging and splitting an accessible
-        # alternative. At the same time, the alternative cost had to
-        # be at the higher end of the range of potential assignment
-        # costs, so that the algorithm did not fail to close gaps and
-        # capture merge and split events. We performed empirical tests
-        # of the sensitivity of tracking results to variations in the
-        # alternative cost. We found that in a range 80th – 100th
-        # percentile of all potential assignment costs the outcome of
-        # gap closing, merging and splitting varied negligibly (data
-        # not shown). We attribute this robustness to the fact that
-        # track initiations and terminations competed globally, in
-        # space and time, with all other potential assignments. Thus,
-        # the alternative cost was taken as the 90th percentile.'''
 
         log.info('Build cost functions')
 
