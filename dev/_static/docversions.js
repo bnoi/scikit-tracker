@@ -17,5 +17,5 @@ function insert_version_links() {
 }
 
 function stable_version() {
-    return versions[-1];
+    return 'kkkkkkkkk';
 }
