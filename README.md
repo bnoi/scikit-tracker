@@ -21,8 +21,8 @@ Several algorithms are featured and it is planned to add others:
 
 Current stable version is v0.2.
 
-- Stable version : http://bnoi.github.io/scikit-tracker/stable
-- Dev version : http://bnoi.github.io/scikit-tracker/dev
+- Stable version : http://scikit-tracker.org/stable
+- Dev version : http://scikit-tracker.org/dev
 
 ## Dependencies
 

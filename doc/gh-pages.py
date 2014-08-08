@@ -111,9 +111,9 @@ if __name__ == '__main__':
             sh('rm -f stable')
             sh('ln -s %s stable' % tag)
 
-            static_dir = "_static"
-            shutil.rmtree(static_dir, ignore_errors=True)
-            shutil.copytree(os.path.join('..', html_dir, static_dir), static_dir)
+        static_dir = "_static"
+        shutil.rmtree(static_dir, ignore_errors=True)
+        shutil.copytree(os.path.join('..', html_dir, static_dir), static_dir)
 
         sh('git add . --all')
         sh2('git commit -am "Updated doc release: {}" --allow-empty'.format(version))
