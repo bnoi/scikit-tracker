@@ -1,131 +1,163 @@
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>scikit-tracker’s documentation</title>
-
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
-    <link rel="top" title="sktracker vdev docs" href="#"/>
-        <link rel="next" title="What’s new" href="new.html"/>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-  <script type="text/javascript" src="_static/docversions.js"></script>
-
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-
+  <link href=
+  'https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700'
+  rel='stylesheet' type='text/css'>
+  <link href="_static/css/theme.css" rel="stylesheet" type="text/css">
+  <link href="#" rel="top" title="sktracker vdev docs">
+  <link href="new.html" rel="next" title="What’s new">
+  <script src=
+  "https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/docversions.js" type="text/javascript"></script>
+  <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
 </head>
 
-<body class="wy-body-for-nav" role="document">
-
+<body class="wy-body-for-nav">
   <div class="wy-grid-for-nav">
-
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+    <nav class="wy-nav-side" data-toggle="wy-nav-shift">
       <div class="wy-side-nav-search">
-        <a href="http://bnoi.github.io/scikit-tracker/" class="fa fa-home"> scikit-tracker</a>
-        <div role="search">
-</div>
+        <a class="fa fa-home" href=
+        "http://bnoi.github.io/scikit-tracker/">scikit-tracker</a>
+
+        <div></div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-
-        <ul>
-          <script type="text/javascript">insert_version_links()</script>
-        </ul>
-
-
-      </div>
-      &nbsp;
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" style=
+      "margin-left: 2em">
+        <script type="text/javascript">
+insert_version_links()
+        </script>
+      </div>&nbsp;
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="#">scikit-tracker</a>
+    <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+      <nav class="wy-nav-top">
+        <i class="fa fa-bars" data-toggle="wy-nav-top"></i> <a href=
+        "#">scikit-tracker</a>
       </nav>
 
-
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <hr/>
-</div>
-          <div role="main">
-
-  <div class="section" id="scikit-tracker-s-documentation">
-<h1>scikit-tracker&#8217;s documentation<a class="headerlink" href="#scikit-tracker-s-documentation" title="Permalink to this headline">¶</a></h1>
-
-<div class="section" id="table-of-content">
-<div class="toctree-wrapper compound">
-
-<ul>
-  <li><a href="http://bnoi.github.io/scikit-tracker/stable">Access to <strong>scikit-tracker</strong> stable documentation</a></li>
-  <li><a href="http://bnoi.github.io/scikit-tracker/dev">Access to <strong>scikit-tracker</strong> development documentation</a></li>
-</ul>
-
-<hr/>
-
-<p>Here you will find all documentation versions :</p>
-
-<ul>
-<script type="text/javascript">insert_version_links()</script>
-</ul>
-
-</div>
-</div>
-</div>
-
-
-          </div>
-          <footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
-    </p>
-  </div>
-
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
-</footer>
+      <div class="wy-nav-content rst-content">
+        <div>
+          <hr>
         </div>
+
+        <div class="section" id="scikit-tracker-s-documentation">
+          <h1>scikit-tracker - Objects detection and robust tracking for cell
+          biology<a class="headerlink" href="#scikit-tracker-s-documentation"
+          title="Permalink to this headline">¶</a></h1>
+
+          <div class="section toctree-wrapper compound" id="table-of-content">
+            <h1>Objects detection and robust tracking for cell biology</h1>
+
+            <p><a href="https://travis-ci.org/bnoi/scikit-tracker"><img alt=
+            "Build Status" src=
+            "https://travis-ci.org/bnoi/scikit-tracker.png?branch=master"></a>
+            <a href="http://dx.doi.org/10.5281/zenodo.10078"><img alt=
+            "scikit-tracker DOI" src=
+            "https://zenodo.org/badge/doi/10.5281/zenodo.10078.png"></a></p>
+
+            <p><strong>scikit-tracker</strong>aims to be a robust Python
+            library to work with cell biology microscopy images. <a href=
+            "https://www.openmicroscopy.org/site/support/ome-model/ome-tiff/">OME
+            XML and OME Tiff</a>are supported to handle input/output to the
+            lib. The two main goals of the library is to implement
+            <strong>detection</strong>and <strong>tracking</strong>algorithms
+            relevant to analyse biological microscopy dataset.</p>
+
+            <p>Several algorithms are featured and it is planned to add
+            others:</p>
+
+            <ul>
+              <li>
+                <p>Gaussian peak detection by deflation loop : <a href=
+                "http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1233.html">
+                Segré et al. Nature Methods (2008)</a></p>
+              </li>
+
+              <li>
+                <p>Cell boundary detection with bright field depth fitting :
+                <a href=
+                "http://www.pnas.org/content/early/2013/07/10/1301428110">Julou,
+                T., PNAS, (2013)</a></p>
+              </li>
+
+              <li>
+                <p>Cell nucleus segmentation : by Guillaume Gay</p>
+              </li>
+
+              <li>
+                <p>Lap Tracker, a robust single-particle tracking : <a href=
+                "http://www.nature.com/nmeth/journal/v5/n8/full/nmeth.1237.html">
+                K. Jaqaman and G. Danuser, Nature Methods, 2008</a>. The
+                version implemented in <strong>scikit-tracker</strong>is a
+                slightly modified version from the original to allow easy,
+                flexible and yet powerfull parameters adjustements with custom
+                cost function.</p>
+              </li>
+            </ul>
+
+            <p><strong>scikit-tracker</strong>provides several intuitive
+            graphical interfaces to semi-manually modify detected objects and
+            trajectories (thanks to Qt4).</p>
+
+            <ul>
+              <li>
+                <a href="http://bnoi.github.io/scikit-tracker/stable">Access to
+                <strong>scikit-tracker</strong> stable documentation</a>
+              </li>
+
+              <li>
+                <a href="http://bnoi.github.io/scikit-tracker/dev">Access to
+                <strong>scikit-tracker</strong> development documentation</a>
+              </li>
+            </ul>
+            <hr>
+
+            <p>All documentation versions:</p>
+
+            <div style="margin-left: 2em">
+              <script type="text/javascript">
+                insert_version_links()
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <hr>
+
+          <div>
+            <p>&copy; Copyright 2014, Guillaume Gay and Hadrien Mary.</p>
+          </div><a href="https://github.com/snide/sphinx_rtd_theme">Sphinx
+          theme</a> provided by <a href="https://readthedocs.org">Read the
+          Docs</a>
+        </footer>
       </div>
-
     </section>
-
-  </div>
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
+  </div><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'dev',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
         };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-  <script type="text/javascript">
-      jQuery(function () {
+  </script> <script src="_static/jquery.js" type="text/javascript"></script> <script src="_static/underscore.js" type="text/javascript"></script> <script src="_static/doctools.js" type="text/javascript"></script> <script src=
+"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  type="text/javascript"></script> <script src="_static/js/theme.js" type="text/javascript"></script> <script type="text/javascript">
+    jQuery(function () {
           SphinxRtdTheme.StickyNav.enable();
       });
   </script>
-
-
 </body>
 </html>
