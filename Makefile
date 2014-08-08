@@ -9,7 +9,7 @@ help:
 	@echo "    test             : run tests"
 	@echo "    coverage         : run tests and check code coverage"
 	@echo "    doc              : build dev documentation"
-	@echo "    push_doc         : push dev documentation to http://bnoi.github.io/scikit-tracker/dev/"
+	@echo "    push_doc         : push dev documentation to http://scikit-tracker.org/dev/"
 
 init_submodule:
 	git submodule update --init --recursive

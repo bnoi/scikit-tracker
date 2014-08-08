@@ -56,11 +56,11 @@ Several algorithms are featured and it is planned to add others:
   The version implemented in scikit-tracker is a slightly modified version from the original to allow
   easy, flexible and yet powerfull parameters adjustements with custom cost function.
 
-For more details, please visit : http://bnoi.github.io/scikit-tracker/stable
+For more details, please visit : http://scikit-tracker.org/
 """
 MAINTAINER = 'Guillaume Gay and Hadrien Mary'
 MAINTAINER_EMAIL = 'gllm.gay@gmail.com'
-URL = 'http://bnoi.github.io/scikit-tracker'
+URL = 'http://scikit-tracker.org/'
 LICENSE = 'BSD 3-Clause'
 DOWNLOAD_URL = 'https://github.com/bnoi/scikit-tracker'
 VERSION = sktracker.__version__

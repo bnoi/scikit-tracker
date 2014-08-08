@@ -12,7 +12,7 @@ function insert_version_links() {
         document.write(open_list);
         document.write('<a href="URL">scikit-tracker VERSION</a> </li>\n'
                         .replace('VERSION', versions[i])
-                        .replace('URL', 'http://bnoi.github.io/scikit-tracker/' + versions[i]));
+                        .replace('URL', 'http://scikit-tracker.org/' + versions[i]));
     }
 }
 
