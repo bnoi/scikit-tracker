@@ -7,10 +7,9 @@ from __future__ import print_function
 
 import numpy as np
 import logging
+import itertools
 
 log = logging.getLogger(__name__)
-
-from ...utils import print_progress
 
 from ..matrix import CostMatrix
 
@@ -96,8 +95,7 @@ class GapCloseSolver(AbstractSolver):
         """
         log.info('Initiating gap close tracking')
 
-        idxs_in, idxs_out = self._get_candidates(progress_bar=progress_bar,
-                                                 progress_bar_out=progress_bar_out)
+        idxs_in, idxs_out = self._get_candidates()
 
         self.link_cf.context['trajs'] = self.trajs
         self.link_cf.context['idxs_in'] = idxs_in
@@ -154,8 +152,42 @@ class GapCloseSolver(AbstractSolver):
 
         return self.trajs
 
-    def _get_candidates(self, progress_bar=False, progress_bar_out=None):
+    def _get_candidates(self):
+        """Find candidate pair of segments for gap closing.
         """
+
+        log.info('Find candidates among {} segments'.format(len(self.trajs.segment_idxs)))
+
+        max_gap = self.maximum_gap
+        labels = self.trajs.labels
+
+        bounds_t_stamp = self.trajs.get_bounds()
+        if not self.use_t_stamp:
+            bounds_t = self.trajs.get_bounds(column='t')
+        else:
+            bounds_t = bounds_t_stamp
+
+        in_idxs = []
+        out_idxs = []
+
+        for s1, s2 in itertools.combinations(labels, 2):
+            # Test s1 ---- s2
+            gap_size = bounds_t[s2][0] - bounds_t[s1][1]
+            if gap_size > 0 and gap_size <= max_gap:
+                in_idxs.append((bounds_t_stamp[s1][1], s1))
+                out_idxs.append((bounds_t_stamp[s2][0], s2))
+
+            # Test s2 ---- s1
+            gap_size = bounds_t[s1][0] - bounds_t[s2][1]
+            if gap_size > 0 and gap_size <= max_gap:
+                in_idxs.append((bounds_t_stamp[s1][1], s1))
+                out_idxs.append((bounds_t_stamp[s2][0], s2))
+
+        log.info("{} candidates found".format(len(in_idxs)))
+        return in_idxs, out_idxs
+
+    def _old_get_candidates(self):  # pragma: no cover
+        """TO REMOVE. DEPRECATED.
         """
         seg_idx = self.trajs.segment_idxs
 
@@ -167,18 +199,11 @@ class GapCloseSolver(AbstractSolver):
         bounds = []
         for i, idxs in enumerate(seg_idx.values()):
 
-            if progress_bar:
-                progress = i / len(seg_idx) * 100
-                print_progress(progress, out=progress_bar_out)
-
             if self.use_t_stamp:
                 bound = (idxs[0][0], idxs[-1][0])
             else:
                 bound = (self.trajs.loc[idxs[0], 't'], self.trajs.loc[idxs[-1], 't'])
             bounds.append(bound)
-
-        if progress_bar:
-            print_progress(-1)
 
         bounds = np.array(bounds)
         start_times = bounds[:, 0]
