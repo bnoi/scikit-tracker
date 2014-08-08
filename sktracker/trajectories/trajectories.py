@@ -110,11 +110,14 @@ class Trajectories(pd.DataFrame):
         for lbl, idxs in self.segment_idxs.items():
             yield lbl, self.loc[idxs]
 
-    def get_bounds(self, asarray=False):
+    def get_bounds(self, column=None):
         """Get bounds of all segments.
 
         Parameters
         ----------
+        column : string
+            By default the method will return bounds as 't_stamp'. If you want another value from
+            column ('t' for example), you can put the column's name here.
         asarray : bool
             Return bounds as dict of as array wether it's True
 
@@ -122,9 +125,11 @@ class Trajectories(pd.DataFrame):
         -------
         bounds as dict or ndarray
         """
-        bounds = {k: (v[0][0], v[-1][0]) for k, v in self.segment_idxs.items()}
-        if asarray:
-            bounds = np.array(list(bounds.values()))
+        all_segs = self.segment_idxs.items()
+        if column:
+            bounds = {k: (self.loc[v[0], column], self.loc[v[-1], column]) for k, v in all_segs}
+        else:
+            bounds = {k: (v[0][0], v[-1][0]) for k, v in all_segs}
         return bounds
 
     def get_segments(self):

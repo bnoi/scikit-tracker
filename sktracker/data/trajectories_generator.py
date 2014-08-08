@@ -112,9 +112,9 @@ def directed_trajectories_generator(n_part=5,
     Examples
     --------
 
-    >>> trajs = data.trajectories_generator(n_part=5, n_times=100,
-                                            noise=1e-10, p_disapear=1e-10,
-                                            sampling=10, seed=0)
+    >>> trajs = data.directed_trajectories_generator(n_part=5, n_times=100,
+                                                     noise=1e-10, p_disapear=1e-10,
+                                                     sampling=10, seed=0)
     >>> print(trajs)
                               x         y         z  true_label   t
         t_stamp label

@@ -407,8 +407,9 @@ def test_get_bounds():
     """
 
     trajs = Trajectories(data.brownian_trajs_df())
-    dict_bounds = {0: (0, 4), 1: (0, 4), 2: (0, 4), 3: (0, 4), 4: (0, 4)}
-    array_bounds = [[0, 4], [0, 4], [0, 4], [0, 4], [0, 4]]
+    trajs['t'] *= 10
+    t_stamp_bounds = {0: (0, 4), 1: (0, 4), 2: (0, 4), 3: (0, 4), 4: (0, 4)}
+    t_bounds = {0: (0.0, 40.0), 1: (0.0, 40.0), 2: (0.0, 40.0), 3: (0.0, 40.0), 4: (0.0, 40.0)}
 
-    assert trajs.get_bounds() == dict_bounds
-    assert trajs.get_bounds(asarray=True).tolist() == array_bounds
+    assert trajs.get_bounds() == t_stamp_bounds
+    assert trajs.get_bounds(column='t') == t_bounds
