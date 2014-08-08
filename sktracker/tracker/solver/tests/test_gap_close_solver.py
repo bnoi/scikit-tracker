@@ -23,9 +23,8 @@ def test_gap_close_get_candidates():
                                                    use_t_stamp=True)
     in_idxs, out_idxs = gc_solver._get_candidates()
 
-    for in_idx, out_idx in zip(in_idxs, out_idxs):
-        dt = out_idx[0] - in_idx[0]
-        assert 0 < dt <= maximum_gap
+    assert in_idxs == [(3, 0), (3, 0), (5, 1), (13, 2), (13, 2), (16, 3)]
+    assert out_idxs == [(5, 3), (7, 4), (7, 4), (15, 5), (18, 6), (18, 6)]
 
 
 def test_gap_close_get_candidates_with_t():
@@ -40,9 +39,8 @@ def test_gap_close_get_candidates_with_t():
                                                    use_t_stamp=False)
     in_idxs, out_idxs = gc_solver._get_candidates()
 
-    for in_idx, out_idx in zip(in_idxs, out_idxs):
-        dt = out_idx[0] - in_idx[0]
-        assert 0 < dt <= maximum_gap
+    assert in_idxs == [(3, 0), (3, 0), (5, 1), (13, 2), (13, 2), (16, 3)]
+    assert out_idxs == [(5, 3), (7, 4), (7, 4), (15, 5), (18, 6), (18, 6)]
 
 
 def test_gap_close():
