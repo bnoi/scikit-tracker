@@ -701,7 +701,7 @@ class Trajectories(pd.DataFrame):
     def show(self, xaxis='t',
              yaxis='x',
              groupby_args={'level': "label"},
-             ax=None, **kwargs):  # pragma: no cover
+             ax=None, legend=False, **kwargs):  # pragma: no cover
         """Show trajectories
 
         Parameters
@@ -758,11 +758,14 @@ class Trajectories(pd.DataFrame):
             if auto_color:
                 c = colors[v[0][1]]  # that's the label
                 kwargs['color'] = c
-            ax.plot(traj[xaxis], traj[yaxis], **kwargs)
+            ax.plot(traj[xaxis], traj[yaxis], label=str(k), **kwargs)
 
         ax.set_xlabel(xaxis)
         ax.set_ylabel(yaxis)
         ax.set_title(str(groupby_args))
+
+        if legend:
+            ax.legend()
 
         return ax
 
