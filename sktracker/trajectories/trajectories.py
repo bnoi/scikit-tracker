@@ -110,6 +110,23 @@ class Trajectories(pd.DataFrame):
         for lbl, idxs in self.segment_idxs.items():
             yield lbl, self.loc[idxs]
 
+    def get_bounds(self, asarray=False):
+        """Get bounds of all segments.
+
+        Parameters
+        ----------
+        asarray : bool
+            Return bounds as dict of as array wether it's True
+
+        Returns
+        -------
+        bounds as dict or ndarray
+        """
+        bounds = {k: (v[0][0], v[-1][0]) for k, v in self.segment_idxs.items()}
+        if asarray:
+            bounds = np.array(list(bounds.values()))
+        return bounds
+
     def get_segments(self):
         """A segment contains all the data from `self.trajs` with
 

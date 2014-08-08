@@ -400,3 +400,15 @@ def test_duplicate_segments():
                    (4, 4), (4, 5)]
 
     assert trajs.index.tolist() == new_indexes
+
+
+def test_get_bounds():
+    """
+    """
+
+    trajs = Trajectories(data.brownian_trajs_df())
+    dict_bounds = {0: (0, 4), 1: (0, 4), 2: (0, 4), 3: (0, 4), 4: (0, 4)}
+    array_bounds = [[0, 4], [0, 4], [0, 4], [0, 4], [0, 4]]
+
+    assert trajs.get_bounds() == dict_bounds
+    assert trajs.get_bounds(asarray=True).tolist() == array_bounds
