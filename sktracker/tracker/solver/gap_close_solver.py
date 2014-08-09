@@ -12,6 +12,7 @@ import itertools
 log = logging.getLogger(__name__)
 
 from ..matrix import CostMatrix
+from ...utils import print_progress
 
 from ..cost_function import AbstractCostFunction
 from ..cost_function.brownian import BrownianGapCloseCostFunction
@@ -108,7 +109,8 @@ class GapCloseSolver(AbstractSolver):
         """
         log.info('Initiating gap close tracking')
 
-        idxs_in, idxs_out = self._get_candidates()
+        idxs_in, idxs_out = self._get_candidates(progress_bar=progress_bar,
+                                                 progress_bar_out=progress_bar_out)
 
         self.link_cf.context['trajs'] = self.trajs
         self.link_cf.context['idxs_in'] = idxs_in
@@ -148,7 +150,7 @@ class GapCloseSolver(AbstractSolver):
 
         return self.trajs
 
-    def _get_candidates(self):
+    def _get_candidates(self, progress_bar=False, progress_bar_out=None):
         """Find candidate pair of segments for gap closing.
         """
 
@@ -166,7 +168,20 @@ class GapCloseSolver(AbstractSolver):
         in_idxs = []
         out_idxs = []
 
-        for s1, s2 in itertools.combinations(labels, 2):
+        label_combinations = itertools.combinations(labels, 2)
+
+        # Numbers of combinations
+        f = np.math.factorial
+        n = len(labels)
+        n  = f(n) / (f(n - 2) * f(2))
+
+        for i, (s1, s2) in enumerate(label_combinations):
+
+            if progress_bar:
+                progress = i / n * 100
+                message = "{} / {}".format(i, n)
+                print_progress(progress, message=message, out=progress_bar_out)
+
             # Test s1 ---- s2
             gap_size = bounds_t[s2][0] - bounds_t[s1][1]
             if gap_size > 0 and gap_size <= max_gap:
@@ -178,6 +193,9 @@ class GapCloseSolver(AbstractSolver):
             if gap_size > 0 and gap_size <= max_gap:
                 in_idxs.append((bounds_t_stamp[s1][1], s1))
                 out_idxs.append((bounds_t_stamp[s2][0], s2))
+
+        if progress_bar:
+            print_progress(-1)
 
         log.info("{} candidates found".format(len(in_idxs)))
         return in_idxs, out_idxs
