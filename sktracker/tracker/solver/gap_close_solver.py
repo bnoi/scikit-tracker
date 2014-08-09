@@ -109,8 +109,7 @@ class GapCloseSolver(AbstractSolver):
         """
         log.info('Initiating gap close tracking')
 
-        idxs_in, idxs_out = self._get_candidates(progress_bar=progress_bar,
-                                                 progress_bar_out=progress_bar_out)
+        idxs_in, idxs_out = self._get_candidates()
 
         self.link_cf.context['trajs'] = self.trajs
         self.link_cf.context['idxs_in'] = idxs_in
@@ -150,8 +149,65 @@ class GapCloseSolver(AbstractSolver):
 
         return self.trajs
 
-    def _get_candidates(self, progress_bar=False, progress_bar_out=None):
+    def _get_candidates(self):
         """Find candidate pair of segments for gap closing.
+        """
+        seg_idx = self.trajs.segment_idxs
+
+        log.info('Find candidates among {} segments'.format(len(seg_idx)))
+
+        max_gap = self.maximum_gap
+        labels = self.trajs.labels
+
+        bounds = []
+        for i, idxs in enumerate(seg_idx.values()):
+
+            if self.use_t_stamp:
+                bound = (idxs[0][0], idxs[-1][0])
+            else:
+                bound = (self.trajs.loc[idxs[0], 't'], self.trajs.loc[idxs[-1], 't'])
+            bounds.append(bound)
+
+        bounds = np.array(bounds)
+        start_times = bounds[:, 0]
+        stop_times = bounds[:, 1]
+        ss_in, ss_out = np.meshgrid(labels, labels)
+
+        gaps_size = start_times[ss_out] - stop_times[ss_in]
+
+        matches = np.argwhere((gaps_size > 0) * (gaps_size <= max_gap))
+
+        if not matches.shape[0]:
+            log.info("No candidate found")
+            return [], []
+
+        matches_in = matches[:, 1]
+        matches_out = matches[:, 0]
+
+        # Rewrite start and stop times array
+        # to use index t-stamp instead of t
+        if not self.use_t_stamp:
+            start_times = [self.trajs[self.trajs['t'] == t].index.values[0][0] for t in start_times]
+            stop_times = [self.trajs[self.trajs['t'] == t].index.values[0][0] for t in stop_times]
+            start_times = np.array(start_times, dtype='int')
+            stop_times = np.array(stop_times, dtype='int')
+
+        in_idxs = [(in_time, in_lbl) for (in_time, in_lbl)
+                   in zip(stop_times[matches_in],
+                          self.trajs.labels[matches_in])]
+        # pos_in = self.trajs.loc[in_idxs]
+
+        out_idxs = [(out_time, out_lbl) for (out_time, out_lbl)
+                    in zip(start_times[matches_out],
+                           self.trajs.labels[matches_out])]
+        # pos_out = self.trajs.loc[out_idxs]
+
+        log.info("{} candidates found".format(len(in_idxs)))
+
+        return in_idxs, out_idxs
+
+    def _get_candidates_dict_version(self, progress_bar=False, progress_bar_out=None):   # pragma: no cover
+        """Slower version on large dataset and faster on small dataset.
         """
 
         log.info('Find candidates among {} segments'.format(len(self.trajs.segment_idxs)))
@@ -198,61 +254,6 @@ class GapCloseSolver(AbstractSolver):
             print_progress(-1)
 
         log.info("{} candidates found".format(len(in_idxs)))
-        return in_idxs, out_idxs
-
-    def _old_get_candidates(self):  # pragma: no cover
-        """TO REMOVE. DEPRECATED.
-        """
-        seg_idx = self.trajs.segment_idxs
-
-        log.info('Find candidates among {} segments'.format(len(seg_idx)))
-
-        max_gap = self.maximum_gap
-        labels = self.trajs.labels
-
-        bounds = []
-        for i, idxs in enumerate(seg_idx.values()):
-
-            if self.use_t_stamp:
-                bound = (idxs[0][0], idxs[-1][0])
-            else:
-                bound = (self.trajs.loc[idxs[0], 't'], self.trajs.loc[idxs[-1], 't'])
-            bounds.append(bound)
-
-        bounds = np.array(bounds)
-        start_times = bounds[:, 0]
-        stop_times = bounds[:, 1]
-        ss_in, ss_out = np.meshgrid(labels, labels)
-
-        gaps_size = start_times[ss_out] - stop_times[ss_in]
-
-        matches = np.argwhere((gaps_size > 0) * (gaps_size <= max_gap))
-
-        if not matches.shape[0]:
-            return [], []
-        matches_in = matches[:, 1]
-        matches_out = matches[:, 0]
-
-        # Rewrite start and stop times array
-        # to use index t-stamp instead of t
-        if not self.use_t_stamp:
-            start_times = [self.trajs[self.trajs['t'] == t].index.values[0][0] for t in start_times]
-            stop_times = [self.trajs[self.trajs['t'] == t].index.values[0][0] for t in stop_times]
-            start_times = np.array(start_times, dtype='int')
-            stop_times = np.array(stop_times, dtype='int')
-
-        in_idxs = [(in_time, in_lbl) for (in_time, in_lbl)
-                   in zip(stop_times[matches_in],
-                          self.trajs.labels[matches_in])]
-        # pos_in = self.trajs.loc[in_idxs]
-
-        out_idxs = [(out_time, out_lbl) for (out_time, out_lbl)
-                    in zip(start_times[matches_out],
-                           self.trajs.labels[matches_out])]
-        # pos_out = self.trajs.loc[out_idxs]
-
-        log.info("{} candidates found".format(len(in_idxs)))
-
         return in_idxs, out_idxs
 
     def assign(self):
