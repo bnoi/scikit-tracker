@@ -413,3 +413,15 @@ def test_get_bounds():
 
     assert trajs.get_bounds() == t_stamp_bounds
     assert trajs.get_bounds(column='t') == t_bounds
+
+
+def test_get_t_stamps_correspondences():
+    """
+    """
+
+    trajs = Trajectories(data.brownian_trajs_df())
+    trajs['t'] *= 33
+    data_values = [132, 33, 99, 66, 33, 33, 99., 99, 132]
+    t_stamps = trajs.get_t_stamps_correspondences(data_values, column='t')
+
+    assert_array_equal(t_stamps, [4, 1, 3, 2, 1, 1, 3, 3, 4])

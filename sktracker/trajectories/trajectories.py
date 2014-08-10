@@ -204,6 +204,32 @@ class Trajectories(pd.DataFrame):
 
         return colors
 
+    def get_t_stamps_correspondences(self, data_values, column):
+        """For a given column return 't_stamp' values corresponding to 1d vector of this column.
+
+        Parameters
+        ----------
+        data_values : 1d np.ndarray
+            Data found in self[column]
+        column : str
+            Which column to use.
+
+        Returns
+        -------
+        np.ndarray with the same length as 'data_values'.
+        """
+
+        t_stamps = self.t_stamps
+        values = self[column].unique()
+
+        index = np.argsort(values)
+        values_sorted = values[index]
+        sorted_index = np.searchsorted(values_sorted, data_values)
+
+        yindex = np.take(index, sorted_index)
+
+        return t_stamps[yindex]
+
     # Segment / spot modification methods
 
     def remove_spots(self, spots, inplace=False):
