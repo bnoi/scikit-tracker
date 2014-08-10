@@ -107,9 +107,12 @@ class GapCloseSolver(AbstractSolver):
             terminations competed globally, in space and time, with all other potential assignments.
             Thus, the alternative cost was taken as the 90th percentile.
         """
-        log.info('Initiating gap close tracking')
 
         idxs_in, idxs_out = self._get_candidates()
+
+        if len(idxs_in) > 10000:
+            log.warning("Number of segment's candidates is very high."
+                        " Tracking can be very slow.")
 
         self.link_cf.context['trajs'] = self.trajs
         self.link_cf.context['idxs_in'] = idxs_in
