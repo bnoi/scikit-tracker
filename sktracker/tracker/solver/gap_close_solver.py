@@ -128,8 +128,7 @@ class GapCloseSolver(AbstractSolver):
 
         link_percentile_b = self.birth_cf.parameters['link_percentile']
         link_percentile_d = self.death_cf.parameters['link_percentile']
-        self.link_cf.get_block(progress_bar=progress_bar,
-                               progress_bar_out=progress_bar_out)
+        self.link_cf.get_block()
         link_costs = np.ma.masked_invalid(self.link_cf.mat).compressed()
 
         if not link_costs.shape[0]:

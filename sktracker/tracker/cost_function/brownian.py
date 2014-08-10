@@ -10,10 +10,9 @@ from __future__ import print_function
 
 import numpy as np
 import pandas as pd
-from scipy.spatial.distance import cdist, pdist
+from scipy.spatial.distance import cdist
 
 from . import AbstractCostFunction
-from ...utils import print_progress
 from .gap_close import AbstractGapCloseCostFunction
 from ...trajectories import Trajectories
 
@@ -113,7 +112,7 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
 
         super(self.__class__, self).__init__(context={}, parameters=_parameters)
 
-    def _build(self, progress_bar=False, progress_bar_out=None):
+    def _build(self,):
         """
         """
 
@@ -122,6 +121,10 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
         # Get parameters
         coords = self.parameters['coords']
         distance_metric = self.parameters['distance_metric']
+
+        if distance_metric != 'euclidean':
+            raise Exception("Only 'euclidean' distance are supported for now.")
+
         max_speed = self.parameters['max_speed']
 
         # Check context
@@ -132,29 +135,29 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
         # Just in case the parent didn't do it
         trajs.relabel_fromzero('label', inplace=True)
 
-        # Build matrix
-        distances = np.empty((len(trajs.labels),
-                              len(trajs.labels)))
-        distances.fill(np.nan)
-        n = len(idxs_in)
-        for i, (idx_in, idx_out) in enumerate(zip(idxs_in, idxs_out)):
+        # Init 2d distances array
+        mat = np.empty((len(trajs.labels),
+                        len(trajs.labels)))
+        mat.fill(np.nan)
 
-            if progress_bar:
-                progress = i / n * 100
-                print_progress(progress, out=progress_bar_out)
+        # Compute distance between all_pos_out and all_pos_in
+        all_pos_in = trajs.loc[idxs_in]
+        all_pos_out = trajs.loc[idxs_out]
+        vecs = [(all_pos_in[c].values - all_pos_out[c].values) ** 2 for c in coords]
+        all_dist = np.sqrt(np.sum(vecs, axis=0))
 
-            pos_in = trajs.loc[idx_in]
-            pos_out = trajs.loc[idx_out]
-            distance = pdist(np.vstack([pos_in[coords].values,
-                                        pos_out[coords].values]),
-                             metric=distance_metric)
-            dt = pos_out.t - pos_in.t
-            speed = distance / np.abs(dt)
-            if speed < max_speed:
-                distances[idx_in[1], idx_out[1]] = distance
+        # Get all dt
+        all_dt = np.abs(all_pos_in['t'].values - all_pos_out['t'].values)
 
-        if progress_bar:
-            print_progress(-1)
+        # Compute speeds
+        speeds = all_dist / all_dt
 
-        distances = distances ** 2
-        return distances
+        # Remove speeds greater than 'max_speed'
+        speeds[speeds > max_speed] = np.nan
+
+        # Fill 2d distances array
+        mat[np.array(idxs_in)[:, 1], np.array(idxs_out)[:, 1]] = speeds
+
+        mat = mat ** 2
+
+        return mat
