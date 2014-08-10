@@ -7,12 +7,10 @@ from __future__ import print_function
 
 import numpy as np
 import logging
-import itertools
 
 log = logging.getLogger(__name__)
 
 from ..matrix import CostMatrix
-from ...utils import print_progress
 
 from ..cost_function import AbstractCostFunction
 from ..cost_function.brownian import BrownianGapCloseCostFunction
@@ -161,16 +159,13 @@ class GapCloseSolver(AbstractSolver):
         max_gap = self.maximum_gap
         labels = self.trajs.labels
 
-        bounds = []
-        for i, idxs in enumerate(seg_idx.values()):
+        if self.use_t_stamp:
+            bounds = self.trajs.get_bounds()
+        else:
+            bounds = self.trajs.get_bounds(column='t')
 
-            if self.use_t_stamp:
-                bound = (idxs[0][0], idxs[-1][0])
-            else:
-                bound = (self.trajs.loc[idxs[0], 't'], self.trajs.loc[idxs[-1], 't'])
-            bounds.append(bound)
+        bounds = np.array(list(bounds.values()))
 
-        bounds = np.array(bounds)
         start_times = bounds[:, 0]
         stop_times = bounds[:, 1]
         ss_in, ss_out = np.meshgrid(labels, labels)
@@ -186,76 +181,23 @@ class GapCloseSolver(AbstractSolver):
         matches_in = matches[:, 1]
         matches_out = matches[:, 0]
 
-        # Rewrite start and stop times array
-        # to use index t-stamp instead of t
         if not self.use_t_stamp:
-            start_times = [self.trajs[self.trajs['t'] == t].index.values[0][0] for t in start_times]
-            stop_times = [self.trajs[self.trajs['t'] == t].index.values[0][0] for t in stop_times]
-            start_times = np.array(start_times, dtype='int')
-            stop_times = np.array(stop_times, dtype='int')
+            start_times = self.trajs.get_t_stamps_correspondences(start_times, column='t')
+            stop_times = self.trajs.get_t_stamps_correspondences(stop_times, column='t')
 
-        in_idxs = [(in_time, in_lbl) for (in_time, in_lbl)
-                   in zip(stop_times[matches_in],
-                          self.trajs.labels[matches_in])]
-        # pos_in = self.trajs.loc[in_idxs]
+        in_idxs = np.column_stack([stop_times, self.trajs.labels])
+        in_idxs = in_idxs[matches_in]
+        out_idxs = np.column_stack([start_times, self.trajs.labels])
+        out_idxs = out_idxs[matches_out]
 
-        out_idxs = [(out_time, out_lbl) for (out_time, out_lbl)
-                    in zip(start_times[matches_out],
-                           self.trajs.labels[matches_out])]
-        # pos_out = self.trajs.loc[out_idxs]
+        # Convert idx in list of tuple
+        # Otherwise trajs.loc[] indexing fails.
+        # See https://github.com/pydata/pandas/issues/7981
+        in_idxs = [tuple(v) for v in in_idxs]
+        out_idxs = [tuple(v) for v in out_idxs]
 
         log.info("{} candidates found".format(len(in_idxs)))
 
-        return in_idxs, out_idxs
-
-    def _get_candidates_dict(self, progress_bar=False, progress_bar_out=None):  # pragma: no cover
-        """Slower version on large dataset and faster on small dataset.
-        """
-
-        log.info('Find candidates among {} segments'.format(len(self.trajs.segment_idxs)))
-
-        max_gap = self.maximum_gap
-        labels = self.trajs.labels
-
-        bounds_t_stamp = self.trajs.get_bounds()
-        if not self.use_t_stamp:
-            bounds_t = self.trajs.get_bounds(column='t')
-        else:
-            bounds_t = bounds_t_stamp
-
-        in_idxs = []
-        out_idxs = []
-
-        label_combinations = itertools.combinations(labels, 2)
-
-        # Numbers of combinations
-        f = np.math.factorial
-        n = len(labels)
-        n = f(n) / (f(n - 2) * f(2))
-
-        for i, (s1, s2) in enumerate(label_combinations):
-
-            if progress_bar:
-                progress = i / n * 100
-                message = "{} / {}".format(i, n)
-                print_progress(progress, message=message, out=progress_bar_out)
-
-            # Test s1 ---- s2
-            gap_size = bounds_t[s2][0] - bounds_t[s1][1]
-            if gap_size > 0 and gap_size <= max_gap:
-                in_idxs.append((bounds_t_stamp[s1][1], s1))
-                out_idxs.append((bounds_t_stamp[s2][0], s2))
-
-            # Test s2 ---- s1
-            gap_size = bounds_t[s1][0] - bounds_t[s2][1]
-            if gap_size > 0 and gap_size <= max_gap:
-                in_idxs.append((bounds_t_stamp[s1][1], s1))
-                out_idxs.append((bounds_t_stamp[s2][0], s2))
-
-        if progress_bar:
-            print_progress(-1)
-
-        log.info("{} candidates found".format(len(in_idxs)))
         return in_idxs, out_idxs
 
     def assign(self):

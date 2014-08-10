@@ -64,7 +64,7 @@ class AbstractCostFunction(object):
         ----------
         key : str
             Key to find in self.context.
-        type : class name
+        obj_type : class name
             To check context value type.
 
         Returns
