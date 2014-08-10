@@ -2,13 +2,16 @@ import re
 
 __all__ = ["natural_keys"]
 
+
 def _atoi(text):
     return int(text) if text.isdigit() else text
+
 
 def natural_keys(text):
     """Sort list of string in a human way.
 
-    See: http://stackoverflow.com/questions/5967500/how-to-correctly-sort-a-string-with-a-number-inside
+    See: http://stackoverflow.com/questions/5967500/how-to-correctly-sort-a-string-with-a-number-
+    inside
 
     Examples
     --------

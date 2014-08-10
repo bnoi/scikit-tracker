@@ -37,12 +37,27 @@ def read_roi(roi_path):
     >>> import read_roi
     >>> zip_file = "roi_objects.zip"
     >>> print(read_roi.read_roi_zip(zip_file))
-    {'1454-0095-0083': {'y': [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], 'x': [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], 'position': {'channel': 2, 'frame': 73, 'slice': 7}, 'name': '1454-0095-0083', 'n': 23, 'type': 'polygon'}, '0714-0092-0090': {'y': [4, 16, 24, 37, 53, 71, 93, 117, 131, 149, 180, 179, 168, 148, 137, 114, 89, 62, 48, 47, 32, 18, 8], 'x': [52, 27, 19, 19, 22, 35, 50, 51, 60, 84, 130, 148, 161, 160, 154, 153, 144, 127, 108, 100, 81, 72, 68], 'position': {'channel': 2, 'frame': 36, 'slice': 7}, 'name': '0714-0092-0090', 'n': 23, 'type': 'polygon'}, '0014-0089-0092': {'y': [1, 13, 21, 34, 50, 68, 90, 114, 128, 146, 177, 176, 165, 145, 134, 111, 86, 59, 45, 44, 29, 15, 5], 'x': [54, 29, 21, 21, 24, 37, 52, 53, 62, 86, 132, 150, 163, 162, 156, 155, 146, 129, 110, 102, 83, 74, 70], 'position': {'channel': 2, 'frame': 1, 'slice': 7}, 'name': '0014-0089-0092', 'n': 23, 'type': 'polygon'}}
+
+    {'1454-0095-0083': {'y': [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140,
+    117, 92, 65, 51, 50, 35, 21, 11], 'x': [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154,
+    153, 147, 146, 137, 120, 101, 93, 74, 65, 61], 'position': {'channel': 2, 'frame': 73, 'slice':
+    7}, 'name': '1454-0095-0083', 'n': 23, 'type': 'polygon'}, '0714-0092-0090': {'y': [4, 16, 24,
+    37, 53, 71, 93, 117, 131, 149, 180, 179, 168, 148, 137, 114, 89, 62, 48, 47, 32, 18, 8], 'x':
+    [52, 27, 19, 19, 22, 35, 50, 51, 60, 84, 130, 148, 161, 160, 154, 153, 144, 127, 108, 100, 81,
+    72, 68], 'position': {'channel': 2, 'frame': 36, 'slice': 7}, 'name': '0714-0092-0090', 'n': 23,
+    'type': 'polygon'}, '0014-0089-0092': {'y': [1, 13, 21, 34, 50, 68, 90, 114, 128, 146, 177, 176,
+    165, 145, 134, 111, 86, 59, 45, 44, 29, 15, 5], 'x': [54, 29, 21, 21, 24, 37, 52, 53, 62, 86,
+    132, 150, 163, 162, 156, 155, 146, 129, 110, 102, 83, 74, 70], 'position': {'channel': 2,
+    'frame': 1, 'slice': 7}, 'name': '0014-0089-0092', 'n': 23, 'type': 'polygon'}}
 
     >>> import read_roi
     >>> roi_file = "roi_object.roi"
     >>> print(read_roi.read_roi(roi_file))
-    {'example2': {'y': [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], 'x': [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], 'position': {'channel': 2, 'frame': 73, 'slice': 7}, 'name': 'example2', 'n': 23, 'type': 'polygon'}}
+
+    {'example2': {'y': [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92,
+    65, 51, 50, 35, 21, 11], 'x': [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147,
+    146, 137, 120, 101, 93, 74, 65, 61], 'position': {'channel': 2, 'frame': 73, 'slice': 7},
+    'name': 'example2', 'n': 23, 'type': 'polygon'}}
 
     """
 
@@ -177,7 +192,7 @@ def read_roi_single(fpath):
     # TODO: raise error if magic != 'Iout'
 
     version = get_short(data, OFFSET['VERSION_OFFSET'])
-    type = get_byte(data, OFFSET['TYPE'])
+    roi_type = get_byte(data, OFFSET['TYPE'])
     subtype = get_short(data, OFFSET['SUBTYPE'])
     top = get_short(data, OFFSET['TOP'])
     left = get_short(data, OFFSET['LEFT'])
@@ -198,7 +213,7 @@ def read_roi_single(fpath):
 
     sub_pixel_resolution = (options == OPTIONS['SUB_PIXEL_RESOLUTION']) and version >= 222
     draw_offset = sub_pixel_resolution and (options == OPTIONS['DRAW_OFFSET'])
-    sub_pixel_rect = version >= 223 and sub_pixel_resolution and (roi_type == ROI_TYPE['rect'] or roi_type == ROI_TYPE['oval'])
+    sub_pixel_rect = version >= 223 and sub_pixel_resolution
 
     # Untested
     if sub_pixel_rect:
@@ -211,12 +226,15 @@ def read_roi_single(fpath):
         channel = get_int(data, hdr2Offset + HEADER_OFFSET['C_POSITION'])
         slice = get_int(data, hdr2Offset + HEADER_OFFSET['Z_POSITION'])
         frame = get_int(data, hdr2Offset + HEADER_OFFSET['T_POSITION'])
-        overlayLabelColor = get_int(data, hdr2Offset + HEADER_OFFSET['OVERLAY_LABEL_COLOR'])
-        overlayFontSize = get_short(data, hdr2Offset + HEADER_OFFSET['OVERLAY_FONT_SIZE'])
-        imageOpacity = get_byte(data, hdr2Offset + HEADER_OFFSET['IMAGE_OPACITY'])
-        imageSize = get_int(data, hdr2Offset + HEADER_OFFSET['IMAGE_SIZE'])
+        # overlayLabelColor = get_int(data, hdr2Offset + HEADER_OFFSET['OVERLAY_LABEL_COLOR'])
+        # overlayFontSize = get_short(data, hdr2Offset + HEADER_OFFSET['OVERLAY_FONT_SIZE'])
+        # imageOpacity = get_byte(data, hdr2Offset + HEADER_OFFSET['IMAGE_OPACITY'])
+        # imageSize = get_int(data, hdr2Offset + HEADER_OFFSET['IMAGE_SIZE'])
 
     is_composite = get_int(data, OFFSET['SHAPE_ROI_SIZE']) > 0
+
+    all_roi_types = ["polygon", "freehand", "traced", "polyline", "freeline", "angle", "point"]
+    all_roi_types = [ROI_TYPE[t] for t in all_roi_types]
 
     # Not implemented
     if is_composite:
@@ -226,7 +244,7 @@ def read_roi_single(fpath):
         if channel > 0 or slice > 0 or frame > 0:
             pass
 
-    if type == ROI_TYPE['rect']:
+    if roi_type == ROI_TYPE['rect']:
         roi = {'type': 'rectangle'}
 
         if sub_pixel_rect:
@@ -236,7 +254,7 @@ def read_roi_single(fpath):
 
         roi['arc_size'] = get_short(data, OFFSET['ROUNDED_RECT_ARC_SIZE'])
 
-    elif type == ROI_TYPE['oval']:
+    elif roi_type == ROI_TYPE['oval']:
         roi = {'type': 'oval'}
 
         if sub_pixel_rect:
@@ -244,7 +262,7 @@ def read_roi_single(fpath):
         else:
             roi.update(dict(left=left, top=top, width=width, height=height))
 
-    elif type == ROI_TYPE['line']:
+    elif roi_type == ROI_TYPE['line']:
         roi = {'type': 'line'}
 
         x1 = get_float(data, OFFSET['X1'])
@@ -259,7 +277,7 @@ def read_roi_single(fpath):
             roi.update(dict(x1=x1, x2=x2, y1=y1, y2=y2))
             roi['draw_offset'] = draw_offset
 
-    elif type in [ROI_TYPE[t] for t in ["polygon", "freehand", "traced", "polyline", "freeline", "angle", "point"]]:
+    elif roi_type in all_roi_types:
         x = []
         y = []
         base1 = OFFSET['COORDINATES']
@@ -283,7 +301,7 @@ def read_roi_single(fpath):
                 xf.append(get_float(data, base1 + i * 4))
                 yf.append(get_float(data, base2 + i * 4))
 
-        if type == ROI_TYPE['point']:
+        if roi_type == ROI_TYPE['point']:
             roi = {'type': 'point'}
 
             if sub_pixel_resolution:
@@ -291,9 +309,9 @@ def read_roi_single(fpath):
             else:
                 roi.update(dict(x=x, y=y, n=n))
 
-        if type == ROI_TYPE['polygon']:
+        if roi_type == ROI_TYPE['polygon']:
             roi = {'type': 'polygon'}
-        elif type == ROI_TYPE['freehand']:
+        elif roi_type == ROI_TYPE['freehand']:
             roi = {'type': 'freehand'}
             if subtype == SUBTYPES['ELLIPSE']:
                 ex1 = get_float(data, OFFSET['X1'])
@@ -303,13 +321,13 @@ def read_roi_single(fpath):
                 roi['aspect_ratio'] = get_float(data, OFFSET['ELLIPSE_ASPECT_RATIO'])
                 roi.update(dict(ex1=ex1, ey1=ey1, ex2=ex2, ey2=ey2))
 
-        elif type == ROI_TYPE['traced']:
+        elif roi_type == ROI_TYPE['traced']:
             roi = {'type': 'traced'}
-        elif type == ROI_TYPE['polyline']:
+        elif roi_type == ROI_TYPE['polyline']:
             roi = {'type': 'polyline'}
-        elif type == ROI_TYPE['freeline']:
+        elif roi_type == ROI_TYPE['freeline']:
             roi = {'type': 'freeline'}
-        elif type == ROI_TYPE['angle']:
+        elif roi_type == ROI_TYPE['angle']:
             roi = {'type': 'angle'}
         else:
             roi = {'type': 'freeroi'}

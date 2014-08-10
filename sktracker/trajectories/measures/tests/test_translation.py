@@ -36,11 +36,13 @@ def test_p2p_cum_dir():
     p2p_cd = translation.p2p_cum_dir(trajs, t_stamp0=0, t_stamp1=10)
     assert np.all(p2p_cd == 1)
 
+
 def test_p2p_directionality():
 
     trajs = linear_trajs()
     p2p_dir = translation.p2p_directionality(trajs, t_stamp0=0, t_stamp1=10)
     assert np.all(p2p_dir == 1)
+
 
 def test_p2p_processivity():
 
@@ -54,18 +56,22 @@ def test_sld_dir():
     sld_dir = translation.sld_dir(trajs, window=4).dropna()
     assert(np.all(sld_dir['sld_dir'] == 1))
 
+
 def test_sld_processivity():
     trajs = linear_trajs()
     sld_processivity = translation.sld_processivity(trajs, window=4).dropna()
 
     assert(np.all(sld_processivity['sld_processivity'] == 1))
 
+
 def test_sld_cum_dir():
     trajs = linear_trajs()
     sld_cum_dir = translation.sld_cum_dir(trajs, window=4).dropna()
     assert(np.all(sld_cum_dir['sld_cum_dir'] == 1))
 
+
 def test_get_MSD():
     trajs = linear_trajs()
     msd = translation.get_MSD(trajs)
     assert_array_almost_equal(np.sqrt(msd['MSD']), trajs.x)
+

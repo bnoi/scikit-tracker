@@ -6,7 +6,6 @@ from __future__ import absolute_import
 from __future__ import print_function
 
 import numpy as np
-from numpy.testing import assert_array_equal
 from numpy.testing import assert_array_almost_equal
 from numpy.testing import assert_almost_equal
 
@@ -24,13 +23,13 @@ def test_radial_speed():
     rd_speeds = rotation.radial_speed(trajs, in_coords=['x', 'y'], from_polar=False)
 
 
-
 def test_polar_coords():
 
     trajs = data.brownian_trajs_df()
     trajs = Trajectories(trajs)
     polar = rotation.get_polar_coords(trajs, get_dtheta=True)
     assert_array_almost_equal(trajs.x, polar.rho * np.cos(polar.theta))
+
 
 def test_continuous_theta_1d():
 
@@ -41,6 +40,7 @@ def test_continuous_theta_1d():
     thetas_th = np.array([0, np.pi/2, np.pi,  3*np.pi/2])
     assert_array_almost_equal(dthetas, dthetas_th)
     assert_array_almost_equal(thetas_out, thetas_th)
+
 
 def test_continuous_theta_2d():
     thetas_th = np.vstack([np.linspace(0, 2*np.pi, 10),

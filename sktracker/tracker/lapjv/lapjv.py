@@ -169,8 +169,7 @@ def lapjv(i, j, costs, wants_dual_variables=False,
             for iii in range(augmenting_row_reductions):
                 ii = slow_augmenting_row_reduction(
                     n, ii, j, i_index, i_count, x, y, u, v, costs)
-        slow_augment(n, ii,
-                j, i_index, i_count, x, y, u, v, costs)
+        slow_augment(n, ii, j, i_index, i_count, x, y, u, v, costs)
     else:
         if np.any(one_i):
             reduction_transfer(
@@ -181,9 +180,8 @@ def lapjv(i, j, costs, wants_dual_variables=False,
         #
         ii = np.ascontiguousarray(np.argwhere(free_i).flatten(), np.uint32)
         if len(ii) > 0:
-            for iii in range (augmenting_row_reductions):
-                ii = augmenting_row_reduction(
-                    n, ii, j, i_index, i_count, x, y, u, v, costs)
+            for iii in range(augmenting_row_reductions):
+                ii = augmenting_row_reduction(n, ii, j, i_index, i_count, x, y, u, v, costs)
         augment(n, ii,
                 j, i_index, i_count, x, y, u, v, costs)
     if wants_dual_variables:
@@ -283,7 +281,7 @@ def slow_augmenting_row_reduction(n, ii, jj, idx, count, x, y, u, v, c):  # prag
         uu = c[idx[i]:(idx[i] + count[i])] - v[j]
         order = np.lexsort([uu])
         u1, u2 = uu[order[:2]]
-        j1,j2 = j[order[:2]]
+        j1, j2 = j[order[:2]]
         i1 = y[j1]
         if u1 < u2:
             v[j1] = v[j1] - u2 + u1
@@ -358,15 +356,15 @@ def slow_augment(n, ii, jj, idx, count, x, y, u, v, c):  # pragma: no cover
     #end
     inf = np.sum(c) + 1
     d = np.zeros(n)
-    cc = np.zeros((n,n))
-    cc[:,:] = inf
+    cc = np.zeros((n, n))
+    cc[:, :] = inf
     for i in range(n):
-        cc[i,jj[idx[i]:(idx[i]+count[i])]] = c[idx[i]:(idx[i]+count[i])]
+        cc[i, jj[idx[i]:(idx[i]+count[i])]] = c[idx[i]:(idx[i] + count[i])]
     c = cc
     for i in ii:
         print("Processing i=%d" % i)
         j = jj[idx[i]:(idx[i] + count[i])]
-        d = c[i,:] - v
+        d = c[i, :] - v
         pred = np.ones(n, int) * i
         on_deck = []
         ready = []
@@ -393,7 +391,8 @@ def slow_augment(n, ii, jj, idx, count, x, y, u, v, c):  # pragma: no cover
                 u1 = c[iii, j1] - v[j1] - umin
                 for j1 in list(to_do):
                     h = c[iii, j1] - v[j1] - u1
-                    print("Consider j=%d as replacement, c[%d,%d]=%f,v[%d]=%f,h=%f, d[j]= %f" % (j1,iii,j1,c[iii,j1],j1,v[j1],h,d[j1]))
+                    print("Consider j=%d as replacement, c[%d,%d]=%f,v[%d]=%f,h=%f, d[j]= %f" %
+                          (j1, iii, j1, c[iii, j1], j1, v[j1], h, d[j1]))
                     if h < d[j1]:
                         print("Add to chain")
                         pred[j1] = iii
@@ -424,8 +423,7 @@ def slow_augment(n, ii, jj, idx, count, x, y, u, v, c):  # pragma: no cover
     #
     for i in range(n):
         j = x[i]
-        u[i] = c[i,j] - v[j]
-
+        u[i] = c[i, j] - v[j]
 
 # if __name__=="__main__":
 #     i = np.load("c:/temp/bad/img-1557/i.npy")

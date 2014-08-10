@@ -14,8 +14,9 @@ from .trajectories import Trajectories
 
 try:
     from . import draw
-    __all__ = ['Trajectories', 'draw']
+    __all__ = ['Trajectories',
+               'draw']
 except ImportError:
-    # log.warning('''Looks like matplotlib can't be imported,'''
-    #             '''drawing won't be available ''')
+    log.warning('''Matplotlib can't be imported,'''
+                '''drawing module won't be available ''')
     __all__ = ['Trajectories']

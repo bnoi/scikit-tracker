@@ -9,13 +9,10 @@ import numpy as np
 import pandas as pd
 from ..trajectories import Trajectories
 
-from .measure_decorators import (trajs_measure, segment_measure,
-                                 sliding_measure, p2p_measure)
-
+from .measure_decorators import trajs_measure
 
 import logging
 log = logging.getLogger(__name__)
-
 
 
 def dir_shift_(segment, shift=1, coords=['v_x', 'v_y', 'v_z']):
@@ -25,16 +22,24 @@ def dir_shift_(segment, shift=1, coords=['v_x', 'v_y', 'v_z']):
     norm_s = np.linalg.norm(segment[coords].shift(-shift//2), axis=1)
     return np.arccos(dot_p / (norm * norm_s))
 
+
 @trajs_measure
 def dir_shift(trajs, shift=1, coords=['v_x', 'v_y', 'v_z']):
-    return trajs.groupby(level=['label'], group_keys=False).apply(dir_shift_, shift=shift, coords=coords)
+    """
+    """
+    gp = trajs.groupby(level=['label'], group_keys=False)
+    return gp.apply(dir_shift_, shift=shift, coords=coords)
 
-###trajectories pseudo methods
+
+# Trajectories pseudo methods
+
 def radial_speed(trajs, in_coords=['rho', 'theta'],
                  from_polar=True,
                  smooth=0,
                  append=False,
-                 out_coords=['v_rad', 'v_orad', 'v_theta'] ):
+                 out_coords=['v_rad', 'v_orad', 'v_theta']):
+    """
+    """
     if not from_polar:
         polar = get_polar_coords(trajs, get_dtheta=False,
                                  in_coords=in_coords,
@@ -43,6 +48,7 @@ def radial_speed(trajs, in_coords=['rho', 'theta'],
         in_coords = ['rho', 'theta']
     else:
         polar = trajs[in_coords].copy()
+
     polar = Trajectories(polar)
     polar['t'] = trajs['t']
     intp_polar = polar.time_interpolate(coords=['rho', 'theta'], s=smooth, k=3)
@@ -60,6 +66,7 @@ def radial_speed(trajs, in_coords=['rho', 'theta'],
         for coord in speeds.columns:
             trajs[coord] = speeds[coord]
         return trajs
+
     return speeds
 
 
@@ -98,8 +105,8 @@ def get_polar_coords(trajs, get_dtheta=False,
     rho_coord, theta_coord = out_coords
     thetas = np.arctan2(trajs[y_coord], trajs[x_coord])
     rhos = np.hypot(trajs[y_coord], trajs[x_coord])
-    polar_trajs = pd.DataFrame.from_dict({theta_coord:thetas,
-                                         rho_coord:rhos})
+    polar_trajs = pd.DataFrame.from_dict({theta_coord: thetas,
+                                          rho_coord: rhos})
     polar_trajs.set_index(trajs.index, inplace=True)
     polar_trajs['t'] = trajs.t
     if not periodic:
@@ -116,11 +123,14 @@ def get_polar_coords(trajs, get_dtheta=False,
         return trajs
     return polar_trajs
 
+
 def get_spherical_coords(trajs, get_dtheta=False,
                          in_coords=['x', 'y', 'z'],
                          out_coords=['r', 'theta', 'phi'],
                          periodic=False,
                          append=False):
+    """
+    """
 
     x, y, z = in_coords
     r, theta, phi = out_coords
@@ -141,8 +151,12 @@ def get_spherical_coords(trajs, get_dtheta=False,
 
     return spherical_trajs.sortlevel(['t_stamp', 'label'])
 
-### segment method
+# Segment method
+
+
 def continuous_theta_(segment, coord='theta', get_dtheta=True):
+    """
+    """
 
     out = _continuous_theta(segment[coord].values,
                             return_dtheta=get_dtheta)
@@ -156,14 +170,16 @@ def continuous_theta_(segment, coord='theta', get_dtheta=True):
         segment[coord] = out
     return segment
 
+
 def periodic_dtheta_(segment, coord='theta'):
     dtheta_ = np.zeros_like(segment[coord].values).ravel()
     dtheta_[1:] = _periodic_dtheta(segment[coord].values)
     segment['d'+coord] = dtheta_
     return segment
 
+# Array methods
 
-### array methods
+
 def _continuous_theta(thetas, return_dtheta=True, axis=-1):
     '''Shifts the passed angles by multiples of ::math:2\np.pi such that
     the result is continuous (i.e. accumulating circles).
@@ -201,6 +217,7 @@ def _continuous_theta(thetas, return_dtheta=True, axis=-1):
         ### I don't really know how to avoid this
         return thetas_out, np.diff(thetas_out, axis=axis)
 
+
 def _periodic_dtheta(thetas, axis=-1):
     '''Returns  the difference between
     two consecutive angles, corrected for periodic boundary conditions
@@ -227,6 +244,7 @@ def _periodic_dtheta(thetas, axis=-1):
                                   axis, thetas, False)
     return dthetas
 
+
 def _1d_pbc_dtheta(thetas):
     """Angular difference respecting periodic 2\pi
     boundary conditions"""
@@ -234,6 +252,7 @@ def _1d_pbc_dtheta(thetas):
     dthetas[dthetas > np.pi] -= 2 * np.pi
     dthetas[dthetas < - np.pi] += 2 * np.pi
     return dthetas
+
 
 def _1d_continuous_thetas(thetas, return_dtheta=True):
     """

@@ -206,7 +206,7 @@ class GapCloseSolver(AbstractSolver):
 
         return in_idxs, out_idxs
 
-    def _get_candidates_dict_version(self, progress_bar=False, progress_bar_out=None):   # pragma: no cover
+    def _get_candidates_dict(self, progress_bar=False, progress_bar_out=None):  # pragma: no cover
         """Slower version on large dataset and faster on small dataset.
         """
 
@@ -229,7 +229,7 @@ class GapCloseSolver(AbstractSolver):
         # Numbers of combinations
         f = np.math.factorial
         n = len(labels)
-        n  = f(n) / (f(n - 2) * f(2))
+        n = f(n) / (f(n - 2) * f(2))
 
         for i, (s1, s2) in enumerate(label_combinations):
 

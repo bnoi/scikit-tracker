@@ -372,7 +372,7 @@ def imsave(filename, data, photometric=None, planarconfig=None,
            {'miniswhite': 0, 'minisblack': 1, 'rgb': 2}[photometric])
     addtag('samples_per_pixel', 'H', 1, samplesperpixel)
     if planarconfig:
-        addtag('planar_configuration', 'H', 1, 1 if planarconfig=='contig'
+        addtag('planar_configuration', 'H', 1, 1 if planarconfig == 'contig'
                else 2)
         addtag('bits_per_sample', 'H', samplesperpixel,
                (data.dtype.itemsize * 8, ) * samplesperpixel)
@@ -817,7 +817,7 @@ class TiffFile(object):
     def _omeseries(self):
         """Return image series in OME-TIFF file(s)."""
         xmlstring = self.pages[0].tags['image_description'].value
-        xmlstring = xmlstring.decode('utf-8',errors='replace')
+        xmlstring = xmlstring.decode('utf-8', errors='replace')
         root = ElementTree.XML(xmlstring)
         uuid = root.attrib.get('UUID', None)
         self._tiffs = {uuid: self}

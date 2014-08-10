@@ -16,6 +16,7 @@ from scipy.interpolate import splev, splrep
 import logging
 log = logging.getLogger(__name__)
 
+
 def do_pca(trajs,
            pca=None,
            coords=['x', 'y', 'z'],
@@ -116,8 +117,9 @@ def time_interpolate(trajs, sampling=1,
 
 
 def _segment_interpolate_(segment, sampling, s=0, k=3,
-                         coords=['x', 'y', 'z']):
-
+                          coords=['x', 'y', 'z']):
+    """
+    """
 
     corrected_k = k
     while segment.shape[0] <= corrected_k:

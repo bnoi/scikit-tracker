@@ -17,6 +17,6 @@ from . import gap_close
 
 __all__ = ["AbstractCostFunction",
            "brownian",
-           "diagonals",
+           "diagonal",
            "directed",
            "gap_close"]

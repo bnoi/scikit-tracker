@@ -12,6 +12,8 @@ import ast
 import logging
 from collections import OrderedDict
 
+import numpy as np
+
 log = logging.getLogger(__name__)
 
 from . import TiffFile
@@ -35,6 +37,7 @@ METADATA_TYPE = {'SizeT': int,
                  'AcquisitionDate': str,
                  'unique_id': str,
                  'FileName': str}
+
 
 class OIOMetadata(OrderedDict):
     '''
@@ -68,7 +71,6 @@ class OIOMetadata(OrderedDict):
                     except:
                         msg = "Metadata contains wrong data type '{}'' has type {}, should be {}"
                         raise ValueError(msg.format(k, type(self[k]), v))
-
 
 
 def get_metadata(filename, json_discovery=False, base_dir=None):

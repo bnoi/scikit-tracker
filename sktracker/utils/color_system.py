@@ -53,6 +53,7 @@ CODE = {
     'BLACK': 30,
 }
 
+
 def _termcode(num):
     return '\033[%sm' % num
 

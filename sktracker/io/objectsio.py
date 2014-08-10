@@ -7,10 +7,10 @@ from __future__ import print_function
 
 
 import logging
-import sys
 import os
 import tempfile
 import shutil
+from collections import OrderedDict
 
 import pandas as pd
 
@@ -178,5 +178,3 @@ class ObjectsIO(object):
                    store_path=store_path,
                    base_dir=base_dir,
                    minimum_metadata_keys=minimum_metadata_keys)
-
-
