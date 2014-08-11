@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-eee973f docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-afa3b33 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-eee973f docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-afa3b33 docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
         <link rel="prev" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/> 
@@ -512,6 +512,31 @@ following group_args parameters.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.get_t_stamps_correspondences">
+<tt class="descname">get_t_stamps_correspondences</tt><big>(</big><em>data_values</em>, <em>column</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_t_stamps_correspondences" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given column return &#8216;t_stamp&#8217; values corresponding to 1d vector of this column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data_values</strong> : 1d np.ndarray</p>
+<blockquote>
+<div><p>Data found in self[column]</p>
+</div></blockquote>
+<p><strong>column</strong> : str</p>
+<blockquote>
+<div><p>Which column to use.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">np.ndarray with the same length as &#8216;data_values&#8217;.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="sktracker.trajectories.Trajectories.iter_segments">
 <tt class="descname">iter_segments</tt><a class="headerlink" href="#sktracker.trajectories.Trajectories.iter_segments" title="Permalink to this definition">¶</a></dt>
@@ -896,7 +921,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-eee973f',
+            VERSION:'0.3.dev-afa3b33',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

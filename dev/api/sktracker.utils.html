@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.utils package &mdash; sktracker 0.3.dev-eee973f docs</title>
+  <title>sktracker.utils package &mdash; sktracker 0.3.dev-afa3b33 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-eee973f docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-afa3b33 docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="Contribute to development" href="../contribute.html"/>
         <link rel="prev" title="sktracker.ui package" href="sktracker.ui.html"/> 
@@ -199,7 +199,8 @@
 <dt id="sktracker.utils.sort.natural_keys">
 <tt class="descclassname">sktracker.utils.sort.</tt><tt class="descname">natural_keys</tt><big>(</big><em>text</em><big>)</big><a class="headerlink" href="#sktracker.utils.sort.natural_keys" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort list of string in a human way.</p>
-<p>See: <a class="reference external" href="http://stackoverflow.com/questions/5967500/how-to-correctly-sort-a-string-with-a-number-inside">http://stackoverflow.com/questions/5967500/how-to-correctly-sort-a-string-with-a-number-inside</a></p>
+<p>See: <a class="reference external" href="http://stackoverflow.com/questions/5967500/how-to-correctly-sort-a-string-with-a-number">http://stackoverflow.com/questions/5967500/how-to-correctly-sort-a-string-with-a-number</a>-
+inside</p>
 <p class="rubric">Examples</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">alist</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;something1&quot;</span><span class="p">,</span> <span class="s">&quot;something12&quot;</span><span class="p">,</span> <span class="s">&quot;something17&quot;</span><span class="p">,</span> <span class="s">&quot;something2&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">alist</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">natural_keys</span><span class="p">)</span>
@@ -209,163 +210,6 @@
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="module-sktracker.utils.transformations">
-<span id="sktracker-utils-transformations-module"></span><h2>sktracker.utils.transformations module<a class="headerlink" href="#module-sktracker.utils.transformations" title="Permalink to this headline">¶</a></h2>
-<p>Homogeneous Transformation Matrices and Quaternions.</p>
-<p>A library for calculating 4x4 matrices for translating, rotating, reflecting,
-scaling, shearing, projecting, orthogonalizing, and superimposing arrays of
-3D homogeneous coordinates as well as for converting between rotation matrices,
-Euler angles, and quaternions. Also includes an Arcball control object and
-functions to decompose transformation matrices.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body"><a class="reference external" href="http://www.lfd.uci.edu/~gohlke/">Christoph Gohlke</a></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Organization:</th><td class="field-body">Laboratory for Fluorescence Dynamics, University of California, Irvine</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">2013.06.29</td>
-</tr>
-</tbody>
-</table>
-<div class="section" id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><a class="reference external" href="http://www.python.org">CPython 2.7 or 3.3</a></li>
-<li><a class="reference external" href="http://www.numpy.org">Numpy 1.7</a></li>
-<li><a class="reference external" href="http://www.lfd.uci.edu/~gohlke/">Transformations.c 2013.01.18</a>
-(recommended for speedup of some functions)</li>
-</ul>
-</div>
-<div class="section" id="notes">
-<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
-<p>The API is not stable yet and is expected to change between revisions.</p>
-<p>This Python code is not optimized for speed. Refer to the transformations.c
-module for a faster implementation of some functions.</p>
-<p>Documentation in HTML format can be generated with epydoc.</p>
-<p>Matrices (M) can be inverted using numpy.linalg.inv(M), be concatenated using
-numpy.dot(M0, M1), or transform homogeneous coordinate arrays (v) using
-numpy.dot(M, v) for shape (4, *) column vectors, respectively
-numpy.dot(v, M.T) for shape (*, 4) row vectors (&#8220;array of points&#8221;).</p>
-<p>This module follows the &#8220;column vectors on the right&#8221; and &#8220;row major storage&#8221;
-(C contiguous) conventions. The translation components are in the right column
-of the transformation matrix, i.e. M[:3, 3].
-The transpose of the transformation matrices may have to be used to interface
-with other graphics systems, e.g. with OpenGL&#8217;s glMultMatrixd(). See also [16].</p>
-<p>Calculations are carried out with numpy.float64 precision.</p>
-<p>Vector, point, quaternion, and matrix function arguments are expected to be
-&#8220;array like&#8221;, i.e. tuple, list, or numpy arrays.</p>
-<p>Return types are numpy arrays unless specified otherwise.</p>
-<p>Angles are in radians unless specified otherwise.</p>
-<p>Quaternions w+ix+jy+kz are represented as [w, x, y, z].</p>
-<p>A triple of Euler angles can be applied/interpreted in 24 ways, which can
-be specified using a 4 character string or encoded 4-tuple:</p>
-<blockquote>
-<div><p><em>Axes 4-string</em>: e.g. &#8216;sxyz&#8217; or &#8216;ryxy&#8217;</p>
-<ul class="simple">
-<li>first character : rotations are applied to &#8216;s&#8217;tatic or &#8216;r&#8217;otating frame</li>
-<li>remaining characters : successive rotation axis &#8216;x&#8217;, &#8216;y&#8217;, or &#8216;z&#8217;</li>
-</ul>
-<p><em>Axes 4-tuple</em>: e.g. (0, 0, 0, 0) or (1, 1, 1, 1)</p>
-<ul class="simple">
-<li>inner axis: code of axis (&#8216;x&#8217;:0, &#8216;y&#8217;:1, &#8216;z&#8217;:2) of rightmost matrix.</li>
-<li>parity : even (0) if inner axis &#8216;x&#8217; is followed by &#8216;y&#8217;, &#8216;y&#8217; is followed
-by &#8216;z&#8217;, or &#8216;z&#8217; is followed by &#8216;x&#8217;. Otherwise odd (1).</li>
-<li>repetition : first and last axis are same (1) or different (0).</li>
-<li>frame : rotations are applied to static (0) or rotating (1) frame.</li>
-</ul>
-</div></blockquote>
-</div>
-<div class="section" id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic simple">
-<li>Matrices and transformations. Ronald Goldman.
-In &#8220;Graphics Gems I&#8221;, pp 472-475. Morgan Kaufmann, 1990.</li>
-<li>More matrices and transformations: shear and pseudo-perspective.
-Ronald Goldman. In &#8220;Graphics Gems II&#8221;, pp 320-323. Morgan Kaufmann, 1991.</li>
-<li>Decomposing a matrix into simple transformations. Spencer Thomas.
-In &#8220;Graphics Gems II&#8221;, pp 320-323. Morgan Kaufmann, 1991.</li>
-<li>Recovering the data from the transformation matrix. Ronald Goldman.
-In &#8220;Graphics Gems II&#8221;, pp 324-331. Morgan Kaufmann, 1991.</li>
-<li>Euler angle conversion. Ken Shoemake.
-In &#8220;Graphics Gems IV&#8221;, pp 222-229. Morgan Kaufmann, 1994.</li>
-<li>Arcball rotation control. Ken Shoemake.
-In &#8220;Graphics Gems IV&#8221;, pp 175-192. Morgan Kaufmann, 1994.</li>
-<li>Representing attitude: Euler angles, unit quaternions, and rotation
-vectors. James Diebel. 2006.</li>
-<li>A discussion of the solution for the best rotation to relate two sets
-of vectors. W Kabsch. Acta Cryst. 1978. A34, 827-828.</li>
-<li>Closed-form solution of absolute orientation using unit quaternions.
-BKP Horn. J Opt Soc Am A. 1987. 4(4):629-642.</li>
-<li>Quaternions. Ken Shoemake.
-<a class="reference external" href="http://www.sfu.ca/~jwa3/cmpt461/files/quatut.pdf">http://www.sfu.ca/~jwa3/cmpt461/files/quatut.pdf</a></li>
-<li>From quaternion to matrix and back. JMP van Waveren. 2005.
-<a class="reference external" href="http://www.intel.com/cd/ids/developer/asmo-na/eng/293748.htm">http://www.intel.com/cd/ids/developer/asmo-na/eng/293748.htm</a></li>
-<li>Uniform random rotations. Ken Shoemake.
-In &#8220;Graphics Gems III&#8221;, pp 124-132. Morgan Kaufmann, 1992.</li>
-<li>Quaternion in molecular modeling. CFF Karney.
-J Mol Graph Mod, 25(5):595-604</li>
-<li>New method for extracting the quaternion from a rotation matrix.
-Itzhack Y Bar-Itzhack, J Guid Contr Dynam. 2000. 23(6): 1085-1087.</li>
-<li>Multiple View Geometry in Computer Vision. Hartley and Zissermann.
-Cambridge University Press; 2nd Ed. 2004. Chapter 4, Algorithm 4.7, p 130.</li>
-<li>Column Vectors vs. Row Vectors.
-<a class="reference external" href="http://steve.hollasch.net/cgindex/math/matrix/column-vec.html">http://steve.hollasch.net/cgindex/math/matrix/column-vec.html</a></li>
-</ol>
-</div>
-<div class="section" id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.123</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.234</span><span class="p">,</span> <span class="mf">2.345</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">origin</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">,</span> <span class="n">yaxis</span><span class="p">,</span> <span class="n">zaxis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">identity_matrix</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Rx</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Ry</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">yaxis</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Rz</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">zaxis</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">concatenate_matrices</span><span class="p">(</span><span class="n">Rx</span><span class="p">,</span> <span class="n">Ry</span><span class="p">,</span> <span class="n">Rz</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">euler</span> <span class="o">=</span> <span class="n">euler_from_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s">&#39;rxyz&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">([</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">],</span> <span class="n">euler</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Re</span> <span class="o">=</span> <span class="n">euler_matrix</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="s">&#39;rxyz&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Re</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">al</span><span class="p">,</span> <span class="n">be</span><span class="p">,</span> <span class="n">ga</span> <span class="o">=</span> <span class="n">euler_from_matrix</span><span class="p">(</span><span class="n">Re</span><span class="p">,</span> <span class="s">&#39;rxyz&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">Re</span><span class="p">,</span> <span class="n">euler_matrix</span><span class="p">(</span><span class="n">al</span><span class="p">,</span> <span class="n">be</span><span class="p">,</span> <span class="n">ga</span><span class="p">,</span> <span class="s">&#39;rxyz&#39;</span><span class="p">))</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span> <span class="o">=</span> <span class="n">quaternion_about_axis</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qy</span> <span class="o">=</span> <span class="n">quaternion_about_axis</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">yaxis</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qz</span> <span class="o">=</span> <span class="n">quaternion_about_axis</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">zaxis</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">quaternion_multiply</span><span class="p">(</span><span class="n">qx</span><span class="p">,</span> <span class="n">qy</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">quaternion_multiply</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">qz</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Rq</span> <span class="o">=</span> <span class="n">quaternion_matrix</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Rq</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">scale_matrix</span><span class="p">(</span><span class="mf">1.23</span><span class="p">,</span> <span class="n">origin</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">translation_matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">shear_matrix</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">xaxis</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">zaxis</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">random_rotation_matrix</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">concatenate_matrices</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">scale</span><span class="p">,</span> <span class="n">shear</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">persp</span> <span class="o">=</span> <span class="n">decompose_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="mf">1.23</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">shear</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">beta</span><span class="p">),</span> <span class="mi">0</span><span class="p">])</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">euler_matrix</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="s">&#39;sxyz&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">angles</span><span class="p">))</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">M1</span> <span class="o">=</span> <span class="n">compose_matrix</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">shear</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">persp</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_same_transform</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M1</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">random_vector</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">random_vector</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">angle_between_vectors</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span><span class="p">),</span> <span class="n">vector_product</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">unit_vector</span><span class="p">(</span><span class="n">v1</span><span class="p">),</span> <span class="n">unit_vector</span><span class="p">(</span><span class="n">v2</span><span class="p">))</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="module-sktracker.utils">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.utils" title="Permalink to this headline">¶</a></h2>
@@ -506,7 +350,7 @@ and 100.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-eee973f',
+            VERSION:'0.3.dev-afa3b33',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

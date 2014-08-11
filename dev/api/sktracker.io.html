@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.io package &mdash; sktracker 0.3.dev-eee973f docs</title>
+  <title>sktracker.io package &mdash; sktracker 0.3.dev-afa3b33 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-eee973f docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-afa3b33 docs" href="../index.html"/>
         <link rel="up" title="sktracker package" href="sktracker.html"/>
         <link rel="next" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="prev" title="sktracker.detection package" href="sktracker.detection.html"/> 
@@ -188,15 +188,28 @@ Specifications and code is largely inspired from:
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zip_file</span> <span class="o">=</span> <span class="s">&quot;roi_objects.zip&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi_zip</span><span class="p">(</span><span class="n">zip_file</span><span class="p">))</span>
-<span class="go">{&#39;1454-0095-0083&#39;: {&#39;y&#39;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], &#39;x&#39;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 73, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;1454-0095-0083&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}, &#39;0714-0092-0090&#39;: {&#39;y&#39;: [4, 16, 24, 37, 53, 71, 93, 117, 131, 149, 180, 179, 168, 148, 137, 114, 89, 62, 48, 47, 32, 18, 8], &#39;x&#39;: [52, 27, 19, 19, 22, 35, 50, 51, 60, 84, 130, 148, 161, 160, 154, 153, 144, 127, 108, 100, 81, 72, 68], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 36, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;0714-0092-0090&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}, &#39;0014-0089-0092&#39;: {&#39;y&#39;: [1, 13, 21, 34, 50, 68, 90, 114, 128, 146, 177, 176, 165, 145, 134, 111, 86, 59, 45, 44, 29, 15, 5], &#39;x&#39;: [54, 29, 21, 21, 24, 37, 52, 53, 62, 86, 132, 150, 163, 162, 156, 155, 146, 129, 110, 102, 83, 74, 70], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 1, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;0014-0089-0092&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}}</span>
 </pre></div>
 </div>
+<p>{&#8216;1454-0095-0083&#8217;: {&#8216;y&#8217;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140,
+117, 92, 65, 51, 50, 35, 21, 11], &#8216;x&#8217;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154,
+153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#8216;position&#8217;: {&#8216;channel&#8217;: 2, &#8216;frame&#8217;: 73, &#8216;slice&#8217;:
+7}, &#8216;name&#8217;: &#8216;1454-0095-0083&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}, &#8216;0714-0092-0090&#8217;: {&#8216;y&#8217;: [4, 16, 24,
+37, 53, 71, 93, 117, 131, 149, 180, 179, 168, 148, 137, 114, 89, 62, 48, 47, 32, 18, 8], &#8216;x&#8217;:
+[52, 27, 19, 19, 22, 35, 50, 51, 60, 84, 130, 148, 161, 160, 154, 153, 144, 127, 108, 100, 81,
+72, 68], &#8216;position&#8217;: {&#8216;channel&#8217;: 2, &#8216;frame&#8217;: 36, &#8216;slice&#8217;: 7}, &#8216;name&#8217;: &#8216;0714-0092-0090&#8217;, &#8216;n&#8217;: 23,
+&#8216;type&#8217;: &#8216;polygon&#8217;}, &#8216;0014-0089-0092&#8217;: {&#8216;y&#8217;: [1, 13, 21, 34, 50, 68, 90, 114, 128, 146, 177, 176,
+165, 145, 134, 111, 86, 59, 45, 44, 29, 15, 5], &#8216;x&#8217;: [54, 29, 21, 21, 24, 37, 52, 53, 62, 86,
+132, 150, 163, 162, 156, 155, 146, 129, 110, 102, 83, 74, 70], &#8216;position&#8217;: {&#8216;channel&#8217;: 2,
+&#8216;frame&#8217;: 1, &#8216;slice&#8217;: 7}, &#8216;name&#8217;: &#8216;0014-0089-0092&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}}</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">roi_file</span> <span class="o">=</span> <span class="s">&quot;roi_object.roi&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi</span><span class="p">(</span><span class="n">roi_file</span><span class="p">))</span>
-<span class="go">{&#39;example2&#39;: {&#39;y&#39;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], &#39;x&#39;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 73, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;example2&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}}</span>
 </pre></div>
 </div>
+<p>{&#8216;example2&#8217;: {&#8216;y&#8217;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92,
+65, 51, 50, 35, 21, 11], &#8216;x&#8217;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147,
+146, 137, 120, 101, 93, 74, 65, 61], &#8216;position&#8217;: {&#8216;channel&#8217;: 2, &#8216;frame&#8217;: 73, &#8216;slice&#8217;: 7},
+&#8216;name&#8217;: &#8216;example2&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}}</p>
 </dd></dl>
 
 </div>
@@ -1213,15 +1226,28 @@ Specifications and code is largely inspired from:
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zip_file</span> <span class="o">=</span> <span class="s">&quot;roi_objects.zip&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi_zip</span><span class="p">(</span><span class="n">zip_file</span><span class="p">))</span>
-<span class="go">{&#39;1454-0095-0083&#39;: {&#39;y&#39;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], &#39;x&#39;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 73, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;1454-0095-0083&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}, &#39;0714-0092-0090&#39;: {&#39;y&#39;: [4, 16, 24, 37, 53, 71, 93, 117, 131, 149, 180, 179, 168, 148, 137, 114, 89, 62, 48, 47, 32, 18, 8], &#39;x&#39;: [52, 27, 19, 19, 22, 35, 50, 51, 60, 84, 130, 148, 161, 160, 154, 153, 144, 127, 108, 100, 81, 72, 68], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 36, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;0714-0092-0090&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}, &#39;0014-0089-0092&#39;: {&#39;y&#39;: [1, 13, 21, 34, 50, 68, 90, 114, 128, 146, 177, 176, 165, 145, 134, 111, 86, 59, 45, 44, 29, 15, 5], &#39;x&#39;: [54, 29, 21, 21, 24, 37, 52, 53, 62, 86, 132, 150, 163, 162, 156, 155, 146, 129, 110, 102, 83, 74, 70], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 1, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;0014-0089-0092&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}}</span>
 </pre></div>
 </div>
+<p>{&#8216;1454-0095-0083&#8217;: {&#8216;y&#8217;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140,
+117, 92, 65, 51, 50, 35, 21, 11], &#8216;x&#8217;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154,
+153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#8216;position&#8217;: {&#8216;channel&#8217;: 2, &#8216;frame&#8217;: 73, &#8216;slice&#8217;:
+7}, &#8216;name&#8217;: &#8216;1454-0095-0083&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}, &#8216;0714-0092-0090&#8217;: {&#8216;y&#8217;: [4, 16, 24,
+37, 53, 71, 93, 117, 131, 149, 180, 179, 168, 148, 137, 114, 89, 62, 48, 47, 32, 18, 8], &#8216;x&#8217;:
+[52, 27, 19, 19, 22, 35, 50, 51, 60, 84, 130, 148, 161, 160, 154, 153, 144, 127, 108, 100, 81,
+72, 68], &#8216;position&#8217;: {&#8216;channel&#8217;: 2, &#8216;frame&#8217;: 36, &#8216;slice&#8217;: 7}, &#8216;name&#8217;: &#8216;0714-0092-0090&#8217;, &#8216;n&#8217;: 23,
+&#8216;type&#8217;: &#8216;polygon&#8217;}, &#8216;0014-0089-0092&#8217;: {&#8216;y&#8217;: [1, 13, 21, 34, 50, 68, 90, 114, 128, 146, 177, 176,
+165, 145, 134, 111, 86, 59, 45, 44, 29, 15, 5], &#8216;x&#8217;: [54, 29, 21, 21, 24, 37, 52, 53, 62, 86,
+132, 150, 163, 162, 156, 155, 146, 129, 110, 102, 83, 74, 70], &#8216;position&#8217;: {&#8216;channel&#8217;: 2,
+&#8216;frame&#8217;: 1, &#8216;slice&#8217;: 7}, &#8216;name&#8217;: &#8216;0014-0089-0092&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}}</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">roi_file</span> <span class="o">=</span> <span class="s">&quot;roi_object.roi&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi</span><span class="p">(</span><span class="n">roi_file</span><span class="p">))</span>
-<span class="go">{&#39;example2&#39;: {&#39;y&#39;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92, 65, 51, 50, 35, 21, 11], &#39;x&#39;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#39;position&#39;: {&#39;channel&#39;: 2, &#39;frame&#39;: 73, &#39;slice&#39;: 7}, &#39;name&#39;: &#39;example2&#39;, &#39;n&#39;: 23, &#39;type&#39;: &#39;polygon&#39;}}</span>
 </pre></div>
 </div>
+<p>{&#8216;example2&#8217;: {&#8216;y&#8217;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92,
+65, 51, 50, 35, 21, 11], &#8216;x&#8217;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147,
+146, 137, 120, 101, 93, 74, 65, 61], &#8216;position&#8217;: {&#8216;channel&#8217;: 2, &#8216;frame&#8217;: 73, &#8216;slice&#8217;: 7},
+&#8216;name&#8217;: &#8216;example2&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}}</p>
 </dd></dl>
 
 </div>
@@ -1265,7 +1291,7 @@ Specifications and code is largely inspired from:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-eee973f',
+            VERSION:'0.3.dev-afa3b33',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

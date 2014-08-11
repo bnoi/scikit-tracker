@@ -52,14 +52,6 @@ sktracker.utils.sort module
     :undoc-members:
     :show-inheritance:
 
-sktracker.utils.transformations module
---------------------------------------
-
-.. automodule:: sktracker.utils.transformations
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------
