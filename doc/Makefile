@@ -178,10 +178,10 @@ pseudoxml:
 
 api:
 	@mkdir -p source/api
-	sphinx-apidoc -o source/api ../sktracker/ -s txt -flTe
-	sed -i '1s/.*/API references/' source/api/sktracker.txt
-	sed -i '2s/.*/==============/' source/api/sktracker.txt
+	sphinx-apidoc -o source/api ../sktracker/ -s rst -flTe
+	sed -i '1s/.*/API references/' source/api/sktracker.rst
+	sed -i '2s/.*/==============/' source/api/sktracker.rst
 	@echo "Build API docs...done."
 
 notebooks:
-	sh convert_notebooks.sh
+	python notebooks2sphinx.py
