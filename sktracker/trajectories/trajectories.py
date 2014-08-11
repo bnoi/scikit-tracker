@@ -27,7 +27,7 @@ __all__ = []
 
 class Trajectories(pd.DataFrame):
     """
-    This class is a subclass of the class :class:`pandas.DataFrame`
+    This class is a subclass of the class :class:`pandas.DataFrame`.
 
     It is mainly here to provide utility attributes and syntactic shugar.
 
@@ -50,6 +50,18 @@ class Trajectories(pd.DataFrame):
     Parameters
     ----------
     trajs : :class:`pandas.DataFrame`
+
+    Examples
+    --------
+    >>> from sktracker import data
+    >>> from sktracker.trajectories import Trajectories
+    >>>
+    >>> trajs = data.with_gaps_df()
+    >>> trajs = Trajectories(trajs)
+    >>>
+    >>> # One of the available method can display trajectories with matplotlib.
+    >>> trajs.show(xaxis='t', yaxis='x')
+    <matplotlib.axes.AxesSubplot at 0x7f027ecc2cf8>
 
     """
     def __init__(self, *args, **kwargs):

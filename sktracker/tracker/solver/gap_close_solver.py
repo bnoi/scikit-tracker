@@ -63,7 +63,39 @@ class GapCloseSolver(AbstractSolver):
                             link_percentile=90,
                             use_t_stamp=True,
                             coords=['x', 'y', 'z']):
-        """
+        """Close gaps found in different trajectories.
+
+        Parameters
+        ----------
+        trajs : :class:`sktracker.trajectories.Trajectories`
+            Trajectories where to close gaps.
+        max_speed : float
+            Maximum speed of objects in trajectories.
+        maximum_gap : float
+            Maximum gap size which can be closed.
+        link_percentile : float
+            TODO
+        use_t_stamp : bool
+            If True `t_stamp` index will be used when computing maximum gap. If False, column 't'
+            will be used.
+        coords : list
+            Which columns to choose in trajs when computing distances.
+
+        Examples
+        --------
+        >>> trajs = data.with_gaps_df()
+        >>> max_speed = 10.
+        >>> maximum_gap = 5
+        >>> gc_solver = GapCloseSolver.for_brownian_motion(trajs, max_speed=max_speed,
+        >>>                                                maximum_gap=maximum_gap,
+        >>>                                                use_t_stamp=True)
+        >>> new_trajs = gc_solver.track()
+        2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: Initiating gap close solver
+        2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: Find candidates among 7 segments
+        2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: 6 candidates found
+        2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: Build cost functions
+        2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: Assigning results
+        2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: 4 gap close event processed
         """
 
         guessed_cost = float(max_speed ** 2)

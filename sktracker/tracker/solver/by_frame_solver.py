@@ -1,12 +1,12 @@
-
 # -*- coding: utf-8 -*-
-
 
 from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
 
+import logging
+log = logging.getLogger(__name__)
 
 import numpy as np
 
@@ -55,8 +55,7 @@ class ByFrameSolver(AbstractSolver):
         self.max_assigned_cost = self.death_cf.context['cost']
 
     @classmethod
-    def for_brownian_motion(cls,
-                            trajs,
+    def for_brownian_motion(cls, trajs,
                             max_speed,
                             penalty=1.05,
                             coords=['x', 'y', 'z']):
@@ -64,11 +63,24 @@ class ByFrameSolver(AbstractSolver):
 
         Parameters
         ----------
-        trajs : :class:`pandas.DataFrame`
+        trajs : :class:`sktracker.trajectories.Trajectories`
         max_speed : float
-            Max objects velocity
+            Maximum objects velocity
         penalty : float
         coords : list
+            Which columns to choose in trajs when computing distances.
+
+        Examples
+        --------
+        >>> true_trajs = Trajectories(data.brownian_trajectories_generator())
+        >>>
+        >>> # Remove labels
+        >>> true_trajs.relabel(np.arange(len(true_trajs)))
+        >>>
+        >>> solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=5, penalty=2.)
+        >>> new_trajs = solver.track()
+        2014-08-11:INFO:sktracker.tracker.solver.by_frame_solver: Initiating frame by frame tracking.
+        2014-08-11:INFO:sktracker.tracker.solver.by_frame_solver: Frame by frame tracking done. 5 segments found (500 before).
         """
         guessed_cost = np.float(max_speed ** 2) * penalty
         diag_context = {'cost': guessed_cost}
@@ -88,21 +100,20 @@ class ByFrameSolver(AbstractSolver):
         return cls(trajs, cost_functions, coords=coords)
 
     @classmethod
-    def for_directed_motion(cls,
-                            trajs,
+    def for_directed_motion(cls, trajs,
                             max_speed,
                             penalty=1.05,
                             past_traj_time=10,
                             smooth_factor=0,
                             interpolation_order=1,
                             coords=['x', 'y', 'z']):
-        """
+        """Link objects according to their distance found in trajectories frame by frame.
 
         Parameters
         ----------
-        trajs : :class:`pandas.DataFrame`
+        trajs : :class:`sktracker.trajectories.Trajectories`
         max_speed : float
-            Max objects velocity
+            Maximum objects velocity
         penalty : float
         past_traj_time : float
             Time during which the tracker can make a gap close. Above this time all gap
@@ -112,6 +123,7 @@ class ByFrameSolver(AbstractSolver):
         interpolation_order : int
             The order of the spline fit. See :func:`scipy.interpolate.splrep`
         coords : list
+            Which columns to choose in trajs when computing distances.
         """
 
         parameters = {'max_speed': max_speed,
@@ -164,10 +176,14 @@ class ByFrameSolver(AbstractSolver):
             For testing purpose only
         """
 
+        log.info('Initiating frame by frame tracking.')
+
         old_labels = self.trajs.index.get_level_values('label').values
         self.trajs['new_label'] = old_labels.astype(np.float)
         ts_in = self.trajs.t_stamps[:-1]
         ts_out = self.trajs.t_stamps[1:]
+
+        n_labels_before = len(self.trajs.labels)
 
         n = len(ts_in)
         for i, (t_in, t_out) in enumerate(zip(ts_in, ts_out)):
@@ -182,6 +198,10 @@ class ByFrameSolver(AbstractSolver):
             print_progress(-1)
 
         self.relabel_trajs()
+
+        n_labels_after = len(self.trajs.labels)
+        mess = 'Frame by frame tracking done. {} segments found ({} before).'
+        log.info(mess.format(n_labels_after, n_labels_before))
         return self.trajs
 
     def one_frame(self, t_in, t_out):
