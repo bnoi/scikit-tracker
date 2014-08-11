@@ -1,0 +1,7 @@
+sktracker.tracker.cost_function.brownian module
+===============================================
+
+.. automodule:: sktracker.tracker.cost_function.brownian
+    :members:
+    :undoc-members:
+    :show-inheritance:

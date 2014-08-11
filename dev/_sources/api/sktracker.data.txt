@@ -4,14 +4,9 @@ sktracker.data package
 Submodules
 ----------
 
-sktracker.data.trajectories_generator module
---------------------------------------------
+.. toctree::
 
-.. automodule:: sktracker.data.trajectories_generator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   sktracker.data.trajectories_generator
 
 Module contents
 ---------------

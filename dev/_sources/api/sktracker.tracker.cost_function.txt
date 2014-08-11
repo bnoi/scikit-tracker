@@ -4,46 +4,13 @@ sktracker.tracker.cost_function package
 Submodules
 ----------
 
-sktracker.tracker.cost_function.abstract_cost_functions module
---------------------------------------------------------------
+.. toctree::
 
-.. automodule:: sktracker.tracker.cost_function.abstract_cost_functions
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.tracker.cost_function.brownian module
------------------------------------------------
-
-.. automodule:: sktracker.tracker.cost_function.brownian
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.tracker.cost_function.diagonal module
------------------------------------------------
-
-.. automodule:: sktracker.tracker.cost_function.diagonal
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.tracker.cost_function.directed module
------------------------------------------------
-
-.. automodule:: sktracker.tracker.cost_function.directed
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.tracker.cost_function.gap_close module
-------------------------------------------------
-
-.. automodule:: sktracker.tracker.cost_function.gap_close
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   sktracker.tracker.cost_function.abstract_cost_functions
+   sktracker.tracker.cost_function.brownian
+   sktracker.tracker.cost_function.diagonal
+   sktracker.tracker.cost_function.directed
+   sktracker.tracker.cost_function.gap_close
 
 Module contents
 ---------------

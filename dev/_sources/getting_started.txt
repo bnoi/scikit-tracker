@@ -1,10 +1,13 @@
-Tutorial : getting started
-==========================
+.. _getting-started:
+
+Getting started
+===============
 
 Here you can find some quickstart guides to quickly learn how to use basic
 ``sktracker`` features.
 
 .. toctree::
    :maxdepth: 2
+   :glob:
 
-   tutorial/ch_trajectories
+   getting_started/*

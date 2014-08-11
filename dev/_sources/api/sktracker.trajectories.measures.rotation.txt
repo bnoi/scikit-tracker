@@ -1,0 +1,7 @@
+sktracker.trajectories.measures.rotation module
+===============================================
+
+.. automodule:: sktracker.trajectories.measures.rotation
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,7 @@
+sktracker.tracker.solver.by_frame_solver module
+===============================================
+
+.. automodule:: sktracker.tracker.solver.by_frame_solver
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.cost_function package &mdash; sktracker 0.3.dev-f033a25 docs</title>
+  <title>sktracker.tracker.cost_function package &mdash; sktracker 0.3.dev-877a561 docs</title>
   
 
   
@@ -31,9 +31,9 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-f033a25 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-877a561 docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
-        <link rel="next" title="sktracker.tracker.lapjv package" href="sktracker.tracker.lapjv.html"/>
+        <link rel="next" title="sktracker.tracker.cost_function.abstract_cost_functions module" href="sktracker.tracker.cost_function.abstract_cost_functions.html"/>
         <link rel="prev" title="sktracker.tracker package" href="sktracker.tracker.html"/> 
 
   
@@ -76,8 +76,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial : getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
@@ -87,10 +87,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">sktracker package</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker.version">sktracker.version module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
 </ul>
 </li>
@@ -126,7 +128,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="sktracker.html">sktracker package</a> &raquo;</li>
+          <li><a href="sktracker.html">API references</a> &raquo;</li>
       
           <li><a href="sktracker.tracker.html">sktracker.tracker package</a> &raquo;</li>
       
@@ -145,121 +147,15 @@
 <h1>sktracker.tracker.cost_function package<a class="headerlink" href="#sktracker-tracker-cost-function-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.abstract_cost_functions.html">sktracker.tracker.cost_function.abstract_cost_functions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.brownian.html">sktracker.tracker.cost_function.brownian module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.diagonal.html">sktracker.tracker.cost_function.diagonal module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.directed.html">sktracker.tracker.cost_function.directed module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.gap_close.html">sktracker.tracker.cost_function.gap_close module</a></li>
+</ul>
 </div>
-<div class="section" id="module-sktracker.tracker.cost_function.abstract_cost_functions">
-<span id="sktracker-tracker-cost-function-abstract-cost-functions-module"></span><h2>sktracker.tracker.cost_function.abstract_cost_functions module<a class="headerlink" href="#module-sktracker.tracker.cost_function.abstract_cost_functions" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-sktracker.tracker.cost_function.brownian">
-<span id="sktracker-tracker-cost-function-brownian-module"></span><h2>sktracker.tracker.cost_function.brownian module<a class="headerlink" href="#module-sktracker.tracker.cost_function.brownian" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="sktracker.tracker.cost_function.brownian.BrownianLinkCostFunction">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.cost_function.brownian.</tt><tt class="descname">BrownianLinkCostFunction</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.brownian.BrownianLinkCostFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.cost_function.abstract_cost_functions.AbstractCostFunction</span></tt></p>
-<p>This class generates cost matrices for brownian motion
-trajectories.</p>
-<p>The cost between two position is given by the square of their
-distance</p>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="3%" />
-<col width="97%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>parameters: dict</td>
-<td>Used by the <cite>build</cite> method, with the following keys:  - &#8216;distance_metric&#8217;: a string, default &#8216;euclidean&#8217;, passed to <cite>scipy.spatial.distance.cdist</cite> (see this function documentation for more)  - &#8216;coords&#8217;: a list of column names on which to compute the distance, default [&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;]  - &#8216;max_speed&#8217;: a float, default 1. All the values of the cost matrix for which the distance <em>divided by the time difference</em> is higher than this parameter&#8217;s value are set to np.nan</td>
-</tr>
-<tr class="row-even"><td>context: dict</td>
-<td>Context is used to store vectors.  - pos_in: <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a> The object coordinates to link from  - pos_out: <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a> The object coordinates to link to</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="class">
-<dt id="sktracker.tracker.cost_function.brownian.BrownianGapCloseCostFunction">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.cost_function.brownian.</tt><tt class="descname">BrownianGapCloseCostFunction</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.brownian.BrownianGapCloseCostFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction" title="sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction</span></tt></a></p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-sktracker.tracker.cost_function.diagonal">
-<span id="sktracker-tracker-cost-function-diagonal-module"></span><h2>sktracker.tracker.cost_function.diagonal module<a class="headerlink" href="#module-sktracker.tracker.cost_function.diagonal" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="sktracker.tracker.cost_function.diagonal.DiagonalCostFunction">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.cost_function.diagonal.</tt><tt class="descname">DiagonalCostFunction</tt><big>(</big><em>context</em>, <em>parameters</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.diagonal.DiagonalCostFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.cost_function.abstract_cost_functions.AbstractCostFunction</span></tt></p>
-<p>Basic cost function for a diagonal block.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>context: `dict`</strong></p>
-<blockquote>
-<div><p>this dictionnary must contain at least a <cite>&#8220;cost&#8221;</cite> key</p>
-</div></blockquote>
-<p class="last"><strong>parameters: `dict`</strong></p>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>context: dict</td>
-<td>Context need to be updated at each <cite>_build</cite> call  - cost: float Default cost  - objects: Vector used to build block matrix</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-<div class="section" id="module-sktracker.tracker.cost_function.directed">
-<span id="sktracker-tracker-cost-function-directed-module"></span><h2>sktracker.tracker.cost_function.directed module<a class="headerlink" href="#module-sktracker.tracker.cost_function.directed" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="sktracker.tracker.cost_function.directed.BasicDirectedLinkCostFunction">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.cost_function.directed.</tt><tt class="descname">BasicDirectedLinkCostFunction</tt><big>(</big><em>parameters</em>, <em>context={}</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.directed.BasicDirectedLinkCostFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.cost_function.abstract_cost_functions.AbstractCostFunction</span></tt></p>
-<p>This class generates cost matrices for directed motion
-trajectories.</p>
-<p>The score for each situations is given by the cosine similarity between a guessed trajectory
-vector and the vector made by two points.</p>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="3%" />
-<col width="97%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>paramters: dict</td>
-<td>Used by the <cite>build</cite> method, with the following keys:  - &#8216;distance_metric&#8217;: a string, default &#8216;euclidean&#8217;, passed to <cite>scipy.spatial.distance.cdist</cite> (see this function documentation for more)  - &#8216;coords&#8217;: a list of column names on which to compute the distance, default [&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;]  - &#8216;max_speed&#8217;: a float, default 1. All the values of the cost matrix for which the distance <em>divided by the time difference</em> is higher than this parameter&#8217;s value are set to np.nan</td>
-</tr>
-<tr class="row-even"><td>context: dict</td>
-<td>Context is used to store vectors.  - pos_in: <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a> The object coordinates to link from  - pos_out: <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a> The object coordinates to link to</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-<div class="section" id="module-sktracker.tracker.cost_function.gap_close">
-<span id="sktracker-tracker-cost-function-gap-close-module"></span><h2>sktracker.tracker.cost_function.gap_close module<a class="headerlink" href="#module-sktracker.tracker.cost_function.gap_close" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.cost_function.gap_close.</tt><tt class="descname">AbstractGapCloseCostFunction</tt><big>(</big><em>context</em>, <em>parameters</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sktracker.tracker.cost_function.abstract_cost_functions.AbstractCostFunction</span></tt></p>
-<dl class="method">
-<dt id="sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction.check_idxs_length">
-<tt class="descname">check_idxs_length</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.gap_close.AbstractGapCloseCostFunction.check_idxs_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check wether idxs_in and idxs_out have the same length.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.tracker.cost_function">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.cost_function" title="Permalink to this headline">¶</a></h2>
@@ -337,7 +233,7 @@ verification returned by self.build.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.tracker.lapjv.html" class="btn btn-neutral float-right" title="sktracker.tracker.lapjv package">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.tracker.cost_function.abstract_cost_functions.html" class="btn btn-neutral float-right" title="sktracker.tracker.cost_function.abstract_cost_functions module">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="sktracker.tracker.html" class="btn btn-neutral" title="sktracker.tracker package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -369,7 +265,7 @@ verification returned by self.build.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-f033a25',
+            VERSION:'0.3.dev-877a561',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

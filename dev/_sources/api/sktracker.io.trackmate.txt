@@ -1,0 +1,7 @@
+sktracker.io.trackmate module
+=============================
+
+.. automodule:: sktracker.io.trackmate
+    :members:
+    :undoc-members:
+    :show-inheritance:

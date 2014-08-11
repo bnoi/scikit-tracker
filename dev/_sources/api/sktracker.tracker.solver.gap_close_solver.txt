@@ -1,0 +1,7 @@
+sktracker.tracker.solver.gap_close_solver module
+================================================
+
+.. automodule:: sktracker.tracker.solver.gap_close_solver
+    :members:
+    :undoc-members:
+    :show-inheritance:

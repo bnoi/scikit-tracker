@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories.measures package &mdash; sktracker 0.3.dev-f033a25 docs</title>
+  <title>sktracker.trajectories.measures package &mdash; sktracker 0.3.dev-877a561 docs</title>
   
 
   
@@ -31,9 +31,9 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-f033a25 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-877a561 docs" href="../index.html"/>
         <link rel="up" title="sktracker.trajectories package" href="sktracker.trajectories.html"/>
-        <link rel="next" title="sktracker.ui package" href="sktracker.ui.html"/>
+        <link rel="next" title="sktracker.trajectories.measures.measure_decorators module" href="sktracker.trajectories.measures.measure_decorators.html"/>
         <link rel="prev" title="sktracker.trajectories package" href="sktracker.trajectories.html"/> 
 
   
@@ -76,8 +76,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial : getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
@@ -87,10 +87,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">sktracker package</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker.version">sktracker.version module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
 </ul>
 </li>
@@ -126,7 +128,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="sktracker.html">sktracker package</a> &raquo;</li>
+          <li><a href="sktracker.html">API references</a> &raquo;</li>
       
           <li><a href="sktracker.trajectories.html">sktracker.trajectories package</a> &raquo;</li>
       
@@ -145,285 +147,14 @@
 <h1>sktracker.trajectories.measures package<a class="headerlink" href="#sktracker-trajectories-measures-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.trajectories.measures.measure_decorators.html">sktracker.trajectories.measures.measure_decorators module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.trajectories.measures.rotation.html">sktracker.trajectories.measures.rotation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.trajectories.measures.transformation.html">sktracker.trajectories.measures.transformation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.trajectories.measures.translation.html">sktracker.trajectories.measures.translation module</a></li>
+</ul>
 </div>
-<div class="section" id="module-sktracker.trajectories.measures.measure_decorators">
-<span id="sktracker-trajectories-measures-measure-decorators-module"></span><h2>sktracker.trajectories.measures.measure_decorators module<a class="headerlink" href="#module-sktracker.trajectories.measures.measure_decorators" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.trajectories.measures.measure_decorators.p2p_measure">
-<tt class="descclassname">sktracker.trajectories.measures.measure_decorators.</tt><tt class="descname">p2p_measure</tt><big>(</big><em>method</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.measure_decorators.p2p_measure" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.measure_decorators.segment_measure">
-<tt class="descclassname">sktracker.trajectories.measures.measure_decorators.</tt><tt class="descname">segment_measure</tt><big>(</big><em>method</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.measure_decorators.segment_measure" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.measure_decorators.sliding_measure">
-<tt class="descclassname">sktracker.trajectories.measures.measure_decorators.</tt><tt class="descname">sliding_measure</tt><big>(</big><em>method</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.measure_decorators.sliding_measure" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.measure_decorators.trajs_measure">
-<tt class="descclassname">sktracker.trajectories.measures.measure_decorators.</tt><tt class="descname">trajs_measure</tt><big>(</big><em>method</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.measure_decorators.trajs_measure" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="module-sktracker.trajectories.measures.rotation">
-<span id="sktracker-trajectories-measures-rotation-module"></span><h2>sktracker.trajectories.measures.rotation module<a class="headerlink" href="#module-sktracker.trajectories.measures.rotation" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.trajectories.measures.rotation.continuous_theta_">
-<tt class="descclassname">sktracker.trajectories.measures.rotation.</tt><tt class="descname">continuous_theta_</tt><big>(</big><em>segment</em>, <em>coord='theta'</em>, <em>get_dtheta=True</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.rotation.continuous_theta_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.rotation.dir_shift">
-<tt class="descclassname">sktracker.trajectories.measures.rotation.</tt><tt class="descname">dir_shift</tt><big>(</big><em>trajs, shift=1, coords=['v_x', 'v_y', 'v_z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.rotation.dir_shift" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.rotation.dir_shift_">
-<tt class="descclassname">sktracker.trajectories.measures.rotation.</tt><tt class="descname">dir_shift_</tt><big>(</big><em>segment, shift=1, coords=['v_x', 'v_y', 'v_z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.rotation.dir_shift_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.rotation.get_polar_coords">
-<tt class="descclassname">sktracker.trajectories.measures.rotation.</tt><tt class="descname">get_polar_coords</tt><big>(</big><em>trajs, get_dtheta=False, in_coords=['x', 'y'], out_coords=['rho', 'theta'], periodic=False, append=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.rotation.get_polar_coords" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the polar coordinates for trajectories
-from the cartesian coordinates given by in_coords.</p>
-<p>Let <span class="math">\(x\)</span> and <span class="math">\(y\)</span> be the input coordinates, it will compute
-:math:`     heta = tan^{-1}(y/x)` and <span class="math">\(rho = \sqrt{x^2+y^2}\)</span></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.rotation.get_spherical_coords">
-<tt class="descclassname">sktracker.trajectories.measures.rotation.</tt><tt class="descname">get_spherical_coords</tt><big>(</big><em>trajs, get_dtheta=False, in_coords=['x', 'y', 'z'], out_coords=['r', 'theta', 'phi'], periodic=False, append=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.rotation.get_spherical_coords" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.rotation.periodic_dtheta_">
-<tt class="descclassname">sktracker.trajectories.measures.rotation.</tt><tt class="descname">periodic_dtheta_</tt><big>(</big><em>segment</em>, <em>coord='theta'</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.rotation.periodic_dtheta_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.rotation.radial_speed">
-<tt class="descclassname">sktracker.trajectories.measures.rotation.</tt><tt class="descname">radial_speed</tt><big>(</big><em>trajs, in_coords=['rho', 'theta'], from_polar=True, smooth=0, append=False, out_coords=['v_rad', 'v_orad', 'v_theta']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.rotation.radial_speed" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="module-sktracker.trajectories.measures.transformation">
-<span id="sktracker-trajectories-measures-transformation-module"></span><h2>sktracker.trajectories.measures.transformation module<a class="headerlink" href="#module-sktracker.trajectories.measures.transformation" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.trajectories.measures.transformation.back_proj_interp">
-<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">back_proj_interp</tt><big>(</big><em>interpolated</em>, <em>orig</em>, <em>sampling</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.back_proj_interp" title="Permalink to this definition">¶</a></dt>
-<dd><p>back_proj_interp(interpolated, trajs, 3).iloc[0].x - trajs.iloc[0].x = 0</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.transformation.back_proj_pca">
-<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">back_proj_pca</tt><big>(</big><em>rotated</em>, <em>pca</em>, <em>coords</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.back_proj_pca" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.transformation.do_pca">
-<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">do_pca</tt><big>(</big><em>trajs, pca=None, coords=['x', 'y', 'z'], suffix='_pca', append=False, return_pca=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.do_pca" title="Permalink to this definition">¶</a></dt>
-<dd><p>Performs a principal component analysis on the input coordinates
-suffix is only applied when appending</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.transformation.time_interpolate">
-<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">time_interpolate</tt><big>(</big><em>trajs, sampling=1, s=0, k=3, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.time_interpolate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Interpolates each segment of the trajectories along time
-using <cite>scipy.interpolate.splrep</cite></p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sampling</strong> : int,</p>
-<blockquote>
-<div><p>Must be higher or equal than 1, will add <cite>sampling - 1</cite> extra points
-between two consecutive original data point. Sub-sampling is not supported.</p>
-</div></blockquote>
-<p><strong>coords</strong> : tuple of column names, default <cite>(&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;)</cite></p>
-<blockquote>
-<div><blockquote>
-<div><p>the coordinates to interpolate.</p>
-</div></blockquote>
-<dl class="docutils">
-<dt>s <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">A smoothing condition. The amount of smoothness is determined by
-satisfying the conditions: sum((w * (y - g))**2,axis=0) &lt;= s where g(x)
-is the smoothed interpolation of (x,y). The user can use s to control
-the tradeoff between closeness and smoothness of fit. Larger s means
-more smoothing while smaller values of s indicate less smoothing.
-Recommended values of s depend on the weights, w. If the weights
-represent the inverse of the standard-deviation of y, then a good s
-value should be found in the range (m-sqrt(2*m),m+sqrt(2*m)) where m is
-the number of datapoints in x, y, and w. default : s=m-sqrt(2*m) if
-weights are supplied. s = 0.0 (interpolating) if no weights are
-supplied.</p>
-</dd>
-</dl>
-</div></blockquote>
-<p><strong>k</strong> : int</p>
-<blockquote>
-<div><p>The order of the spline fit. It is recommended to use cubic splines.
-Even order splines should be avoided especially with small s values.
-1 &lt;= k &lt;= 5</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>interpolated</strong> : a <tt class="xref py py-class docutils literal"><span class="pre">pandas.Dataframe</span></tt> instance</p>
-<blockquote class="last">
-<div><p>The interpolated values, with column names given by <cite>coords</cite>
-plus the computed speeds (first order derivative) and accelarations
-(second order derivative) if <cite>k</cite> &gt; 2</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Notes</p>
-<p>The returned DataFrame is NOT indexed like the input (in particular for <cite>t_stamp</cite>).
-It is also NOT casted to a Trajectories instance</p>
-<dl class="docutils">
-<dt>The <cite>s</cite> and <cite>k</cite> arguments are passed to <cite>scipy.interpolate.splrep</cite>, see this</dt>
-<dd>function documentation for more details</dd>
-<dt>If a segment is too short to be interpolated with the passed order <cite>k</cite>, the order</dt>
-<dd>will be automatically diminished</dd>
-</dl>
-<p>Segments with only one point will be returned as is</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.transformation.transformations_matrix">
-<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">transformations_matrix</tt><big>(</big><em>center</em>, <em>vec</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.transformations_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build transformation matrix:
-- translation : from (0, 0) to a point (center)
-- rotation : following angle between (1, 0) and vec</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>center</strong> : list or np.ndarray</p>
-<p><strong>vec</strong> : list or np.ndarray</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The transformation matrix, np.ndarray.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-<div class="section" id="module-sktracker.trajectories.measures.translation">
-<span id="sktracker-trajectories-measures-translation-module"></span><h2>sktracker.trajectories.measures.translation module<a class="headerlink" href="#module-sktracker.trajectories.measures.translation" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.by_segments">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">by_segments</tt><big>(</big><em>trajs</em>, <em>group_keys=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.by_segments" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.compute_MSD_">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">compute_MSD_</tt><big>(</big><em>segment, dts, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.compute_MSD_" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the mean square displacement of the segment given by</p>
-<blockquote>
-<div><div class="math">
-</div>
-<p>egin{aligned}
-mbox{MSD}(Delta t) &amp;=</p>
-</div></blockquote>
-<dl class="docutils">
-<dt>rac{sum_0^{T - Delta t}</dt>
-<dd>left(mathbf{r}(t + Delta t)  - mathbf{r}(t)</dd>
-<dt>ight)^2}{(T - Delta t) / delta t}</dt>
-<dd>end{aligned}</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.cum_disp">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">cum_disp</tt><big>(</big><em>trajs, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.cum_disp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.cumulative_displacement_">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">cumulative_displacement_</tt><big>(</big><em>segment</em>, <em>coords</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.cumulative_displacement_" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the cumulated displacement of the segment given by</p>
-<blockquote>
-<div><div class="math">
-</div>
-<p>egin{aligned}
-D(0) &amp;= 0D(t) &amp;= sum_{i=1}^{t} left((x_i - x_{i-1})^2 + (y_i - y_{i-1})^2 + (z_i -
-z_{i-1})^2</p>
-</div></blockquote>
-<dl class="docutils">
-<dt>ight)^{1/2}</dt>
-<dd>end{aligned}</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.get_MSD">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">get_MSD</tt><big>(</big><em>trajs</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.get_MSD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the mean square displacement for each segment.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.p2p_cum_dir">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">p2p_cum_dir</tt><big>(</big><em>trajs, t_stamp0, t_stamp1, coords=['x', 'y', 'z'], append=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.p2p_cum_dir" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the ratio between the net displacement and the
-cumulated displacement between t_stamp0 and t_stamp1 over coords</p>
-<dl class="docutils">
-<dt>call signature:</dt>
-<dd><dl class="first last docutils">
-<dt>p2p_cum_dir(trajs, t_stamp0, t_stamp1,</dt>
-<dd>coords=[&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;],
-append=False)</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.p2p_dif_">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">p2p_dif_</tt><big>(</big><em>segment</em>, <em>t_stamp0</em>, <em>t_stamp1</em>, <em>coords</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.p2p_dif_" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the difference of coordinates coords between t_stamp1 and t_stamp0</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.p2p_directionality">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">p2p_directionality</tt><big>(</big><em>trajs, t_stamp0, t_stamp1, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.p2p_directionality" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.p2p_processivity">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">p2p_processivity</tt><big>(</big><em>trajs, t_stamp0, t_stamp1, signed=True, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.p2p_processivity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.shifted_dif_">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">shifted_dif_</tt><big>(</big><em>segment</em>, <em>shift</em>, <em>coords</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.shifted_dif_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.sld_cum_dir">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">sld_cum_dir</tt><big>(</big><em>trajs, window, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.sld_cum_dir" title="Permalink to this definition">¶</a></dt>
-<dd><p>Window is expressed in t_stamps</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.sld_dir">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">sld_dir</tt><big>(</big><em>trajs, window, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.sld_dir" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="sktracker.trajectories.measures.translation.sld_processivity">
-<tt class="descclassname">sktracker.trajectories.measures.translation.</tt><tt class="descname">sld_processivity</tt><big>(</big><em>trajs, window, signed=True, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.translation.sld_processivity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </div>
 <div class="section" id="module-sktracker.trajectories.measures">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.trajectories.measures" title="Permalink to this headline">¶</a></h2>
@@ -436,7 +167,7 @@ append=False)</dd>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.ui.html" class="btn btn-neutral float-right" title="sktracker.ui package">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.trajectories.measures.measure_decorators.html" class="btn btn-neutral float-right" title="sktracker.trajectories.measures.measure_decorators module">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="sktracker.trajectories.html" class="btn btn-neutral" title="sktracker.trajectories package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -468,7 +199,7 @@ append=False)</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-f033a25',
+            VERSION:'0.3.dev-877a561',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

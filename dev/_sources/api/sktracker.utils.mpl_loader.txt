@@ -1,0 +1,7 @@
+sktracker.utils.mpl_loader module
+=================================
+
+.. automodule:: sktracker.utils.mpl_loader
+    :members:
+    :undoc-members:
+    :show-inheritance:

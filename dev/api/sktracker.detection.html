@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.detection package &mdash; sktracker 0.3.dev-f033a25 docs</title>
+  <title>sktracker.detection package &mdash; sktracker 0.3.dev-877a561 docs</title>
   
 
   
@@ -31,10 +31,10 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-f033a25 docs" href="../index.html"/>
-        <link rel="up" title="sktracker package" href="sktracker.html"/>
-        <link rel="next" title="sktracker.io package" href="sktracker.io.html"/>
-        <link rel="prev" title="sktracker.data package" href="sktracker.data.html"/> 
+    <link rel="top" title="sktracker 0.3.dev-877a561 docs" href="../index.html"/>
+        <link rel="up" title="API references" href="sktracker.html"/>
+        <link rel="next" title="sktracker.detection.cell_boundaries_detector module" href="sktracker.detection.cell_boundaries_detector.html"/>
+        <link rel="prev" title="sktracker.data.trajectories_generator module" href="sktracker.data.trajectories_generator.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -76,8 +76,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial : getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
@@ -87,10 +87,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">sktracker package</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker.version">sktracker.version module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
 </ul>
 </li>
@@ -126,7 +128,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="sktracker.html">sktracker package</a> &raquo;</li>
+          <li><a href="sktracker.html">API references</a> &raquo;</li>
       
     <li>sktracker.detection package</li>
       <li class="wy-breadcrumbs-aside">
@@ -143,15 +145,13 @@
 <h1>sktracker.detection package<a class="headerlink" href="#sktracker-detection-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.detection.cell_boundaries_detector.html">sktracker.detection.cell_boundaries_detector module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.detection.nuclei_detector.html">sktracker.detection.nuclei_detector module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.detection.peak_detector.html">sktracker.detection.peak_detector module</a></li>
+</ul>
 </div>
-<div class="section" id="module-sktracker.detection.cell_boundaries_detector">
-<span id="sktracker-detection-cell-boundaries-detector-module"></span><h2>sktracker.detection.cell_boundaries_detector module<a class="headerlink" href="#module-sktracker.detection.cell_boundaries_detector" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-sktracker.detection.nuclei_detector">
-<span id="sktracker-detection-nuclei-detector-module"></span><h2>sktracker.detection.nuclei_detector module<a class="headerlink" href="#module-sktracker.detection.nuclei_detector" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-sktracker.detection.peak_detector">
-<span id="sktracker-detection-peak-detector-module"></span><h2>sktracker.detection.peak_detector module<a class="headerlink" href="#module-sktracker.detection.peak_detector" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-sktracker.detection">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.detection" title="Permalink to this headline">¶</a></h2>
@@ -314,10 +314,10 @@ iterations</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.io.html" class="btn btn-neutral float-right" title="sktracker.io package">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.detection.cell_boundaries_detector.html" class="btn btn-neutral float-right" title="sktracker.detection.cell_boundaries_detector module">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sktracker.data.html" class="btn btn-neutral" title="sktracker.data package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sktracker.data.trajectories_generator.html" class="btn btn-neutral" title="sktracker.data.trajectories_generator module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -346,7 +346,7 @@ iterations</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-f033a25',
+            VERSION:'0.3.dev-877a561',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

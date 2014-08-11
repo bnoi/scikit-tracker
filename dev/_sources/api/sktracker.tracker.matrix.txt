@@ -4,14 +4,9 @@ sktracker.tracker.matrix package
 Submodules
 ----------
 
-sktracker.tracker.matrix.matrix module
---------------------------------------
+.. toctree::
 
-.. automodule:: sktracker.tracker.matrix.matrix
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   sktracker.tracker.matrix.matrix
 
 Module contents
 ---------------

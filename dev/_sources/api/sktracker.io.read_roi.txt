@@ -1,0 +1,7 @@
+sktracker.io.read_roi module
+============================
+
+.. automodule:: sktracker.io.read_roi
+    :members:
+    :undoc-members:
+    :show-inheritance:

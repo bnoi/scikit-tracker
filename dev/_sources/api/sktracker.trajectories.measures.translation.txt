@@ -1,0 +1,7 @@
+sktracker.trajectories.measures.translation module
+==================================================
+
+.. automodule:: sktracker.trajectories.measures.translation
+    :members:
+    :undoc-members:
+    :show-inheritance:

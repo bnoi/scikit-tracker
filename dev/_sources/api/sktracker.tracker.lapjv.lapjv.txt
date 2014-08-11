@@ -1,0 +1,7 @@
+sktracker.tracker.lapjv.lapjv module
+====================================
+
+.. automodule:: sktracker.tracker.lapjv.lapjv
+    :members:
+    :undoc-members:
+    :show-inheritance:

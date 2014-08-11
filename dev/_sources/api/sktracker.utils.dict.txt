@@ -1,0 +1,7 @@
+sktracker.utils.dict module
+===========================
+
+.. automodule:: sktracker.utils.dict
+    :members:
+    :undoc-members:
+    :show-inheritance:

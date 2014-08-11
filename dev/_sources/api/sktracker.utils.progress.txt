@@ -1,0 +1,7 @@
+sktracker.utils.progress module
+===============================
+
+.. automodule:: sktracker.utils.progress
+    :members:
+    :undoc-members:
+    :show-inheritance:

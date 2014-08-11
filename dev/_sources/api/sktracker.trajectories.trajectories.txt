@@ -1,0 +1,7 @@
+sktracker.trajectories.trajectories module
+==========================================
+
+.. automodule:: sktracker.trajectories.trajectories
+    :members:
+    :undoc-members:
+    :show-inheritance:

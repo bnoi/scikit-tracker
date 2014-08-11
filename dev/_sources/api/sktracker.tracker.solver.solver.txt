@@ -1,0 +1,7 @@
+sktracker.tracker.solver.solver module
+======================================
+
+.. automodule:: sktracker.tracker.solver.solver
+    :members:
+    :undoc-members:
+    :show-inheritance:

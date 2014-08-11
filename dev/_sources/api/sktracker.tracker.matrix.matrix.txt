@@ -1,0 +1,7 @@
+sktracker.tracker.matrix.matrix module
+======================================
+
+.. automodule:: sktracker.tracker.matrix.matrix
+    :members:
+    :undoc-members:
+    :show-inheritance:

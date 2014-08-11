@@ -1,0 +1,10 @@
+Use cases
+=========
+
+Here you will find more complex examples that shown in :ref:`getting-started`.
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+
+   use_cases/*

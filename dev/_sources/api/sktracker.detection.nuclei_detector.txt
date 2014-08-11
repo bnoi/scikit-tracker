@@ -1,0 +1,7 @@
+sktracker.detection.nuclei_detector module
+==========================================
+
+.. automodule:: sktracker.detection.nuclei_detector
+    :members:
+    :undoc-members:
+    :show-inheritance:

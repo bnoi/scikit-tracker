@@ -1,0 +1,273 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sktracker.io.read_roi module &mdash; sktracker 0.3.dev-877a561 docs</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="sktracker 0.3.dev-877a561 docs" href="../index.html"/>
+        <link rel="up" title="sktracker.io package" href="sktracker.io.html"/>
+        <link rel="next" title="sktracker.io.stackio module" href="sktracker.io.stackio.html"/>
+        <link rel="prev" title="sktracker.io.ome module" href="sktracker.io.ome.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+<a href="http://scikit-tracker.org/" class="fa fa-home">  scikit-tracker</a>
+
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../new.html">What&#8217;s new</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.3.html">scikit-tracker v0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.2.html">scikit-tracker v0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.1.html">scikit-tracker v0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contribute to development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">scikit-tracker</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="sktracker.html">API references</a> &raquo;</li>
+      
+          <li><a href="sktracker.io.html">sktracker.io package</a> &raquo;</li>
+      
+    <li>sktracker.io.read_roi module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/sktracker.io.read_roi.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="module-sktracker.io.read_roi">
+<span id="sktracker-io-read-roi-module"></span><h1>sktracker.io.read_roi module<a class="headerlink" href="#module-sktracker.io.read_roi" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sktracker.io.read_roi.read_roi">
+<tt class="descclassname">sktracker.io.read_roi.</tt><tt class="descname">read_roi</tt><big>(</big><em>roi_path</em><big>)</big><a class="headerlink" href="#sktracker.io.read_roi.read_roi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read ROI files .zip or .roi generated with ImageJ.
+Specifications and code is largely inspired from:
+<a class="reference external" href="http://rsb.info.nih.gov/ij/developer/source/ij/io/RoiDecoder.java.html">http://rsb.info.nih.gov/ij/developer/source/ij/io/RoiDecoder.java.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>roi_path</strong> : string</p>
+<blockquote>
+<div><p>Path to ROI file (can be either .zip or .roi)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>rois</strong> : dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Some format specifications are not implemented. See RoiDecoder.java for details.</li>
+<li>Most of &#8220;normal&#8221; ROI file should work.</li>
+<li>Code has not been yet strongly tested.</li>
+<li>Feel free to hack it and send me modifications.</li>
+<li>Star me on gist to show me wether this script has been usefull to you !</li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zip_file</span> <span class="o">=</span> <span class="s">&quot;roi_objects.zip&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi_zip</span><span class="p">(</span><span class="n">zip_file</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>{&#8216;1454-0095-0083&#8217;: {&#8216;y&#8217;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140,
+117, 92, 65, 51, 50, 35, 21, 11], &#8216;x&#8217;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154,
+153, 147, 146, 137, 120, 101, 93, 74, 65, 61], &#8216;position&#8217;: {&#8216;channel&#8217;: 2, &#8216;frame&#8217;: 73, &#8216;slice&#8217;:
+7}, &#8216;name&#8217;: &#8216;1454-0095-0083&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}, &#8216;0714-0092-0090&#8217;: {&#8216;y&#8217;: [4, 16, 24,
+37, 53, 71, 93, 117, 131, 149, 180, 179, 168, 148, 137, 114, 89, 62, 48, 47, 32, 18, 8], &#8216;x&#8217;:
+[52, 27, 19, 19, 22, 35, 50, 51, 60, 84, 130, 148, 161, 160, 154, 153, 144, 127, 108, 100, 81,
+72, 68], &#8216;position&#8217;: {&#8216;channel&#8217;: 2, &#8216;frame&#8217;: 36, &#8216;slice&#8217;: 7}, &#8216;name&#8217;: &#8216;0714-0092-0090&#8217;, &#8216;n&#8217;: 23,
+&#8216;type&#8217;: &#8216;polygon&#8217;}, &#8216;0014-0089-0092&#8217;: {&#8216;y&#8217;: [1, 13, 21, 34, 50, 68, 90, 114, 128, 146, 177, 176,
+165, 145, 134, 111, 86, 59, 45, 44, 29, 15, 5], &#8216;x&#8217;: [54, 29, 21, 21, 24, 37, 52, 53, 62, 86,
+132, 150, 163, 162, 156, 155, 146, 129, 110, 102, 83, 74, 70], &#8216;position&#8217;: {&#8216;channel&#8217;: 2,
+&#8216;frame&#8217;: 1, &#8216;slice&#8217;: 7}, &#8216;name&#8217;: &#8216;0014-0089-0092&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}}</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">read_roi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roi_file</span> <span class="o">=</span> <span class="s">&quot;roi_object.roi&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">read_roi</span><span class="o">.</span><span class="n">read_roi</span><span class="p">(</span><span class="n">roi_file</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>{&#8216;example2&#8217;: {&#8216;y&#8217;: [7, 19, 27, 40, 56, 74, 96, 120, 134, 152, 183, 182, 171, 151, 140, 117, 92,
+65, 51, 50, 35, 21, 11], &#8216;x&#8217;: [45, 20, 12, 12, 15, 28, 43, 44, 53, 77, 123, 141, 154, 153, 147,
+146, 137, 120, 101, 93, 74, 65, 61], &#8216;position&#8217;: {&#8216;channel&#8217;: 2, &#8216;frame&#8217;: 73, &#8216;slice&#8217;: 7},
+&#8216;name&#8217;: &#8216;example2&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}}</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sktracker.io.stackio.html" class="btn btn-neutral float-right" title="sktracker.io.stackio module">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sktracker.io.ome.html" class="btn btn-neutral" title="sktracker.io.ome module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev-877a561',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

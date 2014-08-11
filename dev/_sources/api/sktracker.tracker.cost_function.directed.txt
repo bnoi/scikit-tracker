@@ -1,0 +1,7 @@
+sktracker.tracker.cost_function.directed module
+===============================================
+
+.. automodule:: sktracker.tracker.cost_function.directed
+    :members:
+    :undoc-members:
+    :show-inheritance:

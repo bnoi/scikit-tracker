@@ -4,30 +4,11 @@ sktracker.detection package
 Submodules
 ----------
 
-sktracker.detection.cell_boundaries_detector module
----------------------------------------------------
+.. toctree::
 
-.. automodule:: sktracker.detection.cell_boundaries_detector
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.detection.nuclei_detector module
-------------------------------------------
-
-.. automodule:: sktracker.detection.nuclei_detector
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.detection.peak_detector module
-----------------------------------------
-
-.. automodule:: sktracker.detection.peak_detector
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   sktracker.detection.cell_boundaries_detector
+   sktracker.detection.nuclei_detector
+   sktracker.detection.peak_detector
 
 Module contents
 ---------------

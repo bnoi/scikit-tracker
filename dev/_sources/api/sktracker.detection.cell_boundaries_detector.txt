@@ -1,0 +1,7 @@
+sktracker.detection.cell_boundaries_detector module
+===================================================
+
+.. automodule:: sktracker.detection.cell_boundaries_detector
+    :members:
+    :undoc-members:
+    :show-inheritance:

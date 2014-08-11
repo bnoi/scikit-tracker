@@ -4,14 +4,9 @@ sktracker.tracker.utils package
 Submodules
 ----------
 
-sktracker.tracker.utils.scores module
--------------------------------------
+.. toctree::
 
-.. automodule:: sktracker.tracker.utils.scores
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   sktracker.tracker.utils.scores
 
 Module contents
 ---------------

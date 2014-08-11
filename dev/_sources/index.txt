@@ -54,8 +54,9 @@ Table of content
 
     new
     install
-    tutorial
+    getting_started
     theory
+    use_cases
     api/sktracker
     contribute
     license

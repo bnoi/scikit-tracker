@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.solver package &mdash; sktracker 0.3.dev-f033a25 docs</title>
+  <title>sktracker.tracker.solver package &mdash; sktracker 0.3.dev-877a561 docs</title>
   
 
   
@@ -31,10 +31,10 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-f033a25 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-877a561 docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
-        <link rel="next" title="sktracker.tracker.utils package" href="sktracker.tracker.utils.html"/>
-        <link rel="prev" title="sktracker.tracker.matrix package" href="sktracker.tracker.matrix.html"/> 
+        <link rel="next" title="sktracker.tracker.solver.by_frame_solver module" href="sktracker.tracker.solver.by_frame_solver.html"/>
+        <link rel="prev" title="sktracker.tracker.matrix.matrix module" href="sktracker.tracker.matrix.matrix.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -76,8 +76,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial : getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
@@ -87,10 +87,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">sktracker package</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker.version">sktracker.version module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
 </ul>
 </li>
@@ -126,7 +128,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="sktracker.html">sktracker package</a> &raquo;</li>
+          <li><a href="sktracker.html">API references</a> &raquo;</li>
       
           <li><a href="sktracker.tracker.html">sktracker.tracker package</a> &raquo;</li>
       
@@ -145,15 +147,13 @@
 <h1>sktracker.tracker.solver package<a class="headerlink" href="#sktracker-tracker-solver-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.solver.by_frame_solver.html">sktracker.tracker.solver.by_frame_solver module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.solver.gap_close_solver.html">sktracker.tracker.solver.gap_close_solver module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.solver.solver.html">sktracker.tracker.solver.solver module</a></li>
+</ul>
 </div>
-<div class="section" id="module-sktracker.tracker.solver.by_frame_solver">
-<span id="sktracker-tracker-solver-by-frame-solver-module"></span><h2>sktracker.tracker.solver.by_frame_solver module<a class="headerlink" href="#module-sktracker.tracker.solver.by_frame_solver" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-sktracker.tracker.solver.gap_close_solver">
-<span id="sktracker-tracker-solver-gap-close-solver-module"></span><h2>sktracker.tracker.solver.gap_close_solver module<a class="headerlink" href="#module-sktracker.tracker.solver.gap_close_solver" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-sktracker.tracker.solver.solver">
-<span id="sktracker-tracker-solver-solver-module"></span><h2>sktracker.tracker.solver.solver module<a class="headerlink" href="#module-sktracker.tracker.solver.solver" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-sktracker.tracker.solver">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.solver" title="Permalink to this headline">¶</a></h2>
@@ -245,29 +245,46 @@ as the new label index</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference internal" href="sktracker.trajectories.html#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a></p>
 <p><strong>max_speed</strong> : float</p>
 <blockquote>
-<div><p>Max objects velocity</p>
+<div><p>Maximum objects velocity</p>
 </div></blockquote>
-<p class="last"><strong>coords</strong> : list</p>
+<p><strong>penalty</strong> : float</p>
+<p><strong>coords</strong> : list</p>
+<blockquote class="last">
+<div><p>Which columns to choose in trajs when computing distances.</p>
+</div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">true_trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">brownian_trajectories_generator</span><span class="p">())</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Remove labels</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">true_trajs</span><span class="o">.</span><span class="n">relabel</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">true_trajs</span><span class="p">)))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">ByFrameSolver</span><span class="o">.</span><span class="n">for_brownian_motion</span><span class="p">(</span><span class="n">true_trajs</span><span class="p">,</span> <span class="n">max_speed</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="mf">2.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_trajs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">track</span><span class="p">()</span>
+<span class="go">2014-08-11:INFO:sktracker.tracker.solver.by_frame_solver: Initiating frame by frame tracking.</span>
+<span class="go">2014-08-11:INFO:sktracker.tracker.solver.by_frame_solver: Frame by frame tracking done. 5 segments found (500 before).</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="sktracker.tracker.solver.ByFrameSolver.for_directed_motion">
 <em class="property">classmethod </em><tt class="descname">for_directed_motion</tt><big>(</big><em>trajs, max_speed, penalty=1.05, past_traj_time=10, smooth_factor=0, interpolation_order=1, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.ByFrameSolver.for_directed_motion" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Link objects according to their distance found in trajectories frame by frame.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference internal" href="sktracker.trajectories.html#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a></p>
 <p><strong>max_speed</strong> : float</p>
 <blockquote>
-<div><p>Max objects velocity</p>
+<div><p>Maximum objects velocity</p>
 </div></blockquote>
 <p><strong>penalty</strong> : float</p>
 <p><strong>past_traj_time</strong> : float</p>
@@ -283,7 +300,10 @@ close event will discarded.</p>
 <blockquote>
 <div><p>The order of the spline fit. See <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.splrep.html#scipy.interpolate.splrep" title="(in SciPy v0.14.0)"><tt class="xref py py-func docutils literal"><span class="pre">scipy.interpolate.splrep()</span></tt></a></p>
 </div></blockquote>
-<p class="last"><strong>coords</strong> : list</p>
+<p><strong>coords</strong> : list</p>
+<blockquote class="last">
+<div><p>Which columns to choose in trajs when computing distances.</p>
+</div></blockquote>
 </td>
 </tr>
 </tbody>
@@ -366,7 +386,57 @@ close event will discarded.</p>
 <dl class="classmethod">
 <dt id="sktracker.tracker.solver.GapCloseSolver.for_brownian_motion">
 <em class="property">classmethod </em><tt class="descname">for_brownian_motion</tt><big>(</big><em>trajs, max_speed, maximum_gap, link_percentile=90, use_t_stamp=True, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.tracker.solver.GapCloseSolver.for_brownian_motion" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Close gaps found in different trajectories.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <a class="reference internal" href="sktracker.trajectories.html#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a></p>
+<blockquote>
+<div><p>Trajectories where to close gaps.</p>
+</div></blockquote>
+<p><strong>max_speed</strong> : float</p>
+<blockquote>
+<div><p>Maximum speed of objects in trajectories.</p>
+</div></blockquote>
+<p><strong>maximum_gap</strong> : float</p>
+<blockquote>
+<div><p>Maximum gap size which can be closed.</p>
+</div></blockquote>
+<p><strong>link_percentile</strong> : float</p>
+<blockquote>
+<div><p>TODO</p>
+</div></blockquote>
+<p><strong>use_t_stamp</strong> : bool</p>
+<blockquote>
+<div><p>If True <cite>t_stamp</cite> index will be used when computing maximum gap. If False, column &#8216;t&#8217;
+will be used.</p>
+</div></blockquote>
+<p><strong>coords</strong> : list</p>
+<blockquote class="last">
+<div><p>Which columns to choose in trajs when computing distances.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">with_gaps_df</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">max_speed</span> <span class="o">=</span> <span class="mf">10.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maximum_gap</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gc_solver</span> <span class="o">=</span> <span class="n">GapCloseSolver</span><span class="o">.</span><span class="n">for_brownian_motion</span><span class="p">(</span><span class="n">trajs</span><span class="p">,</span> <span class="n">max_speed</span><span class="o">=</span><span class="n">max_speed</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                               <span class="n">maximum_gap</span><span class="o">=</span><span class="n">maximum_gap</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                               <span class="n">use_t_stamp</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_trajs</span> <span class="o">=</span> <span class="n">gc_solver</span><span class="o">.</span><span class="n">track</span><span class="p">()</span>
+<span class="go">2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: Initiating gap close solver</span>
+<span class="go">2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: Find candidates among 7 segments</span>
+<span class="go">2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: 6 candidates found</span>
+<span class="go">2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: Build cost functions</span>
+<span class="go">2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: Assigning results</span>
+<span class="go">2014-08-11:INFO:sktracker.tracker.solver.gap_close_solver: 4 gap close event processed</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="method">
 <dt id="sktracker.tracker.solver.GapCloseSolver.track">
@@ -398,10 +468,10 @@ Thus, the alternative cost was taken as the 90th percentile.</div></blockquote>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.tracker.utils.html" class="btn btn-neutral float-right" title="sktracker.tracker.utils package">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.tracker.solver.by_frame_solver.html" class="btn btn-neutral float-right" title="sktracker.tracker.solver.by_frame_solver module">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sktracker.tracker.matrix.html" class="btn btn-neutral" title="sktracker.tracker.matrix package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sktracker.tracker.matrix.matrix.html" class="btn btn-neutral" title="sktracker.tracker.matrix.matrix module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -430,7 +500,7 @@ Thus, the alternative cost was taken as the 90th percentile.</div></blockquote>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-f033a25',
+            VERSION:'0.3.dev-877a561',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

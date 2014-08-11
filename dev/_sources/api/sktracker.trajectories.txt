@@ -11,22 +11,10 @@ Subpackages
 Submodules
 ----------
 
-sktracker.trajectories.draw module
-----------------------------------
+.. toctree::
 
-.. automodule:: sktracker.trajectories.draw
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.trajectories.trajectories module
-------------------------------------------
-
-.. automodule:: sktracker.trajectories.trajectories
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   sktracker.trajectories.draw
+   sktracker.trajectories.trajectories
 
 Module contents
 ---------------

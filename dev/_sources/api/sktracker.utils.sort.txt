@@ -1,0 +1,7 @@
+sktracker.utils.sort module
+===========================
+
+.. automodule:: sktracker.utils.sort
+    :members:
+    :undoc-members:
+    :show-inheritance:

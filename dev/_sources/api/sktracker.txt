@@ -1,5 +1,5 @@
-sktracker package
-=================
+API references
+==============
 
 Subpackages
 -----------
@@ -17,14 +17,9 @@ Subpackages
 Submodules
 ----------
 
-sktracker.version module
-------------------------
+.. toctree::
 
-.. automodule:: sktracker.version
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   sktracker.version
 
 Module contents
 ---------------

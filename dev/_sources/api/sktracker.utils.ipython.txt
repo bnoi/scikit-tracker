@@ -1,0 +1,7 @@
+sktracker.utils.ipython module
+==============================
+
+.. automodule:: sktracker.utils.ipython
+    :members:
+    :undoc-members:
+    :show-inheritance:

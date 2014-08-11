@@ -4,54 +4,14 @@ sktracker.utils package
 Submodules
 ----------
 
-sktracker.utils.color_system module
------------------------------------
+.. toctree::
 
-.. automodule:: sktracker.utils.color_system
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.utils.dict module
----------------------------
-
-.. automodule:: sktracker.utils.dict
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.utils.ipython module
-------------------------------
-
-.. automodule:: sktracker.utils.ipython
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.utils.mpl_loader module
----------------------------------
-
-.. automodule:: sktracker.utils.mpl_loader
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.utils.progress module
--------------------------------
-
-.. automodule:: sktracker.utils.progress
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.utils.sort module
----------------------------
-
-.. automodule:: sktracker.utils.sort
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   sktracker.utils.color_system
+   sktracker.utils.dict
+   sktracker.utils.ipython
+   sktracker.utils.mpl_loader
+   sktracker.utils.progress
+   sktracker.utils.sort
 
 Module contents
 ---------------

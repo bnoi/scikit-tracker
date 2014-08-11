@@ -4,70 +4,16 @@ sktracker.io package
 Submodules
 ----------
 
-sktracker.io.metadataio module
-------------------------------
+.. toctree::
 
-.. automodule:: sktracker.io.metadataio
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.io.objectsio module
------------------------------
-
-.. automodule:: sktracker.io.objectsio
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.io.ome module
------------------------
-
-.. automodule:: sktracker.io.ome
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.io.read_roi module
-----------------------------
-
-.. automodule:: sktracker.io.read_roi
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.io.stackio module
----------------------------
-
-.. automodule:: sktracker.io.stackio
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.io.tifffile module
-----------------------------
-
-.. automodule:: sktracker.io.tifffile
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.io.trackmate module
------------------------------
-
-.. automodule:: sktracker.io.trackmate
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-sktracker.io.utils module
--------------------------
-
-.. automodule:: sktracker.io.utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   sktracker.io.metadataio
+   sktracker.io.objectsio
+   sktracker.io.ome
+   sktracker.io.read_roi
+   sktracker.io.stackio
+   sktracker.io.tifffile
+   sktracker.io.trackmate
+   sktracker.io.utils
 
 Module contents
 ---------------

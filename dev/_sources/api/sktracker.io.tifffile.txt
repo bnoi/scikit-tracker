@@ -1,0 +1,7 @@
+sktracker.io.tifffile module
+============================
+
+.. automodule:: sktracker.io.tifffile
+    :members:
+    :undoc-members:
+    :show-inheritance:

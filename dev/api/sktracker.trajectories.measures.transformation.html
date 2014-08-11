@@ -1,0 +1,322 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sktracker.trajectories.measures.transformation module &mdash; sktracker 0.3.dev-877a561 docs</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="sktracker 0.3.dev-877a561 docs" href="../index.html"/>
+        <link rel="up" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
+        <link rel="next" title="sktracker.trajectories.measures.translation module" href="sktracker.trajectories.measures.translation.html"/>
+        <link rel="prev" title="sktracker.trajectories.measures.rotation module" href="sktracker.trajectories.measures.rotation.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+<a href="http://scikit-tracker.org/" class="fa fa-home">  scikit-tracker</a>
+
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../new.html">What&#8217;s new</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.3.html">scikit-tracker v0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.2.html">scikit-tracker v0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../release/release_0.1.html">scikit-tracker v0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/ch_trajectories.html">Detect and track chromosomes trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contribute to development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#development-process">Development process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#test-coverage">Test coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">scikit-tracker</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="sktracker.html">API references</a> &raquo;</li>
+      
+          <li><a href="sktracker.trajectories.html">sktracker.trajectories package</a> &raquo;</li>
+      
+          <li><a href="sktracker.trajectories.measures.html">sktracker.trajectories.measures package</a> &raquo;</li>
+      
+    <li>sktracker.trajectories.measures.transformation module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/api/sktracker.trajectories.measures.transformation.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="module-sktracker.trajectories.measures.transformation">
+<span id="sktracker-trajectories-measures-transformation-module"></span><h1>sktracker.trajectories.measures.transformation module<a class="headerlink" href="#module-sktracker.trajectories.measures.transformation" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="sktracker.trajectories.measures.transformation.back_proj_interp">
+<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">back_proj_interp</tt><big>(</big><em>interpolated</em>, <em>orig</em>, <em>sampling</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.back_proj_interp" title="Permalink to this definition">¶</a></dt>
+<dd><p>back_proj_interp(interpolated, trajs, 3).iloc[0].x - trajs.iloc[0].x = 0</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.trajectories.measures.transformation.back_proj_pca">
+<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">back_proj_pca</tt><big>(</big><em>rotated</em>, <em>pca</em>, <em>coords</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.back_proj_pca" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="sktracker.trajectories.measures.transformation.do_pca">
+<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">do_pca</tt><big>(</big><em>trajs, pca=None, coords=['x', 'y', 'z'], suffix='_pca', append=False, return_pca=False</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.do_pca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a principal component analysis on the input coordinates
+suffix is only applied when appending</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.trajectories.measures.transformation.time_interpolate">
+<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">time_interpolate</tt><big>(</big><em>trajs, sampling=1, s=0, k=3, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.time_interpolate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolates each segment of the trajectories along time
+using <cite>scipy.interpolate.splrep</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sampling</strong> : int,</p>
+<blockquote>
+<div><p>Must be higher or equal than 1, will add <cite>sampling - 1</cite> extra points
+between two consecutive original data point. Sub-sampling is not supported.</p>
+</div></blockquote>
+<p><strong>coords</strong> : tuple of column names, default <cite>(&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;)</cite></p>
+<blockquote>
+<div><blockquote>
+<div><p>the coordinates to interpolate.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>s <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">A smoothing condition. The amount of smoothness is determined by
+satisfying the conditions: sum((w * (y - g))**2,axis=0) &lt;= s where g(x)
+is the smoothed interpolation of (x,y). The user can use s to control
+the tradeoff between closeness and smoothness of fit. Larger s means
+more smoothing while smaller values of s indicate less smoothing.
+Recommended values of s depend on the weights, w. If the weights
+represent the inverse of the standard-deviation of y, then a good s
+value should be found in the range (m-sqrt(2*m),m+sqrt(2*m)) where m is
+the number of datapoints in x, y, and w. default : s=m-sqrt(2*m) if
+weights are supplied. s = 0.0 (interpolating) if no weights are
+supplied.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>k</strong> : int</p>
+<blockquote>
+<div><p>The order of the spline fit. It is recommended to use cubic splines.
+Even order splines should be avoided especially with small s values.
+1 &lt;= k &lt;= 5</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>interpolated</strong> : a <tt class="xref py py-class docutils literal"><span class="pre">pandas.Dataframe</span></tt> instance</p>
+<blockquote class="last">
+<div><p>The interpolated values, with column names given by <cite>coords</cite>
+plus the computed speeds (first order derivative) and accelarations
+(second order derivative) if <cite>k</cite> &gt; 2</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The returned DataFrame is NOT indexed like the input (in particular for <cite>t_stamp</cite>).
+It is also NOT casted to a Trajectories instance</p>
+<dl class="docutils">
+<dt>The <cite>s</cite> and <cite>k</cite> arguments are passed to <cite>scipy.interpolate.splrep</cite>, see this</dt>
+<dd>function documentation for more details</dd>
+<dt>If a segment is too short to be interpolated with the passed order <cite>k</cite>, the order</dt>
+<dd>will be automatically diminished</dd>
+</dl>
+<p>Segments with only one point will be returned as is</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sktracker.trajectories.measures.transformation.transformations_matrix">
+<tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">transformations_matrix</tt><big>(</big><em>center</em>, <em>vec</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.transformations_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build transformation matrix:
+- translation : from (0, 0) to a point (center)
+- rotation : following angle between (1, 0) and vec</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>center</strong> : list or np.ndarray</p>
+<p><strong>vec</strong> : list or np.ndarray</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The transformation matrix, np.ndarray.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sktracker.trajectories.measures.translation.html" class="btn btn-neutral float-right" title="sktracker.trajectories.measures.translation module">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sktracker.trajectories.measures.rotation.html" class="btn btn-neutral" title="sktracker.trajectories.measures.rotation module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Guillaume Gay and Hadrien Mary.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3.dev-877a561',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

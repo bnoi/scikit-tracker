@@ -1,0 +1,7 @@
+sktracker.io.metadataio module
+==============================
+
+.. automodule:: sktracker.io.metadataio
+    :members:
+    :undoc-members:
+    :show-inheritance:

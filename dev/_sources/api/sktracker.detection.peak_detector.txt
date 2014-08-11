@@ -1,0 +1,7 @@
+sktracker.detection.peak_detector module
+========================================
+
+.. automodule:: sktracker.detection.peak_detector
+    :members:
+    :undoc-members:
+    :show-inheritance:
