@@ -45,3 +45,4 @@ doc/source/api
 *.emacs*
 
 *.ipynb_checkpoints
+*_notebook_output_files
