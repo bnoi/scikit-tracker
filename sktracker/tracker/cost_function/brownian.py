@@ -156,7 +156,9 @@ class BrownianGapCloseCostFunction(AbstractGapCloseCostFunction):
         speeds[speeds > max_speed] = np.nan
 
         # Fill 2d distances array
-        mat[np.array(idxs_in)[:, 1], np.array(idxs_out)[:, 1]] = speeds
+        i_in = np.array(idxs_in)[:, 1].astype(int)
+        i_out = np.array(idxs_out)[:, 1].astype(int)
+        mat[i_in, i_out] = speeds
 
         mat = mat ** 2
 
