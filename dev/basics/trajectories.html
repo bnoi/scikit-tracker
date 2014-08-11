@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Representation of trajectories &mdash; sktracker 0.3.dev-3b4cc75 docs</title>
+  <title>Representation of trajectories &mdash; sktracker 0.3.dev-5a86ba7 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-3b4cc75 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-5a86ba7 docs" href="../index.html"/>
         <link rel="up" title="Basics: getting started with sktracker" href="../basics.html"/>
         <link rel="next" title="Input / Output" href="io.html"/>
         <link rel="prev" title="Basics: getting started with sktracker" href="../basics.html"/> 
@@ -92,7 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="data.html">Ready to use test dataset</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/ch_trajectories.html">Track chromosomes during mitosis</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/sktracker.html">API references</a><ul>
@@ -158,8 +159,8 @@ integer as index. The first integer is a time stamp <tt class="docutils literal"
 second one is a <tt class="docutils literal"><span class="pre">label</span></tt>. Objects from the same <tt class="docutils literal"><span class="pre">label</span></tt> belong to the
 same trajectory.</p>
 <p>Be aware that <tt class="docutils literal"><span class="pre">t_stamp</span></tt> are time index and does not represent time in
-second or minute. Time poisition (in second or minute) can be stored as
-object&#8217;s features in columns.</p>
+second or minute. Time position (in second or minute) can be stored as
+object&#8217;s features in columns (with &#8216;t&#8217; for example).</p>
 <div class="section" id="create-trajectories">
 <h2>Create trajectories<a class="headerlink" href="#create-trajectories" title="Permalink to this headline">¶</a></h2>
 <p>All you need to create a <tt class="docutils literal"><span class="pre">Trajectories</span></tt> object is a
@@ -198,47 +199,185 @@ object&#8217;s features in columns.</p>
   </thead>
   <tbody>
     <tr>
-      <th rowspan="3" valign="top">0</th>
       <th>0</th>
-      <td> 0.136820</td>
-      <td> 0.052267</td>
-      <td> 0.720264</td>
+      <th>0</th>
+      <td> 0.776543</td>
+      <td> 0.005846</td>
+      <td> 0.256168</td>
       <td>  0</td>
     </tr>
     <tr>
+      <th rowspan="4" valign="top">1</th>
       <th>1</th>
-      <td> 0.637322</td>
-      <td> 0.063170</td>
-      <td> 0.194157</td>
-      <td>  0</td>
+      <td> 0.585106</td>
+      <td> 0.582513</td>
+      <td> 0.502796</td>
+      <td> 60</td>
     </tr>
     <tr>
       <th>2</th>
-      <td> 0.545661</td>
-      <td> 0.068337</td>
-      <td> 0.491243</td>
-      <td>  0</td>
+      <td> 0.693993</td>
+      <td> 0.087650</td>
+      <td> 0.328282</td>
+      <td> 60</td>
     </tr>
     <tr>
-      <th rowspan="2" valign="top">1</th>
       <th>3</th>
-      <td> 0.533964</td>
-      <td> 0.680509</td>
-      <td> 0.065720</td>
+      <td> 0.053243</td>
+      <td> 0.392563</td>
+      <td> 0.473721</td>
       <td> 60</td>
     </tr>
     <tr>
       <th>4</th>
-      <td> 0.214166</td>
-      <td> 0.111218</td>
-      <td> 0.274236</td>
+      <td> 0.132044</td>
+      <td> 0.297930</td>
+      <td> 0.348275</td>
       <td> 60</td>
     </tr>
   </tbody>
 </table>
-</div></div>
-<div class="section" id="vizualize-trajectories">
-<h2>Vizualize trajectories<a class="headerlink" href="#vizualize-trajectories" title="Permalink to this headline">¶</a></h2>
+</div><p>To create <tt class="docutils literal"><span class="pre">Trajectories</span></tt>, dataframe need to have:</p>
+<ul class="simple">
+<li>columns (&#8216;x&#8217;, &#8216;y&#8217;, &#8216;z&#8217;, &#8216;t&#8217; here)</li>
+<li>a multi index (see <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/indexing.html#hierarchical-indexing-multiindex">pandas
+doc</a>)
+with two levels : <tt class="docutils literal"><span class="pre">t_stamp</span></tt> and <tt class="docutils literal"><span class="pre">label</span></tt></li>
+</ul>
+<p>While <tt class="docutils literal"><span class="pre">t_stamp</span></tt> and <tt class="docutils literal"><span class="pre">label</span></tt> are required. Columns can contain
+anything you want/need.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sktracker.trajectories</span> <span class="kn">import</span> <span class="n">Trajectories</span>
+
+<span class="c"># Create a Trajectories instance</span>
+<span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualize-trajectories">
+<h2>Visualize trajectories<a class="headerlink" href="#visualize-trajectories" title="Permalink to this headline">¶</a></h2>
+<p>First thing you want to do is probably to visualize trajectories you&#8217;re
+working on. First load some sample dataset.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="n">trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">with_gaps_df</span><span class="p">()</span>
+<span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+      <th>true_label</th>
+      <th>t</th>
+    </tr>
+    <tr>
+      <th>t_stamp</th>
+      <th>label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">0</th>
+      <th>0</th>
+      <td>-15.425890</td>
+      <td>  3.604392</td>
+      <td> -9.723257</td>
+      <td> 0</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -0.419929</td>
+      <td> 17.429072</td>
+      <td> 10.077393</td>
+      <td> 1</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-18.238856</td>
+      <td>  7.356460</td>
+      <td>  1.138426</td>
+      <td> 2</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1</th>
+      <th>0</th>
+      <td>-13.126613</td>
+      <td>  2.122316</td>
+      <td> -9.375269</td>
+      <td> 0</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -1.217757</td>
+      <td> 15.554279</td>
+      <td> 10.444372</td>
+      <td> 1</td>
+      <td> 1</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7fdb58ed4eb8&gt;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/home/hadim/.virtualenvs/st/lib/python3.4/site-packages/matplotlib/font_manager.py:1236: UserWarning: findfont: Font family [&#39;monospace&#39;] not found. Falling back to Bitstream Vera Sans
+  (prop.get_family(), self.defaultFamily[fontext]))
+</pre></div>
+</div>
+<img alt="../_images/output_10_2.png" src="../_images/output_10_2.png" />
+<p>You can change axis to display.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7fdb58e0fe48&gt;
+</pre></div>
+</div>
+<img alt="../_images/output_12_1.png" src="../_images/output_12_1.png" />
+<p>You can also add a legend.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7fdb58d6ae48&gt;
+</pre></div>
+</div>
+<img alt="../_images/output_14_1.png" src="../_images/output_14_1.png" />
+<p>You can also build more complex figures.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7fdb58bd2b70&gt;
+</pre></div>
+</div>
+<img alt="../_images/output_16_1.png" src="../_images/output_16_1.png" />
+<p><tt class="docutils literal"><span class="pre">Trajectories.show()</span></tt> is a nice way to quickly build visualizations.
+However <tt class="docutils literal"><span class="pre">sktracker.ui</span></tt> module provides more complex functions and
+classes in order to visualize your trajectories/dataset. See
+<a class="reference external" href="ui.html">here</a> for more details.</p>
 </div>
 <div class="section" id="get-informations">
 <h2>Get informations<a class="headerlink" href="#get-informations" title="Permalink to this headline">¶</a></h2>
@@ -252,6 +391,10 @@ object&#8217;s features in columns.</p>
 %matplotlib inline
 %load_ext autoreload
 %autoreload 2
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
 </pre></div>
 </div>
 </div>
@@ -295,7 +438,7 @@ object&#8217;s features in columns.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-3b4cc75',
+            VERSION:'0.3.dev-5a86ba7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

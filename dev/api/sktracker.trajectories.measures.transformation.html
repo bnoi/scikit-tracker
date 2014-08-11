@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories.measures.transformation module &mdash; sktracker 0.3.dev-3b4cc75 docs</title>
+  <title>sktracker.trajectories.measures.transformation module &mdash; sktracker 0.3.dev-5a86ba7 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-3b4cc75 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-5a86ba7 docs" href="../index.html"/>
         <link rel="up" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
         <link rel="next" title="sktracker.trajectories.measures.translation module" href="sktracker.trajectories.measures.translation.html"/>
         <link rel="prev" title="sktracker.trajectories.measures.rotation module" href="sktracker.trajectories.measures.rotation.html"/> 
@@ -92,7 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/data.html">Ready to use test dataset</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/ch_trajectories.html">Track chromosomes during mitosis</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
@@ -173,8 +174,7 @@ suffix is only applied when appending</p>
 <dl class="function">
 <dt id="sktracker.trajectories.measures.transformation.time_interpolate">
 <tt class="descclassname">sktracker.trajectories.measures.transformation.</tt><tt class="descname">time_interpolate</tt><big>(</big><em>trajs, sampling=1, s=0, k=3, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.measures.transformation.time_interpolate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Interpolates each segment of the trajectories along time
-using <cite>scipy.interpolate.splrep</cite></p>
+<dd><p>Interpolates each segment of the trajectories along time using <cite>scipy.interpolate.splrep</cite></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -191,17 +191,14 @@ between two consecutive original data point. Sub-sampling is not supported.</p>
 </div></blockquote>
 <dl class="docutils">
 <dt>s <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">A smoothing condition. The amount of smoothness is determined by
-satisfying the conditions: sum((w * (y - g))**2,axis=0) &lt;= s where g(x)
-is the smoothed interpolation of (x,y). The user can use s to control
-the tradeoff between closeness and smoothness of fit. Larger s means
-more smoothing while smaller values of s indicate less smoothing.
-Recommended values of s depend on the weights, w. If the weights
-represent the inverse of the standard-deviation of y, then a good s
-value should be found in the range (m-sqrt(2*m),m+sqrt(2*m)) where m is
-the number of datapoints in x, y, and w. default : s=m-sqrt(2*m) if
-weights are supplied. s = 0.0 (interpolating) if no weights are
-supplied.</p>
+<dd><p class="first last">A smoothing condition. The amount of smoothness is determined by satisfying the conditions:
+sum((w * (y - g))**2,axis=0) &lt;= s where g(x) is the smoothed interpolation of (x,y). The
+user can use s to control the tradeoff between closeness and smoothness of fit. Larger s
+means more smoothing while smaller values of s indicate less smoothing. Recommended values
+of s depend on the weights, w. If the weights represent the inverse of the standard-
+deviation of y, then a good s value should be found in the range (m-sqrt(2*m),m+sqrt(2*m))
+where m is the number of datapoints in x, y, and w. default : s=m-sqrt(2*m) if weights are
+supplied. s = 0.0 (interpolating) if no weights are supplied.</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -215,24 +212,23 @@ Even order splines should be avoided especially with small s values.
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>interpolated</strong> : a <tt class="xref py py-class docutils literal"><span class="pre">pandas.Dataframe</span></tt> instance</p>
 <blockquote class="last">
-<div><p>The interpolated values, with column names given by <cite>coords</cite>
-plus the computed speeds (first order derivative) and accelarations
-(second order derivative) if <cite>k</cite> &gt; 2</p>
+<div><p>The interpolated values, with column names given by <cite>coords</cite> plus the computed speeds (first
+order derivative) and accelarations (second order derivative) if <cite>k</cite> &gt; 2</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>The returned DataFrame is NOT indexed like the input (in particular for <cite>t_stamp</cite>).
-It is also NOT casted to a Trajectories instance</p>
-<dl class="docutils">
-<dt>The <cite>s</cite> and <cite>k</cite> arguments are passed to <cite>scipy.interpolate.splrep</cite>, see this</dt>
-<dd>function documentation for more details</dd>
-<dt>If a segment is too short to be interpolated with the passed order <cite>k</cite>, the order</dt>
-<dd>will be automatically diminished</dd>
-</dl>
-<p>Segments with only one point will be returned as is</p>
+<ul class="simple">
+<li>The returned DataFrame is NOT indexed like the input (in particular for <cite>t_stamp</cite>).</li>
+<li>It is also NOT casted to a Trajectories instance.</li>
+<li>The <cite>s</cite> and <cite>k</cite> arguments are passed to <cite>scipy.interpolate.splrep</cite>, see this function
+documentation for more details</li>
+<li>If a segment is too short to be interpolated with the passed order <cite>k</cite>, the order will be
+automatically diminished.</li>
+<li>Segments with only one point will be returned as is</li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -296,7 +292,7 @@ It is also NOT casted to a Trajectories instance</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-3b4cc75',
+            VERSION:'0.3.dev-5a86ba7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

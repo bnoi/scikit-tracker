@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories.draw module &mdash; sktracker 0.3.dev-3b4cc75 docs</title>
+  <title>sktracker.trajectories.draw module &mdash; sktracker 0.3.dev-5a86ba7 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-3b4cc75 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-5a86ba7 docs" href="../index.html"/>
         <link rel="up" title="sktracker.trajectories package" href="sktracker.trajectories.html"/>
         <link rel="next" title="sktracker.trajectories.trajectories module" href="sktracker.trajectories.trajectories.html"/>
         <link rel="prev" title="sktracker.trajectories.measures.translation module" href="sktracker.trajectories.measures.translation.html"/> 
@@ -92,7 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/data.html">Ready to use test dataset</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/ch_trajectories.html">Track chromosomes during mitosis</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
@@ -193,22 +194,14 @@ at the extremities on the upper most plot</p>
 <tt class="descclassname">sktracker.trajectories.draw.</tt><tt class="descname">show_4panels</tt><big>(</big><em>trajs</em>, <em>label</em>, <em>coords=('x'</em>, <em>'y'</em>, <em>'z')</em>, <em>axes=None</em>, <em>ax_3d=None</em>, <em>scatter_kw={}</em>, <em>line_kw={}</em>, <em>interpolate=False</em>, <em>interp_kw={}</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.draw.show_4panels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the segment of trajectories <cite>trajs</cite> with label <cite>label</cite> on four panels
 organized in two cols by two rows like so:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>y|     y|</dt>
-<dd><dl class="first last docutils">
-<dt><a href="#id1"><span class="problematic" id="id2">|</span></a>___   <a href="#id3"><span class="problematic" id="id4">|</span></a>___</dt>
-<dd>x      z</dd>
-</dl>
-</dd>
-<dt>z|     z| y</dt>
-<dd><dl class="first last docutils">
-<dt><a href="#id5"><span class="problematic" id="id6">|</span></a>___   <a href="#id7"><span class="problematic" id="id8">|</span></a>/__</dt>
-<dd>x      x</dd>
-</dl>
-</dd>
-</dl>
-</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre>y|     y|
+ |___   |___
+   x      z
+z|     z| y
+ |___   |/__
+   x      x
+</pre></div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -290,7 +283,7 @@ the trajectories (not implemented right now)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-3b4cc75',
+            VERSION:'0.3.dev-5a86ba7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

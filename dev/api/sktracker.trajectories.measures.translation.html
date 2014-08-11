@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories.measures.translation module &mdash; sktracker 0.3.dev-3b4cc75 docs</title>
+  <title>sktracker.trajectories.measures.translation module &mdash; sktracker 0.3.dev-5a86ba7 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-3b4cc75 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-5a86ba7 docs" href="../index.html"/>
         <link rel="up" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
         <link rel="next" title="sktracker.trajectories.draw module" href="sktracker.trajectories.draw.html"/>
         <link rel="prev" title="sktracker.trajectories.measures.transformation module" href="sktracker.trajectories.measures.transformation.html"/> 
@@ -92,7 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/data.html">Ready to use test dataset</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/ch_trajectories.html">Track chromosomes during mitosis</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
@@ -163,9 +164,8 @@
 <dd><p>Computes the mean square displacement of the segment given by</p>
 <blockquote>
 <div><div class="math">
-</div>
-<p>egin{aligned}
-mbox{MSD}(Delta t) &amp;=</p>
+\[\begin{split}egin{aligned}
+\mbox{MSD}(\Delta t) &amp;=  \end{split}\]</div>
 </div></blockquote>
 <dl class="docutils">
 <dt>rac{sum_0^{T - Delta t}</dt>
@@ -186,10 +186,10 @@ mbox{MSD}(Delta t) &amp;=</p>
 <dd><p>Computes the cumulated displacement of the segment given by</p>
 <blockquote>
 <div><div class="math">
-</div>
-<p>egin{aligned}
-D(0) &amp;= 0D(t) &amp;= sum_{i=1}^{t} left((x_i - x_{i-1})^2 + (y_i - y_{i-1})^2 + (z_i -
-z_{i-1})^2</p>
+\[\begin{split}egin{aligned}
+D(0) &amp;= 0\
+D(t) &amp;= \sum_{i=1}^{t} \left((x_i - x_{i-1})^2 + (y_i - y_{i-1})^2 + (z_i -
+z_{i-1})^2\end{split}\]</div>
 </div></blockquote>
 <dl class="docutils">
 <dt>ight)^{1/2}</dt>
@@ -296,7 +296,7 @@ append=False)</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-3b4cc75',
+            VERSION:'0.3.dev-5a86ba7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

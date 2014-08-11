@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories.measures.rotation module &mdash; sktracker 0.3.dev-3b4cc75 docs</title>
+  <title>sktracker.trajectories.measures.rotation module &mdash; sktracker 0.3.dev-5a86ba7 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-3b4cc75 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-5a86ba7 docs" href="../index.html"/>
         <link rel="up" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
         <link rel="next" title="sktracker.trajectories.measures.transformation module" href="sktracker.trajectories.measures.transformation.html"/>
         <link rel="prev" title="sktracker.trajectories.measures.measure_decorators module" href="sktracker.trajectories.measures.measure_decorators.html"/> 
@@ -92,7 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/data.html">Ready to use test dataset</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/ch_trajectories.html">Track chromosomes during mitosis</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
@@ -174,6 +175,39 @@
 from the cartesian coordinates given by in_coords.</p>
 <p>Let <span class="math">\(x\)</span> and <span class="math">\(y\)</span> be the input coordinates, it will compute
 :math:`     heta = tan^{-1}(y/x)` and <span class="math">\(rho = \sqrt{x^2+y^2}\)</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>trajs</strong> : <tt class="xref py py-class docutils literal"><span class="pre">Trajectories</span></tt> instance</p>
+<p><strong>get_dtheta</strong> : bool, default False</p>
+<blockquote>
+<div><p>if True, will also compute the angular shift between two successive points
+for each segment of the trajectories. This angular shift is corrected
+for periodic boundary conditions and defined in <span class="math">\([-\pi, \pi]\)</span></p>
+</div></blockquote>
+<p><strong>in_coords</strong> : list of two strings, default [&#8216;x&#8217;, &#8216;y&#8217;]</p>
+<blockquote>
+<div><p>the coordinates used to compute the angle and radius</p>
+</div></blockquote>
+<p><strong>out_coords</strong> : list of strings, default [&#8216;rho&#8217;, &#8216;theta&#8217;]</p>
+<blockquote>
+<div><p>the coordinates as which the angle and radius will be named (in this order!)</p>
+</div></blockquote>
+<p><strong>periodic</strong> : bool, default False</p>
+<blockquote>
+<div><p>if True, simply use arctan2 and returns angles in <span class="math">\([-\pi, \pi]\)</span>
+if False, the returned angles are continuous for each segment</p>
+</div></blockquote>
+<p><strong>append</strong> : bool, default False</p>
+<blockquote class="last">
+<div><p>if True, appends the computed columns to the input trajectories and return them
+if Fase, only returns the computed columns</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -231,7 +265,7 @@ from the cartesian coordinates given by in_coords.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-3b4cc75',
+            VERSION:'0.3.dev-5a86ba7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

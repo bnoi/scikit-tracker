@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-3b4cc75 docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-5a86ba7 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-3b4cc75 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-5a86ba7 docs" href="../index.html"/>
         <link rel="up" title="API references" href="sktracker.html"/>
         <link rel="next" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
         <link rel="prev" title="sktracker.tracker.utils.scores module" href="sktracker.tracker.utils.scores.html"/> 
@@ -92,7 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../basics/data.html">Ready to use test dataset</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/ch_trajectories.html">Track chromosomes during mitosis</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
@@ -647,7 +648,13 @@ as the new label index</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Copy of modified <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a> or None wether inplace is</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_column</strong> : str</p>
+<blockquote>
+<div><p>Which column used to reverse.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Copy of modified <a class="reference internal" href="#sktracker.trajectories.Trajectories" title="sktracker.trajectories.Trajectories"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.trajectories.Trajectories</span></tt></a> or None wether inplace is</p>
 <p class="last">True.</p>
 </td>
 </tr>
@@ -842,7 +849,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-3b4cc75',
+            VERSION:'0.3.dev-5a86ba7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
