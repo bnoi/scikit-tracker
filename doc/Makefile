@@ -178,5 +178,7 @@ pseudoxml:
 
 api:
 	@mkdir -p source/api
-	sphinx-apidoc -o source/api ../sktracker/ -s txt -flT
+	sphinx-apidoc -o source/api ../sktracker/ -s txt -flTe
+	sed -i '1s/.*/API references/' source/api/sktracker.txt
+	sed -i '2s/.*/==============/' source/api/sktracker.txt
 	@echo "Build API docs...done."

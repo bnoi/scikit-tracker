@@ -67,6 +67,7 @@ class ByFrameSolver(AbstractSolver):
         trajs : :class:`pandas.DataFrame`
         max_speed : float
             Max objects velocity
+        penalty : float
         coords : list
         """
         guessed_cost = np.float(max_speed ** 2) * penalty
