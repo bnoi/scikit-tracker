@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Detect and track chromosomes trajectories &mdash; sktracker 0.3.dev-877a561 docs</title>
+  <title>Tracking &mdash; sktracker 0.3.dev-3b4cc75 docs</title>
   
 
   
@@ -31,10 +31,10 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-877a561 docs" href="../index.html"/>
-        <link rel="up" title="Getting started" href="../getting_started.html"/>
-        <link rel="next" title="Theory about some featured algorithms" href="../theory.html"/>
-        <link rel="prev" title="Getting started" href="../getting_started.html"/> 
+    <link rel="top" title="sktracker 0.3.dev-3b4cc75 docs" href="../index.html"/>
+        <link rel="up" title="Basics: getting started with sktracker" href="../basics.html"/>
+        <link rel="next" title="GUI: view and modifiy trajectories manually" href="ui.html"/>
+        <link rel="prev" title="How to detect objects" href="detection.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -70,21 +70,26 @@
 <li class="toctree-l2"><a class="reference internal" href="../release/release_0.1.html">scikit-tracker v0.1</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-boundary-detection">Cell boundary detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../install.html#dependencies">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../install.html#from-pypi">From PyPI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../getting_started.html">Getting started</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">Detect and track chromosomes trajectories</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory about some featured algorithms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../theory.html#gaussian-peak-detection">Gaussian peak detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-boundary-detection">Cell boundary detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../theory.html#cell-nucleu-segmentation">Cell nucleu segmentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../theory.html#lap-tracker">Lap Tracker</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../basics.html">Basics: getting started with <tt class="docutils literal"><span class="pre">sktracker</span></tt></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Representation of trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html">Input / Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="detection.html">How to detect objects</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">GUI: view and modifiy trajectories manually</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Ready to use test dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
@@ -128,12 +133,12 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="../getting_started.html">Getting started</a> &raquo;</li>
+          <li><a href="../basics.html">Basics: getting started with <tt class="docutils literal"><span class="pre">sktracker</span></tt></a> &raquo;</li>
       
-    <li>Detect and track chromosomes trajectories</li>
+    <li>Tracking</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="../_sources/getting_started/ch_trajectories.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/basics/tracker.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -141,9 +146,8 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="detect-and-track-chromosomes-trajectories">
-<h1>Detect and track chromosomes trajectories<a class="headerlink" href="#detect-and-track-chromosomes-trajectories" title="Permalink to this headline">¶</a></h1>
-<p>TODO</p>
+  <div class="section" id="tracking">
+<h1>Tracking<a class="headerlink" href="#tracking" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -152,10 +156,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../theory.html" class="btn btn-neutral float-right" title="Theory about some featured algorithms">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ui.html" class="btn btn-neutral float-right" title="GUI: view and modifiy trajectories manually">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../getting_started.html" class="btn btn-neutral" title="Getting started"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="detection.html" class="btn btn-neutral" title="How to detect objects"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -184,7 +188,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-877a561',
+            VERSION:'0.3.dev-3b4cc75',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

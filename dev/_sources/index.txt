@@ -53,9 +53,9 @@ Table of content
 .. toctree::
 
     new
-    install
-    getting_started
     theory
+    install
+    basics
     use_cases
     api/sktracker
     contribute

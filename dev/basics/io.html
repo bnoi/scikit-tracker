@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.solver.gap_close_solver module &mdash; sktracker 0.3.dev-3b4cc75 docs</title>
+  <title>Input / Output &mdash; sktracker 0.3.dev-3b4cc75 docs</title>
   
 
   
@@ -32,9 +32,9 @@
 
   
     <link rel="top" title="sktracker 0.3.dev-3b4cc75 docs" href="../index.html"/>
-        <link rel="up" title="sktracker.tracker.solver package" href="sktracker.tracker.solver.html"/>
-        <link rel="next" title="sktracker.tracker.solver.solver module" href="sktracker.tracker.solver.solver.html"/>
-        <link rel="prev" title="sktracker.tracker.solver.by_frame_solver module" href="sktracker.tracker.solver.by_frame_solver.html"/> 
+        <link rel="up" title="Basics: getting started with sktracker" href="../basics.html"/>
+        <link rel="next" title="How to detect objects" href="detection.html"/>
+        <link rel="prev" title="Representation of trajectories" href="trajectories.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -83,22 +83,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../install.html#installation-from-source-github-repo">Installation from source (Github repo)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics: getting started with <tt class="docutils literal"><span class="pre">sktracker</span></tt></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../basics/trajectories.html">Representation of trajectories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/io.html">Input / Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/detection.html">How to detect objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/tracker.html">Tracking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/ui.html">GUI: view and modifiy trajectories manually</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../basics/data.html">Ready to use test dataset</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../basics.html">Basics: getting started with <tt class="docutils literal"><span class="pre">sktracker</span></tt></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Representation of trajectories</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Input / Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="detection.html">How to detect objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracker.html">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ui.html">GUI: view and modifiy trajectories manually</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Ready to use test dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use cases</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="sktracker.html">API references</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="sktracker.html#subpackages">Subpackages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.html#module-sktracker">Module contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/sktracker.html">API references</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/sktracker.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/sktracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/sktracker.html#module-sktracker">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contribute to development</a><ul>
@@ -133,16 +133,12 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="sktracker.html">API references</a> &raquo;</li>
+          <li><a href="../basics.html">Basics: getting started with <tt class="docutils literal"><span class="pre">sktracker</span></tt></a> &raquo;</li>
       
-          <li><a href="sktracker.tracker.html">sktracker.tracker package</a> &raquo;</li>
-      
-          <li><a href="sktracker.tracker.solver.html">sktracker.tracker.solver package</a> &raquo;</li>
-      
-    <li>sktracker.tracker.solver.gap_close_solver module</li>
+    <li>Input / Output</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="../_sources/api/sktracker.tracker.solver.gap_close_solver.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/basics/io.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -150,8 +146,8 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="module-sktracker.tracker.solver.gap_close_solver">
-<span id="sktracker-tracker-solver-gap-close-solver-module"></span><h1>sktracker.tracker.solver.gap_close_solver module<a class="headerlink" href="#module-sktracker.tracker.solver.gap_close_solver" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="input-output">
+<h1>Input / Output<a class="headerlink" href="#input-output" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -160,10 +156,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.tracker.solver.solver.html" class="btn btn-neutral float-right" title="sktracker.tracker.solver.solver module">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="detection.html" class="btn btn-neutral float-right" title="How to detect objects">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sktracker.tracker.solver.by_frame_solver.html" class="btn btn-neutral" title="sktracker.tracker.solver.by_frame_solver module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="trajectories.html" class="btn btn-neutral" title="Representation of trajectories"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
