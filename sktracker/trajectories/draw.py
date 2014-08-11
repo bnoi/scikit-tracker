@@ -77,9 +77,8 @@ def show_4panels(trajs, label, coords=('x', 'y', 'z'),
                  axes=None, ax_3d=None,
                  scatter_kw={}, line_kw={},
                  interpolate=False, interp_kw={}):  # pragma: no cover
-    '''
-    Plots the segment of trajectories `trajs` with label `label` on four panels
-    organized in two cols by two rows like so:
+    '''Plots the segment of trajectories `trajs` with label `label` on four panels
+    organized in two cols by two rows like so::
 
 
         y|     y|
@@ -111,7 +110,6 @@ def show_4panels(trajs, label, coords=('x', 'y', 'z'),
 
     Returns
     -------
-
     axes, ax3d: the 2D and 3D axes
     '''
     import matplotlib.pyplot as plt

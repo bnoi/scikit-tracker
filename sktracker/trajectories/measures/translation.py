@@ -34,13 +34,6 @@ def p2p_cum_dir(trajs, t_stamp0, t_stamp1,
       p2p_cum_dir(trajs, t_stamp0, t_stamp1,
                   coords=['x', 'y', 'z'],
                   append=False)
-
-    Paramters
-    ---------
-
-    Returns
-    -------
-
     '''
     if not 'cum_disp' in trajs.columns:
         trajs['cum_disp'] = cum_disp(trajs)['cum_disp']
@@ -175,11 +168,12 @@ def cumulative_displacement_(segment, coords):
     '''Computes the cumulated displacement of the segment given by
 
     .. math::
-    \begin{aligned}
-    D(0) &= 0\\
-    D(t) &= \sum_{i=1}^{t} \left((x_i - x_{i-1})^2 + (y_i - y_{i-1})^2 + (z_i -
-    z_{i-1})^2\right)^{1/2}\\
-    \end{aligned}
+
+        \begin{aligned}
+        D(0) &= 0\\
+        D(t) &= \sum_{i=1}^{t} \left((x_i - x_{i-1})^2 + (y_i - y_{i-1})^2 + (z_i -
+        z_{i-1})^2\right)^{1/2}\\
+        \end{aligned}
     '''
     x, y, z = coords
     displacement = np.sqrt(segment[x].diff()**2
@@ -196,10 +190,11 @@ def compute_MSD_(segment, dts, coords=['x', 'y', 'z']):
     '''Computes the mean square displacement of the segment given by
 
     .. math::
-    \begin{aligned}
-    \mbox{MSD}(\Delta t) &=  \frac{\sum_0^{T - \Delta t}
-        \left(\mathbf{r}(t + \Delta t)  - \mathbf{r}(t) \right)^2}{(T - \Delta t) / \delta t}
-    \end{aligned}
+
+        \begin{aligned}
+        \mbox{MSD}(\Delta t) &=  \frac{\sum_0^{T - \Delta t}
+            \left(\mathbf{r}(t + \Delta t)  - \mathbf{r}(t) \right)^2}{(T - \Delta t) / \delta t}
+        \end{aligned}
     '''
     dts = np.asarray(dts, dtype=np.int)
     msds = pd.DataFrame(index=pd.Index(dts, name='Dt_stamp'),

@@ -60,29 +60,27 @@ def _grouped_pca(trajs, pca, coords, group_kw):
 def time_interpolate(trajs, sampling=1,
                      s=0, k=3,
                      coords=['x', 'y', 'z']):
-    """
-    Interpolates each segment of the trajectories along time
-    using `scipy.interpolate.splrep`
+    """Interpolates each segment of the trajectories along time using `scipy.interpolate.splrep`
 
     Parameters
     ----------
     sampling : int,
         Must be higher or equal than 1, will add `sampling - 1` extra points
         between two consecutive original data point. Sub-sampling is not supported.
+
     coords : tuple of column names, default `('x', 'y', 'z')`
        the coordinates to interpolate.
+
      s : float
-        A smoothing condition. The amount of smoothness is determined by
-        satisfying the conditions: sum((w * (y - g))**2,axis=0) <= s where g(x)
-        is the smoothed interpolation of (x,y). The user can use s to control
-        the tradeoff between closeness and smoothness of fit. Larger s means
-        more smoothing while smaller values of s indicate less smoothing.
-        Recommended values of s depend on the weights, w. If the weights
-        represent the inverse of the standard-deviation of y, then a good s
-        value should be found in the range (m-sqrt(2*m),m+sqrt(2*m)) where m is
-        the number of datapoints in x, y, and w. default : s=m-sqrt(2*m) if
-        weights are supplied. s = 0.0 (interpolating) if no weights are
-        supplied.
+        A smoothing condition. The amount of smoothness is determined by satisfying the conditions:
+        sum((w * (y - g))**2,axis=0) <= s where g(x) is the smoothed interpolation of (x,y). The
+        user can use s to control the tradeoff between closeness and smoothness of fit. Larger s
+        means more smoothing while smaller values of s indicate less smoothing. Recommended values
+        of s depend on the weights, w. If the weights represent the inverse of the standard-
+        deviation of y, then a good s value should be found in the range (m-sqrt(2*m),m+sqrt(2*m))
+        where m is the number of datapoints in x, y, and w. default : s=m-sqrt(2*m) if weights are
+        supplied. s = 0.0 (interpolating) if no weights are supplied.
+
     k : int
        The order of the spline fit. It is recommended to use cubic splines.
        Even order splines should be avoided especially with small s values.
@@ -91,22 +89,18 @@ def time_interpolate(trajs, sampling=1,
     Returns
     -------
     interpolated : a :class:`pandas.Dataframe` instance
-       The interpolated values, with column names given by `coords`
-       plus the computed speeds (first order derivative) and accelarations
-       (second order derivative) if `k` > 2
+       The interpolated values, with column names given by `coords` plus the computed speeds (first
+       order derivative) and accelarations (second order derivative) if `k` > 2
 
     Notes
     -----
-    The returned DataFrame is NOT indexed like the input (in particular for `t_stamp`).
-    It is also NOT casted to a Trajectories instance
-
-    The `s` and `k` arguments are passed to `scipy.interpolate.splrep`, see this
-         function documentation for more details
-    If a segment is too short to be interpolated with the passed order `k`, the order
-         will be automatically diminished
-    Segments with only one point will be returned as is
-
-
+    - The returned DataFrame is NOT indexed like the input (in particular for `t_stamp`).
+    - It is also NOT casted to a Trajectories instance.
+    - The `s` and `k` arguments are passed to `scipy.interpolate.splrep`, see this function
+      documentation for more details
+    - If a segment is too short to be interpolated with the passed order `k`, the order will be
+      automatically diminished.
+    - Segments with only one point will be returned as is
     """
     interpolated = trajs.groupby(level='label').apply(_segment_interpolate_,
                                                       sampling=sampling, s=s, k=k,

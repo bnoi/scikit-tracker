@@ -1674,7 +1674,7 @@ class TiffTag(object):
 class TiffSequence(object):
     """Sequence of image files.
 
-    Properties
+    Attributes
     ----------
     files : list
         List of file names.

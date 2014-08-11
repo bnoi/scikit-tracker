@@ -62,40 +62,40 @@ All you need to create a ``Trajectories`` object is a
       </thead>
       <tbody>
         <tr>
-          <th rowspan="3" valign="top">0</th>
           <th>0</th>
-          <td> 0.229821</td>
-          <td> 0.510572</td>
-          <td> 0.039481</td>
+          <th>0</th>
+          <td> 0.776543</td>
+          <td> 0.005846</td>
+          <td> 0.256168</td>
           <td>  0</td>
         </tr>
         <tr>
+          <th rowspan="4" valign="top">1</th>
           <th>1</th>
-          <td> 0.463987</td>
-          <td> 0.694649</td>
-          <td> 0.623968</td>
-          <td>  0</td>
+          <td> 0.585106</td>
+          <td> 0.582513</td>
+          <td> 0.502796</td>
+          <td> 60</td>
         </tr>
         <tr>
           <th>2</th>
-          <td> 0.810128</td>
-          <td> 0.365844</td>
-          <td> 0.864505</td>
-          <td>  0</td>
+          <td> 0.693993</td>
+          <td> 0.087650</td>
+          <td> 0.328282</td>
+          <td> 60</td>
         </tr>
         <tr>
-          <th rowspan="2" valign="top">1</th>
           <th>3</th>
-          <td> 0.063223</td>
-          <td> 0.753305</td>
-          <td> 0.080830</td>
+          <td> 0.053243</td>
+          <td> 0.392563</td>
+          <td> 0.473721</td>
           <td> 60</td>
         </tr>
         <tr>
           <th>4</th>
-          <td> 0.457479</td>
-          <td> 0.351360</td>
-          <td> 0.959976</td>
+          <td> 0.132044</td>
+          <td> 0.297930</td>
+          <td> 0.348275</td>
           <td> 60</td>
         </tr>
       </tbody>
@@ -120,6 +120,7 @@ anything you want/need.
     
     # Create a Trajectories instance
     trajs = Trajectories(trajs)
+
 Visualize trajectories
 ----------------------
 
@@ -129,7 +130,6 @@ working on. First load some sample dataset.
 .. code:: python
 
     from sktracker import data
-    
     trajs = data.with_gaps_df()
     trajs = Trajectories(trajs)
     trajs.head()
@@ -217,7 +217,7 @@ working on. First load some sample dataset.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f38a0c09e10>
+    <matplotlib.axes.AxesSubplot at 0x7fdb58ed4eb8>
 
 
 
@@ -228,7 +228,7 @@ working on. First load some sample dataset.
 
 
 
-.. image:: trajectories_notebook_output_files/output_9_2.png
+.. image:: trajectories_notebook_output_files/output_10_2.png
 
 
 You can change axis to display.
@@ -241,12 +241,12 @@ You can change axis to display.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f389d321780>
+    <matplotlib.axes.AxesSubplot at 0x7fdb58e0fe48>
 
 
 
 
-.. image:: trajectories_notebook_output_files/output_11_1.png
+.. image:: trajectories_notebook_output_files/output_12_1.png
 
 
 You can also add a legend.
@@ -259,12 +259,12 @@ You can also add a legend.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f389d24d7f0>
+    <matplotlib.axes.AxesSubplot at 0x7fdb58d6ae48>
 
 
 
 
-.. image:: trajectories_notebook_output_files/output_13_1.png
+.. image:: trajectories_notebook_output_files/output_14_1.png
 
 
 You can also build more complex figures.
@@ -286,12 +286,12 @@ You can also build more complex figures.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f389ca12a58>
+    <matplotlib.axes.AxesSubplot at 0x7fdb58bd2b70>
 
 
 
 
-.. image:: trajectories_notebook_output_files/output_15_1.png
+.. image:: trajectories_notebook_output_files/output_16_1.png
 
 
 ``Trajectories.show()`` is a nice way to quickly build visualizations.
@@ -314,3 +314,9 @@ Measurements on trajectories
     %matplotlib inline
     %load_ext autoreload
     %autoreload 2
+
+.. parsed-literal::
+
+    The autoreload extension is already loaded. To reload it, use:
+      %reload_ext autoreload
+

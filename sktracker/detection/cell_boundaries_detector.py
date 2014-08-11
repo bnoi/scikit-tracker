@@ -54,8 +54,8 @@ def cell_boundaries_detector(data_iterator,
         minimal_area : float
             Typical area of the object in um^2.
 
-    Return
-    ------
+    Returns
+    ------()
     shapes : :class:`pd.DataFrame`
         Contains cell boundary properties for each time_stamp
     """

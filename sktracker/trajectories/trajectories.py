@@ -256,7 +256,6 @@ class Trajectories(pd.DataFrame):
         -------
         Copy of modified trajectories or None wether inplace is True.
         """
-
         return Trajectories(self.drop(spots, inplace=inplace))
 
     def remove_segments(self, segments_idx, inplace=False):
@@ -376,6 +375,11 @@ class Trajectories(pd.DataFrame):
 
     def reverse(self, time_column='t', inplace=False):
         """Reverse trajectories time.
+
+        Parameters
+        ----------
+        time_column : str
+            Which column used to reverse.
 
         Returns
         -------

@@ -80,8 +80,8 @@ def get_polar_coords(trajs, get_dtheta=False,
     Let :math:`x` and :math:`y` be the input coordinates, it will compute
     :math:`\theta = tan^{-1}(y/x)` and :math:`rho = \sqrt{x^2+y^2}`
 
-    Parameters :
-    ------------
+    Parameters
+    ----------
     trajs : :class:`Trajectories` instance
     get_dtheta : bool, default False
         if True, will also compute the angular shift between two successive points
@@ -188,8 +188,8 @@ def _continuous_theta(thetas, return_dtheta=True, axis=-1):
     two consecutive values, corrected for periodic boundary conditions
     between ::math:\pi: and ::math:-\pi:
 
-    Parameters :
-    ------------
+    Parameters
+    ----------
     thetas : ndarray, angle vaues in radians
     return_dtheta : bool, default True
 
@@ -223,14 +223,14 @@ def _periodic_dtheta(thetas, axis=-1):
     two consecutive angles, corrected for periodic boundary conditions
     between ::math:\pi and ::math:-\pi
 
-    Parameters :
-    ------------
+    Parameters
+    ----------
     thetas : ndarray, angle vaues in radians
     axis : int, default -1
         the axis along which t xompute de difference (default -1)
 
-    Returns :
-    ---------
+    Returns
+    -------
     dthetas : ndarray, pbc corrected angle differences
 
     '''

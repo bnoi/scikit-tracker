@@ -10,8 +10,8 @@ def sanitize_dict(obj):
     ----------
     obj : dict
 
-    Return
-    ------
+    Returns
+    -------
     new_obj : dict with all values as str
     """
 
@@ -26,8 +26,8 @@ def guess_values_type(obj):
     ----------
     obj : dict
 
-    Return
-    ------
+    Returns
+    -------
     new_obj : dict
     """
 

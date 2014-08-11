@@ -22,14 +22,12 @@ License : WTFPL
 import fnmatch
 import os
 
-from IPython.nbformat import current as nbformat
 from IPython.nbconvert import RSTExporter
 from IPython.nbconvert.writers import FilesWriter
 
 if __name__ == '__main__':
 
     source_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "source")
-    static_dirs = os.path.join(source_dir, "_static/")
 
     for root, dirs, files in os.walk(source_dir):
         if ".ipynb_checkpoints" in root:
@@ -45,7 +43,6 @@ if __name__ == '__main__':
             build_dir = os.path.dirname(full_path)
             rel_build_dir = os.path.relpath(build_dir, source_dir)
 
-            nb = nbformat.reads_json(open(full_path).read())
             exporter = RSTExporter()
             writer = FilesWriter()
 
