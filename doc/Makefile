@@ -182,3 +182,6 @@ api:
 	sed -i '1s/.*/API references/' source/api/sktracker.txt
 	sed -i '2s/.*/==============/' source/api/sktracker.txt
 	@echo "Build API docs...done."
+
+notebooks:
+	sh convert_notebooks.sh

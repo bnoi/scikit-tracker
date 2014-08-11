@@ -43,3 +43,5 @@ doc/source/api
 *.*~
 *.orig
 *.emacs*
+
+*.ipynb_checkpoints

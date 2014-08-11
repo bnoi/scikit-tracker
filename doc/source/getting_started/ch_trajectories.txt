@@ -1,4 +1,0 @@
-Detect and track chromosomes trajectories
-=========================================
-
-TODO
