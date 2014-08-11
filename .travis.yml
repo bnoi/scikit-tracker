@@ -22,7 +22,7 @@ virtualenv:
     system_site_packages: false
 
 install:
-    - sudo apt-get install tk-dev
+    - sudo apt-get install tk-dev pandoc
 
     - if [[ $PYVER == '2.7' ]]; then wget http://repo.continuum.io/miniconda/Miniconda-3.4.2-Linux-x86_64.sh -O miniconda.sh; fi
     - if [[ $PYVER == '3.3' ]]; then wget http://repo.continuum.io/miniconda/Miniconda3-3.4.2-Linux-x86_64.sh -O miniconda.sh; fi
