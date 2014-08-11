@@ -13,6 +13,7 @@ Building html doc with sphinx should then display your notebooks perfectly and w
 Please hack this script and share it ! Or better build a sphinx extension and I will buy you a beer
 (I am sure I won't be alone) !
 
+Url : https://gist.github.com/hadim/16e29b5848672e2e497c
 Date : 11/08/2014
 Author : HadiM <hadrien.mary@gmail.com>
 License : WTFPL
