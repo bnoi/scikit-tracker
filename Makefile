@@ -16,7 +16,7 @@ init_submodule:
 	git submodule update --init --recursive
 
 update_submodule:
-	git submodule foreach git pull
+	git submodule foreach git pull origin master
 
 build:
 	python setup.py build_ext --inplace
