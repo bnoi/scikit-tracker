@@ -1,4 +1,4 @@
-.PHONY: help init_submodule update_submodule build clean flake8 test coverage doc push_doc
+.PHONY: help init_submodule update_submodule build clean flake8 test coverage doc push_doc open_doc
 
 help:
 	@echo "Please use make <target> where <target> is one of"
@@ -42,3 +42,6 @@ doc:
 push_doc:
 	cd doc/ && python gh-pages.py
 	cd doc/gh-pages/ && git push origin gh-pages && cd ../../
+
+open_doc:
+	xdg-open doc/build/html/index.html
