@@ -45,7 +45,7 @@ install:
     - conda install --yes pip
     - conda install --yes cython
     - conda install --yes matplotlib
-    - conda install --yes ipython
+    - conda install --yes ipython[all]
     - pip install wheel
     - pip install coverage
 
