@@ -12,10 +12,12 @@ Read it, use it, hack it and share it ! Or you can do better writing a sphinx ex
 :License:
     WTFPL
 :Version:
-    0.2 (2014.08.12)
+    0.2.1 (2014.08.12)
 
 Changelog
 ---------
+- 0.2.1 (2014.08.12):
+    - Clear old output dirs
 - 0.2 (2014.08.12):
     - add IPython 3 native notebook running with ExecutePreprocessor (with fallback to runipy)
 - 0.1 (2014.08.11):
@@ -23,6 +25,7 @@ Changelog
 """
 
 import fnmatch
+import shutil
 import os
 import argparse
 import logging
@@ -107,6 +110,10 @@ if __name__ == '__main__':
             nb_name = os.path.splitext(os.path.basename(full_path))[0]
             nb_output_dirs = nb_name + args.outputs_dir_suffix
             resources['output_files_dir'] = nb_output_dirs
+
+            # Clear old output dir path
+            if os.path.isdir(os.path.join(build_dir, nb_output_dirs)):
+                shutil.rmtree(os.path.join(build_dir, nb_output_dirs))
 
             exporter = RSTExporter()
 

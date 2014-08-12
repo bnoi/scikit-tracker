@@ -65,40 +65,40 @@ All you need to create a ``Trajectories`` object is a
       </thead>
       <tbody>
         <tr>
+          <th rowspan="3" valign="top">0</th>
           <th>0</th>
-          <th>0</th>
-          <td> 0.776543</td>
-          <td> 0.005846</td>
-          <td> 0.256168</td>
+          <td> 0.006620</td>
+          <td> 0.792951</td>
+          <td> 0.918868</td>
           <td>  0</td>
         </tr>
         <tr>
-          <th rowspan="4" valign="top">1</th>
           <th>1</th>
-          <td> 0.585106</td>
-          <td> 0.582513</td>
-          <td> 0.502796</td>
-          <td> 60</td>
+          <td> 0.431061</td>
+          <td> 0.600502</td>
+          <td> 0.586959</td>
+          <td>  0</td>
         </tr>
         <tr>
           <th>2</th>
-          <td> 0.693993</td>
-          <td> 0.087650</td>
-          <td> 0.328282</td>
-          <td> 60</td>
+          <td> 0.459313</td>
+          <td> 0.074589</td>
+          <td> 0.571584</td>
+          <td>  0</td>
         </tr>
         <tr>
+          <th rowspan="2" valign="top">1</th>
           <th>3</th>
-          <td> 0.053243</td>
-          <td> 0.392563</td>
-          <td> 0.473721</td>
+          <td> 0.582771</td>
+          <td> 0.408673</td>
+          <td> 0.518711</td>
           <td> 60</td>
         </tr>
         <tr>
           <th>4</th>
-          <td> 0.132044</td>
-          <td> 0.297930</td>
-          <td> 0.348275</td>
+          <td> 0.397735</td>
+          <td> 0.454671</td>
+          <td> 0.579425</td>
           <td> 60</td>
         </tr>
       </tbody>
@@ -123,6 +123,12 @@ anything you want/need.
     
     # Create a Trajectories instance
     trajs = Trajectories(trajs)
+
+.. parsed-literal::
+
+    2014-08-12 13:14:06:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
+
+
 
 Visualize trajectories
 ----------------------
@@ -220,13 +226,13 @@ working on. First load some sample dataset.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7fdb58ed4eb8>
+    <matplotlib.axes.AxesSubplot at 0x7f4a20cf3fd0>
 
 
 
 .. parsed-literal::
 
-    /home/hadim/.virtualenvs/st/lib/python3.4/site-packages/matplotlib/font_manager.py:1236: UserWarning: findfont: Font family ['monospace'] not found. Falling back to Bitstream Vera Sans
+    /home/hadim/local/virtualenvs/st/lib/python3.4/site-packages/matplotlib/font_manager.py:1236: UserWarning: findfont: Font family ['monospace'] not found. Falling back to Bitstream Vera Sans
       (prop.get_family(), self.defaultFamily[fontext]))
 
 
@@ -244,7 +250,7 @@ You can change axis to display.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7fdb58e0fe48>
+    <matplotlib.axes.AxesSubplot at 0x7f4a18cb03c8>
 
 
 
@@ -262,7 +268,7 @@ You can also add a legend.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7fdb58d6ae48>
+    <matplotlib.axes.AxesSubplot at 0x7f4a18cadd30>
 
 
 
@@ -289,7 +295,7 @@ You can also build more complex figures.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7fdb58bd2b70>
+    <matplotlib.axes.AxesSubplot at 0x7f4a18ad4710>
 
 
 
@@ -305,11 +311,117 @@ classes in order to visualize your trajectories/dataset. See
 Get informations
 ----------------
 
+Here you will find how to retrieve informations specific to
+trajectories. Remember that trajectory and segment are the same as well
+as object/peak and spot are the same.
+
+.. code:: python
+
+    trajs.t_stamps
+
+
+
+.. parsed-literal::
+
+    array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+           17, 18, 19])
+
+
+
+.. code:: python
+
+    # Each label corresponds to one segment/trajectory
+    trajs.labels
+
+
+
+.. parsed-literal::
+
+    array([0, 1, 2, 3, 4, 5, 6])
+
+
+
+.. code:: python
+
+    # Get dict if dataframe index of segments (sorted by labels)
+    trajs.segment_idxs[0]
+
+
+
+.. parsed-literal::
+
+    [(0, 0), (1, 0), (2, 0), (3, 0)]
+
+
+
+.. code:: python
+
+    # Iterator over segments
+    for label, segment in trajs.iter_segments:
+        print(label, end=' ')
+
+.. parsed-literal::
+
+    0 1 2 3 4 5 6 
+
+.. code:: python
+
+    # Get bounds (first and last spots/objects) of each segment
+    trajs.get_bounds()
+
+
+
+.. parsed-literal::
+
+    {0: (0, 3),
+     1: (0, 5),
+     2: (0, 13),
+     3: (5, 16),
+     4: (7, 19),
+     5: (15, 19),
+     6: (18, 19)}
+
+
+
+.. code:: python
+
+    # Get a different colors for each segments
+    trajs.get_colors()
+
+
+
+.. parsed-literal::
+
+    {0: '#FF0000',
+     1: '#FFE000',
+     2: '#3DFF00',
+     3: '#00FFA9',
+     4: '#0074FF',
+     5: '#7200FF',
+     6: '#FF00AC'}
+
+
+
+Some other methods such as:
+
+-  ``get_segments()``
+-  ``get_longest_segments()``
+-  ``get_shortest_segments()``
+-  ``get_t_stamps_correspondences()``
+
+See ```Trajectories``
+API <http://scikit-tracker.org/dev/api/sktracker.trajectories.html#sktracker.trajectories.Trajectories>`__
+for more informations.
+
 Modify trajectories
 -------------------
 
+TODO
+
 Measurements on trajectories
 ----------------------------
+
+TODO
 
 .. code:: python
 
