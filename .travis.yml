@@ -48,6 +48,7 @@ install:
     - conda install --yes ipython tornado pyzmq jinja2 Pygments
     - pip install wheel
     - pip install coverage
+    - pip install runipy
 
     - python setup.py build_ext --inplace
     - python setup.py install
