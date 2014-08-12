@@ -63,40 +63,41 @@ All you need to create a ``Trajectories`` object is a
       </thead>
       <tbody>
         <tr>
-          <th rowspan="5" valign="top">0</th>
           <th>0</th>
-          <td> 0.392877</td>
-          <td> 0.737245</td>
-          <td> 0.176047</td>
-          <td> 0</td>
+          <th>0</th>
+          <td> 0.776543</td>
+          <td> 0.005846</td>
+          <td> 0.256168</td>
+          <td>  0</td>
         </tr>
         <tr>
+          <th rowspan="4" valign="top">1</th>
           <th>1</th>
-          <td> 0.548310</td>
-          <td> 0.179397</td>
-          <td> 0.826997</td>
-          <td> 0</td>
+          <td> 0.585106</td>
+          <td> 0.582513</td>
+          <td> 0.502796</td>
+          <td> 60</td>
         </tr>
         <tr>
           <th>2</th>
-          <td> 0.822651</td>
-          <td> 0.016322</td>
-          <td> 0.871532</td>
-          <td> 0</td>
+          <td> 0.693993</td>
+          <td> 0.087650</td>
+          <td> 0.328282</td>
+          <td> 60</td>
         </tr>
         <tr>
           <th>3</th>
-          <td> 0.803618</td>
-          <td> 0.693088</td>
-          <td> 0.686296</td>
-          <td> 0</td>
+          <td> 0.053243</td>
+          <td> 0.392563</td>
+          <td> 0.473721</td>
+          <td> 60</td>
         </tr>
         <tr>
           <th>4</th>
-          <td> 0.872963</td>
-          <td> 0.687341</td>
-          <td> 0.049577</td>
-          <td> 0</td>
+          <td> 0.132044</td>
+          <td> 0.297930</td>
+          <td> 0.348275</td>
+          <td> 60</td>
         </tr>
       </tbody>
     </table>
@@ -120,12 +121,6 @@ anything you want/need.
     
     # Create a Trajectories instance
     trajs = Trajectories(trajs)
-
-.. parsed-literal::
-
-    2014-08-12 10:44:31:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
-
-
 
 Visualize trajectories
 ----------------------
@@ -223,13 +218,13 @@ working on. First load some sample dataset.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f465d9b4f60>
+    <matplotlib.axes.AxesSubplot at 0x7fdb58ed4eb8>
 
 
 
 .. parsed-literal::
 
-    /home/hadim/local/virtualenvs/st/lib/python3.4/site-packages/matplotlib/font_manager.py:1236: UserWarning: findfont: Font family ['monospace'] not found. Falling back to Bitstream Vera Sans
+    /home/hadim/.virtualenvs/st/lib/python3.4/site-packages/matplotlib/font_manager.py:1236: UserWarning: findfont: Font family ['monospace'] not found. Falling back to Bitstream Vera Sans
       (prop.get_family(), self.defaultFamily[fontext]))
 
 
@@ -247,7 +242,7 @@ You can change axis to display.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f465d9e9ba8>
+    <matplotlib.axes.AxesSubplot at 0x7fdb58e0fe48>
 
 
 
@@ -265,7 +260,7 @@ You can also add a legend.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f46558aea20>
+    <matplotlib.axes.AxesSubplot at 0x7fdb58d6ae48>
 
 
 
@@ -292,7 +287,7 @@ You can also build more complex figures.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f4655797cc0>
+    <matplotlib.axes.AxesSubplot at 0x7fdb58bd2b70>
 
 
 
@@ -319,3 +314,9 @@ Measurements on trajectories
     # Run this cell first.
     %load_ext autoreload
     %autoreload 2
+
+.. parsed-literal::
+
+    The autoreload extension is already loaded. To reload it, use:
+      %reload_ext autoreload
+

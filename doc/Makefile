@@ -184,4 +184,7 @@ api:
 	@echo "Build API docs...done."
 
 notebooks:
-	python notebooks2sphinx.py --execute
+	python notebooks2sphinx.py
+
+notebooks-execute:
+	python notebooks2sphinx.py
