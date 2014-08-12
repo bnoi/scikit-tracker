@@ -39,6 +39,9 @@ coverage:
 doc:
 	cd doc/ && make clean && make api && make notebooks && make html
 
+doc_execute_notebook:
+	cd doc/ && make clean && make api && make notebooks-execute && make html
+
 push_doc:
 	cd doc/ && python gh-pages.py
 	cd doc/gh-pages/ && git push origin gh-pages && cd ../../

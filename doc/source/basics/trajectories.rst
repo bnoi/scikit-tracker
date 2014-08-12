@@ -26,6 +26,8 @@ All you need to create a ``Trajectories`` object is a
 .. code:: python
 
     %matplotlib inline
+.. code:: python
+
     import pandas as pd
     import numpy as np
     
@@ -229,7 +231,7 @@ working on. First load some sample dataset.
 
 
 
-.. image:: trajectories_notebook_output_files/output_10_2.png
+.. image:: trajectories_notebook_output_files/output_11_2.png
 
 
 You can change axis to display.
@@ -247,7 +249,7 @@ You can change axis to display.
 
 
 
-.. image:: trajectories_notebook_output_files/output_12_1.png
+.. image:: trajectories_notebook_output_files/output_13_1.png
 
 
 You can also add a legend.
@@ -265,7 +267,7 @@ You can also add a legend.
 
 
 
-.. image:: trajectories_notebook_output_files/output_14_1.png
+.. image:: trajectories_notebook_output_files/output_15_1.png
 
 
 You can also build more complex figures.
@@ -292,7 +294,7 @@ You can also build more complex figures.
 
 
 
-.. image:: trajectories_notebook_output_files/output_16_1.png
+.. image:: trajectories_notebook_output_files/output_17_1.png
 
 
 ``Trajectories.show()`` is a nice way to quickly build visualizations.
