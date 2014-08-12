@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Representation of trajectories &mdash; sktracker 0.3.dev-c1f149e docs</title>
+  <title>Representation of trajectories &mdash; sktracker 0.3.dev-474419e docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-c1f149e docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-474419e docs" href="../index.html"/>
         <link rel="up" title="Basics: getting started with sktracker" href="../basics.html"/>
         <link rel="next" title="Input / Output" href="io.html"/>
         <link rel="prev" title="Basics: getting started with sktracker" href="../basics.html"/> 
@@ -202,40 +202,40 @@ object&#8217;s features in columns (with &#8216;t&#8217; for example).</p>
   </thead>
   <tbody>
     <tr>
+      <th rowspan="3" valign="top">0</th>
       <th>0</th>
-      <th>0</th>
-      <td> 0.776543</td>
-      <td> 0.005846</td>
-      <td> 0.256168</td>
+      <td> 0.006620</td>
+      <td> 0.792951</td>
+      <td> 0.918868</td>
       <td>  0</td>
     </tr>
     <tr>
-      <th rowspan="4" valign="top">1</th>
       <th>1</th>
-      <td> 0.585106</td>
-      <td> 0.582513</td>
-      <td> 0.502796</td>
-      <td> 60</td>
+      <td> 0.431061</td>
+      <td> 0.600502</td>
+      <td> 0.586959</td>
+      <td>  0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td> 0.693993</td>
-      <td> 0.087650</td>
-      <td> 0.328282</td>
-      <td> 60</td>
+      <td> 0.459313</td>
+      <td> 0.074589</td>
+      <td> 0.571584</td>
+      <td>  0</td>
     </tr>
     <tr>
+      <th rowspan="2" valign="top">1</th>
       <th>3</th>
-      <td> 0.053243</td>
-      <td> 0.392563</td>
-      <td> 0.473721</td>
+      <td> 0.582771</td>
+      <td> 0.408673</td>
+      <td> 0.518711</td>
       <td> 60</td>
     </tr>
     <tr>
       <th>4</th>
-      <td> 0.132044</td>
-      <td> 0.297930</td>
-      <td> 0.348275</td>
+      <td> 0.397735</td>
+      <td> 0.454671</td>
+      <td> 0.579425</td>
       <td> 60</td>
     </tr>
   </tbody>
@@ -253,6 +253,9 @@ anything you want/need.</p>
 
 <span class="c"># Create a Trajectories instance</span>
 <span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>2014-08-12 13:14:06:INFO:sktracker.utils.mpl_loader: Matplotlib backend &#39;Qt4Agg&#39; has been loaded.
 </pre></div>
 </div>
 </div>
@@ -336,10 +339,10 @@ working on. First load some sample dataset.</p>
 </div><div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7fdb58ed4eb8&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7f4a20cf3fd0&gt;
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>/home/hadim/.virtualenvs/st/lib/python3.4/site-packages/matplotlib/font_manager.py:1236: UserWarning: findfont: Font family [&#39;monospace&#39;] not found. Falling back to Bitstream Vera Sans
+<div class="highlight-python"><div class="highlight"><pre>/home/hadim/local/virtualenvs/st/lib/python3.4/site-packages/matplotlib/font_manager.py:1236: UserWarning: findfont: Font family [&#39;monospace&#39;] not found. Falling back to Bitstream Vera Sans
   (prop.get_family(), self.defaultFamily[fontext]))
 </pre></div>
 </div>
@@ -348,7 +351,7 @@ working on. First load some sample dataset.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7fdb58e0fe48&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7f4a18cb03c8&gt;
 </pre></div>
 </div>
 <img alt="../_images/output_13_1.png" src="../_images/output_13_1.png" />
@@ -356,7 +359,7 @@ working on. First load some sample dataset.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7fdb58d6ae48&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7f4a18cadd30&gt;
 </pre></div>
 </div>
 <img alt="../_images/output_15_1.png" src="../_images/output_15_1.png" />
@@ -373,7 +376,7 @@ working on. First load some sample dataset.</p>
 <span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7fdb58bd2b70&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7f4a18ad4710&gt;
 </pre></div>
 </div>
 <img alt="../_images/output_17_1.png" src="../_images/output_17_1.png" />
@@ -384,12 +387,82 @@ classes in order to visualize your trajectories/dataset. See
 </div>
 <div class="section" id="get-informations">
 <h2>Get informations<a class="headerlink" href="#get-informations" title="Permalink to this headline">¶</a></h2>
+<p>Here you will find how to retrieve informations specific to
+trajectories. Remember that trajectory and segment are the same as well
+as object/peak and spot are the same.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">t_stamps</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">array</span><span class="p">([</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span>
+       <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Each label corresponds to one segment/trajectory</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">labels</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Get dict if dataframe index of segments (sorted by labels)</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">segment_idxs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Iterator over segments</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">segment</span> <span class="ow">in</span> <span class="n">trajs</span><span class="o">.</span><span class="n">iter_segments</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>0 1 2 3 4 5 6
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Get bounds (first and last spots/objects) of each segment</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">get_bounds</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+ <span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+ <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+ <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+ <span class="mi">4</span><span class="p">:</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+ <span class="mi">5</span><span class="p">:</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+ <span class="mi">6</span><span class="p">:</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">)}</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Get a different colors for each segments</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">get_colors</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;#FF0000&#39;</span><span class="p">,</span>
+ <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;#FFE000&#39;</span><span class="p">,</span>
+ <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;#3DFF00&#39;</span><span class="p">,</span>
+ <span class="mi">3</span><span class="p">:</span> <span class="s">&#39;#00FFA9&#39;</span><span class="p">,</span>
+ <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;#0074FF&#39;</span><span class="p">,</span>
+ <span class="mi">5</span><span class="p">:</span> <span class="s">&#39;#7200FF&#39;</span><span class="p">,</span>
+ <span class="mi">6</span><span class="p">:</span> <span class="s">&#39;#FF00AC&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Some other methods such as:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">get_segments()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">get_longest_segments()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">get_shortest_segments()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">get_t_stamps_correspondences()</span></tt></li>
+</ul>
+<p>See <tt class="docutils literal"><span class="pre">`Trajectories</span></tt>
+API &lt;<a class="reference external" href="http://scikit-tracker.org/dev/api/sktracker.trajectories.html#sktracker.trajectories.Trajectories">http://scikit-tracker.org/dev/api/sktracker.trajectories.html#sktracker.trajectories.Trajectories</a>&gt;`__
+for more informations.</p>
 </div>
 <div class="section" id="modify-trajectories">
 <h2>Modify trajectories<a class="headerlink" href="#modify-trajectories" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
 </div>
 <div class="section" id="measurements-on-trajectories">
 <h2>Measurements on trajectories<a class="headerlink" href="#measurements-on-trajectories" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
 <div class="code python highlight-python"><div class="highlight"><pre># Run this cell first.
 %load_ext autoreload
 %autoreload 2
@@ -440,7 +513,7 @@ classes in order to visualize your trajectories/dataset. See
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-c1f149e',
+            VERSION:'0.3.dev-474419e',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
