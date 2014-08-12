@@ -10,10 +10,10 @@ log = logging.getLogger(__name__)
 
 from .trajectories import Trajectories
 
-try:
+try:  # pragma: no cover
     from . import draw
     __all__ = ['Trajectories', 'draw']
-except ImportError:
+except ImportError:  # pragma: no cover
     log.warning('''Matplotlib can't be imported,'''
                 '''drawing module won't be available ''')
     __all__ = ['Trajectories']
