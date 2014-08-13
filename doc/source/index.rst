@@ -51,6 +51,7 @@ Table of content
 ----------------
 
 .. toctree::
+    :maxdepth: 2
 
     new
     theory
