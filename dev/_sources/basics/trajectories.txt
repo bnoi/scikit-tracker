@@ -68,40 +68,40 @@ documentation <http://pandas.pydata.org/pandas-docs/stable/>`__.
       </thead>
       <tbody>
         <tr>
-          <th rowspan="4" valign="top">0</th>
           <th>0</th>
-          <td> 0.626138</td>
-          <td> 0.563744</td>
-          <td> 0.290244</td>
+          <th>0</th>
+          <td> 0.720178</td>
+          <td> 0.483076</td>
+          <td> 0.256835</td>
           <td>  0</td>
         </tr>
         <tr>
+          <th rowspan="4" valign="top">1</th>
           <th>1</th>
-          <td> 0.747097</td>
-          <td> 0.615411</td>
-          <td> 0.042033</td>
-          <td>  0</td>
+          <td> 0.544855</td>
+          <td> 0.763863</td>
+          <td> 0.707014</td>
+          <td> 60</td>
         </tr>
         <tr>
           <th>2</th>
-          <td> 0.363577</td>
-          <td> 0.657864</td>
-          <td> 0.563616</td>
-          <td>  0</td>
+          <td> 0.334676</td>
+          <td> 0.903346</td>
+          <td> 0.253023</td>
+          <td> 60</td>
         </tr>
         <tr>
           <th>3</th>
-          <td> 0.411117</td>
-          <td> 0.492734</td>
-          <td> 0.125191</td>
-          <td>  0</td>
+          <td> 0.001365</td>
+          <td> 0.392694</td>
+          <td> 0.382180</td>
+          <td> 60</td>
         </tr>
         <tr>
-          <th>1</th>
           <th>4</th>
-          <td> 0.020130</td>
-          <td> 0.212100</td>
-          <td> 0.410889</td>
+          <td> 0.203241</td>
+          <td> 0.840345</td>
+          <td> 0.111807</td>
           <td> 60</td>
         </tr>
       </tbody>
@@ -129,7 +129,7 @@ anything you want/need.
 
 .. parsed-literal::
 
-    2014-08-14 14:11:44:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
+    2014-08-14 14:13:22:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
 
 
 Trajectories viewer
@@ -230,7 +230,7 @@ working on. First load some sample dataset.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2ae2da5e0f98>
+    <matplotlib.axes.AxesSubplot at 0x2b4752055978>
 
 
 
@@ -248,7 +248,7 @@ You can change axis to display.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2ae2dc62f080>
+    <matplotlib.axes.AxesSubplot at 0x2b47540a3278>
 
 
 
@@ -266,7 +266,7 @@ You can also add a legend.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2ae2dc6d7eb8>
+    <matplotlib.axes.AxesSubplot at 0x2b475409ba58>
 
 
 
@@ -293,7 +293,7 @@ You can also build more complex figures.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2ae2dc8440f0>
+    <matplotlib.axes.AxesSubplot at 0x2b47542b50f0>
 
 
 
