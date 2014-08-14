@@ -68,40 +68,40 @@ documentation <http://pandas.pydata.org/pandas-docs/stable/>`__.
       </thead>
       <tbody>
         <tr>
-          <th rowspan="3" valign="top">0</th>
+          <th rowspan="4" valign="top">0</th>
           <th>0</th>
-          <td> 0.266288</td>
-          <td> 0.741809</td>
-          <td> 0.727173</td>
+          <td> 0.626138</td>
+          <td> 0.563744</td>
+          <td> 0.290244</td>
           <td>  0</td>
         </tr>
         <tr>
           <th>1</th>
-          <td> 0.151043</td>
-          <td> 0.094702</td>
-          <td> 0.045460</td>
+          <td> 0.747097</td>
+          <td> 0.615411</td>
+          <td> 0.042033</td>
           <td>  0</td>
         </tr>
         <tr>
           <th>2</th>
-          <td> 0.621466</td>
-          <td> 0.857687</td>
-          <td> 0.303807</td>
+          <td> 0.363577</td>
+          <td> 0.657864</td>
+          <td> 0.563616</td>
           <td>  0</td>
         </tr>
         <tr>
-          <th rowspan="2" valign="top">1</th>
           <th>3</th>
-          <td> 0.019421</td>
-          <td> 0.216775</td>
-          <td> 0.218089</td>
-          <td> 60</td>
+          <td> 0.411117</td>
+          <td> 0.492734</td>
+          <td> 0.125191</td>
+          <td>  0</td>
         </tr>
         <tr>
+          <th>1</th>
           <th>4</th>
-          <td> 0.325111</td>
-          <td> 0.014488</td>
-          <td> 0.505610</td>
+          <td> 0.020130</td>
+          <td> 0.212100</td>
+          <td> 0.410889</td>
           <td> 60</td>
         </tr>
       </tbody>
@@ -129,7 +129,7 @@ anything you want/need.
 
 .. parsed-literal::
 
-    2014-08-14 14:01:32:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
+    2014-08-14 14:11:44:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
 
 
 Trajectories viewer
@@ -230,7 +230,7 @@ working on. First load some sample dataset.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b060cc05fd0>
+    <matplotlib.axes.AxesSubplot at 0x2ae2da5e0f98>
 
 
 
@@ -248,7 +248,7 @@ You can change axis to display.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b060ec54978>
+    <matplotlib.axes.AxesSubplot at 0x2ae2dc62f080>
 
 
 
@@ -266,7 +266,7 @@ You can also add a legend.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b060ecfd4e0>
+    <matplotlib.axes.AxesSubplot at 0x2ae2dc6d7eb8>
 
 
 
@@ -293,7 +293,7 @@ You can also build more complex figures.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b060ee680f0>
+    <matplotlib.axes.AxesSubplot at 0x2ae2dc8440f0>
 
 
 
@@ -587,6 +587,8 @@ kinds : *global* and *local* trajectories modifications.
 
 
 
+
+
 Global modifications
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -596,7 +598,9 @@ of the time :-))
 .. code:: python
 
     reversed_traj = trajs.reverse(time_column='t', inplace=False)
-    print(reversed_traj['t'].head())
+    reversed_traj['t'].head()
+
+
 
 .. parsed-literal::
 
@@ -607,6 +611,7 @@ of the time :-))
     -18      6       -18
              5       -18
     Name: t, dtype: float64
+
 
 
 Merge two trajectories together taking care to not mix labels.
@@ -962,6 +967,8 @@ See ```Trajectories``
 API <http://scikit-tracker.org/dev/api/sktracker.trajectories.html#sktracker.trajectories.Trajectories>`__
 for more informations.
 
+
+
 Local modifications
 ~~~~~~~~~~~~~~~~~~~
 
@@ -1208,6 +1215,13 @@ Duplicate a segment
 
 
 
+Because hard coded trajectories modifications can take long time and be
+boring, we designed a smart GUI that allows all kind of local trajectory
+editions such as remove, duplicate, merge and so forth.
+
+For more infos please go
+`here <http://scikit-tracker.org/dev/basics/ui.html>`__.
+
 Measurements on trajectories
 ----------------------------
 
@@ -1216,6 +1230,8 @@ Measurements on trajectories
     from sktracker import data
     from sktracker.trajectories import Trajectories
     trajs = Trajectories(data.brownian_trajs_df())
+
+
 Get the differences between each consecutive timepoints for a same
 trajectory (label).
 
@@ -1359,6 +1375,8 @@ trajectory (label).
       </tbody>
     </table>
     </div>
+
+
 
 
 
