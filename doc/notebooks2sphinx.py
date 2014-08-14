@@ -12,10 +12,12 @@ Read it, use it, hack it and share it ! Or you can do better writing a sphinx ex
 :License:
     WTFPL
 :Version:
-    0.2.1 (2014.08.12)
+    0.3 (2014.08.14):
 
 Changelog
 ---------
+- 0.3 (2014.08.14):
+    - add --overwrite option to overwrite executed notebook to original path.
 - 0.2.1 (2014.08.12):
     - Clear old output dirs
 - 0.2 (2014.08.12):
@@ -81,12 +83,15 @@ if __name__ == '__main__':
                         help='Sphinx source directory')
     parser.add_argument('--execute', action='store_true',
                         help="Execute notebook before export (need 'runipy' or IPython >= 3)")
+    parser.add_argument('--overwrite', action='store_true',
+                        help="Overwrite notebook after it has been executed")
     parser.add_argument('--outputs_dir_suffix', type=str, nargs=1,
                         default="_notebook_output_files",
                         help='Suffix to output files directory (notebook images mainly)')
 
     args = parser.parse_args()
     execute = args.execute
+    overwrite = args.overwrite
 
     if not args.source_dir:
         source_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "source")
@@ -122,6 +127,13 @@ if __name__ == '__main__':
             if execute:
                 log.info("Execute notebook '{}'".format(rel_path))
                 nb = execute_notebook(nb, resources)
+
+                if overwrite and len(nbformat.validate(nb)) == 0:
+                    with open(full_path, 'w') as f:
+                        nbformat.write(nb, f, 'ipynb')
+                elif overwrite and len(nbformat.validate(nb)) > 0:
+                    log.error("Executed notebook is not a valid format. "
+                              "Original notebook won't be overwritten.")
 
             log.info("Export notebook '{}'".format(rel_path))
             (output, resources) = exporter.from_notebook_node(nb, resources=resources)

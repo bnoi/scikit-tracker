@@ -187,4 +187,4 @@ notebooks:
 	python notebooks2sphinx.py
 
 notebooks-execute:
-	python notebooks2sphinx.py
+	python notebooks2sphinx.py --execute --overwrite

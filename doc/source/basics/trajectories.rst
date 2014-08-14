@@ -65,41 +65,42 @@ All you need to create a ``Trajectories`` object is a
       </thead>
       <tbody>
         <tr>
-          <th rowspan="3" valign="top">0</th>
           <th>0</th>
-          <td> 0.006620</td>
-          <td> 0.792951</td>
-          <td> 0.918868</td>
-          <td>  0</td>
+          <th>0</th>
+          <td> 0.891366</td>
+          <td> 0.659543</td>
+          <td> 0.091617</td>
+          <td>   0</td>
         </tr>
         <tr>
           <th>1</th>
-          <td> 0.431061</td>
-          <td> 0.600502</td>
-          <td> 0.586959</td>
-          <td>  0</td>
+          <th>1</th>
+          <td> 0.602459</td>
+          <td> 0.673590</td>
+          <td> 0.111075</td>
+          <td>  60</td>
         </tr>
         <tr>
+          <th rowspan="3" valign="top">2</th>
           <th>2</th>
-          <td> 0.459313</td>
-          <td> 0.074589</td>
-          <td> 0.571584</td>
-          <td>  0</td>
+          <td> 0.907255</td>
+          <td> 0.522362</td>
+          <td> 0.644981</td>
+          <td> 120</td>
         </tr>
         <tr>
-          <th rowspan="2" valign="top">1</th>
           <th>3</th>
-          <td> 0.582771</td>
-          <td> 0.408673</td>
-          <td> 0.518711</td>
-          <td> 60</td>
+          <td> 0.823668</td>
+          <td> 0.811170</td>
+          <td> 0.229627</td>
+          <td> 120</td>
         </tr>
         <tr>
           <th>4</th>
-          <td> 0.397735</td>
-          <td> 0.454671</td>
-          <td> 0.579425</td>
-          <td> 60</td>
+          <td> 0.316576</td>
+          <td> 0.700603</td>
+          <td> 0.369789</td>
+          <td> 120</td>
         </tr>
       </tbody>
     </table>
@@ -126,7 +127,7 @@ anything you want/need.
 
 .. parsed-literal::
 
-    2014-08-12 13:14:06:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
+    2014-08-14 11:22:55:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
 
 
 
@@ -226,7 +227,7 @@ working on. First load some sample dataset.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f4a20cf3fd0>
+    <matplotlib.axes.AxesSubplot at 0x2b9fda13c630>
 
 
 
@@ -250,7 +251,7 @@ You can change axis to display.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f4a18cb03c8>
+    <matplotlib.axes.AxesSubplot at 0x2b9fdc18f278>
 
 
 
@@ -268,7 +269,7 @@ You can also add a legend.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f4a18cadd30>
+    <matplotlib.axes.AxesSubplot at 0x2b9fdc2585f8>
 
 
 
@@ -295,7 +296,7 @@ You can also build more complex figures.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x7f4a18ad4710>
+    <matplotlib.axes.AxesSubplot at 0x2b9fdc3c3f60>
 
 
 
@@ -428,9 +429,3 @@ TODO
     # Run this cell first.
     %load_ext autoreload
     %autoreload 2
-
-.. parsed-literal::
-
-    The autoreload extension is already loaded. To reload it, use:
-      %reload_ext autoreload
-
