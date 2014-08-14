@@ -20,7 +20,7 @@ order to test or usefulle during development.
 
 .. parsed-literal::
 
-    2014-08-14 14:40:21:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
+    2014-08-14 14:43:08:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
 
 
 Generate brownian or directed trajectories
@@ -35,7 +35,7 @@ Generate brownian or directed trajectories
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2acfd6cfd978>
+    <matplotlib.axes.AxesSubplot at 0x2b988ed3d9e8>
 
 
 
@@ -52,7 +52,7 @@ Generate brownian or directed trajectories
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2acfd6d900f0>
+    <matplotlib.axes.AxesSubplot at 0x2b9889980748>
 
 
 
@@ -81,7 +81,7 @@ Get sample microscopy stack
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x2acfd6e973c8>
+    <matplotlib.image.AxesImage at 0x2b988eecfe10>
 
 
 
