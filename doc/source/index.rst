@@ -54,10 +54,12 @@ Table of content
     :maxdepth: 3
 
     new
+
     theory
     install
     basics
     use_cases
     api/sktracker
     contribute
+    cite
     license

@@ -1,3 +1,5 @@
+.. _basics:
+
 Basics: getting started with ``sktracker``
 ==========================================
 

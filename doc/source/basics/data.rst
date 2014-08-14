@@ -8,6 +8,8 @@ order to test or usefulle during development.
 .. code:: python
 
     %matplotlib inline
+.. code:: python
+
     import matplotlib.pyplot as plt
     
     import pandas as pd
@@ -18,7 +20,7 @@ order to test or usefulle during development.
 
 .. parsed-literal::
 
-    2014-08-14 14:37:03:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
+    2014-08-14 16:18:23:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
 
 
 Generate brownian or directed trajectories
@@ -33,12 +35,12 @@ Generate brownian or directed trajectories
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b88b68adfd0>
+    <matplotlib.axes.AxesSubplot at 0x2ae9efbd09e8>
 
 
 
 
-.. image:: data_notebook_output_files/output_3_1.png
+.. image:: data_notebook_output_files/output_4_1.png
 
 
 .. code:: python
@@ -50,12 +52,12 @@ Generate brownian or directed trajectories
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b88b69925c0>
+    <matplotlib.axes.AxesSubplot at 0x2ae9efbd0860>
 
 
 
 
-.. image:: data_notebook_output_files/output_4_1.png
+.. image:: data_notebook_output_files/output_5_1.png
 
 
 Get sample microscopy stack
@@ -79,30 +81,12 @@ Get sample microscopy stack
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x2b88b6a711d0>
+    <matplotlib.image.AxesImage at 0x2ae9efd6ab00>
 
 
 
 
-.. image:: data_notebook_output_files/output_6_2.png
-
-
-Get Tiff files as filenames list
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    data.stack_list()
-
-
-
-.. parsed-literal::
-
-    ['/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-1.tif',
-     '/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-2.tif',
-     '/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-3.tif',
-     '/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-4.tif']
-
+.. image:: data_notebook_output_files/output_7_2.png
 
 
 Get sample H5 file stored by ``sktacker.io.ObjectsIO``
@@ -132,13 +116,24 @@ Get sample H5 file stored by ``sktacker.io.ObjectsIO``
     dtype: object
 
 
-See also : - ``sample_ome()`` - ``tubhiswt_4D()`` - ``stack_list_dir()``
-- ``TZ_nucleus`` - ``TC_BF_cells()`` - ``metadata_json()`` -
-``sample_h5_temp()`` - ``brownian_trajs_df()`` -
-``directed_motion_trajs_df()`` - ``trackmate_xml_temp()`` -
-``trackmate_xml()`` - ``with_gaps_d()``
+See also :
 
-Available in the API references.
+::
+
+    - `sample_ome()`
+    - `tubhiswt_4D()`
+    - `stack_list_dir()`
+    - `TZ_nucleus`
+    - `TC_BF_cells()`
+    - `metadata_json()`
+    - `sample_h5_temp()`
+    - `brownian_trajs_df()`
+    - `directed_motion_trajs_df()`
+    - `trackmate_xml_temp()`
+    - `trackmate_xml()`
+    - `with_gaps_d()`
+
+available in the API references.
 
 .. code:: python
 

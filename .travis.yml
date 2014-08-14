@@ -57,5 +57,7 @@ install:
 script:
     # Run all tests
     - nosetests sktracker --with-coverage --cover-package=sktracker -v
+    # Check PEP8
+    - make flake8
     # Build documentation
     - make doc

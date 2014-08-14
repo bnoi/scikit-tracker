@@ -27,6 +27,8 @@ Dependencies
 From PyPI
 ---------
 
+Available at https://pypi.python.org/pypi/scikit-tracker.
+
 .. code-block:: sh
 
   $ pip install -U scikit-tracker

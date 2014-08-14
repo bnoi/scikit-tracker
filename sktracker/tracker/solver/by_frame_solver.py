@@ -79,8 +79,8 @@ class ByFrameSolver(AbstractSolver):
         >>>
         >>> solver = ByFrameSolver.for_brownian_motion(true_trajs, max_speed=5, penalty=2.)
         >>> new_trajs = solver.track()
-        2014-08-11:INFO:sktracker.tracker.solver.by_frame_solver: Initiating frame by frame tracking.
-        2014-08-11:INFO:sktracker.tracker.solver.by_frame_solver: Frame by frame tracking done. 5 segments found (500 before).
+        2014:INFO:by_frame_solver: Initiating frame by frame tracking.
+        2014:INFO:by_frame_solver: Frame by frame tracking done. 5 segments found (500 before).
         """
         guessed_cost = np.float(max_speed ** 2) * penalty
         diag_context = {'cost': guessed_cost}
