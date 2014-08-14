@@ -1,21 +1,21 @@
-.PHONY: help init_submodule update_submodule build clean flake8 test coverage doc push_doc open_doc
+.PHONY: help init-submodule update-submodule build clean flake8 test coverage doc push-doc open-doc
 
 help:
 	@echo "Please use make <target> where <target> is one of"
-	@echo "    init_submodule   : init and pull all submodules"
-	@echo "    update_submodule : update all submodules"
+	@echo "    init-submodule   : init and pull all submodules"
+	@echo "    update-submodule : update all submodules"
 	@echo "    build            : build extensions (not needed yet)"
 	@echo "    clean            : clean current repository"
 	@echo "    flake8           : run flake8 to check PEP8"
 	@echo "    test             : run tests"
 	@echo "    coverage         : run tests and check code coverage"
 	@echo "    doc              : build dev documentation"
-	@echo "    push_doc         : push dev documentation to http://scikit-tracker.org/dev/"
+	@echo "    push-doc         : push dev documentation to http://scikit-tracker.org/dev/"
 
-init_submodule:
+init-submodule:
 	git submodule update --init --recursive
 
-update_submodule:
+update-submodule:
 	git submodule foreach git pull origin master
 
 build:
@@ -39,12 +39,12 @@ coverage:
 doc:
 	cd doc/ && make clean && make api && make notebooks && make html
 
-doc_execute_notebook:
+doc-execute-notebook:
 	cd doc/ && make clean && make api && make notebooks-execute && make html
 
-push_doc:
+push-doc:
 	cd doc/ && python gh-pages.py
 	cd doc/gh-pages/ && git push origin gh-pages && cd ../../
 
-open_doc:
+open-doc:
 	xdg-open doc/build/html/index.html
