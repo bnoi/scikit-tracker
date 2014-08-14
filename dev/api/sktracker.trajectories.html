@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-cd36e96 docs</title>
+  <title>sktracker.trajectories package &mdash; sktracker 0.3.dev-9148725 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-cd36e96 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-9148725 docs" href="../index.html"/>
         <link rel="up" title="API references" href="sktracker.html"/>
         <link rel="next" title="sktracker.trajectories.measures package" href="sktracker.trajectories.measures.html"/>
         <link rel="prev" title="sktracker.tracker.utils.scores module" href="sktracker.tracker.utils.scores.html"/> 
@@ -226,12 +226,6 @@
 </tbody>
 </table>
 <dl class="method">
-<dt id="sktracker.trajectories.Trajectories.all_speeds">
-<tt class="descname">all_speeds</tt><big>(</big><em>coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.all_speeds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all speeds in trajectories between each t_stamp.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="sktracker.trajectories.Trajectories.check_trajs_df_structure">
 <tt class="descname">check_trajs_df_structure</tt><big>(</big><em>index=None</em>, <em>columns=None</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.check_trajs_df_structure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check wether trajectories contains a specified structure.</p>
@@ -367,24 +361,9 @@ available colormap.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sktracker.trajectories.Trajectories.get_longest_segments">
-<tt class="descname">get_longest_segments</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_longest_segments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the n th longest segments label indexes.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> : int</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="sktracker.trajectories.Trajectories.get_mean_distances">
-<tt class="descname">get_mean_distances</tt><big>(</big><em>group_args={'level': 'label'}, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_mean_distances" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the mean distances between each timepoints. Objects are grouped
-following group_args parameters.</p>
+<dt id="sktracker.trajectories.Trajectories.get_diff">
+<tt class="descname">get_diff</tt><big>(</big><em>group_args={'level': 'label'}, columns=['t', 'x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the diff grouped by labels.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -393,14 +372,28 @@ following group_args parameters.</p>
 <blockquote>
 <div><p>Used to group objects with <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="(in pandas v0.14.1)"><tt class="xref py py-meth docutils literal"><span class="pre">pandas.DataFrame.groupby()</span></tt></a>.</p>
 </div></blockquote>
-<p><strong>coords</strong> : list</p>
+<p><strong>columns</strong> : list</p>
 <blockquote>
-<div><p>Column names used to compute euclidean distance.</p>
+<div><p>Column names on which applying np.diff</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>mean_dist</strong> : <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">diffs as <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.get_longest_segments">
+<tt class="descname">get_longest_segments</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_longest_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the n th longest segments label indexes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> : int</td>
 </tr>
 </tbody>
 </table>
@@ -429,6 +422,35 @@ following group_args parameters.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> : int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.trajectories.Trajectories.get_speeds">
+<tt class="descname">get_speeds</tt><big>(</big><em>time_column='t', group_args={'level': 'label'}, coords=['x', 'y', 'z']</em><big>)</big><a class="headerlink" href="#sktracker.trajectories.Trajectories.get_speeds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get instantaneous speeds between each spots on the same label.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_column</strong> : str</p>
+<blockquote>
+<div><p>Column used to represents time.</p>
+</div></blockquote>
+<p><strong>group_args</strong> : dict</p>
+<blockquote>
+<div><p>Used to group objects with <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="(in pandas v0.14.1)"><tt class="xref py py-meth docutils literal"><span class="pre">pandas.DataFrame.groupby()</span></tt></a>.</p>
+</div></blockquote>
+<p><strong>coords</strong> : list</p>
+<blockquote>
+<div><p>Column names used to compute euclidean distance.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.html#pandas.Series" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.Series</span></tt></a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -849,7 +871,7 @@ plus the computed speeds (first order derivative) and accelarations
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-cd36e96',
+            VERSION:'0.3.dev-9148725',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

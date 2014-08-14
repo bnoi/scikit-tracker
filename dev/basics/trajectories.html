@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Representation of trajectories &mdash; sktracker 0.3.dev-cd36e96 docs</title>
+  <title>Representation of trajectories &mdash; sktracker 0.3.dev-9148725 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-cd36e96 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-9148725 docs" href="../index.html"/>
         <link rel="up" title="Basics: getting started with sktracker" href="../basics.html"/>
         <link rel="next" title="Input / Output" href="io.html"/>
         <link rel="prev" title="Basics: getting started with sktracker" href="../basics.html"/> 
@@ -161,10 +161,13 @@ same trajectory.</p>
 <p>Be aware that <tt class="docutils literal"><span class="pre">t_stamp</span></tt> are time index and does not represent time in
 second or minute. Time position (in second or minute) can be stored as
 object&#8217;s features in columns (with &#8216;t&#8217; for example).</p>
-<div class="section" id="create-trajectories">
-<h2>Create trajectories<a class="headerlink" href="#create-trajectories" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="trajectories-creation">
+<h2>Trajectories creation<a class="headerlink" href="#trajectories-creation" title="Permalink to this headline">¶</a></h2>
 <p>All you need to create a <tt class="docutils literal"><span class="pre">Trajectories</span></tt> object is a
-<tt class="docutils literal"><span class="pre">pandas.DataFrame</span></tt>.</p>
+<tt class="docutils literal"><span class="pre">pandas.DataFrame</span></tt>. Note that <tt class="docutils literal"><span class="pre">sktracker</span></tt> makes an heavy use of
+<tt class="docutils literal"><span class="pre">pandas.DataFrame</span></tt>. If you are not familiar with it, take a look at
+the wonderfull <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/">Pandas
+documentation</a>.</p>
 <div class="code python highlight-python"><div class="highlight"><pre>%matplotlib inline
 </pre></div>
 </div>
@@ -202,40 +205,40 @@ object&#8217;s features in columns (with &#8216;t&#8217; for example).</p>
   </thead>
   <tbody>
     <tr>
-      <th rowspan="3" valign="top">0</th>
+      <th rowspan="4" valign="top">0</th>
       <th>0</th>
-      <td> 0.006620</td>
-      <td> 0.792951</td>
-      <td> 0.918868</td>
+      <td> 0.626138</td>
+      <td> 0.563744</td>
+      <td> 0.290244</td>
       <td>  0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td> 0.431061</td>
-      <td> 0.600502</td>
-      <td> 0.586959</td>
+      <td> 0.747097</td>
+      <td> 0.615411</td>
+      <td> 0.042033</td>
       <td>  0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td> 0.459313</td>
-      <td> 0.074589</td>
-      <td> 0.571584</td>
+      <td> 0.363577</td>
+      <td> 0.657864</td>
+      <td> 0.563616</td>
       <td>  0</td>
     </tr>
     <tr>
-      <th rowspan="2" valign="top">1</th>
       <th>3</th>
-      <td> 0.582771</td>
-      <td> 0.408673</td>
-      <td> 0.518711</td>
-      <td> 60</td>
+      <td> 0.411117</td>
+      <td> 0.492734</td>
+      <td> 0.125191</td>
+      <td>  0</td>
     </tr>
     <tr>
+      <th>1</th>
       <th>4</th>
-      <td> 0.397735</td>
-      <td> 0.454671</td>
-      <td> 0.579425</td>
+      <td> 0.020130</td>
+      <td> 0.212100</td>
+      <td> 0.410889</td>
       <td> 60</td>
     </tr>
   </tbody>
@@ -255,15 +258,17 @@ anything you want/need.</p>
 <span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>2014-08-12 13:14:06:INFO:sktracker.utils.mpl_loader: Matplotlib backend &#39;Qt4Agg&#39; has been loaded.
+<div class="highlight-python"><div class="highlight"><pre>2014-08-14 14:11:44:INFO:sktracker.utils.mpl_loader: Matplotlib backend &#39;Qt4Agg&#39; has been loaded.
 </pre></div>
 </div>
 </div>
-<div class="section" id="visualize-trajectories">
-<h2>Visualize trajectories<a class="headerlink" href="#visualize-trajectories" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="trajectories-viewer">
+<h2>Trajectories viewer<a class="headerlink" href="#trajectories-viewer" title="Permalink to this headline">¶</a></h2>
 <p>First thing you want to do is probably to visualize trajectories you&#8217;re
 working on. First load some sample dataset.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span> <span class="nn">sktracker.trajectories</span> <span class="kn">import</span> <span class="n">Trajectories</span>
 <span class="n">trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">with_gaps_df</span><span class="p">()</span>
 <span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
 <span class="n">trajs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -339,30 +344,26 @@ working on. First load some sample dataset.</p>
 </div><div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7f4a20cf3fd0&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2ae2da5e0f98&gt;
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>/home/hadim/local/virtualenvs/st/lib/python3.4/site-packages/matplotlib/font_manager.py:1236: UserWarning: findfont: Font family [&#39;monospace&#39;] not found. Falling back to Bitstream Vera Sans
-  (prop.get_family(), self.defaultFamily[fontext]))
-</pre></div>
-</div>
-<img alt="../_images/output_11_2.png" src="../_images/output_11_2.png" />
+<img alt="../_images/output_9_1.png" src="../_images/output_9_1.png" />
 <p>You can change axis to display.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7f4a18cb03c8&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2ae2dc62f080&gt;
 </pre></div>
 </div>
-<img alt="../_images/output_13_1.png" src="../_images/output_13_1.png" />
+<img alt="../_images/output_11_1.png" src="../_images/output_11_1.png" />
 <p>You can also add a legend.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7f4a18cadd30&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2ae2dc6d7eb8&gt;
 </pre></div>
 </div>
-<img alt="../_images/output_15_1.png" src="../_images/output_15_1.png" />
+<img alt="../_images/output_13_1.png" src="../_images/output_13_1.png" />
 <p>You can also build more complex figures.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -376,21 +377,96 @@ working on. First load some sample dataset.</p>
 <span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x7f4a18ad4710&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2ae2dc8440f0&gt;
 </pre></div>
 </div>
-<img alt="../_images/output_17_1.png" src="../_images/output_17_1.png" />
+<img alt="../_images/output_15_1.png" src="../_images/output_15_1.png" />
 <p><tt class="docutils literal"><span class="pre">Trajectories.show()</span></tt> is a nice way to quickly build visualizations.
 However <tt class="docutils literal"><span class="pre">sktracker.ui</span></tt> module provides more complex functions and
 classes in order to visualize your trajectories/dataset. See
 <a class="reference external" href="ui.html">here</a> for more details.</p>
 </div>
-<div class="section" id="get-informations">
-<h2>Get informations<a class="headerlink" href="#get-informations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="retrieve-informations">
+<h2>Retrieve informations<a class="headerlink" href="#retrieve-informations" title="Permalink to this headline">¶</a></h2>
 <p>Here you will find how to retrieve informations specific to
 trajectories. Remember that trajectory and segment are the same as well
 as object/peak and spot are the same.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">t_stamps</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span> <span class="nn">sktracker.trajectories</span> <span class="kn">import</span> <span class="n">Trajectories</span>
+<span class="n">trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">with_gaps_df</span><span class="p">()</span>
+<span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+      <th>true_label</th>
+      <th>t</th>
+    </tr>
+    <tr>
+      <th>t_stamp</th>
+      <th>label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">0</th>
+      <th>0</th>
+      <td>-15.425890</td>
+      <td>  3.604392</td>
+      <td> -9.723257</td>
+      <td> 0</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -0.419929</td>
+      <td> 17.429072</td>
+      <td> 10.077393</td>
+      <td> 1</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-18.238856</td>
+      <td>  7.356460</td>
+      <td>  1.138426</td>
+      <td> 2</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1</th>
+      <th>0</th>
+      <td>-13.126613</td>
+      <td>  2.122316</td>
+      <td> -9.375269</td>
+      <td> 0</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -1.217757</td>
+      <td> 15.554279</td>
+      <td> 10.444372</td>
+      <td> 1</td>
+      <td> 1</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">t_stamps</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">array</span><span class="p">([</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span>
@@ -458,18 +534,801 @@ for more informations.</p>
 </div>
 <div class="section" id="modify-trajectories">
 <h2>Modify trajectories<a class="headerlink" href="#modify-trajectories" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<p>Automatic objects detection and tracking is very powerfull. However
+sometime you&#8217;ll need to manually edit and modify trajectories. Here it
+is presented methods to help you with that. Methods are separated in two
+kinds : <em>global</em> and <em>local</em> trajectories modifications.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span> <span class="nn">sktracker.trajectories</span> <span class="kn">import</span> <span class="n">Trajectories</span>
+<span class="n">trajs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">with_gaps_df</span><span class="p">()</span>
+<span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+      <th>true_label</th>
+      <th>t</th>
+    </tr>
+    <tr>
+      <th>t_stamp</th>
+      <th>label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">0</th>
+      <th>0</th>
+      <td>-15.425890</td>
+      <td>  3.604392</td>
+      <td> -9.723257</td>
+      <td> 0</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -0.419929</td>
+      <td> 17.429072</td>
+      <td> 10.077393</td>
+      <td> 1</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-18.238856</td>
+      <td>  7.356460</td>
+      <td>  1.138426</td>
+      <td> 2</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1</th>
+      <th>0</th>
+      <td>-13.126613</td>
+      <td>  2.122316</td>
+      <td> -9.375269</td>
+      <td> 0</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -1.217757</td>
+      <td> 15.554279</td>
+      <td> 10.444372</td>
+      <td> 1</td>
+      <td> 1</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="section" id="global-modifications">
+<h3>Global modifications<a class="headerlink" href="#global-modifications" title="Permalink to this headline">¶</a></h3>
+<p>Reverse trajectories according to a column (time column makes sense most
+of the time :-))</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">reversed_traj</span> <span class="o">=</span> <span class="n">trajs</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">time_column</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">reversed_traj</span><span class="p">[</span><span class="s">&#39;t&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>t_stamp  label
+-19      6       -19
+         5       -19
+         4       -19
+-18      6       -18
+         5       -18
+Name: t, dtype: float64
+</pre></div>
+</div>
+<p>Merge two trajectories together taking care to not mix labels.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="s">&quot;Original trajs labels:&quot;</span><span class="p">,</span> <span class="n">trajs</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">merged_trajs</span> <span class="o">=</span> <span class="n">trajs</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">trajs</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Merged trajs new labels:&quot;</span><span class="p">,</span> <span class="n">merged_trajs</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Original trajs labels: [0 1 2 3 4 5 6]
+Merged trajs new labels: [ 0  1  2  7  8  9  3 10  4 11  5 12  6 13]
+</pre></div>
+</div>
+<p>Relabel trajectories from zero. Note that it will also sort labels
+order.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="s">&quot;Original trajs labels:&quot;</span><span class="p">,</span> <span class="n">merged_trajs</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">relabeled_trajs</span> <span class="o">=</span> <span class="n">merged_trajs</span><span class="o">.</span><span class="n">relabel_fromzero</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Relabeled trajs labels:&quot;</span><span class="p">,</span> <span class="n">relabeled_trajs</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Original trajs labels: [ 0  1  2  7  8  9  3 10  4 11  5 12  6 13]
+Relabeled trajs labels: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13]
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">time_interpolate()</span></tt> can &#8220;fill&#8221; holes in your dataset. For example if
+you have trajs with a missing timepoint, this method will try to &#8220;guess&#8221;
+the value of the missing timepoint.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># t = 1 is missing here</span>
+<span class="n">missing_trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">trajs</span><span class="p">[</span><span class="n">trajs</span><span class="p">[</span><span class="s">&#39;t&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">missing_trajs</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+      <th>true_label</th>
+      <th>t</th>
+    </tr>
+    <tr>
+      <th>t_stamp</th>
+      <th>label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">0</th>
+      <th>0</th>
+      <td>-15.425890</td>
+      <td>  3.604392</td>
+      <td> -9.723257</td>
+      <td> 0</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -0.419929</td>
+      <td> 17.429072</td>
+      <td> 10.077393</td>
+      <td> 1</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-18.238856</td>
+      <td>  7.356460</td>
+      <td>  1.138426</td>
+      <td> 2</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">2</th>
+      <th>0</th>
+      <td>-13.063704</td>
+      <td>  2.757048</td>
+      <td> -8.495509</td>
+      <td> 0</td>
+      <td> 2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -1.044417</td>
+      <td> 13.936055</td>
+      <td>  9.996726</td>
+      <td> 1</td>
+      <td> 2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-19.295839</td>
+      <td>  9.188858</td>
+      <td>  3.061227</td>
+      <td> 2</td>
+      <td> 2</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">3</th>
+      <th>0</th>
+      <td>-13.679896</td>
+      <td>  3.493356</td>
+      <td> -9.183014</td>
+      <td> 0</td>
+      <td> 3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -0.571843</td>
+      <td> 15.075394</td>
+      <td> 10.780867</td>
+      <td> 1</td>
+      <td> 3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-19.159403</td>
+      <td>  9.857153</td>
+      <td>  2.096635</td>
+      <td> 2</td>
+      <td> 3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <th>1</th>
+      <td>  0.545050</td>
+      <td> 14.743210</td>
+      <td> 12.023129</td>
+      <td> 1</td>
+      <td> 4</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>The method return a new <tt class="docutils literal"><span class="pre">Trajectories</span></tt> with interpolated value for
+missing timepoint. <tt class="docutils literal"><span class="pre">v_*</span></tt> values are speeds and <tt class="docutils literal"><span class="pre">a_*</span></tt> values are
+accelerations.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># t = 1 has been &quot;guessed&quot;</span>
+<span class="n">interpolated_trajs</span> <span class="o">=</span> <span class="n">missing_trajs</span><span class="o">.</span><span class="n">time_interpolate</span><span class="p">()</span>
+<span class="n">interpolated_trajs</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>t</th>
+      <th>x</th>
+      <th>v_x</th>
+      <th>a_x</th>
+      <th>y</th>
+      <th>v_y</th>
+      <th>a_y</th>
+      <th>z</th>
+      <th>v_z</th>
+      <th>a_z</th>
+    </tr>
+    <tr>
+      <th>t_stamp</th>
+      <th>label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">0</th>
+      <th>0</th>
+      <td> 0</td>
+      <td>-15.425890</td>
+      <td> 1.181093</td>
+      <td>      NaN</td>
+      <td>  3.604392</td>
+      <td>-0.423672</td>
+      <td>      NaN</td>
+      <td> -9.723257</td>
+      <td> 0.613874</td>
+      <td>      NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> 0</td>
+      <td> -0.419929</td>
+      <td>-0.475633</td>
+      <td>-0.076494</td>
+      <td> 17.429072</td>
+      <td>-7.163935</td>
+      <td> 7.746446</td>
+      <td> 10.077393</td>
+      <td>-0.273943</td>
+      <td> 0.022917</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td> 0</td>
+      <td>-18.238856</td>
+      <td>-1.830310</td>
+      <td> 1.874175</td>
+      <td>  7.356460</td>
+      <td>-0.272637</td>
+      <td> 2.091574</td>
+      <td>  1.138426</td>
+      <td> 3.899341</td>
+      <td>-4.040572</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">1</th>
+      <th>0</th>
+      <td> 1</td>
+      <td>-14.244797</td>
+      <td> 1.181093</td>
+      <td>      NaN</td>
+      <td>  3.180720</td>
+      <td>-0.423672</td>
+      <td>      NaN</td>
+      <td> -9.109383</td>
+      <td> 0.613874</td>
+      <td>      NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> 1</td>
+      <td> -0.873838</td>
+      <td>-0.372215</td>
+      <td> 0.283330</td>
+      <td> 13.556105</td>
+      <td>-1.164254</td>
+      <td> 4.252917</td>
+      <td>  9.867582</td>
+      <td>-0.093007</td>
+      <td> 0.338956</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td> 1</td>
+      <td>-19.275168</td>
+      <td>-0.385402</td>
+      <td> 1.015641</td>
+      <td>  7.903925</td>
+      <td> 1.141883</td>
+      <td> 0.737468</td>
+      <td>  3.293139</td>
+      <td> 0.685742</td>
+      <td>-2.386626</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">2</th>
+      <th>0</th>
+      <td> 2</td>
+      <td>-13.063704</td>
+      <td>-0.616192</td>
+      <td>      NaN</td>
+      <td>  2.757048</td>
+      <td> 0.736307</td>
+      <td>      NaN</td>
+      <td> -8.495509</td>
+      <td>-0.687505</td>
+      <td>      NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> 2</td>
+      <td> -1.044417</td>
+      <td> 0.091027</td>
+      <td> 0.643154</td>
+      <td> 13.936055</td>
+      <td> 1.341899</td>
+      <td> 0.759388</td>
+      <td>  9.996726</td>
+      <td> 0.403969</td>
+      <td> 0.654996</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td> 2</td>
+      <td>-19.295839</td>
+      <td> 0.200972</td>
+      <td> 0.157107</td>
+      <td>  9.188858</td>
+      <td> 1.202298</td>
+      <td>-0.616639</td>
+      <td>  3.061227</td>
+      <td>-0.873910</td>
+      <td>-0.732679</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>0</th>
+      <td> 3</td>
+      <td>-13.679896</td>
+      <td>-0.616192</td>
+      <td>      NaN</td>
+      <td>  3.493356</td>
+      <td> 0.736307</td>
+      <td>      NaN</td>
+      <td> -9.183014</td>
+      <td>-0.687505</td>
+      <td>      NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>See also:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">relabel()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">scale()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">project()</span></tt> : project each spots on a line specified by two spots.</li>
+</ul>
+<p>See <tt class="docutils literal"><span class="pre">`Trajectories</span></tt>
+API &lt;<a class="reference external" href="http://scikit-tracker.org/dev/api/sktracker.trajectories.html#sktracker.trajectories.Trajectories">http://scikit-tracker.org/dev/api/sktracker.trajectories.html#sktracker.trajectories.Trajectories</a>&gt;`__
+for more informations.</p>
+</div>
+<div class="section" id="local-modifications">
+<h3>Local modifications<a class="headerlink" href="#local-modifications" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s see how to edit trajectories details. Almost in all methods, spots
+are identified with a tuple <tt class="docutils literal"><span class="pre">(t_stamp,</span> <span class="pre">label)</span></tt> and trajectory by an
+integer <tt class="docutils literal"><span class="pre">label</span></tt>.</p>
+<p>Remove a spot (can be a list of spots)</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+      <th>true_label</th>
+      <th>t</th>
+    </tr>
+    <tr>
+      <th>t_stamp</th>
+      <th>label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">0</th>
+      <th>0</th>
+      <td>-15.425890</td>
+      <td>  3.604392</td>
+      <td> -9.723257</td>
+      <td> 0</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -0.419929</td>
+      <td> 17.429072</td>
+      <td> 10.077393</td>
+      <td> 1</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-18.238856</td>
+      <td>  7.356460</td>
+      <td>  1.138426</td>
+      <td> 2</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1</th>
+      <th>0</th>
+      <td>-13.126613</td>
+      <td>  2.122316</td>
+      <td> -9.375269</td>
+      <td> 0</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -1.217757</td>
+      <td> 15.554279</td>
+      <td> 10.444372</td>
+      <td> 1</td>
+      <td> 1</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">remove_spots</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+      <th>true_label</th>
+      <th>t</th>
+    </tr>
+    <tr>
+      <th>t_stamp</th>
+      <th>label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">0</th>
+      <th>0</th>
+      <td>-15.425890</td>
+      <td>  3.604392</td>
+      <td> -9.723257</td>
+      <td> 0</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -0.419929</td>
+      <td> 17.429072</td>
+      <td> 10.077393</td>
+      <td> 1</td>
+      <td> 0</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">1</th>
+      <th>0</th>
+      <td>-13.126613</td>
+      <td>  2.122316</td>
+      <td> -9.375269</td>
+      <td> 0</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> -1.217757</td>
+      <td> 15.554279</td>
+      <td> 10.444372</td>
+      <td> 1</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-18.621760</td>
+      <td>  9.218586</td>
+      <td>  2.633193</td>
+      <td> 2</td>
+      <td> 1</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>Remove a segment/trajectory</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">labels</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">remove_segments</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">labels</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Merge two segments</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="s">&quot;Size of segment #0 :&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">trajs</span><span class="o">.</span><span class="n">get_segments</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Size of segment #3 :&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">trajs</span><span class="o">.</span><span class="n">get_segments</span><span class="p">()[</span><span class="mi">3</span><span class="p">]))</span>
+
+<span class="n">merged_trajs</span> <span class="o">=</span> <span class="n">trajs</span><span class="o">.</span><span class="n">merge_segments</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Size of segment #0 (merged with #3):&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">merged_trajs</span><span class="o">.</span><span class="n">get_segments</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Size of segment #0 : 4
+Size of segment #3 : 12
+Size of segment #0 (merged with #3): 16
+</pre></div>
+</div>
+<p>Cut a segment</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="s">&quot;Size of segment #4:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">trajs</span><span class="o">.</span><span class="n">get_segments</span><span class="p">()[</span><span class="mi">4</span><span class="p">]))</span>
+
+<span class="n">cut_trajs</span> <span class="o">=</span> <span class="n">trajs</span><span class="o">.</span><span class="n">cut_segments</span><span class="p">((</span><span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Size of segment #4 :&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cut_trajs</span><span class="o">.</span><span class="n">get_segments</span><span class="p">()[</span><span class="mi">4</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Size of segment #7 (new segment after cut) :&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cut_trajs</span><span class="o">.</span><span class="n">get_segments</span><span class="p">()[</span><span class="mi">7</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Size of segment #4: 13
+Size of segment #4 : 7
+Size of segment #7 (new segment after cut) : 6
+</pre></div>
+</div>
+<p>Duplicate a segment</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">dupli_trajs</span> <span class="o">=</span> <span class="n">trajs</span><span class="o">.</span><span class="n">duplicate_segments</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c"># Check wether #4 and #7 (duplicated) are the same</span>
+<span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">dupli_trajs</span><span class="o">.</span><span class="n">get_segments</span><span class="p">()[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="n">dupli_trajs</span><span class="o">.</span><span class="n">get_segments</span><span class="p">()[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">True</span>
+</pre></div>
+</div>
+<p>Because hard coded trajectories modifications can take long time and be
+boring, we designed a smart GUI that allows all kind of local trajectory
+editions such as remove, duplicate, merge and so forth.</p>
+<p>For more infos please go
+<a class="reference external" href="http://scikit-tracker.org/dev/basics/ui.html">here</a>.</p>
+</div>
 </div>
 <div class="section" id="measurements-on-trajectories">
 <h2>Measurements on trajectories<a class="headerlink" href="#measurements-on-trajectories" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span> <span class="nn">sktracker.trajectories</span> <span class="kn">import</span> <span class="n">Trajectories</span>
+<span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">brownian_trajs_df</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Get the differences between each consecutive timepoints for a same
+trajectory (label).</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">get_diff</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>t</th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+    <tr>
+      <th>t_stamp</th>
+      <th>label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">0</th>
+      <th>0</th>
+      <td>NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+      <td>       NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">1</th>
+      <th>0</th>
+      <td>  1</td>
+      <td> 20.307078</td>
+      <td> -8.108166</td>
+      <td>-19.490299</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>  1</td>
+      <td> 13.827910</td>
+      <td> 29.331007</td>
+      <td>-23.354528</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>  1</td>
+      <td>  3.845230</td>
+      <td> 14.221569</td>
+      <td> 25.614719</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>  1</td>
+      <td>-30.136494</td>
+      <td>-17.332147</td>
+      <td>  8.584708</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>  1</td>
+      <td> -5.692935</td>
+      <td>-17.923296</td>
+      <td>  7.438539</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">2</th>
+      <th>0</th>
+      <td>  1</td>
+      <td>  5.629275</td>
+      <td> 11.364669</td>
+      <td>-14.749773</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>  1</td>
+      <td>-23.926437</td>
+      <td> -2.618648</td>
+      <td> 35.080733</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>  1</td>
+      <td> -3.746919</td>
+      <td>-15.052938</td>
+      <td>-26.025025</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>  1</td>
+      <td> 23.240229</td>
+      <td>  5.534567</td>
+      <td>  4.645337</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>  1</td>
+      <td>  0.634655</td>
+      <td> -0.002195</td>
+      <td>  0.283652</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>Get the instantaneous speeds between each consecutive timepoints for a
+same trajectory (label).</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">get_speeds</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>t_stamp  label
+0        0                NaN
+         1                NaN
+         2                NaN
+         3                NaN
+         4                NaN
+1        0         857.991535
+         1        1596.953075
+         2         873.152678
+         3        1282.308817
+         4         408.985890
+2        0         378.400237
+         1        1809.989515
+         2         917.932277
+         3         592.318817
+         4           0.483250
+dtype: float64
+</pre></div>
+</div>
 <div class="code python highlight-python"><div class="highlight"><pre># Run this cell first.
 %load_ext autoreload
 %autoreload 2
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>The autoreload extension is already loaded. To reload it, use:
-  %reload_ext autoreload
 </pre></div>
 </div>
 </div>
@@ -513,7 +1372,7 @@ for more informations.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-cd36e96',
+            VERSION:'0.3.dev-9148725',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
