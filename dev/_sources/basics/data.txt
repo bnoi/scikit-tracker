@@ -89,24 +89,6 @@ Get sample microscopy stack
 .. image:: data_notebook_output_files/output_7_2.png
 
 
-Get Tiff files as filenames list
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    data.stack_list()
-
-
-
-.. parsed-literal::
-
-    ['/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-1.tif',
-     '/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-2.tif',
-     '/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-3.tif',
-     '/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-4.tif']
-
-
-
 Get sample H5 file stored by ``sktacker.io.ObjectsIO``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
