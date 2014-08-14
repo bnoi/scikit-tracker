@@ -7,10 +7,10 @@ from __future__ import absolute_import
 from __future__ import print_function
 
 import warnings
+from functools import reduce
 
 import numpy as np
 import pandas as pd
-import scipy as sp
 
 from pandas.io import pytables
 
@@ -714,13 +714,42 @@ class Trajectories(pd.DataFrame):
 
     # Measures
 
-    def get_mean_distances(self, group_args={'level': 'label'},
-                           coords=['x', 'y', 'z']):
-        """Return the mean distances between each timepoints. Objects are grouped
-        following group_args parameters.
+    def get_diff(self, group_args={'level': 'label'},
+                 columns=['t', 'x', 'y', 'z']):
+        """Return the diff grouped by labels.
 
         Parameters
         ----------
+        group_args : dict
+            Used to group objects with :meth:`pandas.DataFrame.groupby`.
+        columns : list
+            Column names on which applying np.diff
+
+        Returns
+        -------
+        diffs as :class:`pandas.DataFrame`
+        """
+
+        gp = self.groupby(**group_args)
+
+        def get_distances(x):
+            return np.diff(x)
+
+        diffs = pd.DataFrame([])
+        for coord in columns:
+            diffs[coord] = gp[coord].apply(pd.rolling_apply, 2, get_distances)
+
+        return diffs
+
+    def get_speeds(self, time_column='t',
+                   group_args={'level': 'label'},
+                   coords=['x', 'y', 'z']):
+        """Get instantaneous speeds between each spots on the same label.
+
+        Parameters
+        ----------
+        time_column : str
+            Column used to represents time.
         group_args : dict
             Used to group objects with :meth:`pandas.DataFrame.groupby`.
         coords : list
@@ -728,37 +757,15 @@ class Trajectories(pd.DataFrame):
 
         Returns
         -------
-        mean_dist : :class:`pandas.DataFrame`
+        :class:`pandas.Series`
         """
+        diffs = self.get_diff(group_args=group_args, columns=coords + [time_column])
+        diffs[coords] = diffs[coords] ** 2
 
-        def get_euclidean_distance(vec):
-            vec = vec.loc[:, coords].values
-            dist = (vec[:-1] - vec[1:]) ** 2
-            dist = dist.sum(axis=-1)
-            dist = np.sqrt(dist)
-            return pd.DataFrame(dist, columns=['distance'])
+        speeds = reduce(pd.Series.__add__, [diffs[c] for c in coords])
+        speeds /= np.abs(diffs[time_column])
 
-        groups = self.groupby(**group_args)
-        distances = groups.apply(get_euclidean_distance)
-        mean_dist = distances.groupby(level=0).mean()
-
-        return mean_dist
-
-    def all_speeds(self, coords=['x', 'y', 'z']):
-        """Get all speeds in trajectories between each t_stamp.
-        """
-        t_stamp = self.index.get_level_values('t_stamp').unique()
-        speeds = []
-
-        for t1, t2 in zip(t_stamp[:-1], t_stamp[1:]):
-            p1 = self.loc[t1]
-            p2 = self.loc[t2]
-            dt = p2['t'].unique()[0] - p1['t'].unique()[0]
-
-            d = sp.spatial.distance.cdist(p1.loc[:, coords], p2.loc[:, coords]).flatten()
-            speeds += (d / dt).tolist()
-
-        return np.array(speeds)
+        return speeds
 
     # Visualization methods
 

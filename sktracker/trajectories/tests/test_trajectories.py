@@ -80,6 +80,12 @@ def test_reverse():
 
     assert trajs.reverse().shape == (25, 5)
 
+    trajs = data.brownian_trajs_df()
+    trajs = Trajectories(trajs)
+    trajs.reverse(inplace=True)
+
+    assert trajs.shape == (25, 5)
+
 
 def test_write_hdf():
 
@@ -88,18 +94,6 @@ def test_write_hdf():
     tmp_store = tempfile.NamedTemporaryFile(suffix='h5')
     with pd.get_store(tmp_store.name) as store:
         store['trajs'] = trajs
-
-
-def test_get_mean_dist():
-
-    true_trajs = data.brownian_trajs_df()
-
-    trajs = Trajectories(true_trajs)
-    mean_dist = trajs.get_mean_distances()
-
-    true_dist = np.array([21.71975058, 35.72098449, 31.40463335, 29.5767909, 17.89387283])
-
-    assert_array_almost_equal(true_dist, mean_dist.values.flatten())
 
 
 def test_interpolate():
@@ -119,37 +113,71 @@ def test_interpolate():
     assert_almost_equal(dts.min(), dts.max())
 
 
-def test_all_speeds():
+def get_get_diff():
 
-    trajs = data.brownian_trajs_df()
-    trajs = Trajectories(trajs)
-    speeds = trajs.all_speeds()
+    trajs = Trajectories(data.brownian_trajs_df())
+    diffs = trajs.get_diff()
+    x_diffs = diffs.to_dict()['x']
 
-    real_speeds = [29.29149253,  42.24278092,   1.24544591,  28.5496605 ,
-                   31.5956165 ,  21.93710968,  39.96189529,  30.506188  ,
-                   23.63875175,   2.02299763,  25.16282357,  34.9177922 ,
-                   29.54915698,   0.77486359,  23.92966393,  18.10192901,
-                   1.4519421 ,  42.6697699 ,  35.80933981,  38.35867461,
-                   2.00826474,  20.00524827,  28.63076735,  23.96234609,
-                   20.22339956,  19.45251236,  29.61463181,  25.36724868,
-                   1.61745084,  21.17778688,   1.00431235,  42.54397154,
-                   35.15677816,  19.85153065,  39.07826864,  43.91553261,
-                   1.14867379,  30.29739719,  29.36707721,  32.13200073,
-                   36.47041249,  30.15276245,   1.131474  ,  24.3376009 ,
-                   24.77755792,  39.50921192,  32.31300005,  23.67070283,
-                   20.12833613,   0.6951622 ,   0.62889679,  19.35806068,
-                   45.24644565,  39.42756814,  37.55238742,  43.4886719 ,
-                   28.25417822,   2.40067016,  32.46583113,  31.23535934,
-                   36.41432396,  24.7943914 ,  32.94421696,  23.2506553 ,
-                   2.06057683,  20.47042796,   2.22746757,  30.79769909,
-                   20.13682322,  24.742422  ,  39.65555878,  21.87756577,
-                   33.5356576 ,   1.20844778,  23.46008422,  37.50610066,
-                   46.73647432,  38.31748506,   2.14598242,  20.37801735,
-                   19.87613565,  32.12389289,  25.36581069,  17.50636222,
-                   2.04705   ,  32.53990188,   2.933702  ,  32.82776228,
-                   43.24067854,  29.9153449 ,   2.43175831,  36.47559589,
-                   20.77942458,  38.02339969,  21.63794875,  20.69995033,
-                   35.15221208,   1.75205306,  36.63872024,  27.19684534]
+    real_x_diffs = {(1, 2): 3.8452299074207819,
+                    (3, 2): 4.7476193900872765,
+                    (0, 0): np.nan,
+                    (3, 0): 0.54161236467700746,
+                    (0, 4): np.nan,
+                    (1, 4): -5.6929349491048624,
+                    (1, 3): -30.136494087633611,
+                    (2, 3): 23.240228721514185,
+                    (2, 1): -23.9264368052234,
+                    (2, 4): 0.63465512968445115,
+                    (4, 2): -4.5501817884252063,
+                    (1, 0): 20.307078207040306,
+                    (0, 3): np.nan,
+                    (4, 0): -14.421880216023439,
+                    (0, 1): np.nan,
+                    (3, 3): -6.5845079821965991,
+                    (4, 1): -19.329775838349192,
+                    (3, 1): 18.084232469105203,
+                    (4, 4): 24.644945052453025,
+                    (0, 2): np.nan,
+                    (2, 0): 5.6292750381105723,
+                    (4, 3): 13.209596167161628,
+                    (2, 2): -3.7469188310869228,
+                    (3, 4): -17.381636024737336,
+                    (1, 1): 13.827909766138866}
+
+    assert_almost_equal(x_diffs, real_x_diffs)
+
+
+def test_get_speeds():
+
+    trajs = Trajectories(data.brownian_trajs_df())
+    speeds = trajs.get_speeds().tolist()
+
+    real_speeds = [np.nan,
+                   np.nan,
+                   np.nan,
+                   np.nan,
+                   np.nan,
+                   857.99153458573994,
+                   1596.9530747771976,
+                   873.15267834726137,
+                   1282.3088174598233,
+                   408.98588960526808,
+                   378.40023709328955,
+                   1809.9895146014187,
+                   917.93227668556324,
+                   592.31881736181106,
+                   0.48325048326444919,
+                   0.39551116881922965,
+                   798.29858694043128,
+                   1085.3214310682606,
+                   405.49164945495221,
+                   550.37555144616226,
+                   1406.707586739079,
+                   1031.9444945962532,
+                   1077.6619763794718,
+                   1445.7789239945778,
+                   739.66839622816326]
 
     assert_almost_equal(speeds, real_speeds)
 
@@ -223,6 +251,17 @@ def test_project():
                          [ 7.25346979e-01,  1.77848529e-01]])
 
     assert_array_almost_equal(excepted, trajs.loc[:,['x_proj', 'y_proj']].values)
+
+    trajs = trajs.project([0, 1],
+                           coords=['x', 'y'],
+                           keep_first_time=False,
+                           reference=None,
+                           inplace=False,
+                           progress=False)
+
+    assert_array_almost_equal(excepted, trajs.loc[:,['x_proj', 'y_proj']].values)
+
+    assert_raises(ValueError, trajs.project, [0, 1], coords=['x', 'y', 'z', 't'])
 
 
 def test_get_colors():
@@ -309,6 +348,17 @@ def test_relabel():
 
     assert trajs.iloc[:4].values.tolist() == new_values
 
+    trajs = Trajectories(data.brownian_trajs_df())
+    trajs.columns = ['x', 'y', 'z', 'new_label', 't']
+    trajs = trajs.relabel(inplace=False)
+
+    new_values = [[1.933058243735795, -14.581064591435775, 11.603556633147544, 0.0],
+                  [-12.862215173899491, -2.8611502446443238, -2.2738941196781424, 0.0],
+                  [9.100887851132633, 2.837252570763561, 2.875753940450461, 0.0],
+                  [-9.253860446235523, 11.345550876585719, 22.118203258275745, 0.0]]
+
+    assert trajs.iloc[:4].values.tolist() == new_values
+
 
 def test_relabel_fromzero():
     """
@@ -370,6 +420,18 @@ def test_merge_segments():
 
     assert_array_equal(trajs.values, new_trajs.values)
 
+    trajs = Trajectories(data.brownian_trajs_df())
+    good_trajs = trajs.copy()
+
+    trajs.reset_index(inplace=True)
+    trajs.loc[15, ['label']] = 88
+    trajs.loc[20, ['label']] = 88
+    trajs.set_index(['t_stamp', 'label'], inplace=True)
+
+    trajs.merge_segments([0, 88], inplace=True)
+
+    assert_array_equal(trajs.values, good_trajs.values)
+
 
 def test_cut_segments():
     """
@@ -377,6 +439,17 @@ def test_cut_segments():
     trajs = Trajectories(data.brownian_trajs_df())
 
     trajs.cut_segments((2, 3), inplace=True)
+
+    new_indexes = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1),
+                   (1, 2), (1, 3), (1, 4), (2, 0), (2, 1), (2, 2), (2, 3),
+                   (2, 4), (3, 0), (3, 1), (3, 2), (3, 4), (3, 5), (4, 0),
+                   (4, 1), (4, 2), (4, 4), (4, 5)]
+
+    assert trajs.index.tolist() == new_indexes
+
+    trajs = Trajectories(data.brownian_trajs_df())
+
+    trajs = trajs.cut_segments((2, 3), inplace=False)
 
     new_indexes = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1),
                    (1, 2), (1, 3), (1, 4), (2, 0), (2, 1), (2, 2), (2, 3),

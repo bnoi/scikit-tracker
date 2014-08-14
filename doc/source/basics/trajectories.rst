@@ -17,11 +17,14 @@ Be aware that ``t_stamp`` are time index and does not represent time in
 second or minute. Time position (in second or minute) can be stored as
 object's features in columns (with 't' for example).
 
-Create trajectories
--------------------
+Trajectories creation
+---------------------
 
 All you need to create a ``Trajectories`` object is a
-``pandas.DataFrame``.
+``pandas.DataFrame``. Note that ``sktracker`` makes an heavy use of
+``pandas.DataFrame``. If you are not familiar with it, take a look at
+the wonderfull `Pandas
+documentation <http://pandas.pydata.org/pandas-docs/stable/>`__.
 
 .. code:: python
 
@@ -65,42 +68,41 @@ All you need to create a ``Trajectories`` object is a
       </thead>
       <tbody>
         <tr>
+          <th rowspan="4" valign="top">0</th>
           <th>0</th>
-          <th>0</th>
-          <td> 0.891366</td>
-          <td> 0.659543</td>
-          <td> 0.091617</td>
-          <td>   0</td>
+          <td> 0.943588</td>
+          <td> 0.268040</td>
+          <td> 0.436611</td>
+          <td>  0</td>
         </tr>
         <tr>
           <th>1</th>
-          <th>1</th>
-          <td> 0.602459</td>
-          <td> 0.673590</td>
-          <td> 0.111075</td>
-          <td>  60</td>
+          <td> 0.484852</td>
+          <td> 0.807258</td>
+          <td> 0.222027</td>
+          <td>  0</td>
         </tr>
         <tr>
-          <th rowspan="3" valign="top">2</th>
           <th>2</th>
-          <td> 0.907255</td>
-          <td> 0.522362</td>
-          <td> 0.644981</td>
-          <td> 120</td>
+          <td> 0.572740</td>
+          <td> 0.155965</td>
+          <td> 0.728578</td>
+          <td>  0</td>
         </tr>
         <tr>
           <th>3</th>
-          <td> 0.823668</td>
-          <td> 0.811170</td>
-          <td> 0.229627</td>
-          <td> 120</td>
+          <td> 0.215663</td>
+          <td> 0.472669</td>
+          <td> 0.654975</td>
+          <td>  0</td>
         </tr>
         <tr>
+          <th>1</th>
           <th>4</th>
-          <td> 0.316576</td>
-          <td> 0.700603</td>
-          <td> 0.369789</td>
-          <td> 120</td>
+          <td> 0.449510</td>
+          <td> 0.313357</td>
+          <td> 0.153198</td>
+          <td> 60</td>
         </tr>
       </tbody>
     </table>
@@ -127,12 +129,13 @@ anything you want/need.
 
 .. parsed-literal::
 
-    2014-08-14 11:22:55:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
+    2014-08-14 11:17:34:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
 
 
-
-Visualize trajectories
-----------------------
+                :ref:`create_trajs`
+                
+Trajectories viewer
+-------------------
 
 First thing you want to do is probably to visualize trajectories you're
 working on. First load some sample dataset.
@@ -140,9 +143,15 @@ working on. First load some sample dataset.
 .. code:: python
 
     from sktracker import data
+    from sktracker.trajectories import Trajectories
     trajs = data.with_gaps_df()
     trajs = Trajectories(trajs)
     trajs.head()
+
+.. parsed-literal::
+
+    2014-08-14 11:27:02:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
+
 
 
 
@@ -227,18 +236,12 @@ working on. First load some sample dataset.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b9fda13c630>
+    <matplotlib.axes.AxesSubplot at 0x7effe6ca1cc0>
 
 
 
-.. parsed-literal::
 
-    /home/hadim/local/virtualenvs/st/lib/python3.4/site-packages/matplotlib/font_manager.py:1236: UserWarning: findfont: Font family ['monospace'] not found. Falling back to Bitstream Vera Sans
-      (prop.get_family(), self.defaultFamily[fontext]))
-
-
-
-.. image:: trajectories_notebook_output_files/output_11_2.png
+.. image:: trajectories_notebook_output_files/output_10_1.png
 
 
 You can change axis to display.
@@ -251,12 +254,12 @@ You can change axis to display.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b9fdc18f278>
+    <matplotlib.axes.AxesSubplot at 0x7effde9c5860>
 
 
 
 
-.. image:: trajectories_notebook_output_files/output_13_1.png
+.. image:: trajectories_notebook_output_files/output_12_1.png
 
 
 You can also add a legend.
@@ -269,12 +272,12 @@ You can also add a legend.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b9fdc2585f8>
+    <matplotlib.axes.AxesSubplot at 0x7effde8ef0f0>
 
 
 
 
-.. image:: trajectories_notebook_output_files/output_15_1.png
+.. image:: trajectories_notebook_output_files/output_14_1.png
 
 
 You can also build more complex figures.
@@ -296,12 +299,12 @@ You can also build more complex figures.
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b9fdc3c3f60>
+    <matplotlib.axes.AxesSubplot at 0x7effde7d7f28>
 
 
 
 
-.. image:: trajectories_notebook_output_files/output_17_1.png
+.. image:: trajectories_notebook_output_files/output_16_1.png
 
 
 ``Trajectories.show()`` is a nice way to quickly build visualizations.
@@ -309,8 +312,10 @@ However ``sktracker.ui`` module provides more complex functions and
 classes in order to visualize your trajectories/dataset. See
 `here <ui.html>`__ for more details.
 
-Get informations
-----------------
+                <a id='get_infos' />
+                
+Retrieve informations
+---------------------
 
 Here you will find how to retrieve informations specific to
 trajectories. Remember that trajectory and segment are the same as well
@@ -417,7 +422,82 @@ for more informations.
 Modify trajectories
 -------------------
 
-TODO
+Automatic objects detection and tracking is very powerfull. However
+sometime you'll need to manually edit and modify trajectories. Here it
+is presented methods to help you with that. Methods are separated in two
+kinds : global and local trajectories modifications.
+
+Global modifications
+~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    trajs['t']
+
+
+
+.. parsed-literal::
+
+    t_stamp  label
+    0        0         0
+             1         0
+             2         0
+    1        0         1
+             1         1
+             2         1
+    2        0         2
+             1         2
+             2         2
+    3        0         3
+             1         3
+             2         3
+    4        1         4
+             2         4
+    5        1         5
+             2         5
+             3         5
+    6        2         6
+             3         6
+    7        2         7
+             3         7
+             4         7
+    8        2         8
+             3         8
+             4         8
+    9        2         9
+             3         9
+             4         9
+    10       2        10
+             3        10
+             4        10
+    11       2        11
+             3        11
+             4        11
+    12       2        12
+             3        12
+             4        12
+    13       2        13
+             3        13
+             4        13
+    14       3        14
+             4        14
+    15       3        15
+             4        15
+             5        15
+    16       3        16
+             4        16
+             5        16
+    17       4        17
+             5        17
+    18       4        18
+             5        18
+             6        18
+    19       4        19
+             5        19
+             6        19
+    Name: t, Length: 56, dtype: float64
+
+
 
 Measurements on trajectories
 ----------------------------
