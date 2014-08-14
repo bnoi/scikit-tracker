@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.solver package &mdash; sktracker 0.3.dev-52c6cf9 docs</title>
+  <title>sktracker.tracker.solver package &mdash; sktracker 0.3.dev-2848ace docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-52c6cf9 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-2848ace docs" href="../index.html"/>
         <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
         <link rel="next" title="sktracker.tracker.solver.by_frame_solver module" href="sktracker.tracker.solver.by_frame_solver.html"/>
         <link rel="prev" title="sktracker.tracker.matrix.matrix module" href="sktracker.tracker.matrix.matrix.html"/> 
@@ -107,9 +107,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../contribute.html#guidelines">Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contribute.html#stylistic-guidelines">Stylistic Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contribute.html#test-coverage">Test coverage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contribute.html#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#continous-integration-with-travis-ci">Continous integration with Travis-CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html#tips-for-developers">Tips for developers</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../cite.html">How to cite scikit-tracker</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 </ul>
 
@@ -273,8 +275,8 @@ as the new label index</p>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">ByFrameSolver</span><span class="o">.</span><span class="n">for_brownian_motion</span><span class="p">(</span><span class="n">true_trajs</span><span class="p">,</span> <span class="n">max_speed</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="mf">2.</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">new_trajs</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">track</span><span class="p">()</span>
-<span class="go">2014-08-11:INFO:sktracker.tracker.solver.by_frame_solver: Initiating frame by frame tracking.</span>
-<span class="go">2014-08-11:INFO:sktracker.tracker.solver.by_frame_solver: Frame by frame tracking done. 5 segments found (500 before).</span>
+<span class="go">2014:INFO:by_frame_solver: Initiating frame by frame tracking.</span>
+<span class="go">2014:INFO:by_frame_solver: Frame by frame tracking done. 5 segments found (500 before).</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -506,7 +508,7 @@ Thus, the alternative cost was taken as the 90th percentile.</div></blockquote>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-52c6cf9',
+            VERSION:'0.3.dev-2848ace',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

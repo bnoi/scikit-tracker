@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Contribute to development &mdash; sktracker 0.3.dev-52c6cf9 docs</title>
+  <title>Contribute to development &mdash; sktracker 0.3.dev-2848ace docs</title>
   
 
   
@@ -31,8 +31,8 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-52c6cf9 docs" href="index.html"/>
-        <link rel="next" title="License" href="license.html"/>
+    <link rel="top" title="sktracker 0.3.dev-2848ace docs" href="index.html"/>
+        <link rel="next" title="How to cite scikit-tracker" href="cite.html"/>
         <link rel="prev" title="sktracker.version module" href="api/sktracker.version.html"/> 
 
   
@@ -106,9 +106,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#guidelines">Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#stylistic-guidelines">Stylistic Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#test-coverage">Test coverage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#continous-integration-with-travis-ci">Continous integration with Travis CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#continous-integration-with-travis-ci">Continous integration with Travis-CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tips-for-developers">Tips for developers</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="cite.html">How to cite scikit-tracker</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -146,20 +148,83 @@
             
   <div class="section" id="contribute-to-development">
 <h1>Contribute to development<a class="headerlink" href="#contribute-to-development" title="Permalink to this headline">¶</a></h1>
+<p><strong>scikit-tracker</strong> is community driven which means that anyone can contribute. There is different
+ways to help scikit-tracker development :</p>
+<ul class="simple">
+<li>report bugs to <a class="reference external" href="https://github.com/bnoi/scikit-tracker/issues">https://github.com/bnoi/scikit-tracker/issues</a></li>
+<li>write documentation (<a class="reference internal" href="use_cases.html#use-cases"><em>use cases</em></a> are welcome !)</li>
+<li>open Pull Request on Github to fix, bugs or add new features</li>
+</ul>
+<p>Active contributors can ask to become official member with write access to the github repository.</p>
 <div class="section" id="development-process">
 <h2>Development process<a class="headerlink" href="#development-process" title="Permalink to this headline">¶</a></h2>
+<p>Development workflow follows numpy guidelines available at
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html">http://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html</a>.</p>
 </div>
 <div class="section" id="guidelines">
 <h2>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h2>
+<p>(<em>partially stolen from http://scikit-image.org/docs/dev/contribute.html</em>)</p>
+<ul class="simple">
+<li>All code should have tests (with <cite>nose</cite> module) in a module repository called <tt class="docutils literal"><span class="pre">tests</span></tt>.</li>
+<li>All code should be documented, to the same standard as NumPy and SciPy.</li>
+<li>For new features, try to add example on docstring or in documentation (<a class="reference internal" href="basics.html#basics"><em>Basics: getting started with sktracker</em></a> or <a class="reference internal" href="use_cases.html#use-cases"><em>Use cases</em></a>).</li>
+<li>Heavy new algorithms should be described in a theoretically point of view in <a class="reference internal" href="theory.html#theory"><em>Theory about some featured algorithms</em></a>.</li>
+<li>After opening a new Pull Request Travis-CI will check that everything is fine. Don&#8217;t forget to
+adapt <tt class="docutils literal"><span class="pre">travis.yml</span></tt> when it&#8217;s appropriate.</li>
+</ul>
 </div>
 <div class="section" id="stylistic-guidelines">
 <h2>Stylistic Guidelines<a class="headerlink" href="#stylistic-guidelines" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Set up your editor to remove trailing whitespace.</p>
+</li>
+<li><p class="first">Always check your code with a PEP8 checker (<tt class="docutils literal"><span class="pre">pep8</span></tt> and/or <tt class="docutils literal"><span class="pre">pyflakes</span></tt>)</p>
+</li>
+<li><p class="first">Use the following import conventions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 <div class="section" id="test-coverage">
 <h2>Test coverage<a class="headerlink" href="#test-coverage" title="Permalink to this headline">¶</a></h2>
+<p>scikit-tracker use <tt class="docutils literal"><span class="pre">overage</span></tt> (<tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">coverage</span></tt>)`to check code coverage during tests.
+Ideally it should be always 100%. In fact coverage above 90% is fine.</p>
+<p>To launch coverage got the scikit-tracker root:</p>
+<div class="highlight-python"><div class="highlight"><pre>make coverage
+</pre></div>
+</div>
 </div>
 <div class="section" id="continous-integration-with-travis-ci">
-<h2>Continous integration with Travis CI<a class="headerlink" href="#continous-integration-with-travis-ci" title="Permalink to this headline">¶</a></h2>
+<h2>Continous integration with Travis-CI<a class="headerlink" href="#continous-integration-with-travis-ci" title="Permalink to this headline">¶</a></h2>
+<p>Travis-CI (<a class="reference external" href="https://travis-ci.org/bnoi/scikit-tracker">https://travis-ci.org/bnoi/scikit-tracker</a>) build, installs, tests and check coverage each
+time a commit is made or a pull request open on the github repository.</p>
+<p>Optionally you can enable Travis-CI check for your own scikit-tracker fork:</p>
+<ul class="simple">
+<li>Go to Travis-CI and follow the Sign In link at the top</li>
+<li>Go to your profile page and switch on your <tt class="docutils literal"><span class="pre">scikit-tracker</span></tt> fork</li>
+<li>Thus, as soon as you push your code to your fork, it will trigger Travis-CI, and you will receive
+an email notification when the process is done.</li>
+</ul>
+</div>
+<div class="section" id="tips-for-developers">
+<h2>Tips for developers<a class="headerlink" href="#tips-for-developers" title="Permalink to this headline">¶</a></h2>
+<p>A Makefile at the root of the repository provides several commands:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">init-submodule</span></tt> and <tt class="docutils literal"><span class="pre">update-submodule</span></tt>: required to build documentation</li>
+<li><tt class="docutils literal"><span class="pre">clean</span></tt>: remove temporary Python files</li>
+<li><tt class="docutils literal"><span class="pre">flake8</span></tt>: check PEP8 (need <tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">flake8</span></tt>)</li>
+<li><tt class="docutils literal"><span class="pre">test</span></tt>: run <tt class="docutils literal"><span class="pre">nose</span></tt> tests</li>
+<li><tt class="docutils literal"><span class="pre">coverage</span></tt>: run <tt class="docutils literal"><span class="pre">nose</span></tt> tests with coverage</li>
+<li><tt class="docutils literal"><span class="pre">doc</span></tt>: build documentation with Sphinx</li>
+<li><tt class="docutils literal"><span class="pre">doc-execute-notebook</span></tt>: execute notebooks and then build documentation with Sphinx</li>
+<li><tt class="docutils literal"><span class="pre">push-doc</span></tt>: push doc to scikit-tracker.org (need write access to github repository)</li>
+<li><tt class="docutils literal"><span class="pre">open-doc</span></tt>: open locally built doc in default browser</li>
+</ul>
 </div>
 </div>
 
@@ -169,7 +234,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="license.html" class="btn btn-neutral float-right" title="License">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="cite.html" class="btn btn-neutral float-right" title="How to cite scikit-tracker">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="api/sktracker.version.html" class="btn btn-neutral" title="sktracker.version module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -201,7 +266,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.3.dev-52c6cf9',
+            VERSION:'0.3.dev-2848ace',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

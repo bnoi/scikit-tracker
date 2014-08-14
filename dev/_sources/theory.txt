@@ -1,3 +1,5 @@
+.. _theory:
+
 Theory about some featured algorithms
 =====================================
 
