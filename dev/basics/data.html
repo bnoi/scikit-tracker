@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Ready to use test dataset &mdash; sktracker 0.3.dev-9ecdaa4 docs</title>
+  <title>Ready to use test dataset &mdash; sktracker 0.3.dev-6d19001 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-9ecdaa4 docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-6d19001 docs" href="../index.html"/>
         <link rel="up" title="Basics: getting started with sktracker" href="../basics.html"/>
         <link rel="next" title="Use cases" href="../use_cases.html"/>
         <link rel="prev" title="GUI: view and modifiy trajectories manually" href="ui.html"/> 
@@ -152,16 +152,18 @@
 <p><tt class="docutils literal"><span class="pre">sktracker</span></tt> provides a <tt class="docutils literal"><span class="pre">data</span></tt> module contains sample dataset in
 order to test or usefulle during development.</p>
 <div class="code python highlight-python"><div class="highlight"><pre>%matplotlib inline
-import matplotlib.pyplot as plt
-
-import pandas as pd
-
-from sktracker import data
-from sktracker.trajectories import Trajectories
-from sktracker.io import TiffFile
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>2014-08-14 14:37:03:INFO:sktracker.utils.mpl_loader: Matplotlib backend &#39;Qt4Agg&#39; has been loaded.
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">sktracker</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span> <span class="nn">sktracker.trajectories</span> <span class="kn">import</span> <span class="n">Trajectories</span>
+<span class="kn">from</span> <span class="nn">sktracker.io</span> <span class="kn">import</span> <span class="n">TiffFile</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>2014-08-14 14:40:21:INFO:sktracker.utils.mpl_loader: Matplotlib backend &#39;Qt4Agg&#39; has been loaded.
 </pre></div>
 </div>
 <div class="section" id="generate-brownian-or-directed-trajectories">
@@ -170,18 +172,18 @@ from sktracker.io import TiffFile
 <span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">groupby_args</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;by&#39;</span><span class="p">:</span> <span class="s">&#39;true_label&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2b88b68adfd0&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2acfd6cfd978&gt;
 </pre></div>
 </div>
-<img alt="../_images/output_3_1.png" src="../_images/output_3_1.png" />
+<img alt="../_images/output_4_1.png" src="../_images/output_4_1.png" />
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">directed_trajectories_generator</span><span class="p">())</span>
 <span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">groupby_args</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;by&#39;</span><span class="p">:</span> <span class="s">&#39;true_label&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2b88b69925c0&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2acfd6d900f0&gt;
 </pre></div>
 </div>
-<img alt="../_images/output_4_1.png" src="../_images/output_4_1.png" />
+<img alt="../_images/output_5_1.png" src="../_images/output_5_1.png" />
 </div>
 <div class="section" id="get-sample-microscopy-stack">
 <h2>Get sample microscopy stack<a class="headerlink" href="#get-sample-microscopy-stack" title="Permalink to this headline">¶</a></h2>
@@ -196,10 +198,10 @@ from sktracker.io import TiffFile
 <div class="highlight-python"><div class="highlight"><pre>Shape is : (1, 4, 4, 48, 56)
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.image.AxesImage at 0x2b88b6a711d0&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.image.AxesImage at 0x2acfd6e973c8&gt;
 </pre></div>
 </div>
-<img alt="../_images/output_6_2.png" src="../_images/output_6_2.png" />
+<img alt="basics/data_notebook_output_files/output_7_2.png" src="basics/data_notebook_output_files/output_7_2.png" />
 </div>
 <div class="section" id="get-tiff-files-as-filenames-list">
 <h2>Get Tiff files as filenames list<a class="headerlink" href="#get-tiff-files-as-filenames-list" title="Permalink to this headline">¶</a></h2>
@@ -236,11 +238,21 @@ PysicalSizeZ                    1.5
 dtype: object
 </pre></div>
 </div>
-<p>See also : - <tt class="docutils literal"><span class="pre">sample_ome()</span></tt> - <tt class="docutils literal"><span class="pre">tubhiswt_4D()</span></tt> - <tt class="docutils literal"><span class="pre">stack_list_dir()</span></tt>
-- <tt class="docutils literal"><span class="pre">TZ_nucleus</span></tt> - <tt class="docutils literal"><span class="pre">TC_BF_cells()</span></tt> - <tt class="docutils literal"><span class="pre">metadata_json()</span></tt> -
-<tt class="docutils literal"><span class="pre">sample_h5_temp()</span></tt> - <tt class="docutils literal"><span class="pre">brownian_trajs_df()</span></tt> -
-<tt class="docutils literal"><span class="pre">directed_motion_trajs_df()</span></tt> - <tt class="docutils literal"><span class="pre">trackmate_xml_temp()</span></tt> -
-<tt class="docutils literal"><span class="pre">trackmate_xml()</span></tt> - <tt class="docutils literal"><span class="pre">with_gaps_d()</span></tt></p>
+<p>See also :</p>
+<div class="highlight-python"><div class="highlight"><pre>- `sample_ome()`
+- `tubhiswt_4D()`
+- `stack_list_dir()`
+- `TZ_nucleus`
+- `TC_BF_cells()`
+- `metadata_json()`
+- `sample_h5_temp()`
+- `brownian_trajs_df()`
+- `directed_motion_trajs_df()`
+- `trackmate_xml_temp()`
+- `trackmate_xml()`
+- `with_gaps_d()`
+</pre></div>
+</div>
 <p>Available in the API references.</p>
 <div class="code python highlight-python"><div class="highlight"><pre># Run this cell first.
 %load_ext autoreload
@@ -288,7 +300,7 @@ dtype: object
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-9ecdaa4',
+            VERSION:'0.3.dev-6d19001',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
