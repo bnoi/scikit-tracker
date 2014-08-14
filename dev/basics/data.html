@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Ready to use test dataset &mdash; sktracker 0.3.dev-f9fa9bf docs</title>
+  <title>Ready to use test dataset &mdash; sktracker 0.3.dev-9ecdaa4 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-f9fa9bf docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-9ecdaa4 docs" href="../index.html"/>
         <link rel="up" title="Basics: getting started with sktracker" href="../basics.html"/>
         <link rel="next" title="Use cases" href="../use_cases.html"/>
         <link rel="prev" title="GUI: view and modifiy trajectories manually" href="ui.html"/> 
@@ -149,7 +149,105 @@
             
   <div class="section" id="ready-to-use-test-dataset">
 <h1>Ready to use test dataset<a class="headerlink" href="#ready-to-use-test-dataset" title="Permalink to this headline">¶</a></h1>
-<p>TODO</p>
+<p><tt class="docutils literal"><span class="pre">sktracker</span></tt> provides a <tt class="docutils literal"><span class="pre">data</span></tt> module contains sample dataset in
+order to test or usefulle during development.</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%matplotlib inline
+import matplotlib.pyplot as plt
+
+import pandas as pd
+
+from sktracker import data
+from sktracker.trajectories import Trajectories
+from sktracker.io import TiffFile
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>2014-08-14 14:37:03:INFO:sktracker.utils.mpl_loader: Matplotlib backend &#39;Qt4Agg&#39; has been loaded.
+</pre></div>
+</div>
+<div class="section" id="generate-brownian-or-directed-trajectories">
+<h2>Generate brownian or directed trajectories<a class="headerlink" href="#generate-brownian-or-directed-trajectories" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">brownian_trajectories_generator</span><span class="p">())</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">groupby_args</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;by&#39;</span><span class="p">:</span> <span class="s">&#39;true_label&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2b88b68adfd0&gt;
+</pre></div>
+</div>
+<img alt="../_images/output_3_1.png" src="../_images/output_3_1.png" />
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">directed_trajectories_generator</span><span class="p">())</span>
+<span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">groupby_args</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;by&#39;</span><span class="p">:</span> <span class="s">&#39;true_label&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2b88b69925c0&gt;
+</pre></div>
+</div>
+<img alt="../_images/output_4_1.png" src="../_images/output_4_1.png" />
+</div>
+<div class="section" id="get-sample-microscopy-stack">
+<h2>Get sample microscopy stack<a class="headerlink" href="#get-sample-microscopy-stack" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">tf</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">CZT_peaks</span><span class="p">())</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Shape is :&quot;</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;none&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Shape is : (1, 4, 4, 48, 56)
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.image.AxesImage at 0x2b88b6a711d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/output_6_2.png" src="../_images/output_6_2.png" />
+</div>
+<div class="section" id="get-tiff-files-as-filenames-list">
+<h2>Get Tiff files as filenames list<a class="headerlink" href="#get-tiff-files-as-filenames-list" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">data</span><span class="o">.</span><span class="n">stack_list</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-1.tif&#39;</span><span class="p">,</span>
+ <span class="s">&#39;/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-2.tif&#39;</span><span class="p">,</span>
+ <span class="s">&#39;/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-3.tif&#39;</span><span class="p">,</span>
+ <span class="s">&#39;/home/hadim/Insync/Documents/phd/dev/scikit-tracker/sktracker/data/stack_list/Stack-4.tif&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-sample-h5-file-stored-by-sktacker-io-objectsio">
+<h2>Get sample H5 file stored by <tt class="docutils literal"><span class="pre">sktacker.io.ObjectsIO</span></tt><a class="headerlink" href="#get-sample-h5-file-stored-by-sktacker-io-objectsio" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">HDFStore</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">sample_h5</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&#39;metadata&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>[&#39;/metadata&#39;, &#39;/objects&#39;]
+Shape             (512, 512, 23, 5)
+SizeT                             5
+FileName             sample.ome.tif
+Type                        unint16
+TimeIncrement                     3
+PysicalSizeX                   0.43
+PysicalSizeY                   0.43
+DimensionOrder                 TZYX
+SizeZ                            23
+SizeX                           512
+SizeY                           512
+PysicalSizeZ                    1.5
+dtype: object
+</pre></div>
+</div>
+<p>See also : - <tt class="docutils literal"><span class="pre">sample_ome()</span></tt> - <tt class="docutils literal"><span class="pre">tubhiswt_4D()</span></tt> - <tt class="docutils literal"><span class="pre">stack_list_dir()</span></tt>
+- <tt class="docutils literal"><span class="pre">TZ_nucleus</span></tt> - <tt class="docutils literal"><span class="pre">TC_BF_cells()</span></tt> - <tt class="docutils literal"><span class="pre">metadata_json()</span></tt> -
+<tt class="docutils literal"><span class="pre">sample_h5_temp()</span></tt> - <tt class="docutils literal"><span class="pre">brownian_trajs_df()</span></tt> -
+<tt class="docutils literal"><span class="pre">directed_motion_trajs_df()</span></tt> - <tt class="docutils literal"><span class="pre">trackmate_xml_temp()</span></tt> -
+<tt class="docutils literal"><span class="pre">trackmate_xml()</span></tt> - <tt class="docutils literal"><span class="pre">with_gaps_d()</span></tt></p>
+<p>Available in the API references.</p>
+<div class="code python highlight-python"><div class="highlight"><pre># Run this cell first.
+%load_ext autoreload
+%autoreload 2
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -190,7 +288,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-f9fa9bf',
+            VERSION:'0.3.dev-9ecdaa4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
