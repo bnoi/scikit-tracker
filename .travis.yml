@@ -47,7 +47,7 @@ install:
     - conda install --yes matplotlib
     - conda install --yes ipython tornado pyzmq jinja2 Pygments
     - pip install wheel
-    - pip install coverage
+    - pip install coverage flake8
     - pip install runipy
 
     - python setup.py build_ext --inplace
