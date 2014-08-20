@@ -20,6 +20,8 @@ import shutil
 import sys
 from os import chdir as cd
 
+import numpy as np
+
 from subprocess import Popen, PIPE, CalledProcessError, check_call
 
 pages_dir = 'gh-pages'
@@ -77,9 +79,11 @@ if __name__ == '__main__':
     version = sktracker.__version__
 
     if "dev" in version:
+        stable_version = str(np.round(float(version[:3]) - 0.1, 1))
         tag = "dev"
     else:
         tag = version[:3]
+        stable_version = tag
 
     startdir = os.getcwd()
     if not os.path.exists(pages_dir):
@@ -107,9 +111,8 @@ if __name__ == '__main__':
             raise RuntimeError(e)
         sh("touch .nojekyll")
 
-        if 'dev' not in tag:
-            sh('rm -f stable')
-            sh('ln -s %s stable' % tag)
+        sh('rm -f stable')
+        sh('ln -s {} stable'.format(stable_version))
 
         static_dir = "_static"
         shutil.rmtree(static_dir, ignore_errors=True)
