@@ -56,6 +56,16 @@ def CZT_peaks():
     return os.path.join(data_path, "CZT_peaks.ome.tif")
 
 
+def CZT_peaks_temp():
+    """
+    """
+    d = tempfile.gettempdir()
+    f_ori = CZT_peaks()
+    f_dest = os.path.join(d, "CZT_peaks.ome.tif")
+    shutil.copy(f_ori, f_dest)
+    return f_dest
+
+
 def sample_ome():
     """OME Tiff with fluo spots and cells in BF and CTZ dimensions.
     """

@@ -13,6 +13,7 @@ import shutil
 from collections import OrderedDict
 
 import pandas as pd
+import numpy as np
 
 log = logging.getLogger(__name__)
 
@@ -39,14 +40,14 @@ class ObjectsIO(object):
         Root directory (join to find `store_path`)
     clean_store : bool
         If True, remove duplicated data in the HDFStore file
-        (see https://github.com/pydata/pandas/issues/2132.)
+        (see https://github.com/pydata/pandas/issues/2132)
     """
 
     def __init__(self, metadata=None,
                  store_path=None,
                  base_dir=None,
                  minimum_metadata_keys=[],
-                 clean_store=True):
+                 clean_store=False):
 
         if metadata is not None:
             validate_metadata(metadata, keys=minimum_metadata_keys)
@@ -85,74 +86,8 @@ class ObjectsIO(object):
         """
         return cls(metadata=stackio.metadata)
 
-    def __getitem__(self, name):
-        """Get an object from HDF5 file.
-
-        Parameters
-        ----------
-        name : str
-            Name of the object. Will be used when reading HDF5 file
-
-        """
-        with pd.get_store(self.store_path) as store:
-            obj = store[name]
-
-        if isinstance(obj, pd.Series):
-            obj = obj.to_dict()
-            obj = guess_values_type(obj)
-
-        return obj
-
-    def clean_store_file(self):
-        """Remove duplicate data.
-        See https://github.com/pydata/pandas/issues/2132.
-        """
-        _, fname = tempfile.mkstemp()
-
-        with pd.get_store(self.store_path) as store:
-            new_store = store.copy(fname)
-
-        new_store.close()
-
-        shutil.copy(fname, self.store_path)
-        os.remove(fname)
-
-    def __setitem__(self, name, obj):
-        """Adds an object to HDF5 file.
-
-        Parameters
-        ----------
-        obj : object
-            :class:`pandas.DataFrame`, :class:`pandas.Series` or dict
-        name : str
-            Name of the object. Will be used when reading HDF5 file
-
-        """
-
-        with pd.get_store(self.store_path) as store:
-            if isinstance(obj, pd.DataFrame) or isinstance(obj, pd.Series):
-                store[name] = obj
-            elif isinstance(obj, dict) or isinstance(obj, OrderedDict):
-                obj = sanitize_dict(obj)
-                store[name] = pd.Series(obj)
-
-    def __delitem__(self, name):
-        """
-        """
-        with pd.get_store(self.store_path) as store:
-            store.remove('name')
-
-    def keys(self):
-        """Return list of objects in HDF5 file.
-        """
-
-        objs = []
-        with pd.get_store(self.store_path) as store:
-            objs = store.keys()
-        return objs
-
     @classmethod
-    def from_h5(cls, store_path, base_dir=None, minimum_metadata_keys=[]):
+    def from_h5(cls, store_path, base_dir=None, minimum_metadata_keys=[], clean_store=False):
         """Load ObjectsIO from HDF5 file.
 
         Parameters
@@ -177,4 +112,94 @@ class ObjectsIO(object):
         return cls(metadata=metadata,
                    store_path=store_path,
                    base_dir=base_dir,
-                   minimum_metadata_keys=minimum_metadata_keys)
+                   minimum_metadata_keys=minimum_metadata_keys,
+                   clean_store=clean_store)
+
+    def __getitem__(self, name):
+        """Get an object from HDF5 file.
+
+        Parameters
+        ----------
+        name : str
+            Name of the object. Will be used when reading HDF5 file
+
+        """
+        with pd.get_store(self.store_path) as store:
+            obj = store.get(name)
+
+        if isinstance(obj, pd.Series):
+            obj = obj.to_dict()
+            obj = guess_values_type(obj)
+
+        return obj
+
+    def __setitem__(self, name, obj):
+        """Adds an object to HDF5 file.
+
+        Parameters
+        ----------
+        obj : object
+            :class:`pandas.DataFrame`, :class:`pandas.Series` or dict
+        name : str
+            Name of the object. Will be used when reading HDF5 file
+
+        """
+
+        with pd.get_store(self.store_path) as store:
+            if isinstance(obj, dict) or isinstance(obj, OrderedDict):
+                obj = sanitize_dict(obj)
+                store.put(name, pd.Series(obj))
+            elif isinstance(obj, pd.DataFrame):
+                store.put(name, obj)
+            elif isinstance(obj, pd.Series):
+                store.put(name, obj)
+            else:
+                log.warning("'{}' not saved because {} are not handled.".format(name, type(obj)))
+
+    def __delitem__(self, name):
+        """
+        """
+        with pd.get_store(self.store_path) as store:
+            store.remove(name)
+
+    def get_all_items(self):
+        """Load a list of HDF5 items. It has better performance then multiple call on __getitem__().
+
+        Returns
+        -------
+        Generator of item name and associated object (key, obj)
+        """
+        with pd.get_store(self.store_path) as store:
+            for key in store.keys():
+                key = key.replace('/', '')
+
+                obj = store.get(key)
+
+                if isinstance(obj, pd.Series):
+                    obj = obj.to_dict()
+                    obj = guess_values_type(obj)
+
+                yield key, obj
+
+    def keys(self):
+        """Return list of objects in HDF5 file.
+        """
+
+        objs = []
+        with pd.get_store(self.store_path) as store:
+            objs = store.keys()
+        return objs
+
+    def clean_store_file(self):
+        """Remove duplicate data.
+        See https://github.com/pydata/pandas/issues/2132.
+        """
+        _, fname = tempfile.mkstemp()
+
+        with pd.get_store(self.store_path) as store:
+            new_store = store.copy(fname)
+
+        new_store.close()
+
+        shutil.copy(fname, self.store_path)
+        os.remove(fname)

@@ -25,10 +25,11 @@ from .ome import OMEModel
 from .stackio import StackIO
 from .metadataio import get_metadata
 from .metadataio import validate_metadata
+from .metadataio import OIOMetadata
 from .objectsio import ObjectsIO
 from .read_roi import read_roi
 
 
 __all__ = ['get_metadata', 'OMEModel', 'imsave', 'imread', 'imshow',
            'TiffFile', 'TiffSequence', 'StackIO', 'validate_metadata',
-           'ObjectsIO', 'trackmate', 'read_roi']
+           'ObjectsIO', 'trackmate', 'read_roi', 'OIOMetadata']

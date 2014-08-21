@@ -62,3 +62,12 @@ def test_validate_metadata():
                                          'DimensionOrder',
                                          'AcquisitionDate'])
     assert default_good and extra_good
+
+
+def test_get_from_metadata_json():
+
+    from sktracker.io.metadataio import _get_from_metadata_json
+    assert _get_from_metadata_json(data.metadata_json()) == {'PhysicalSizeZ': 0.8}
+
+    store_path = data.sample_h5_temp()
+    assert _get_from_metadata_json(store_path) == {}

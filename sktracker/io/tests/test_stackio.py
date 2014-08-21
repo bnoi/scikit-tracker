@@ -5,6 +5,8 @@ from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
 
+import os
+
 from sktracker import data
 from sktracker.io import StackIO
 from sktracker.io import ObjectsIO
@@ -55,15 +57,38 @@ def test_stackio_from_objectsio():
     assert guessed_metadata == true_metadata
 
 
+def test_stackio_get_tif():
+
+    fname = data.CZT_peaks()
+    st = StackIO(fname, json_discovery=False, base_dir=os.path.dirname(fname))
+    assert st.image_path == fname
+
+    fname = data.CZT_peaks()
+    st = StackIO(fname, json_discovery=False)
+    assert st.image_path == fname
+
+
 def test_stackio_image_iterator():
     fname = data.CZT_peaks()
     st = StackIO(fname, json_discovery=False)
 
-    arr = st.get_tif().asarray(memmap=True).shape
+    arr = st.get_tif().asarray(memmap=True)
 
     iterator = st.image_iterator(channel_index=0, memmap=True)
     for a in iterator():
-        assert a.shape == arr[-2:]
+        assert a.shape == arr.shape[-2:]
+
+    # Test with channels index
+
+    fname = data.CZT_peaks()
+    st = StackIO(fname, json_discovery=False)
+
+    it = st.image_iterator(channel_index='GFP', memmap=True)
+    assert list(it())[0].shape == arr.shape[-2:]
+
+    st.metadata['Channels'] = ['GFP']
+    it = st.image_iterator(channel_index='GFP', memmap=False, z_projection=True)
+    assert list(it())[0].shape == arr.shape[-2:]
 
 
 def test_load_img_list():
@@ -97,6 +122,12 @@ def test_stackio_list_iterator():
     for n, stack in enumerate(stack_iter()):
         assert stack.shape == (5, 172, 165)
     assert n == 3
+
+    file_list = data.stack_list()
+    stackio = StackIO(image_path_list=file_list, metadata=metadata,
+                      base_dir=os.path.dirname(file_list[0]))
+
+    assert len(stackio.image_path_list) == 4
 
 
 def test_stackio_get_tif_from_list():

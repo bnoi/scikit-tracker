@@ -66,18 +66,17 @@ class OIOMetadata(OrderedDict):
                         if type(v).__name__ in ['list', 'tuple']:
                             self[k] = ast.literal_eval(self[k])
                         else:
-                            if v.__name__ is 'int':
-                                self[k] = v(float(np.round(self[k])))
+                            if v.__name__ == 'int':
+                                self[k] = v(np.round(float(self[k])))
                     except:
                         msg = "Metadata contains wrong data type '{}'' has type {}, should be {}"
                         raise ValueError(msg.format(k, type(self[k]), v))
 
 
 def get_metadata(filename, json_discovery=False, base_dir=None):
-    """Get image file metadata
-    Metadata will be retrieved from TIFF IFD comments. OME is automatically
-    detected. Additionnaly a file called metadata.json can be in the same
-    directory or in the parent directory will be read to initialize metadata.
+    """Get image file metadata. Metadata will be retrieved from TIFF IFD comments. OME is
+    automatically detected. Additionnaly a file called metadata.json can be in the same directory or
+    in the parent directory will be read to initialize metadata.
 
     Parameters
     ----------
@@ -157,10 +156,7 @@ def _get_from_metadata_json(filename):
 
     for metadata_path in candidats:
         if os.path.isfile(metadata_path):
-            try:
-                metadata = json.load(open(metadata_path))
-            except:
-                pass
+            metadata = json.load(open(metadata_path))
 
     return metadata
 
