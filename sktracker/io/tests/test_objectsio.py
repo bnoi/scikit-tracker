@@ -101,9 +101,9 @@ def test_oio_delitem():
     store_path = data.sample_h5_temp()
     oio = ObjectsIO(store_path=store_path)
 
-    assert oio.keys() == ['/metadata', '/objects']
+    assert '/metadata' in oio.keys()
     del oio['metadata']
-    assert oio.keys() == ['/objects']
+    assert '/metadata' not in oio.keys()
 
 
 def test_oio_get_all_items():
@@ -111,6 +111,7 @@ def test_oio_get_all_items():
     store_path = data.sample_h5_temp()
     oio = ObjectsIO(store_path=store_path)
 
+    print(oio.keys())
     assert [key for key, values in oio.get_all_items()] == ['metadata', 'objects']
 
 
@@ -120,6 +121,7 @@ def test_clean_store_file():
     oio = ObjectsIO(store_path=store_path, clean_store=True)
 
     before = os.path.getsize(oio.store_path)
+    print(oio.keys())
     oio["/objects"] = oio["/objects"].copy()
     # No cleanup here so filesize will increase
     after = os.path.getsize(oio.store_path)

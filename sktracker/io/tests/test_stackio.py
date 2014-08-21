@@ -7,6 +7,8 @@ from __future__ import print_function
 
 import os
 
+from nose.tools import assert_raises
+
 from sktracker import data
 from sktracker.io import StackIO
 from sktracker.io import ObjectsIO
@@ -83,8 +85,7 @@ def test_stackio_image_iterator():
     fname = data.CZT_peaks()
     st = StackIO(fname, json_discovery=False)
 
-    it = st.image_iterator(channel_index='GFP', memmap=True)
-    assert list(it())[0].shape == arr.shape[-2:]
+    assert_raises(TypeError, st.image_iterator, hannel_index='GFP', memmap=True)
 
     st.metadata['Channels'] = ['GFP']
     it = st.image_iterator(channel_index='GFP', memmap=False, z_projection=True)

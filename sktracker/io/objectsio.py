@@ -13,7 +13,6 @@ import shutil
 from collections import OrderedDict
 
 import pandas as pd
-import numpy as np
 
 log = logging.getLogger(__name__)
 
@@ -125,7 +124,7 @@ class ObjectsIO(object):
 
         """
         with pd.get_store(self.store_path) as store:
-            obj = store.get(name)
+            obj = store[name]
 
         if isinstance(obj, pd.Series):
             obj = obj.to_dict()

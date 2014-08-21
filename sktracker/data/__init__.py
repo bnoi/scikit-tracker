@@ -18,7 +18,6 @@ import os
 import tempfile
 import shutil
 import pandas as pd
-import sys
 
 from ..io.utils import load_img_list
 
@@ -131,8 +130,6 @@ def nuclei_h5_temp():
 def sample_h5():
     """
     """
-    if sys.version_info[0] < 3:
-        return os.path.join(data_path, "sample_py2.h5")
     return os.path.join(data_path, "sample.h5")
 
 

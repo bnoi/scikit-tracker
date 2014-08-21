@@ -8,6 +8,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 
 
+import sys
 import os
 import logging
 
@@ -142,6 +143,11 @@ class StackIO(object):
         A Python iterator over the image array.
         """
 
+        if not sys.version_info[0] == 2:
+            string_types = (str,)
+        else:
+            string_types = (str, unicode)
+
         try:
             tf = self.get_tif(multifile=True)
             arr = tf.asarray(memmap=memmap)
@@ -150,12 +156,12 @@ class StackIO(object):
             tf = self.get_tif(multifile=False)
             arr = tf.asarray(memmap=memmap).reshape(self.metadata['Shape'])
 
-        if isinstance(channel_index, str):
+        if isinstance(channel_index, string_types):
             if 'Channels' in self.metadata.keys():
                 channel_index = self.metadata['Channels'].index(channel_index)
             else:
-                log.warning("Metadata does not contain Channels key. channel_index is set to 0.")
-                channel_index = 0
+                raise TypeError("'Channels' key is missing in metadata."
+                                "Can't find '{}' index".format(channel_index))
 
         current_dimension_order = list(self.metadata['DimensionOrder'])
 
