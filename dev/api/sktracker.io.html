@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.io package &mdash; sktracker 0.3.dev-472c04f docs</title>
+  <title>sktracker.io package &mdash; sktracker 0.3.dev-0e2d66b docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-472c04f docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-0e2d66b docs" href="../index.html"/>
         <link rel="up" title="API references" href="sktracker.html"/>
         <link rel="next" title="sktracker.io.metadataio module" href="sktracker.io.metadataio.html"/>
         <link rel="prev" title="sktracker.detection.peak_detector module" href="sktracker.detection.peak_detector.html"/> 
@@ -178,10 +178,9 @@
 <span class="target" id="module-sktracker.io"></span><dl class="function">
 <dt id="sktracker.io.get_metadata">
 <tt class="descclassname">sktracker.io.</tt><tt class="descname">get_metadata</tt><big>(</big><em>filename</em>, <em>json_discovery=False</em>, <em>base_dir=None</em><big>)</big><a class="headerlink" href="#sktracker.io.get_metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get image file metadata
-Metadata will be retrieved from TIFF IFD comments. OME is automatically
-detected. Additionnaly a file called metadata.json can be in the same
-directory or in the parent directory will be read to initialize metadata.</p>
+<dd><p>Get image file metadata. Metadata will be retrieved from TIFF IFD comments. OME is
+automatically detected. Additionnaly a file called metadata.json can be in the same directory or
+in the parent directory will be read to initialize metadata.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -955,7 +954,7 @@ image.</p>
 
 <dl class="class">
 <dt id="sktracker.io.ObjectsIO">
-<em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">ObjectsIO</tt><big>(</big><em>metadata=None</em>, <em>store_path=None</em>, <em>base_dir=None</em>, <em>minimum_metadata_keys=</em>, <span class="optional">[</span><span class="optional">]</span><em>clean_store=True</em><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">ObjectsIO</tt><big>(</big><em>metadata=None</em>, <em>store_path=None</em>, <em>base_dir=None</em>, <em>minimum_metadata_keys=</em>, <span class="optional">[</span><span class="optional">]</span><em>clean_store=False</em><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Manipulate and pass along data issued from detected
 objects.</p>
@@ -978,7 +977,7 @@ objects.</p>
 <p><strong>clean_store</strong> : bool</p>
 <blockquote class="last">
 <div><p>If True, remove duplicated data in the HDFStore file
-(see <a class="reference external" href="https://github.com/pydata/pandas/issues/2132">https://github.com/pydata/pandas/issues/2132</a>.)</p>
+(see <a class="reference external" href="https://github.com/pydata/pandas/issues/2132">https://github.com/pydata/pandas/issues/2132</a>)</p>
 </div></blockquote>
 </td>
 </tr>
@@ -993,7 +992,7 @@ See <a class="reference external" href="https://github.com/pydata/pandas/issues/
 
 <dl class="classmethod">
 <dt id="sktracker.io.ObjectsIO.from_h5">
-<em class="property">classmethod </em><tt class="descname">from_h5</tt><big>(</big><em>store_path</em>, <em>base_dir=None</em>, <em>minimum_metadata_keys=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO.from_h5" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">from_h5</tt><big>(</big><em>store_path</em>, <em>base_dir=None</em>, <em>minimum_metadata_keys=</em>, <span class="optional">[</span><span class="optional">]</span><em>clean_store=False</em><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO.from_h5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load ObjectsIO from HDF5 file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1022,6 +1021,20 @@ See <a class="reference external" href="https://github.com/pydata/pandas/issues/
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stackio</strong> : <a class="reference internal" href="#sktracker.io.StackIO" title="sktracker.io.StackIO"><tt class="xref py py-class docutils literal"><span class="pre">sktracker.io.StackIO</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sktracker.io.ObjectsIO.get_all_items">
+<tt class="descname">get_all_items</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.ObjectsIO.get_all_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a list of HDF5 items. It has better performance then multiple call on __getitem__().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Generator of item name and associated object (key, obj)</td>
 </tr>
 </tbody>
 </table>
@@ -1092,6 +1105,14 @@ Specifications and code is largely inspired from:
 &#8216;name&#8217;: &#8216;example2&#8217;, &#8216;n&#8217;: 23, &#8216;type&#8217;: &#8216;polygon&#8217;}}</p>
 </dd></dl>
 
+<dl class="class">
+<dt id="sktracker.io.OIOMetadata">
+<em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">OIOMetadata</tt><big>(</big><em>metadata_dict</em>, <em>objectsio</em><big>)</big><a class="headerlink" href="#sktracker.io.OIOMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/collections.html#collections.OrderedDict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">collections.OrderedDict</span></tt></a></p>
+<p>A subclass of OrderedDict with a modified <cite>__setitem__</cite>, such that
+any modification to the metadata is copied to the <cite>h5</cite> file</p>
+</dd></dl>
+
 </div>
 </div>
 
@@ -1133,7 +1154,7 @@ Specifications and code is largely inspired from:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-472c04f',
+            VERSION:'0.3.dev-0e2d66b',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
