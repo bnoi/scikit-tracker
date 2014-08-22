@@ -92,7 +92,7 @@ def peak_detector(data_iterator,
 
     # Find number of stacks to process
     # Only iteration over T and Z are assumed
-    n_stack = metadata['SizeT'] * metadata['SizeZ']
+    n_stack = int(metadata['SizeT'] * metadata['SizeZ'])
 
     if parallel:
 
@@ -112,6 +112,7 @@ def peak_detector(data_iterator,
         pool = multiprocessing.Pool(processes=ncore, initializer=init_worker)
 
     # Build arguments list
+    print(n_stack)
     arguments = zip(data_iterator,
                     itertools.repeat(parameters),
                     range(n_stack))
