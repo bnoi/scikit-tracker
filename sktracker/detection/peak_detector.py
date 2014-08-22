@@ -112,7 +112,6 @@ def peak_detector(data_iterator,
         pool = multiprocessing.Pool(processes=ncore, initializer=init_worker)
 
     # Build arguments list
-    print(n_stack)
     arguments = zip(data_iterator,
                     itertools.repeat(parameters),
                     range(n_stack))
