@@ -15,30 +15,49 @@ def trackmate_peak_import(trackmate_xml_path):
 
     root = et.fromstring(open(trackmate_xml_path).read())
 
-    # Get detected spots from XML file
     objects = []
-    object_labels = [('t_stamp', 'FRAME'),
-                     ('t', 'POSITION_T'),
-                     ('x', 'POSITION_X'),
-                     ('y', 'POSITION_Y'),
-                     ('z', 'POSITION_Z'),
-                     ('I', 'MEAN_INTENSITY'),
-                     ('w', 'ESTIMATED_DIAMETER')]
+    object_labels = {'FRAME': 't_stamp',
+                     'POSITION_T': 't',
+                     'POSITION_X': 'x',
+                     'POSITION_Y': 'y',
+                     'POSITION_Z': 'z',
+                     'MEAN_INTENSITY': 'I',
+                     'ESTIMATED_DIAMETER': 'w',
+                     'QUALITY': 'q'}
+
+    features = root.find('Model').find('FeatureDeclarations').find('SpotFeatures')
+    features = [c.get('feature') for c in features.getchildren()]
 
     spots = root.find('Model').find('AllSpots')
+    trajs = pd.DataFrame([])
+    objects = []
     for frame in spots.findall('SpotsInFrame'):
         for spot in frame.findall('Spot'):
 
             single_object = []
-            for label, trackmate_label in object_labels:
-                single_object.append(spot.get(trackmate_label))
+            for label in features:
+                single_object.append(spot.get(label))
 
             objects.append(single_object)
-
-    trajs = pd.DataFrame(objects, columns=[label[0] for label in object_labels])
-    trajs['label'] = np.arange(trajs.shape[0])
-    trajs['t_stamp'] = trajs['t_stamp'].values.astype(np.float)
-    trajs.set_index(['t_stamp', 'label'], inplace=True)
+    trajs = pd.DataFrame(objects, columns=features)
     trajs = trajs.astype(np.float)
+
+    # Apply filters
+    spot_filters = root.find("Settings").find("SpotFilterCollection")
+
+    for spot_filter in spot_filters.findall('Filter'):
+        name = spot_filter.get('feature')
+        value = float(spot_filter.get('value'))
+        isabove = True if spot_filter.get('value') == 'true' else False
+
+        if isabove:
+            trajs = trajs[trajs[name] > value]
+        else:
+            trajs = trajs[trajs[name] < value]
+
+    trajs = trajs.loc[:, object_labels.keys()]
+    trajs.columns = [object_labels[k] for k in object_labels.keys()]
+    trajs['label'] = np.arange(trajs.shape[0])
+    trajs.set_index(['t_stamp', 'label'], inplace=True)
 
     return trajs
