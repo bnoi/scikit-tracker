@@ -707,7 +707,7 @@ class Trajectories(pd.DataFrame):
             print_progress(-1)
 
         if np.abs(trajs.x_proj).mean() < np.abs(trajs.y_proj).mean():
-            trajs.loc[:, ['x_proj', 'y_proj']] = trajs.loc[:, ['y_proj', 'x_proj']].values
+            trajs.rename(columns={'x_proj': 'y_proj', 'y_proj': 'x_proj'}, inplace=True)
 
         if not inplace:
             return trajs
