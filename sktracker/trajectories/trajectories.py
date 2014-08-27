@@ -111,7 +111,10 @@ class Trajectories(pd.DataFrame):
 
     @property
     def labels(self):
-        return self.index.get_level_values('label').unique()
+        if 'label' in self.columns:
+            return self['label'].unique()
+        else:
+            return self.index.get_level_values('label').unique()
 
     @property
     def segment_idxs(self):
