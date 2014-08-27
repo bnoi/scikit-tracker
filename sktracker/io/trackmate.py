@@ -48,7 +48,7 @@ def trackmate_peak_import(trackmate_xml_path):
     for spot_filter in spot_filters.findall('Filter'):
         name = spot_filter.get('feature')
         value = float(spot_filter.get('value'))
-        isabove = True if spot_filter.get('value') == 'true' else False
+        isabove = True if spot_filter.get('isabove') == 'true' else False
 
         if isabove:
             trajs = trajs[trajs[name] > value]
