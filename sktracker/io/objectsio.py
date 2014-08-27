@@ -168,17 +168,19 @@ class ObjectsIO(object):
         -------
         Generator of item name and associated object (key, obj)
         """
-        with pd.get_store(self.store_path) as store:
-            for key in store.keys():
-                key = key.replace('/', '')
+        store = pd.HDFStore(self.store_path)
 
-                obj = store.get(key)
+        for key in store.keys():
+            key = key.replace('/', '')
+            obj = store.get(key)
 
-                if isinstance(obj, pd.Series):
-                    obj = obj.to_dict()
-                    obj = guess_values_type(obj)
+            if isinstance(obj, pd.Series):
+                obj = obj.to_dict()
+                obj = guess_values_type(obj)
 
-                yield key, obj
+            yield key, obj
+
+        store.close()
 
     def keys(self):
         """Return list of objects in HDF5 file.
