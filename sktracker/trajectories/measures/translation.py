@@ -46,7 +46,8 @@ def p2p_cum_dir(trajs, t_stamp0, t_stamp1,
 @p2p_measure
 def p2p_directionality(trajs, t_stamp0, t_stamp1,
                        coords=['x', 'y', 'z']):
-    '''
+    '''Computes the ratio between the displacement along the first coordinate
+    and the net displacement between t_stamp0 and t_stamp1
     '''
     shifted = by_segments(trajs).apply(p2p_dif_, t_stamp0, t_stamp1,
                                        coords)
@@ -59,7 +60,8 @@ def p2p_directionality(trajs, t_stamp0, t_stamp1,
 def p2p_processivity(trajs, t_stamp0, t_stamp1,
                      signed=True,
                      coords=['x', 'y', 'z']):
-
+    '''Computes
+    '''
     if not 'cum_disp' in trajs.columns:
         trajs['cum_disp'] = cum_disp(trajs, coords)['cum_disp']
 
