@@ -577,6 +577,8 @@ class Trajectories(pd.DataFrame):
 
     def time_interpolate(self, sampling=1, s=0, k=3,
                          time_step=None,
+                         keep_speed=True,
+                         keep_acceleration=True,
                          coords=['x', 'y', 'z']):
         """
         Interpolates each segment of the trajectories along time
@@ -639,9 +641,33 @@ class Trajectories(pd.DataFrame):
                         .format(sampling, dt, time_step))
 
         if coords is 'all':
-            coords = list(self.columns)
+            coords_number = []
+            coords_other = []
+            for coord in self.columns:
+                if self[coord].dtype.kind in ('i', 'f'):
+                    coords_number.append(coord)
+                else:
+                    coords_other.append(coord)
 
-        interpolated = Trajectories(time_interpolate_(self, sampling, s, k, coords))
+            interpolated = time_interpolate_(self, sampling, s, k, coords_number)
+
+            for coord in coords_other:
+                interpolated[coord] = self[coord]
+
+        else:
+
+            interpolated = time_interpolate_(self, sampling, s, k, coords)
+
+        if not keep_speed:
+            for coord in interpolated.columns:
+                if coord.startswith('v_'):
+                    interpolated.drop(coord, axis=1, inplace=True)
+
+        if not keep_acceleration:
+            for coord in interpolated.columns:
+                if coord.startswith('a_'):
+                    interpolated.drop(coord, axis=1, inplace=True)
+
         return Trajectories(interpolated)
 
     def scale(self, factors, coords=['x', 'y', 'z'], inplace=False):
