@@ -376,6 +376,48 @@ class Trajectories(pd.DataFrame):
 
     # All trajectories modification methods
 
+    def set_level_label(self, inplace=True):
+        """If 'label' is a column then reset index (except 't_stamp') and then put 'label' in index.
+        """
+
+        if inplace:
+            trajs = self
+        else:
+            trajs = self.copy()
+
+        if 'label' not in self.columns:
+            log.error("'label' not in columns. Can't set level 'label'.")
+        else:
+            trajs.old_indexes = list(trajs.index.names)
+            trajs.old_indexes.remove('t_stamp')
+            trajs.reset_index(trajs.old_indexes, inplace=True)
+            trajs.set_index('label', append=True, inplace=True)
+
+        if inplace:
+            return None
+        else:
+            return trajs
+
+    def unset_level_label(self, inplace=True):
+        """Reset original indexes (set 'label' as column).
+        """
+
+        if inplace:
+            trajs = self
+        else:
+            trajs = self.copy()
+
+        if not hasattr(self, 'old_indexes'):
+            log.error("No original indexes found. Can't unset level 'label'")
+        else:
+            trajs.reset_index('label', inplace=True)
+            trajs.set_index(self.old_indexes, append=True, inplace=True)
+
+        if inplace:
+            return None
+        else:
+            return trajs
+
     def reverse(self, time_column='t', inplace=False):
         """Reverse trajectories time.
 
@@ -533,7 +575,8 @@ class Trajectories(pd.DataFrame):
         else:
             return trajs
 
-    def time_interpolate(self, sampling=1, s=0, k=3, time_step=None,
+    def time_interpolate(self, sampling=1, s=0, k=3,
+                         time_step=None,
                          coords=['x', 'y', 'z']):
         """
         Interpolates each segment of the trajectories along time
@@ -544,8 +587,9 @@ class Trajectories(pd.DataFrame):
         sampling : int,
             Must be higher or equal than 1, will add `sampling - 1` extra points
             between two consecutive original data point. Sub-sampling is not supported.
-        coords : tuple of column names, default `('x', 'y', 'z')`
-           the coordinates to interpolate.
+        coords : tuple of column names, default `('x', 'y', 'z')`.
+           The coordinates to interpolate. 'all' will interpolate all columns. If a coord is not a
+           number then value will be just copied.
          s : float
             A smoothing condition. The amount of smoothness is determined by
             satisfying the conditions: sum((w * (y - g))**2,axis=0) <= s where g(x)
@@ -593,6 +637,10 @@ class Trajectories(pd.DataFrame):
             sampling = np.int(dt/time_step)
             log.warning('''sampling was set to {} ({}/{})'''
                         .format(sampling, dt, time_step))
+
+        if coords is 'all':
+            coords = list(self.columns)
+
         interpolated = Trajectories(time_interpolate_(self, sampling, s, k, coords))
         return Trajectories(interpolated)
 
