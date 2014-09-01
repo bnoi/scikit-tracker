@@ -788,7 +788,7 @@ class Trajectories(pd.DataFrame):
         if progress:
             print_progress(-1)
 
-        if np.abs(trajs.x_proj).mean() < np.abs(trajs.y_proj).mean():
+        if np.abs(trajs.x_proj).median() < np.abs(trajs.y_proj).median():
             trajs.rename(columns={'x_proj': 'y_proj', 'y_proj': 'x_proj'}, inplace=True)
 
         if not inplace:
