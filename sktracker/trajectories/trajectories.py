@@ -398,7 +398,7 @@ class Trajectories(pd.DataFrame):
         else:
             return trajs
 
-    def unset_level_label(self, inplace=True):
+    def unset_level_label(self, cols=[], inplace=True):
         """Reset original indexes (set 'label' as column).
         """
 
@@ -407,11 +407,16 @@ class Trajectories(pd.DataFrame):
         else:
             trajs = self.copy()
 
-        if not hasattr(self, 'old_indexes'):
-            log.error("No original indexes found. Can't unset level 'label'")
-        else:
-            trajs.reset_index('label', inplace=True)
-            trajs.set_index(self.old_indexes, append=True, inplace=True)
+        if len(cols) == 0 and not hasattr(self, 'old_indexes'):
+            log.error("""No original indexes found or 'cols' not provided."""
+                      """Can't unset level 'label'""")
+            return None
+
+        if len(cols) == 0:
+            cols = self.old_indexes
+
+        trajs.reset_index('label', inplace=True)
+        trajs.set_index(cols, append=True, inplace=True)
 
         if inplace:
             return None
