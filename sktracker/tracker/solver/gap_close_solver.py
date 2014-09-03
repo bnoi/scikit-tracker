@@ -155,7 +155,7 @@ class GapCloseSolver(AbstractSolver):
             return self.trajs
 
         old_labels = self.trajs.index.get_level_values('label').values
-        self.trajs['new_label'] = old_labels.astype(np.float)
+        self.trajs.loc[:, 'new_label'] = old_labels.astype(np.float)
 
         log.info('Build cost functions')
 

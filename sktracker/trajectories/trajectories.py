@@ -292,13 +292,18 @@ class Trajectories(pd.DataFrame):
 
         new_label = labels[0]
 
-        index_names = trajs.index.names
-        trajs.reset_index(inplace=True)
+        trajs.sortlevel(inplace=True)
+        trajs.loc[:, 'new_label'] = trajs.index.get_level_values('label').values
 
+        idx = pd.IndexSlice
         for label in labels[1:]:
-            trajs.loc[:, 'label'][trajs['label'] == label] = new_label
+            trajs.loc[idx[:, label], 'new_label'] = new_label
 
-        trajs.set_index(index_names, inplace=True)
+        trajs.reset_index('label', inplace=True)
+        trajs.drop('label', axis=1, inplace=True)
+        trajs.rename(columns={'new_label': 'label'}, inplace=True)
+        trajs.set_index('label', append=True, inplace=True)
+        trajs.sortlevel(inplace=True)
 
         # Remove duplicate spots from the same t_stamp
         gps = trajs.groupby(level=['t_stamp', 'label'])
@@ -328,16 +333,20 @@ class Trajectories(pd.DataFrame):
         else:
             trajs = self.copy()
 
-        trajs.sort_index(inplace=True)
+        trajs.sortlevel(inplace=True)
         t_stamp, label = spot
-        new_label = trajs.labels.max() + 1
+        new_label = trajs.index.get_level_values('label').max() + 1
 
-        index_names = trajs.index.names
-        trajs.reset_index(inplace=True)
+        trajs.loc[:, 'new_label'] = trajs.index.get_level_values('label').values
 
-        trajs.loc[:, 'label'][(trajs['t_stamp'] > t_stamp) & (trajs['label'] == label)] = new_label
-        trajs.set_index(index_names, inplace=True)
-        trajs.sort_index(inplace=True)
+        idxs = (trajs.index.get_level_values('t_stamp') > t_stamp) & (trajs.index.get_level_values('label') == label)
+        trajs.loc[idxs, 'new_label'] = new_label
+
+        trajs.reset_index('label', inplace=True)
+        trajs.drop('label', axis=1, inplace=True)
+        trajs.rename(columns={'new_label': 'label'}, inplace=True)
+        trajs.set_index('label', append=True, inplace=True)
+        trajs.sortlevel(inplace=True)
 
         if inplace:
             return None

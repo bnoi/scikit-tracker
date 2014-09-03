@@ -331,16 +331,13 @@ def test_relabel_fromzero():
     trajs = Trajectories(data.brownian_trajs_df())
     original_labels = trajs.labels
 
-    trajs.reset_index(inplace=True)
-    trajs.loc[:, 'label'][trajs['label'] == 1] = 55
-    trajs.set_index(['t_stamp', 'label'], inplace=True)
+    idx = pd.IndexSlice
+    trajs.loc[idx[:, 1], :] = 55
 
     relabeled = trajs.relabel_fromzero('label', inplace=False)
     assert np.all(relabeled.labels == original_labels)
 
-    trajs.reset_index(inplace=True)
-    trajs.loc[:, 'label'][trajs['label'] == 1] = 55
-    trajs.set_index(['t_stamp', 'label'], inplace=True)
+    trajs.loc[idx[:, 1], :] = 55
 
     relabeled = trajs.relabel_fromzero('label', inplace=False)
     assert np.all(relabeled.labels == original_labels)
@@ -382,7 +379,7 @@ def test_merge_segments():
 
     new_trajs = trajs.merge_segments([0, 88], inplace=False)
 
-    assert_array_equal(trajs.values, new_trajs.values)
+    assert_array_almost_equal(trajs.values, new_trajs.values)
 
     trajs = Trajectories(data.brownian_trajs_df())
     good_trajs = trajs.copy()
@@ -394,7 +391,7 @@ def test_merge_segments():
 
     trajs.merge_segments([0, 88], inplace=True)
 
-    assert_array_equal(trajs.values, good_trajs.values)
+    assert_array_almost_equal(trajs.values, good_trajs.values)
 
 
 def test_cut_segments():
