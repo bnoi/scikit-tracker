@@ -751,6 +751,8 @@ class Trajectories(pd.DataFrame):
             if progress:
                 print_progress(i * 100 / n_t)
 
+            peaks = peaks.sort_index()
+
             p1 = peaks.loc[ref_idx[0]][coords]
             p2 = peaks.loc[ref_idx[1]][coords]
 
@@ -774,7 +776,7 @@ class Trajectories(pd.DataFrame):
                 # Add an extra column if coords has two dimensions
                 if len(coords) == 2:
                     peaks_values = np.zeros((peaks[coords].shape[0],
-                                            peaks[coords].shape[1] + 1)) + 1
+                                             peaks[coords].shape[1] + 1)) + 1
                     peaks_values[:, :-1] = peaks[coords].values
                 elif len(coords) == 3:
                     peaks_values = peaks[coords].values
@@ -790,6 +792,14 @@ class Trajectories(pd.DataFrame):
 
         if np.abs(trajs.x_proj).median() < np.abs(trajs.y_proj).median():
             trajs.rename(columns={'x_proj': 'y_proj', 'y_proj': 'x_proj'}, inplace=True)
+
+        trajs.sortlevel(inplace=True)
+
+        # 'y_proj' should be close to 0
+        idx = pd.IndexSlice
+        ref_spots = trajs.loc[idx[:, ref_idx], 'y_proj']
+        if not np.allclose(ref_spots, 0):
+            raise Exception("Projection failed. 'y_proj' is not equal to 0.")
 
         if not inplace:
             return trajs

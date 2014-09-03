@@ -208,9 +208,9 @@ def transformations_matrix(center, vec):
     current_vec = vec / np.linalg.norm(vec)
 
     # Find the rotation angle
-    cosa = np.dot(origin_vec, current_vec)
-    cosa = np.abs(cosa) * -1
-    theta = np.arccos(cosa)
+    a = origin_vec
+    b = current_vec
+    theta = np.arctan2(a[1], a[0]) + np.arctan2(b[1], b[0])
 
     # Build rotation matrix
     R = np.array([[np.cos(theta), -np.sin(theta), 0],
