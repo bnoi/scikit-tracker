@@ -9,6 +9,8 @@ from sktracker.trajectories import Trajectories
 from sktracker.trajectories.measures import transformation
 from sktracker import data
 from sktracker.trajectories.measures.transformation import transformations_matrix
+from sktracker.trajectories.measures.transformation import interp_series
+
 
 def test_back_proj_interp():
     trajs = Trajectories(data.with_gaps_df())
@@ -47,3 +49,12 @@ def test_transformations_matrix():
                          [-6.36396103, -2.12132034, 1]])
 
     assert_array_almost_equal(A, excepted)
+
+
+def test_interp_series():
+
+    series = pd.Series([0, 10, 20, 40, 50, 60], index=[0, 1, 2, 4, 5, 6])
+    new_index = np.arange(0.5, 7.5, 1)
+    inter = interp_series(series, new_index)
+
+    assert_array_equal(inter.values, np.array([5, 15, 25, 35, 45, 55, 60]))

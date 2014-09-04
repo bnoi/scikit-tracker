@@ -11,10 +11,11 @@ import pandas as pd
 from sklearn.decomposition import PCA
 from scipy.interpolate import splev, splrep
 
-#from ..trajectories import Trajectories
-
 import logging
 log = logging.getLogger(__name__)
+
+__all__ = ["do_pca", "time_interpolate", "back_proj_interp",
+           "back_proj_pca", "transformations_matrix", "interp_series"]
 
 
 def do_pca(trajs,
@@ -226,3 +227,43 @@ def transformations_matrix(center, vec):
     A = np.dot(T.T, R)
 
     return A
+
+
+def interp_series(series, new_index):
+    """Numpy API like pandas linear interpolation.
+
+    Parameters
+    ----------
+    series : :class:`pandas.Series`
+        Index should  x-coordinates of the data points and column y-coordinates of the data points.
+    new_index : np.array
+        The x-coordinates of the interpolated value.
+
+    Return
+    ------
+    :class:`pandas.Series` of interpolated values.
+
+    Examples
+    --------
+    >>> import pandas as pd
+    >>> import numpy as np
+    >>> from sktracker.trajectories.measures.transformation import interp_series
+    >>> series = pd.Series([0, 10, 20, 40, 50, 60], index=[0, 1, 2, 4, 5, 6])
+    >>> new_index = np.arange(0.5, 7.5, 1)
+    >>> inter = interp_series(series, new_index)
+    >>> print(inter)
+    0.5     5
+    1.5    15
+    2.5    25
+    3.5    35
+    4.5    45
+    5.5    55
+    6.5    60
+    dtype: float64
+    """
+
+    new_series = pd.Series(index=new_index)
+    series_inter = pd.concat([series, new_series]).sort_index().interpolate(method='index')
+    series_inter = series_inter.reindex(new_series.index)
+
+    return series_inter
