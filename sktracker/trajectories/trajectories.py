@@ -806,7 +806,7 @@ class Trajectories(pd.DataFrame):
 
         # 'y_proj' should be close to 0
         idx = pd.IndexSlice
-        ref_spots = trajs.loc[idx[:, ref_idx], 'y_proj']
+        ref_spots = trajs.loc[idx[:, ref_idx], 'y_proj'].dropna()
         if not np.allclose(ref_spots, 0):
             raise Exception("Projection failed. 'y_proj' is not equal to 0.")
 
