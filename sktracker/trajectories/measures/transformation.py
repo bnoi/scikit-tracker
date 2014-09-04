@@ -266,4 +266,7 @@ def interp_series(series, new_index):
     series_inter = pd.concat([series, new_series]).sort_index().interpolate(method='index')
     series_inter = series_inter.reindex(new_series.index)
 
+    if series_inter.ndim == 2:
+        series_inter = series_inter.drop(0, axis=1)
+
     return series_inter
