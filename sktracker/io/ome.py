@@ -258,6 +258,15 @@ class OMEModel():
         if size_z:
             self.pixels.attrib['PhysicalSizeZ'] = str(size_z)
 
+    def set_time_increment(self, dt):
+        """Set TimeIncrement attribut.
+
+        Parameters
+        ----------
+        dt : float
+        """
+        self.pixels.attrib['TimeIncrement'] = str(dt)
+
     def get_physical_size(self):
         """Get physical size for each dimensions (X, Y and Z) if possible.
 

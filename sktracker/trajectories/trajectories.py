@@ -111,7 +111,10 @@ class Trajectories(pd.DataFrame):
 
     @property
     def labels(self):
-        return self.index.get_level_values('label').unique()
+        if 'label' in self.columns:
+            return self['label'].unique()
+        else:
+            return self.index.get_level_values('label').unique()
 
     @property
     def segment_idxs(self):
@@ -289,13 +292,18 @@ class Trajectories(pd.DataFrame):
 
         new_label = labels[0]
 
-        index_names = trajs.index.names
-        trajs.reset_index(inplace=True)
+        trajs.sortlevel(inplace=True)
+        trajs.loc[:, 'new_label'] = trajs.index.get_level_values('label').values
 
+        idx = pd.IndexSlice
         for label in labels[1:]:
-            trajs.loc[:, 'label'][trajs['label'] == label] = new_label
+            trajs.loc[idx[:, label], 'new_label'] = new_label
 
-        trajs.set_index(index_names, inplace=True)
+        trajs.reset_index('label', inplace=True)
+        trajs.drop('label', axis=1, inplace=True)
+        trajs.rename(columns={'new_label': 'label'}, inplace=True)
+        trajs.set_index('label', append=True, inplace=True)
+        trajs.sortlevel(inplace=True)
 
         # Remove duplicate spots from the same t_stamp
         gps = trajs.groupby(level=['t_stamp', 'label'])
@@ -325,16 +333,20 @@ class Trajectories(pd.DataFrame):
         else:
             trajs = self.copy()
 
-        trajs.sort_index(inplace=True)
+        trajs.sortlevel(inplace=True)
         t_stamp, label = spot
-        new_label = trajs.labels.max() + 1
+        new_label = trajs.index.get_level_values('label').max() + 1
 
-        index_names = trajs.index.names
-        trajs.reset_index(inplace=True)
+        trajs.loc[:, 'new_label'] = trajs.index.get_level_values('label').values
 
-        trajs.loc[:, 'label'][(trajs['t_stamp'] > t_stamp) & (trajs['label'] == label)] = new_label
-        trajs.set_index(index_names, inplace=True)
-        trajs.sort_index(inplace=True)
+        idxs = (trajs.index.get_level_values('t_stamp') > t_stamp) & (trajs.index.get_level_values('label') == label)
+        trajs.loc[idxs, 'new_label'] = new_label
+
+        trajs.reset_index('label', inplace=True)
+        trajs.drop('label', axis=1, inplace=True)
+        trajs.rename(columns={'new_label': 'label'}, inplace=True)
+        trajs.set_index('label', append=True, inplace=True)
+        trajs.sortlevel(inplace=True)
 
         if inplace:
             return None
@@ -372,6 +384,53 @@ class Trajectories(pd.DataFrame):
         return trajs
 
     # All trajectories modification methods
+
+    def set_level_label(self, inplace=True):
+        """If 'label' is a column then reset index (except 't_stamp') and then put 'label' in index.
+        """
+
+        if inplace:
+            trajs = self
+        else:
+            trajs = self.copy()
+
+        if 'label' not in self.columns:
+            log.error("'label' not in columns. Can't set level 'label'.")
+        else:
+            trajs.old_indexes = list(trajs.index.names)
+            trajs.old_indexes.remove('t_stamp')
+            trajs.reset_index(trajs.old_indexes, inplace=True)
+            trajs.set_index('label', append=True, inplace=True)
+
+        if inplace:
+            return None
+        else:
+            return trajs
+
+    def unset_level_label(self, cols=[], inplace=True):
+        """Reset original indexes (set 'label' as column).
+        """
+
+        if inplace:
+            trajs = self
+        else:
+            trajs = self.copy()
+
+        if len(cols) == 0 and not hasattr(self, 'old_indexes'):
+            log.error("""No original indexes found or 'cols' not provided."""
+                      """Can't unset level 'label'""")
+            return None
+
+        if len(cols) == 0:
+            cols = self.old_indexes
+
+        trajs.reset_index('label', inplace=True)
+        trajs.set_index(cols, append=True, inplace=True)
+
+        if inplace:
+            return None
+        else:
+            return trajs
 
     def reverse(self, time_column='t', inplace=False):
         """Reverse trajectories time.
@@ -530,7 +589,10 @@ class Trajectories(pd.DataFrame):
         else:
             return trajs
 
-    def time_interpolate(self, sampling=1, s=0, k=3, time_step=None,
+    def time_interpolate(self, sampling=1, s=0, k=3,
+                         time_step=None,
+                         keep_speed=True,
+                         keep_acceleration=True,
                          coords=['x', 'y', 'z']):
         """
         Interpolates each segment of the trajectories along time
@@ -541,8 +603,9 @@ class Trajectories(pd.DataFrame):
         sampling : int,
             Must be higher or equal than 1, will add `sampling - 1` extra points
             between two consecutive original data point. Sub-sampling is not supported.
-        coords : tuple of column names, default `('x', 'y', 'z')`
-           the coordinates to interpolate.
+        coords : tuple of column names, default `('x', 'y', 'z')`.
+           The coordinates to interpolate. 'all' will interpolate all columns. If a coord is not a
+           number then value will be just copied.
          s : float
             A smoothing condition. The amount of smoothness is determined by
             satisfying the conditions: sum((w * (y - g))**2,axis=0) <= s where g(x)
@@ -590,7 +653,35 @@ class Trajectories(pd.DataFrame):
             sampling = np.int(dt/time_step)
             log.warning('''sampling was set to {} ({}/{})'''
                         .format(sampling, dt, time_step))
-        interpolated = Trajectories(time_interpolate_(self, sampling, s, k, coords))
+
+        if coords is 'all':
+            coords_number = []
+            coords_other = []
+            for coord in self.columns:
+                if self[coord].dtype.kind in ('i', 'f'):
+                    coords_number.append(coord)
+                else:
+                    coords_other.append(coord)
+
+            interpolated = time_interpolate_(self, sampling, s, k, coords_number)
+
+            for coord in coords_other:
+                interpolated[coord] = self[coord]
+
+        else:
+
+            interpolated = time_interpolate_(self, sampling, s, k, coords)
+
+        if not keep_speed:
+            for coord in interpolated.columns:
+                if coord.startswith('v_'):
+                    interpolated.drop(coord, axis=1, inplace=True)
+
+        if not keep_acceleration:
+            for coord in interpolated.columns:
+                if coord.startswith('a_'):
+                    interpolated.drop(coord, axis=1, inplace=True)
+
         return Trajectories(interpolated)
 
     def scale(self, factors, coords=['x', 'y', 'z'], inplace=False):
@@ -669,6 +760,8 @@ class Trajectories(pd.DataFrame):
             if progress:
                 print_progress(i * 100 / n_t)
 
+            peaks = peaks.sort_index()
+
             p1 = peaks.loc[ref_idx[0]][coords]
             p2 = peaks.loc[ref_idx[1]][coords]
 
@@ -692,7 +785,7 @@ class Trajectories(pd.DataFrame):
                 # Add an extra column if coords has two dimensions
                 if len(coords) == 2:
                     peaks_values = np.zeros((peaks[coords].shape[0],
-                                            peaks[coords].shape[1] + 1)) + 1
+                                             peaks[coords].shape[1] + 1)) + 1
                     peaks_values[:, :-1] = peaks[coords].values
                 elif len(coords) == 3:
                     peaks_values = peaks[coords].values
@@ -706,8 +799,16 @@ class Trajectories(pd.DataFrame):
         if progress:
             print_progress(-1)
 
-        if np.abs(trajs.x_proj).mean() < np.abs(trajs.y_proj).mean():
-            trajs.loc[:, ['x_proj', 'y_proj']] = trajs.loc[:, ['y_proj', 'x_proj']].values
+        if np.abs(trajs.x_proj).median() < np.abs(trajs.y_proj).median():
+            trajs.rename(columns={'x_proj': 'y_proj', 'y_proj': 'x_proj'}, inplace=True)
+
+        trajs.sortlevel(inplace=True)
+
+        # 'y_proj' should be close to 0
+        idx = pd.IndexSlice
+        ref_spots = trajs.loc[idx[:, ref_idx], 'y_proj']
+        if not np.allclose(ref_spots, 0):
+            raise Exception("Projection failed. 'y_proj' is not equal to 0.")
 
         if not inplace:
             return trajs

@@ -209,48 +209,12 @@ def test_project():
                   inplace=True,
                   progress=False)
 
-    excepted = np.array([[-2.70274309e-01,  0.00000000e+00],
-                         [ 2.70274309e-01, -5.55111512e-17],
-                         [ 2.53065189e-01, -6.96837132e-01],
-                         [-4.63366354e-02, -3.17226478e-01],
-                         [-2.11960632e-01,  7.99839159e-02],
-                         [ 2.11960632e-01, -7.99839159e-02],
-                         [ 2.78304909e-01, -6.09550094e-01],
-                         [-5.34263659e-02, -1.91504925e-01],
-                         [-1.58343578e-01,  2.35157260e-01],
-                         [ 1.58343578e-01, -2.35157260e-01],
-                         [ 1.33579973e-01, -5.75121334e-01],
-                         [-1.23065020e-01, -7.00631576e-02],
-                         [ 8.97266489e-03,  3.52553866e-01],
-                         [-8.97266489e-03, -3.52553866e-01],
-                         [-4.64718526e-02, -4.83864183e-01],
-                         [-4.45522391e-02,  1.28641191e-02],
-                         [ 1.53606261e-01,  4.13899744e-01],
-                         [-1.53606261e-01, -4.13899744e-01],
-                         [ 2.38961153e-02, -3.98748400e-01],
-                         [ 1.02108498e-01,  5.99558645e-03],
-                         [ 3.31262853e-01,  4.05475741e-01],
-                         [-3.31262853e-01, -4.05475741e-01],
-                         [ 9.99225313e-02, -2.73583029e-01],
-                         [ 2.09043995e-01,  1.82105681e-01],
-                         [ 4.15114677e-01,  4.94167333e-01],
-                         [-4.15114677e-01, -4.94167333e-01],
-                         [ 1.81595719e-01, -3.03742564e-01],
-                         [ 2.87850754e-01,  1.32934815e-01],
-                         [ 6.35702519e-01,  4.64592079e-01],
-                         [-6.35702519e-01, -4.64592079e-01],
-                         [ 2.81387768e-01, -2.86210529e-01],
-                         [ 4.37014198e-01,  2.01436630e-01],
-                         [ 7.44430931e-01,  4.27121995e-01],
-                         [-7.44430931e-01, -4.27121995e-01],
-                         [ 3.48146051e-01, -2.66836192e-01],
-                         [ 5.48097902e-01,  1.72077163e-01],
-                         [ 8.93953060e-01,  4.17075988e-01],
-                         [-8.93953060e-01, -4.17075988e-01],
-                         [ 5.20051609e-01, -2.77121638e-01],
-                         [ 7.25346979e-01,  1.77848529e-01]])
+    excepted = np.array([[ 0.27027431,  0.        ],
+                         [-0.27027431,  0.        ],
+                         [-0.25306519,  0.69683713],
+                         [ 0.04633664,  0.31722648]])
 
-    assert_array_almost_equal(excepted, trajs.loc[:,['x_proj', 'y_proj']].values)
+    assert_array_almost_equal(excepted, trajs.loc[:,['x_proj', 'y_proj']].values[:4])
 
     trajs = trajs.project([0, 1],
                            coords=['x', 'y'],
@@ -259,7 +223,7 @@ def test_project():
                            inplace=False,
                            progress=False)
 
-    assert_array_almost_equal(excepted, trajs.loc[:,['x_proj', 'y_proj']].values)
+    assert_array_almost_equal(excepted, trajs.loc[:,['x_proj', 'y_proj']].values[:4])
 
     assert_raises(ValueError, trajs.project, [0, 1], coords=['x', 'y', 'z', 't'])
 
@@ -367,16 +331,13 @@ def test_relabel_fromzero():
     trajs = Trajectories(data.brownian_trajs_df())
     original_labels = trajs.labels
 
-    trajs.reset_index(inplace=True)
-    trajs.loc[:, 'label'][trajs['label'] == 1] = 55
-    trajs.set_index(['t_stamp', 'label'], inplace=True)
+    idx = pd.IndexSlice
+    trajs.loc[idx[:, 1], :] = 55
 
     relabeled = trajs.relabel_fromzero('label', inplace=False)
     assert np.all(relabeled.labels == original_labels)
 
-    trajs.reset_index(inplace=True)
-    trajs.loc[:, 'label'][trajs['label'] == 1] = 55
-    trajs.set_index(['t_stamp', 'label'], inplace=True)
+    trajs.loc[idx[:, 1], :] = 55
 
     relabeled = trajs.relabel_fromzero('label', inplace=False)
     assert np.all(relabeled.labels == original_labels)
@@ -418,7 +379,7 @@ def test_merge_segments():
 
     new_trajs = trajs.merge_segments([0, 88], inplace=False)
 
-    assert_array_equal(trajs.values, new_trajs.values)
+    assert_array_almost_equal(trajs.values, new_trajs.values)
 
     trajs = Trajectories(data.brownian_trajs_df())
     good_trajs = trajs.copy()
@@ -430,7 +391,7 @@ def test_merge_segments():
 
     trajs.merge_segments([0, 88], inplace=True)
 
-    assert_array_equal(trajs.values, good_trajs.values)
+    assert_array_almost_equal(trajs.values, good_trajs.values)
 
 
 def test_cut_segments():

@@ -77,3 +77,45 @@ def print_progress(progress, message=None, out=None):
     bar_str = "\r%d%% " % (progress) + bar
     out.write(bar_str)
     out.flush()
+
+
+def progress_apply(g, func, out=None, *args, **kwargs):
+    """Add to :class:`pandas.DataFrameGroupBy` a progress bar.
+
+    From http://stackoverflow.com/questions/18603270/progress-indicator-during-pandas-operations-python.
+
+    Parameters
+    ----------
+    g : :class:`pandas.DataFrameGroupBy`
+    func : function
+
+    Examples
+    --------
+    >>> import pandas as pd
+    >>> import numpy as np
+    >>> from sktracker.utils import progress_apply
+
+    >>> df = pd.DataFrame(np.random.choice(range(100), (1000000, 4)), columns=['A', 'B', 'C', 'D'])
+    >>> gp = df.groupby('A')
+    >>> progress_apply(gp, lambda x: np.sqrt((x**2) / 1e99))
+    >>> # See the progress bar
+    """
+
+    if out is None:
+        out = sys.stdout
+
+    n = len(g)
+
+    def logging_decorator(func):
+        def wrapper(*args, **kwargs):
+            progress = wrapper.count * 100 / n
+            print_progress(progress, out=out)
+            wrapper.count += 1
+            return func(*args, **kwargs)
+        wrapper.count = 0
+        return wrapper
+
+    logged_func = logging_decorator(func)
+    res = g.apply(logged_func)
+    print_progress(-1, out=out)
+    return res

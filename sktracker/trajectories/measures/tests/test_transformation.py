@@ -35,15 +35,15 @@ def test_back_proj_pca():
 def test_transformations_matrix():
 
     A = transformations_matrix([0, 0], [1, 0])
-    excepted = np.array([[ -1.00000000e+00,  -1.22464680e-16,   0.00000000e+00],
-                         [  1.22464680e-16,  -1.00000000e+00,   0.00000000e+00],
-                         [  0.00000000e+00,   0.00000000e+00,   1.00000000e+00]])
+    excepted = np.array([[1, 0, 0],
+                         [0, 1, 0],
+                         [0, 0, 1]])
 
     assert_array_almost_equal(A, excepted)
 
     A = transformations_matrix([3, 6], [1, 1])
-    excepted = np.array([[-0.70710678, -0.70710678,  0.        ],
-                         [ 0.70710678, -0.70710678,  0.        ],
-                         [-2.12132034,  6.36396103,  1.        ]])
+    excepted = np.array([[0.70710678, -0.70710678, 0],
+                         [0.70710678, 0.70710678, 0],
+                         [-6.36396103, -2.12132034, 1]])
 
     assert_array_almost_equal(A, excepted)

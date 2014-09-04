@@ -13,7 +13,8 @@ from __future__ import print_function
 """
 
 from .progress import print_progress
+from .progress import progress_apply
 from .color_system import color
 from .ipython import in_ipython
 
-__all__ = ['print_progress', 'color', 'in_ipython', 'sort']
+__all__ = ['print_progress', 'progress_apply', 'color', 'in_ipython', 'sort']
