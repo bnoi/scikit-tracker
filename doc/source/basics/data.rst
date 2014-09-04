@@ -20,7 +20,7 @@ order to test or usefulle during development.
 
 .. parsed-literal::
 
-    2014-08-21 14:30:17:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
+    2014-09-04 11:37:23:INFO:sktracker.utils.mpl_loader: Matplotlib backend 'Qt4Agg' has been loaded.
 
 
 Generate brownian or directed trajectories
@@ -35,7 +35,7 @@ Generate brownian or directed trajectories
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b9be0baf828>
+    <matplotlib.axes._subplots.AxesSubplot at 0x2b946b1c1630>
 
 
 
@@ -52,7 +52,7 @@ Generate brownian or directed trajectories
 
 .. parsed-literal::
 
-    <matplotlib.axes.AxesSubplot at 0x2b9bdb7faa58>
+    <matplotlib.axes._subplots.AxesSubplot at 0x2b946b19bfd0>
 
 
 
@@ -81,7 +81,7 @@ Get sample microscopy stack
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x2b9be0d50a58>
+    <matplotlib.image.AxesImage at 0x2b946b360f60>
 
 
 
@@ -101,18 +101,18 @@ Get sample H5 file stored by ``sktacker.io.ObjectsIO``
 .. parsed-literal::
 
     ['/metadata', '/objects']
-    Shape             (512, 512, 23, 5)
     SizeT                             5
-    FileName             sample.ome.tif
-    Type                        unint16
     TimeIncrement                     3
+    DimensionOrder                 TZYX
+    Type                        unint16
     PysicalSizeX                   0.43
     PysicalSizeY                   0.43
-    DimensionOrder                 TZYX
-    SizeZ                            23
+    PysicalSizeZ                    1.5
     SizeX                           512
     SizeY                           512
-    PysicalSizeZ                    1.5
+    SizeZ                            23
+    FileName             sample.ome.tif
+    Shape             (512, 512, 23, 5)
     dtype: object
 
 
