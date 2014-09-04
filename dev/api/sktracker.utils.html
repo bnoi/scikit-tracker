@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.utils package &mdash; sktracker 0.3.dev-0e2d66b docs</title>
+  <title>sktracker.utils package &mdash; sktracker 0.3.dev-5b179bf docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-0e2d66b docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-5b179bf docs" href="../index.html"/>
         <link rel="up" title="API references" href="sktracker.html"/>
         <link rel="next" title="sktracker.utils.color_system module" href="sktracker.utils.color_system.html"/>
         <link rel="prev" title="sktracker.ui.matplotlib_widget module" href="sktracker.ui.matplotlib_widget.html"/> 
@@ -210,6 +210,35 @@ and 100.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="sktracker.utils.progress_apply">
+<tt class="descclassname">sktracker.utils.</tt><tt class="descname">progress_apply</tt><big>(</big><em>g</em>, <em>func</em>, <em>out=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.utils.progress_apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add to <tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrameGroupBy</span></tt> a progress bar.</p>
+<p>From <a class="reference external" href="http://stackoverflow.com/questions/18603270/progress-indicator-during-pandas-operations-python">http://stackoverflow.com/questions/18603270/progress-indicator-during-pandas-operations-python</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>g</strong> : <tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrameGroupBy</span></tt></p>
+<p class="last"><strong>func</strong> : function</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sktracker.utils</span> <span class="kn">import</span> <span class="n">progress_apply</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">1000000</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;D&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">progress_apply</span><span class="p">(</span><span class="n">gp</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e99</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># See the progress bar</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="sktracker.utils.color">
 <tt class="descclassname">sktracker.utils.</tt><tt class="descname">color</tt><big>(</big><em>astr</em>, <em>color='ENDC'</em><big>)</big><a class="headerlink" href="#sktracker.utils.color" title="Permalink to this definition">¶</a></dt>
 <dd><p>Colorized string variable.</p>
@@ -303,7 +332,7 @@ and 100.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-0e2d66b',
+            VERSION:'0.3.dev-5b179bf',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

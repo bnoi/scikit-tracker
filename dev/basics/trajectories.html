@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Representation of trajectories &mdash; sktracker 0.3.dev-0e2d66b docs</title>
+  <title>Representation of trajectories &mdash; sktracker 0.3.dev-5b179bf docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-0e2d66b docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-5b179bf docs" href="../index.html"/>
         <link rel="up" title="Basics: getting started with sktracker" href="../basics.html"/>
         <link rel="next" title="Input / Output" href="io.html"/>
         <link rel="prev" title="Basics: getting started with sktracker" href="../basics.html"/> 
@@ -207,41 +207,40 @@ documentation</a>.</p>
   </thead>
   <tbody>
     <tr>
-      <th rowspan="2" valign="top">0</th>
+      <th rowspan="5" valign="top">0</th>
       <th>0</th>
-      <td> 0.163160</td>
-      <td> 0.741858</td>
-      <td> 0.289777</td>
-      <td>  0</td>
+      <td> 0.631171</td>
+      <td> 0.898691</td>
+      <td> 0.548723</td>
+      <td> 0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td> 0.323066</td>
-      <td> 0.766561</td>
-      <td> 0.853233</td>
-      <td>  0</td>
+      <td> 0.727319</td>
+      <td> 0.678301</td>
+      <td> 0.183968</td>
+      <td> 0</td>
     </tr>
     <tr>
-      <th rowspan="3" valign="top">1</th>
       <th>2</th>
-      <td> 0.882955</td>
-      <td> 0.743294</td>
-      <td> 0.723205</td>
-      <td> 60</td>
+      <td> 0.710144</td>
+      <td> 0.887972</td>
+      <td> 0.148681</td>
+      <td> 0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td> 0.251235</td>
-      <td> 0.111881</td>
-      <td> 0.807144</td>
-      <td> 60</td>
+      <td> 0.769772</td>
+      <td> 0.730946</td>
+      <td> 0.562411</td>
+      <td> 0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td> 0.068834</td>
-      <td> 0.661382</td>
-      <td> 0.224167</td>
-      <td> 60</td>
+      <td> 0.015158</td>
+      <td> 0.039849</td>
+      <td> 0.479273</td>
+      <td> 0</td>
     </tr>
   </tbody>
 </table>
@@ -260,7 +259,7 @@ anything you want/need.</p>
 <span class="n">trajs</span> <span class="o">=</span> <span class="n">Trajectories</span><span class="p">(</span><span class="n">trajs</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>2014-08-21 14:30:24:INFO:sktracker.utils.mpl_loader: Matplotlib backend &#39;Qt4Agg&#39; has been loaded.
+<div class="highlight-python"><div class="highlight"><pre>2014-09-04 11:37:28:INFO:sktracker.utils.mpl_loader: Matplotlib backend &#39;Qt4Agg&#39; has been loaded.
 </pre></div>
 </div>
 </div>
@@ -346,7 +345,7 @@ working on. First load some sample dataset.</p>
 </div><div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2ab8c467e080&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2b384bef0fd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/output_9_1.png" src="../_images/output_9_1.png" />
@@ -354,7 +353,7 @@ working on. First load some sample dataset.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2ab8c66d5e10&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2b384df8f080&gt;
 </pre></div>
 </div>
 <img alt="../_images/output_11_1.png" src="../_images/output_11_1.png" />
@@ -362,7 +361,7 @@ working on. First load some sample dataset.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2ab8c6783748&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2b384dfe97f0&gt;
 </pre></div>
 </div>
 <img alt="../_images/output_13_1.png" src="../_images/output_13_1.png" />
@@ -379,7 +378,7 @@ working on. First load some sample dataset.</p>
 <span class="n">trajs</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes.AxesSubplot at 0x2ab8c68e4780&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2b384e151748&gt;
 </pre></div>
 </div>
 <img alt="../_images/output_15_1.png" src="../_images/output_15_1.png" />
@@ -1374,7 +1373,7 @@ dtype: float64
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-0e2d66b',
+            VERSION:'0.3.dev-5b179bf',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
