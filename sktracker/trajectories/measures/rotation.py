@@ -16,11 +16,15 @@ log = logging.getLogger(__name__)
 
 
 def dir_shift_(segment, shift=1, coords=['v_x', 'v_y', 'v_z']):
-    dot_p = np.sum(segment[coords].shift(shift//2+1)
-                   * segment[coords].shift(-shift//2), axis=1)
+
+    cross = np.cross(segment[coords].shift(-shift//2),
+                     segment[coords].shift(shift//2+1), axis=-1)
     norm = np.linalg.norm(segment[coords].shift(shift//2+1), axis=1)
     norm_s = np.linalg.norm(segment[coords].shift(-shift//2), axis=1)
-    return np.arccos(dot_p / (norm * norm_s))
+    #data = np.linalg.norm(cross, axis=1) / (norm * norm_s)
+    data = cross[:, -1] / (norm * norm_s)
+    df = pd.DataFrame(np.arcsin(data), index=segment.index)
+    return df
 
 
 @trajs_measure
