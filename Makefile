@@ -1,16 +1,17 @@
-.PHONY: help init-submodule update-submodule build clean flake8 test coverage doc push-doc open-doc
+.PHONY: help init-submodule update-submodule build clean flake8 test coverage doc doc-execute-notebook push-doc open-doc
 
 help:
 	@echo "Please use make <target> where <target> is one of"
-	@echo "    init-submodule   : init and pull all submodules"
-	@echo "    update-submodule : update all submodules"
-	@echo "    build            : build extensions (not needed yet)"
-	@echo "    clean            : clean current repository"
-	@echo "    flake8           : run flake8 to check PEP8"
-	@echo "    test             : run tests"
-	@echo "    coverage         : run tests and check code coverage"
-	@echo "    doc              : build dev documentation"
-	@echo "    push-doc         : push dev documentation to http://scikit-tracker.org/dev/"
+	@echo "    init-submodule       : init and pull all submodules"
+	@echo "    update-submodule     : update all submodules"
+	@echo "    build                : build extensions (not needed yet)"
+	@echo "    clean                : clean current repository"
+	@echo "    flake8               : run flake8 to check PEP8"
+	@echo "    test                 : run tests"
+	@echo "    coverage             : run tests and check code coverage"
+	@echo "    doc                  : build dev documentation"
+	@echo "    doc-execute-notebook : execute doc ipython notebook and build dev documentation"
+	@echo "    push-doc             : push dev documentation to http://scikit-tracker.org/dev/"
 
 init-submodule:
 	git submodule update --init --recursive
