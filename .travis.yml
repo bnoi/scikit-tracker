@@ -13,10 +13,10 @@ matrix:
           env:
             - PYTHON=python3
             - PYVER=3.3
-        # - python: 3.4
-        #   env:
-        #     - PYTHON=python3
-        #     - PYVER=3.4
+        - python: 3.4
+          env:
+            - PYTHON=python3
+            - PYVER=3.4
 
 virtualenv:
     system_site_packages: false

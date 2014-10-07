@@ -23,7 +23,7 @@ except:
 
 qt_ok = False
 try:
-    import PyQt4
+    import pyqtgraph
     qt_ok = True
 except:
     log.warning("PyQt4 is not installed on this system.")
