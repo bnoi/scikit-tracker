@@ -45,10 +45,12 @@ install:
     - conda install --yes pip
     - conda install --yes cython
     - conda install --yes matplotlib
+    - conda install --yes pyqt
     - conda install --yes ipython tornado pyzmq jinja2 Pygments
     - pip install wheel
     - pip install coverage flake8
     - pip install runipy
+    - pip install pyqtgraph
 
     - python setup.py build_ext --inplace
     - python setup.py install
