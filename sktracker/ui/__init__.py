@@ -31,10 +31,13 @@ except:
 
 
 if qt_ok and mpl_ok:
-    from .matplotlib_widget import MatplotlibWidget
-    from .display_figures_widget import DisplayFiguresWidget
-    from .display_figures_widget import display_figures
+    from . import mpl
+    __all__ = ["mpl"]
 
-    __all__ = ["MatplotlibWidget", "display_figures", "DisplayFiguresWidget"]
+if qt_ok:
+    from .trajectories_widget import TrajectoriesWidget
+    __all__ += ["TrajectoriesWidget"]
+
+
 else:
     __all__ = []
