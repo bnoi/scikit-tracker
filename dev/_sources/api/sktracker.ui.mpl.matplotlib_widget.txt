@@ -1,0 +1,7 @@
+sktracker.ui.mpl.matplotlib_widget module
+=========================================
+
+.. automodule:: sktracker.ui.mpl.matplotlib_widget
+    :members:
+    :undoc-members:
+    :show-inheritance:

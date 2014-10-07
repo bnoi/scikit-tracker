@@ -1,0 +1,7 @@
+sktracker.ui.viewbox module
+===========================
+
+.. automodule:: sktracker.ui.viewbox
+    :members:
+    :undoc-members:
+    :show-inheritance:

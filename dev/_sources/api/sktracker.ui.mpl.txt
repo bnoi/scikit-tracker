@@ -1,0 +1,18 @@
+sktracker.ui.mpl package
+========================
+
+Submodules
+----------
+
+.. toctree::
+
+   sktracker.ui.mpl.display_figures_widget
+   sktracker.ui.mpl.matplotlib_widget
+
+Module contents
+---------------
+
+.. automodule:: sktracker.ui.mpl
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,7 @@
+sktracker.ui.mpl.display_figures_widget module
+==============================================
+
+.. automodule:: sktracker.ui.mpl.display_figures_widget
+    :members:
+    :undoc-members:
+    :show-inheritance:

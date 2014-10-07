@@ -1,13 +1,20 @@
 sktracker.ui package
 ====================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    sktracker.ui.mpl
+
 Submodules
 ----------
 
 .. toctree::
 
-   sktracker.ui.display_figures_widget
-   sktracker.ui.matplotlib_widget
+   sktracker.ui.trajectories_widget
+   sktracker.ui.viewbox
 
 Module contents
 ---------------

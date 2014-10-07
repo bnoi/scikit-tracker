@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.ui package &mdash; sktracker 0.3.dev-72b19b8 docs</title>
+  <title>sktracker.ui.trajectories_widget module &mdash; sktracker 0.3.dev-72b19b8 docs</title>
   
 
   
@@ -32,9 +32,9 @@
 
   
     <link rel="top" title="sktracker 0.3.dev-72b19b8 docs" href="../index.html"/>
-        <link rel="up" title="API references" href="sktracker.html"/>
-        <link rel="next" title="sktracker.ui.mpl package" href="sktracker.ui.mpl.html"/>
-        <link rel="prev" title="sktracker.trajectories.trajectories module" href="sktracker.trajectories.trajectories.html"/> 
+        <link rel="up" title="sktracker.ui package" href="sktracker.ui.html"/>
+        <link rel="next" title="sktracker.ui.viewbox module" href="sktracker.ui.viewbox.html"/>
+        <link rel="prev" title="sktracker.ui.mpl.matplotlib_widget module" href="sktracker.ui.mpl.matplotlib_widget.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -138,10 +138,12 @@
       
           <li><a href="sktracker.html">API references</a> &raquo;</li>
       
-    <li>sktracker.ui package</li>
+          <li><a href="sktracker.ui.html">sktracker.ui package</a> &raquo;</li>
+      
+    <li>sktracker.ui.trajectories_widget module</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="../_sources/api/sktracker.ui.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/api/sktracker.ui.trajectories_widget.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -149,38 +151,11 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="sktracker-ui-package">
-<h1>sktracker.ui package<a class="headerlink" href="#sktracker-ui-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.ui.mpl.html">sktracker.ui.mpl package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.ui.mpl.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="sktracker.ui.mpl.display_figures_widget.html">sktracker.ui.mpl.display_figures_widget module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sktracker.ui.mpl.matplotlib_widget.html">sktracker.ui.mpl.matplotlib_widget module</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="sktracker.ui.mpl.html#module-sktracker.ui.mpl">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.ui.trajectories_widget.html">sktracker.ui.trajectories_widget module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.ui.viewbox.html">sktracker.ui.viewbox module</a></li>
-</ul>
-</div>
-</div>
-<div class="section" id="module-sktracker.ui">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.ui" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="module-sktracker.ui.trajectories_widget">
+<span id="sktracker-ui-trajectories-widget-module"></span><h1>sktracker.ui.trajectories_widget module<a class="headerlink" href="#module-sktracker.ui.trajectories_widget" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="sktracker.ui.TrajectoriesWidget">
-<em class="property">class </em><tt class="descclassname">sktracker.ui.</tt><tt class="descname">TrajectoriesWidget</tt><big>(</big><em>trajs</em>, <em>names=None</em>, <em>xaxis='t'</em>, <em>yaxis='x'</em>, <em>scale_x=1</em>, <em>scale_y=1</em>, <em>save_hook=None</em>, <em>parent=None</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget">
+<em class="property">class </em><tt class="descclassname">sktracker.ui.trajectories_widget.</tt><tt class="descname">TrajectoriesWidget</tt><big>(</big><em>trajs</em>, <em>names=None</em>, <em>xaxis='t'</em>, <em>yaxis='x'</em>, <em>scale_x=1</em>, <em>scale_y=1</em>, <em>save_hook=None</em>, <em>parent=None</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QWidget</span></tt></p>
 <dl class="docutils">
 <dt>Display a Trajectories object. Trajectories can be modified manually inside the widget:</dt>
@@ -247,194 +222,193 @@ is clicked/enabled.</p>
 </pre></div>
 </div>
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.check_control_key">
-<tt class="descname">check_control_key</tt><big>(</big><em>ignore_items=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.check_control_key" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.check_control_key">
+<tt class="descname">check_control_key</tt><big>(</big><em>ignore_items=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.check_control_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unselect all previously selected items if CTRL key is not pressed.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.current_traj_index">
-<tt class="descname">current_traj_index</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.current_traj_index" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.current_traj_index">
+<tt class="descname">current_traj_index</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.current_traj_index" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.cut_traj">
-<tt class="descname">cut_traj</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.cut_traj" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.cut_traj">
+<tt class="descname">cut_traj</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.cut_traj" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.duplicate_traj">
-<tt class="descname">duplicate_traj</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.duplicate_traj" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.duplicate_traj">
+<tt class="descname">duplicate_traj</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.duplicate_traj" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.get_selected_items">
-<tt class="descname">get_selected_items</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.get_selected_items" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.get_selected_items">
+<tt class="descname">get_selected_items</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.get_selected_items" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.item_clicked">
-<tt class="descname">item_clicked</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.item_clicked" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.item_clicked">
+<tt class="descname">item_clicked</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.item_clicked" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.item_colors">
-<tt class="descname">item_colors</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.item_colors" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.item_colors">
+<tt class="descname">item_colors</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.item_colors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.merge_trajs">
-<tt class="descname">merge_trajs</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.merge_trajs" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.merge_trajs">
+<tt class="descname">merge_trajs</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.merge_trajs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.next_traj">
-<tt class="descname">next_traj</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.next_traj" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.next_traj">
+<tt class="descname">next_traj</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.next_traj" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.points_clicked">
-<tt class="descname">points_clicked</tt><big>(</big><em>plot</em>, <em>points</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.points_clicked" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.points_clicked">
+<tt class="descname">points_clicked</tt><big>(</big><em>plot</em>, <em>points</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.points_clicked" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.previous_trajs">
-<tt class="descname">previous_trajs</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.previous_trajs" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.previous_trajs">
+<tt class="descname">previous_trajs</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.previous_trajs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.redo">
-<tt class="descname">redo</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.redo" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.redo">
+<tt class="descname">redo</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.redo" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.remove_item">
-<tt class="descname">remove_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.remove_item" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.remove_item">
+<tt class="descname">remove_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.remove_item" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.remove_items">
-<tt class="descname">remove_items</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.remove_items" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.remove_items">
+<tt class="descname">remove_items</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.remove_items" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.remove_spots">
-<tt class="descname">remove_spots</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.remove_spots" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.remove_spots">
+<tt class="descname">remove_spots</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.remove_spots" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.remove_traj">
-<tt class="descname">remove_traj</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.remove_traj" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.remove_traj">
+<tt class="descname">remove_traj</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.remove_traj" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.save">
-<tt class="descname">save</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.save" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.save">
+<tt class="descname">save</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.save" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.select_all_items">
-<tt class="descname">select_all_items</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.select_all_items" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.select_all_items">
+<tt class="descname">select_all_items</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.select_all_items" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.select_item">
-<tt class="descname">select_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.select_item" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.select_item">
+<tt class="descname">select_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.select_item" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.set_all_trajs_label">
-<tt class="descname">set_all_trajs_label</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.set_all_trajs_label" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.set_all_trajs_label">
+<tt class="descname">set_all_trajs_label</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.set_all_trajs_label" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.set_trajectories">
-<tt class="descname">set_trajectories</tt><big>(</big><em>i</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.set_trajectories" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.set_trajectories">
+<tt class="descname">set_trajectories</tt><big>(</big><em>i</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.set_trajectories" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.set_xaxis">
-<tt class="descname">set_xaxis</tt><big>(</big><em>ax_name</em>, <em>scale=None</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.set_xaxis" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.set_xaxis">
+<tt class="descname">set_xaxis</tt><big>(</big><em>ax_name</em>, <em>scale=None</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.set_xaxis" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.set_yaxis">
-<tt class="descname">set_yaxis</tt><big>(</big><em>ax_name</em>, <em>scale=None</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.set_yaxis" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.set_yaxis">
+<tt class="descname">set_yaxis</tt><big>(</big><em>ax_name</em>, <em>scale=None</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.set_yaxis" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.setup_axis_buttons_label">
-<tt class="descname">setup_axis_buttons_label</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.setup_axis_buttons_label" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.setup_axis_buttons_label">
+<tt class="descname">setup_axis_buttons_label</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.setup_axis_buttons_label" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.setup_buttons">
-<tt class="descname">setup_buttons</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.setup_buttons" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.setup_buttons">
+<tt class="descname">setup_buttons</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.setup_buttons" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.setup_menus">
-<tt class="descname">setup_menus</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.setup_menus" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.setup_menus">
+<tt class="descname">setup_menus</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.setup_menus" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.setup_ui">
-<tt class="descname">setup_ui</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.setup_ui" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.setup_ui">
+<tt class="descname">setup_ui</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.setup_ui" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="sktracker.ui.TrajectoriesWidget.sig_axis_change">
-<tt class="descname">sig_axis_change</tt><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.sig_axis_change" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.sig_axis_change">
+<tt class="descname">sig_axis_change</tt><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.sig_axis_change" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="sktracker.ui.TrajectoriesWidget.sig_traj_change">
-<tt class="descname">sig_traj_change</tt><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.sig_traj_change" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.sig_traj_change">
+<tt class="descname">sig_traj_change</tt><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.sig_traj_change" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="sktracker.ui.TrajectoriesWidget.sig_update_trajectories">
-<tt class="descname">sig_update_trajectories</tt><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.sig_update_trajectories" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.sig_update_trajectories">
+<tt class="descname">sig_update_trajectories</tt><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.sig_update_trajectories" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.undo">
-<tt class="descname">undo</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.undo" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.undo">
+<tt class="descname">undo</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.undo" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.unselect_all_items">
-<tt class="descname">unselect_all_items</tt><big>(</big><em>event=None</em>, <em>ignore_items=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.unselect_all_items" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.unselect_all_items">
+<tt class="descname">unselect_all_items</tt><big>(</big><em>event=None</em>, <em>ignore_items=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.unselect_all_items" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.unselect_item">
-<tt class="descname">unselect_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.unselect_item" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.unselect_item">
+<tt class="descname">unselect_item</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.unselect_item" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.update_historic_buttons">
-<tt class="descname">update_historic_buttons</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.update_historic_buttons" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.update_historic_buttons">
+<tt class="descname">update_historic_buttons</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.update_historic_buttons" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.update_mouse_infos">
-<tt class="descname">update_mouse_infos</tt><big>(</big><em>pos</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.update_mouse_infos" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.update_mouse_infos">
+<tt class="descname">update_mouse_infos</tt><big>(</big><em>pos</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.update_mouse_infos" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.update_selection_infos">
-<tt class="descname">update_selection_infos</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.update_selection_infos" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.update_selection_infos">
+<tt class="descname">update_selection_infos</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.update_selection_infos" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sktracker.ui.TrajectoriesWidget.update_trajectories">
-<tt class="descname">update_trajectories</tt><big>(</big><em>draggable_value=None</em>, <em>no_axis_update=False</em><big>)</big><a class="headerlink" href="#sktracker.ui.TrajectoriesWidget.update_trajectories" title="Permalink to this definition">¶</a></dt>
+<dt id="sktracker.ui.trajectories_widget.TrajectoriesWidget.update_trajectories">
+<tt class="descname">update_trajectories</tt><big>(</big><em>draggable_value=None</em>, <em>no_axis_update=False</em><big>)</big><a class="headerlink" href="#sktracker.ui.trajectories_widget.TrajectoriesWidget.update_trajectories" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
 </div>
 
 
@@ -443,10 +417,10 @@ is clicked/enabled.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.ui.mpl.html" class="btn btn-neutral float-right" title="sktracker.ui.mpl package">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.ui.viewbox.html" class="btn btn-neutral float-right" title="sktracker.ui.viewbox module">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sktracker.trajectories.trajectories.html" class="btn btn-neutral" title="sktracker.trajectories.trajectories module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sktracker.ui.mpl.matplotlib_widget.html" class="btn btn-neutral" title="sktracker.ui.mpl.matplotlib_widget module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

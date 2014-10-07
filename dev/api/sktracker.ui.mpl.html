@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.tracker.cost_function package &mdash; sktracker 0.3.dev-72b19b8 docs</title>
+  <title>sktracker.ui.mpl package &mdash; sktracker 0.3.dev-72b19b8 docs</title>
   
 
   
@@ -32,9 +32,9 @@
 
   
     <link rel="top" title="sktracker 0.3.dev-72b19b8 docs" href="../index.html"/>
-        <link rel="up" title="sktracker.tracker package" href="sktracker.tracker.html"/>
-        <link rel="next" title="sktracker.tracker.cost_function.abstract_cost_functions module" href="sktracker.tracker.cost_function.abstract_cost_functions.html"/>
-        <link rel="prev" title="sktracker.tracker package" href="sktracker.tracker.html"/> 
+        <link rel="up" title="sktracker.ui package" href="sktracker.ui.html"/>
+        <link rel="next" title="sktracker.ui.mpl.display_figures_widget module" href="sktracker.ui.mpl.display_figures_widget.html"/>
+        <link rel="prev" title="sktracker.ui package" href="sktracker.ui.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -138,12 +138,12 @@
       
           <li><a href="sktracker.html">API references</a> &raquo;</li>
       
-          <li><a href="sktracker.tracker.html">sktracker.tracker package</a> &raquo;</li>
+          <li><a href="sktracker.ui.html">sktracker.ui package</a> &raquo;</li>
       
-    <li>sktracker.tracker.cost_function package</li>
+    <li>sktracker.ui.mpl package</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="../_sources/api/sktracker.tracker.cost_function.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/api/sktracker.ui.mpl.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -151,84 +151,99 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="sktracker-tracker-cost-function-package">
-<h1>sktracker.tracker.cost_function package<a class="headerlink" href="#sktracker-tracker-cost-function-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="sktracker-ui-mpl-package">
+<h1>sktracker.ui.mpl package<a class="headerlink" href="#sktracker-ui-mpl-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.abstract_cost_functions.html">sktracker.tracker.cost_function.abstract_cost_functions module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.brownian.html">sktracker.tracker.cost_function.brownian module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.diagonal.html">sktracker.tracker.cost_function.diagonal module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.directed.html">sktracker.tracker.cost_function.directed module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sktracker.tracker.cost_function.gap_close.html">sktracker.tracker.cost_function.gap_close module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.ui.mpl.display_figures_widget.html">sktracker.ui.mpl.display_figures_widget module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sktracker.ui.mpl.matplotlib_widget.html">sktracker.ui.mpl.matplotlib_widget module</a></li>
 </ul>
 </div>
 </div>
-<div class="section" id="module-sktracker.tracker.cost_function">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.tracker.cost_function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sktracker.ui.mpl">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sktracker.ui.mpl" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="sktracker.tracker.cost_function.AbstractCostFunction">
-<em class="property">class </em><tt class="descclassname">sktracker.tracker.cost_function.</tt><tt class="descname">AbstractCostFunction</tt><big>(</big><em>context</em>, <em>parameters</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.AbstractCostFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>Abstract class</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>context</strong> : dict</p>
-<p class="last"><strong>parameters</strong> : dict</p>
-</td>
-</tr>
-</tbody>
-</table>
+<dt id="sktracker.ui.mpl.MatplotlibWidget">
+<em class="property">class </em><tt class="descclassname">sktracker.ui.mpl.</tt><tt class="descname">MatplotlibWidget</tt><big>(</big><em>figure</em>, <em>parent</em><big>)</big><a class="headerlink" href="#sktracker.ui.mpl.MatplotlibWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">matplotlib.backends.backend_qt4agg.FigureCanvasQTAgg</span></tt></p>
 <dl class="method">
-<dt id="sktracker.tracker.cost_function.AbstractCostFunction.check_columns">
-<tt class="descname">check_columns</tt><big>(</big><em>objects</em>, <em>cols</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.AbstractCostFunction.check_columns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check pandas.DataFrame column names.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>objects</strong> : list of <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a> or <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.14.1)"><tt class="xref py py-class docutils literal"><span class="pre">pandas.DataFrame</span></tt></a></p>
-<p class="last"><strong>cols</strong> : list column names to check</p>
-</td>
-</tr>
-</tbody>
-</table>
+<dt id="sktracker.ui.mpl.MatplotlibWidget.close_figure">
+<tt class="descname">close_figure</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.mpl.MatplotlibWidget.close_figure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
-<dl class="method">
-<dt id="sktracker.tracker.cost_function.AbstractCostFunction.check_context">
-<tt class="descname">check_context</tt><big>(</big><em>key</em>, <em>obj_type</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.AbstractCostFunction.check_context" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check wether self.context contain a key on a specific type.</p>
+<dl class="function">
+<dt id="sktracker.ui.mpl.display_figures">
+<tt class="descclassname">sktracker.ui.mpl.</tt><tt class="descname">display_figures</tt><big>(</big><em>figure_generator</em><big>)</big><a class="headerlink" href="#sktracker.ui.mpl.display_figures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display several Matplotlib figures with &#8220;next&#8221; and &#8220;previous&#8221; buttons.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>key</strong> : str</p>
-<blockquote>
-<div><p>Key to find in self.context.</p>
-</div></blockquote>
-<p><strong>obj_type</strong> : class name</p>
-<blockquote>
-<div><p>To check context value type.</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>figure_generator</strong> : tuple (python generator, string)</p>
+<blockquote class="last">
+<div><p>Should return <tt class="xref py py-class docutils literal"><span class="pre">matplotlib.figure.Figure</span></tt> object and a title.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The desired key&#8217;s value in context.</p>
-</td>
-</tr>
 </tbody>
 </table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fig_generator</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">plt</span><span class="o">.</span><span class="n">ioff</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">yield</span> <span class="n">fig</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">display_figures</span><span class="p">(</span><span class="n">fig_generator</span><span class="p">())</span>
+</pre></div>
+</div>
 </dd></dl>
 
+<dl class="class">
+<dt id="sktracker.ui.mpl.DisplayFiguresWidget">
+<em class="property">class </em><tt class="descclassname">sktracker.ui.mpl.</tt><tt class="descname">DisplayFiguresWidget</tt><a class="headerlink" href="#sktracker.ui.mpl.DisplayFiguresWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QWidget</span></tt></p>
 <dl class="method">
-<dt id="sktracker.tracker.cost_function.AbstractCostFunction.get_block">
-<tt class="descname">get_block</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.tracker.cost_function.AbstractCostFunction.get_block" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method will update the values in <cite>self.mat</cite>. It should be overwritten for any matrix
-verification returned by self.build.</p>
-</dd></dl>
+<dt id="sktracker.ui.mpl.DisplayFiguresWidget.add_figure">
+<tt class="descname">add_figure</tt><big>(</big><em>args</em><big>)</big><a class="headerlink" href="#sktracker.ui.mpl.DisplayFiguresWidget.add_figure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sktracker.ui.mpl.DisplayFiguresWidget.add_figures">
+<tt class="descname">add_figures</tt><big>(</big><em>fig_generator</em><big>)</big><a class="headerlink" href="#sktracker.ui.mpl.DisplayFiguresWidget.add_figures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sktracker.ui.mpl.DisplayFiguresWidget.init_ui">
+<tt class="descname">init_ui</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.mpl.DisplayFiguresWidget.init_ui" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sktracker.ui.mpl.DisplayFiguresWidget.next_figure">
+<tt class="descname">next_figure</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.mpl.DisplayFiguresWidget.next_figure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sktracker.ui.mpl.DisplayFiguresWidget.previous_figure">
+<tt class="descname">previous_figure</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.mpl.DisplayFiguresWidget.previous_figure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sktracker.ui.mpl.DisplayFiguresWidget.remove_figure">
+<tt class="descname">remove_figure</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.ui.mpl.DisplayFiguresWidget.remove_figure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -241,10 +256,10 @@ verification returned by self.build.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sktracker.tracker.cost_function.abstract_cost_functions.html" class="btn btn-neutral float-right" title="sktracker.tracker.cost_function.abstract_cost_functions module">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sktracker.ui.mpl.display_figures_widget.html" class="btn btn-neutral float-right" title="sktracker.ui.mpl.display_figures_widget module">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sktracker.tracker.html" class="btn btn-neutral" title="sktracker.tracker package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sktracker.ui.html" class="btn btn-neutral" title="sktracker.ui package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

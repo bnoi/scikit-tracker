@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sktracker.io package &mdash; sktracker 0.3.dev-5b179bf docs</title>
+  <title>sktracker.io package &mdash; sktracker 0.3.dev-72b19b8 docs</title>
   
 
   
@@ -31,7 +31,7 @@
   
 
   
-    <link rel="top" title="sktracker 0.3.dev-5b179bf docs" href="../index.html"/>
+    <link rel="top" title="sktracker 0.3.dev-72b19b8 docs" href="../index.html"/>
         <link rel="up" title="API references" href="sktracker.html"/>
         <link rel="next" title="sktracker.io.metadataio module" href="sktracker.io.metadataio.html"/>
         <link rel="prev" title="sktracker.detection.peak_detector module" href="sktracker.detection.peak_detector.html"/> 
@@ -436,13 +436,9 @@ in a single Tiff file to make correct IFD in TiffData tags.</p>
 
 <dl class="function">
 <dt id="sktracker.io.imsave">
-<tt class="descclassname">sktracker.io.</tt><tt class="descname">imsave</tt><big>(</big><em>filename</em>, <em>data</em>, <em>photometric=None</em>, <em>planarconfig=None</em>, <em>resolution=None</em>, <em>description=None</em>, <em>software='tifffile.py'</em>, <em>byteorder=None</em>, <em>bigtiff=False</em>, <em>compress=0</em>, <em>extratags=()</em><big>)</big><a class="headerlink" href="#sktracker.io.imsave" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">sktracker.io.</tt><tt class="descname">imsave</tt><big>(</big><em>filename</em>, <em>data</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.io.imsave" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write image data to TIFF file.</p>
-<p>Image data are written in one stripe per plane.
-Dimensions larger than 2 or 3 (depending on photometric mode and
-planar configuration) are flattened and saved as separate pages.
-The &#8216;sample_format&#8217; and &#8216;bits_per_sample&#8217; TIFF tags are derived from
-the data type.</p>
+<p>Refer to the TiffWriter class and member functions for documentation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -453,90 +449,33 @@ the data type.</p>
 </div></blockquote>
 <p><strong>data</strong> : array_like</p>
 <blockquote>
-<div><p>Input image. The last dimensions are assumed to be image height,
-width, and samples.</p>
+<div><p>Input image. The last dimensions are assumed to be image depth,
+height, width, and samples.</p>
 </div></blockquote>
-<p><strong>photometric</strong> : {&#8216;minisblack&#8217;, &#8216;miniswhite&#8217;, &#8216;rgb&#8217;}</p>
-<blockquote>
-<div><p>The color space of the image data.
-By default this setting is inferred from the data shape.</p>
-</div></blockquote>
-<p><strong>planarconfig</strong> : {&#8216;contig&#8217;, &#8216;planar&#8217;}</p>
-<blockquote>
-<div><p>Specifies if samples are stored contiguous or in separate planes.
-By default this setting is inferred from the data shape.
-&#8216;contig&#8217;: last dimension contains samples.
-&#8216;planar&#8217;: third last dimension contains samples.</p>
-</div></blockquote>
-<p><strong>resolution</strong> : (float, float) or ((int, int), (int, int))</p>
-<blockquote>
-<div><p>X and Y resolution in dots per inch as float or rational numbers.</p>
-</div></blockquote>
-<p><strong>description</strong> : str</p>
-<blockquote>
-<div><p>The subject of the image. Saved with the first page only.</p>
-</div></blockquote>
-<p><strong>software</strong> : str</p>
-<blockquote>
-<div><p>Name of the software used to create the image.
-Saved with the first page only.</p>
-</div></blockquote>
-<p><strong>byteorder</strong> : {&#8216;&lt;&#8217;, &#8216;&gt;&#8217;}</p>
-<blockquote>
-<div><p>The endianness of the data in the file.
-By default this is the system&#8217;s native byte order.</p>
-</div></blockquote>
-<p><strong>bigtiff</strong> : bool</p>
-<blockquote>
-<div><p>If True, the BigTIFF format is used.
-By default the standard TIFF format is used for data less than 2000 MB.</p>
-</div></blockquote>
-<p><strong>compress</strong> : int</p>
-<blockquote>
-<div><p>Values from 0 to 9 controlling the level of zlib compression.
-If 0, data are written uncompressed (default).</p>
-</div></blockquote>
-<p><strong>extratags: sequence of tuples</strong></p>
+<p><strong>kwargs</strong> : dict</p>
 <blockquote class="last">
-<div><p>Additional tags as [(code, dtype, count, value, writeonce)].</p>
-<dl class="docutils">
-<dt>code <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">The TIFF tag Id.</p>
-</dd>
-<dt>dtype <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data type of items in <cite>value</cite> in Python struct format.
-One of B, s, H, I, 2I, b, h, i, f, d, Q, or q.</p>
-</dd>
-<dt>count <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">Number of data values. Not used for string values.</p>
-</dd>
-<dt>value <span class="classifier-delimiter">:</span> <span class="classifier">sequence</span></dt>
-<dd><p class="first last"><cite>Count</cite> values compatible with <cite>dtype</cite>.</p>
-</dd>
-<dt>writeonce <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">If True, the tag is written to the first page only.</p>
-</dd>
-</dl>
+<div><p>Parameters &#8216;byteorder&#8217;, &#8216;bigtiff&#8217;, and &#8216;software&#8217; are passed to
+the TiffWriter class.
+Parameters &#8216;photometric&#8217;, &#8216;planarconfig&#8217;, &#8216;resolution&#8217;,
+&#8216;description&#8217;, &#8216;compress&#8217;, &#8216;volume&#8217;, and &#8216;extratags&#8217; are passed to
+the TiffWriter.save function.</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">301</span><span class="p">,</span> <span class="mi">219</span><span class="p">),</span> <span class="s">&#39;float32&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;temp.tif&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">301</span><span class="p">,</span> <span class="mi">219</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s">&#39;uint8&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">127</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="s">u&#39;{&quot;shape&quot;: </span><span class="si">%s</span><span class="s">}&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;temp.tif&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">extratags</span><span class="o">=</span><span class="p">[(</span><span class="mi">270</span><span class="p">,</span> <span class="s">&#39;s&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="bp">True</span><span class="p">)])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">301</span><span class="p">,</span> <span class="mi">219</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">description</span> <span class="o">=</span> <span class="s">u&#39;{&quot;shape&quot;: </span><span class="si">%s</span><span class="s">}&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;temp.tif&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+<span class="gp">... </span>       <span class="n">extratags</span><span class="o">=</span><span class="p">[(</span><span class="mi">270</span><span class="p">,</span> <span class="s">&#39;s&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="bp">True</span><span class="p">)])</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="sktracker.io.imread">
-<tt class="descclassname">sktracker.io.</tt><tt class="descname">imread</tt><big>(</big><em>files</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.io.imread" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">sktracker.io.</tt><tt class="descname">imread</tt><big>(</big><em>files</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.io.imread" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return image data from TIFF file(s) as numpy array.</p>
 <p>The first image series is returned if no arguments are provided.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -560,16 +499,21 @@ One of B, s, H, I, 2I, b, h, i, f, d, Q, or q.</p>
 <div><p>If True (default), OME-TIFF data may include pages from multiple files.</p>
 </div></blockquote>
 <p><strong>pattern</strong> : str</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Regular expression pattern that matches axes names and indices in
 file names.</p>
+</div></blockquote>
+<p><strong>kwargs</strong> : dict</p>
+<blockquote class="last">
+<div><p>Additional parameters passed to the TiffFile or TiffSequence asarray
+function.</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#39;test.tif&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#39;test.tif&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(256, 256, 4)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span> <span class="o">=</span> <span class="n">imread</span><span class="p">([</span><span class="s">&#39;test.tif&#39;</span><span class="p">,</span> <span class="s">&#39;test.tif&#39;</span><span class="p">])</span>
@@ -625,19 +569,16 @@ Requires pyplot already imported <tt class="docutils literal"><span class="pre">
 
 <dl class="class">
 <dt id="sktracker.io.TiffFile">
-<em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">TiffFile</tt><big>(</big><em>arg</em>, <em>name=None</em>, <em>multifile=False</em><big>)</big><a class="headerlink" href="#sktracker.io.TiffFile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">TiffFile</tt><big>(</big><em>arg</em>, <em>name=None</em>, <em>offset=None</em>, <em>size=None</em>, <em>multifile=True</em>, <em>multifile_close=True</em><big>)</big><a class="headerlink" href="#sktracker.io.TiffFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>Read image and meta-data from TIFF, STK, LSM, and FluoView files.</p>
+<p>Read image and metadata from TIFF, STK, LSM, and FluoView files.</p>
 <p>TiffFile instances must be closed using the close method, which is
 automatically called when using the &#8216;with&#8217; statement.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tif</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="p">(</span><span class="s">&#39;test.tif&#39;</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">images</span> <span class="o">=</span> <span class="n">tif</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
-<span class="gp">... </span><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">finally</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">tif</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">TiffFile</span><span class="p">(</span><span class="s">&#39;test.tif&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tif</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">data</span> <span class="o">=</span> <span class="n">tif</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(256, 256, 4)</span>
 </pre></div>
 </div>
 <p class="rubric">Attributes</p>
@@ -664,7 +605,7 @@ automatically called when using the &#8216;with&#8217; statement.</p>
 <dl class="method">
 <dt id="sktracker.io.TiffFile.asarray">
 <tt class="descname">asarray</tt><big>(</big><em>key=None</em>, <em>series=None</em>, <em>memmap=False</em><big>)</big><a class="headerlink" href="#sktracker.io.TiffFile.asarray" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return image data of multiple TIFF pages as numpy array.</p>
+<dd><p>Return image data from multiple TIFF pages as numpy array.</p>
 <p>By default the first image series is returned.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -680,7 +621,8 @@ automatically called when using the &#8216;with&#8217; statement.</p>
 </div></blockquote>
 <p><strong>memmap</strong> : bool</p>
 <blockquote class="last">
-<div><p>If True, use numpy.memmap to read arrays from file if possible.</p>
+<div><p>If True, return an array stored in a binary file on disk
+if possible.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -692,6 +634,18 @@ automatically called when using the &#8216;with&#8217; statement.</p>
 <dt id="sktracker.io.TiffFile.close">
 <tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.TiffFile.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close open file handle(s).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sktracker.io.TiffFile.filehandle">
+<tt class="descname">filehandle</tt><a class="headerlink" href="#sktracker.io.TiffFile.filehandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return file handle.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sktracker.io.TiffFile.filename">
+<tt class="descname">filename</tt><a class="headerlink" href="#sktracker.io.TiffFile.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name of file handle.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -782,44 +736,37 @@ automatically called when using the &#8216;with&#8217; statement.</p>
 
 <dl class="class">
 <dt id="sktracker.io.TiffSequence">
-<em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">TiffSequence</tt><big>(</big><em>files</em>, <em>imread=&lt;class 'sktracker.io.tifffile.TiffFile'&gt;</em>, <em>pattern='axes'</em><big>)</big><a class="headerlink" href="#sktracker.io.TiffSequence" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sktracker.io.</tt><tt class="descname">TiffSequence</tt><big>(</big><em>files</em>, <em>imread=&lt;class 'sktracker.io.tifffile.TiffFile'&gt;</em>, <em>pattern='axes'</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.io.TiffSequence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Sequence of image files.</p>
+<p>The data shape and dtype of all files must match.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span> <span class="o">=</span> <span class="n">TiffSequence</span><span class="p">(</span><span class="s">&quot;test.oif.files/*.tif&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span> <span class="o">=</span> <span class="n">ims</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ims</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tifs</span> <span class="o">=</span> <span class="n">TiffSequence</span><span class="p">(</span><span class="s">&quot;test.oif.files/*.tif&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tifs</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">tifs</span><span class="o">.</span><span class="n">axes</span>
+<span class="go">((2, 100), &#39;CT&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">tifs</span><span class="o">.</span><span class="n">asarray</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(2, 100, 256, 256)</span>
 </pre></div>
 </div>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="14%" />
-<col width="86%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>files</td>
-<td>(list) List of file names.</td>
-</tr>
-<tr class="row-even"><td>shape</td>
-<td>(tuple) Shape of image sequence.</td>
-</tr>
-<tr class="row-odd"><td>axes</td>
-<td>(str) Labels of axes in shape.</td>
-</tr>
-</tbody>
-</table>
+<dl class="exception">
+<dt id="sktracker.io.TiffSequence.ParseError">
+<em class="property">exception </em><tt class="descname">ParseError</tt><a class="headerlink" href="#sktracker.io.TiffSequence.ParseError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.Exception</span></tt></p>
+</dd></dl>
+
 <dl class="method">
 <dt id="sktracker.io.TiffSequence.asarray">
-<tt class="descname">asarray</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.io.TiffSequence.asarray" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">TiffSequence.</tt><tt class="descname">asarray</tt><big>(</big><em>memmap=False</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#sktracker.io.TiffSequence.asarray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read image data from all files and return as single numpy array.</p>
-<p>Raise IndexError if image shapes don&#8217;t match.</p>
+<p>If memmap is True, return an array stored in a binary file on disk.
+The args and kwargs parameters are passed to the imread function.</p>
+<p>Raise IndexError or ValueError if image shapes don&#8217;t match.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sktracker.io.TiffSequence.close">
-<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.TiffSequence.close" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">TiffSequence.</tt><tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#sktracker.io.TiffSequence.close" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1168,7 +1115,7 @@ any modification to the metadata is copied to the <cite>h5</cite> file</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.dev-5b179bf',
+            VERSION:'0.3.dev-72b19b8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
