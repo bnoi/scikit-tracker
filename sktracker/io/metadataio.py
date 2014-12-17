@@ -151,7 +151,8 @@ def _get_from_metadata_json(filename):
     metadata = {}
 
     file_dir = os.path.dirname(filename)
-    candidats = [os.path.join(file_dir, '..', 'metadata.json'),
+    candidats = [os.path.join(file_dir, '..', '..', 'metadata.json'),
+                 os.path.join(file_dir, '..', 'metadata.json'),
                  os.path.join(file_dir, 'metadata.json')]
 
     for metadata_path in candidats:
