@@ -32,6 +32,7 @@ install:
     - export PATH="$HOME/miniconda/bin:$PATH"
     - hash -r
     - conda config --set always_yes yes --set changeps1 no
+    - conda install pip openssl=1.0.1h --quiet
     - conda update conda
     - conda info -a
 
