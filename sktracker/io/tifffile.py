@@ -1095,7 +1095,7 @@ class TiffFile(object):
 
     def _omeseries(self):
         """Return image series in OME-TIFF file(s)."""
-        root = etree.fromstring(self.pages[0].tags['image_description'].value)
+        root = etree.fromstring(self.pages[0].tags['image_description'].value.decode(errors='ignore'))
         uuid = root.attrib.get('UUID', None)
         self._files = {uuid: self}
         dirname = self._fh.dirname
