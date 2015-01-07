@@ -40,7 +40,7 @@ class OMEModel():
         """Load OME XML string.
         """
 
-        self.root = ElementTree.XML(xml_str, recover=True)
+        self.root = ElementTree.XML(xml_str)
 
         self.ns = NAMESPACE_2012
         self.img = self.root.find("{%s}Image" % self.ns)
