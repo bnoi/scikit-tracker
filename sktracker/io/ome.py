@@ -134,9 +134,7 @@ class OMEModel():
 
         if 'TimeIncrement' not in md.keys() or (md['TimeIncrement'] == 0):
             if self.planes and 'DeltaT' in self.planes[0].attrib.keys():
-                pl = self.df_planes(['DeltaT'])
-                t = pl.xs(0, level='TheC').xs(0, level='TheZ')['DeltaT']
-                md['TimeIncrement'] = float(np.diff(t.values).mean())
+                md['TimeIncrement'] = self.get_mean_timeincrement()
 
         # Find distance between slices
         if ('PhysicalSizeZ' not in md.keys()
@@ -148,6 +146,13 @@ class OMEModel():
             md['PhysicalSizeZ'] = float(z)
 
         return md
+
+    def get_mean_timeincrement(self):
+        """
+        """
+        pl = self.df_planes(['DeltaT'])
+        t = pl.xs(0, level='TheC').xs(0, level='TheZ')['DeltaT']
+        return float(np.diff(t.values).mean())
 
     def df_planes(self, sup_cols=[]):
         """Get OME Plane tags as `pd.DataFrame`.
