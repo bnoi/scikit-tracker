@@ -132,9 +132,8 @@ class OMEModel():
             if dt != 0:
                 md['TimeIncrement'] = dt
 
-        if 'TimeIncrement' not in md.keys() or (md['TimeIncrement'] == 0):
-            if self.planes and 'DeltaT' in self.planes[0].attrib.keys():
-                md['TimeIncrement'] = self.get_mean_timeincrement()
+        if self.planes and 'DeltaT' in self.planes[0].attrib.keys():
+            md['TimeIncrement'] = self.get_mean_timeincrement()
 
         # Find distance between slices
         if ('PhysicalSizeZ' not in md.keys()
