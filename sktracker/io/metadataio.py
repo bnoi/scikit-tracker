@@ -129,6 +129,10 @@ def get_metadata(filename, json_discovery=False, base_dir=None):
         json_metadata = _get_from_metadata_json(abs_filename)
         md.update(json_metadata)
 
+    del tf
+    import gc
+    gc.collect()
+
     return md
 
 
