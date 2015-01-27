@@ -1,3 +1,5 @@
+# THIS PROJECT IS NOW UNMAINTENED AND DEPRECATED
+
 # Objects detection and robust tracking for cell biology
 
 [![Build Status](https://travis-ci.org/bnoi/scikit-tracker.png?branch=master)](https://travis-ci.org/bnoi/scikit-tracker)
