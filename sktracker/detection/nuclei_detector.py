@@ -18,7 +18,7 @@ from scipy.spatial.distance import squareform, pdist
 from scipy.cluster import hierarchy
 from scipy import ndimage
 
-from skimage.filter import rank, threshold_otsu
+from skimage.filters import rank, threshold_otsu
 from skimage.morphology import disk, watershed
 from skimage.feature import peak_local_max
 from skimage.measure import regionprops

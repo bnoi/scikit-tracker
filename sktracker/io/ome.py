@@ -23,6 +23,8 @@ __all__ = []
 
 NAMESPACE_2012 = "http://www.openmicroscopy.org/Schemas/OME/2012-06"
 NAMESPACE_2013 = "http://www.openmicroscopy.org/Schemas/OME/2013-06"
+NAMESPACE_2015 = "http://www.openmicroscopy.org/Schemas/OME/2015-01"
+
 
 
 class OMEModel():

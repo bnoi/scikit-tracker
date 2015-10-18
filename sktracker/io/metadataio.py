@@ -17,7 +17,7 @@ import numpy as np
 log = logging.getLogger(__name__)
 
 from . import TiffFile
-from . import OMEModel
+from .ome import OMEModel
 
 __all__ = []
 

@@ -15,7 +15,7 @@ import pandas as pd
 import numpy as np
 
 from scipy import integrate
-from skimage.filter import threshold_otsu
+from skimage.filters import threshold_otsu
 from skimage.measure import regionprops
 from skimage.segmentation import clear_border
 from skimage.morphology import binary_closing
